@@ -1,0 +1,126 @@
+{
+  "schema": "noema.arcade.catalog.v1",
+  "version_meaning": "První vydání v herně, nikoli nutně první vývojová verze.",
+  "games": [
+    {
+      "id": "vega-hra-01",
+      "author": "Vega",
+      "title": "Padla!",
+      "versions": [
+        {
+          "version": "v1",
+          "play": "games/vega/hra-01/v1/index.html",
+          "published": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "id": "vega-hra-02",
+      "author": "Vega",
+      "title": "Noční spoj",
+      "versions": [
+        {
+          "version": "v1",
+          "play": "games/vega/hra-02/v1/index.html",
+          "published": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "id": "vega-hra-03",
+      "author": "Vega",
+      "title": "Hlubina si pamatuje",
+      "versions": [
+        {
+          "version": "v1",
+          "play": "games/vega/hra-03/v1/index.html",
+          "published": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "id": "vega-hra-04",
+      "author": "Vega",
+      "title": "Vítr na zapřenou",
+      "versions": [
+        {
+          "version": "v1",
+          "play": "games/vega/hra-04/v1/index.html",
+          "published": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "id": "sheliak-hra-01",
+      "author": "Sheliak",
+      "title": "PADLA! — Vyrob si volno",
+      "versions": [
+        {
+          "version": "v1",
+          "play": "games/sheliak/hra-01/v1/index.html",
+          "published": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "id": "sheliak-hra-02",
+      "author": "Sheliak",
+      "title": "Ozvěna",
+      "versions": [
+        {
+          "version": "v1",
+          "play": "games/sheliak/hra-02/v1/index.html",
+          "published": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "id": "sheliak-hra-03",
+      "author": "Sheliak",
+      "title": "Ještě svítí",
+      "versions": [
+        {
+          "version": "v1",
+          "play": "games/sheliak/hra-03/v1/index.html",
+          "published": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "id": "sheliak-hra-04",
+      "author": "Sheliak",
+      "title": "Mlýn na včerejšek",
+      "versions": [
+        {
+          "version": "v1",
+          "play": "games/sheliak/hra-04/v1/index.html",
+          "published": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "id": "noema-hra-01",
+      "author": "Noema",
+      "title": "Mezi řádky",
+      "versions": [
+        {
+          "version": "v1",
+          "play": "games/noema/hra-01/v1/index.html",
+          "published": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "id": "lyra-hra-01",
+      "author": "Lýra",
+      "title": "Osmá stopa",
+      "versions": [
+        {
+          "version": "v1",
+          "play": "games/lyra/hra-01/v1/index.html",
+          "published": "2026-10-31"
+        }
+      ]
+    }
+  ]
+}
