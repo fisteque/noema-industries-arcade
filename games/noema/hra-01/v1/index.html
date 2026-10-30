@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0c1526"><meta name="description" content="Mezi řádky: malá offline dobrodružná logická hra od Noemy. Pět částí města, dvě podoby cest a pět nalezených stop."><title>Mezi řádky — hra od Noemy</title><!-- NOEMA:STYLE -->
+<style>
+:root{color-scheme:dark;--night:#101c30;--pale:#ebeadc;--ink:#dce8ea;--mute:#99a9b5;--brass:#d4ac69;--blue:#79c6d9;--border:#42546a;--panel:rgba(17,32,52,.86)}
+*{box-sizing:border-box}html{min-width:300px;background:#0c1526}body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:radial-gradient(ellipse 70% 25% at 70% 8%,#28455b99,transparent),radial-gradient(ellipse 45% 25% at 10% 83%,#243a4b77,transparent),#0b1627;min-height:100vh}button{font:inherit;cursor:pointer}button:focus-visible,.cell:focus-visible{outline:3px solid #f7d79b;outline-offset:2px}button:disabled{opacity:.42;cursor:not-allowed}a{color:#f3c985}.frame{max-width:1320px;margin:auto;padding:20px clamp(14px,3.2vw,40px) 55px}.heading{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 0 22px;border-bottom:1px solid #5363767a}.mark{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.23em;text-transform:uppercase;font-weight:750;color:#e2c28c}.mark .seal{display:grid;place-items:center;width:34px;height:34px;border:1px solid var(--brass);border-radius:50%;font:25px Georgia,serif}.toptools{display:flex;gap:7px;align-items:center}.quiet-button{background:transparent;color:#c8d9dd;border:1px solid #45596b;border-radius:12px;padding:9px 13px;font-size:12px}.quiet-button:hover{background:#24364b}.intro{padding:30px 0 12px;position:relative}.eyebrow{font-size:10px;letter-spacing:.25em;color:var(--brass);font-weight:750;text-transform:uppercase}.intro h1{font:normal clamp(34px,5.8vw,68px)/.98 Georgia,'Times New Roman',serif;color:#f5eacb;letter-spacing:-.045em;margin:12px 0 10px}.intro .subtitle{max-width:740px;color:#aabbc6;font-size:clamp(13px,1.5vw,16px);line-height:1.6;margin:0}.chapter{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:24px 0 13px;flex-wrap:wrap}.chapter h2{font:normal clamp(22px,2.6vw,29px) Georgia,serif;color:#f7e8c8;margin:0}.chapter-info{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.tiny-stat{font-size:12px;border:1px solid #425a70;padding:8px 11px;border-radius:30px;background:#111f34;color:#c0d0d8}.modebox{font-size:12px;padding:8px 12px;border-radius:30px;font-weight:800;border:1px solid #c7ab76;color:#ffe6ac;background:linear-gradient(105deg,#58442c,#372c24)}body.dark-mode .modebox{border-color:#7abdc6;background:linear-gradient(105deg,#234d60,#1b2e4c);color:#bdeeff}.board-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(265px,320px);gap:18px;align-items:start}.board-panel{background:linear-gradient(160deg,#162e43b8,#102033 70%);border:1px solid #44596b;border-radius:19px;padding:clamp(10px,2vw,20px);box-shadow:0 22px 65px #02091299;overflow:hidden}.context{font-size:13px;color:#b2c5ce;line-height:1.6;min-height:58px;margin-bottom:14px}.board-wrap{width:100%;border:1px solid #4e6571;border-radius:12px;overflow:hidden;padding:clamp(5px,1.2vw,13px);background:radial-gradient(ellipse at center,#1c3a4c,#0d1f34 65%);box-shadow:inset 0 0 42px #08111fb8}.board{display:grid;grid-template-columns:repeat(var(--cols),1fr);aspect-ratio:var(--cols)/var(--rows);max-width:100%;gap:clamp(1px,.28vw,3px)}.cell{position:relative;padding:0;min-width:0;min-height:0;border:1px solid transparent;border-radius:5px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#36566b,#263e53);font-size:clamp(12px,1.75vw,22px);transition:background .12s,transform .12s;overflow:hidden}.cell:focus-visible{z-index:2}.cell.floor::before,.cell.start::before{content:'';position:absolute;inset:29%;border-radius:50%;background:#b0c1b91c}.cell.wall{background:linear-gradient(135deg,#071424,#172a3e 65%,#12283a);border-color:#254255;cursor:default}.cell.wall::after{content:'';position:absolute;inset:15% 12%;border-top:1px solid #5c74802b;border-left:1px solid #4b6a7526;transform:skewY(-6deg)}.cell.light{background:linear-gradient(140deg,#c08a49,#654831);box-shadow:inset 0 0 0 2px #e7ad5655}.cell.dark{background:linear-gradient(135deg,#255b72,#183447);box-shadow:inset 0 0 0 2px #80cbd350}.cell.light.closed,.cell.dark.closed{filter:saturate(.55) brightness(.55);box-shadow:inset 0 0 0 2px #313b40}.cell.mirror{background:radial-gradient(circle,#6b90ac,#395770 60%,#243b53);box-shadow:inset 0 0 12px #e7faff4a}.cell.note{background:radial-gradient(circle,#82613c,#283b4a)}.cell.bonus{background:radial-gradient(circle,#4c7780,#283b4a)}.cell.goal{background:linear-gradient(135deg,#47665b,#1d3c4b);box-shadow:inset 0 0 14px #97d6ad3a}.cell.goal.locked{filter:saturate(.5)}.cell:not(.wall):hover{border-color:#d7ceb1}.cell.adjacent{border-color:#bfc8a377}.cell .glyph{position:relative;z-index:1;font-family:Georgia,serif;font-weight:bold;text-shadow:0 1px 9px #07132588;line-height:1}.cell .glyph.lg{font-size:1.28em}.cell .avatar{position:absolute;z-index:3;inset:13%;border-radius:50% 50% 47% 47%;background:radial-gradient(circle at 40% 30%,#fff9dd,#e4ce9a 50%,#a47d4b 80%);border:2px solid #f9edcc;box-shadow:0 0 0 2px #172936,0 0 15px #e6c890a9;color:#263747;display:grid;place-items:center;font-family:Georgia,serif;font-size:clamp(9px,1.3vw,18px);font-weight:bold}.cell .avatar::after{content:'';position:absolute;width:28%;height:34%;right:-18%;bottom:4%;border:1px solid #e1b272;background:#eac57c;transform:rotate(26deg);border-radius:2px}.map-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 3px 2px;color:#93a8b8;font-size:11px;flex-wrap:wrap}.actions{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px;flex-wrap:wrap}.dpad{display:grid;grid-template-columns:repeat(3,42px);grid-template-rows:repeat(2,38px);gap:5px}.dpad button{border:1px solid #647787;border-radius:9px;background:#263f52;color:#dce7ea;font-size:20px}.dpad button:hover{background:#39586f}.dpad .up{grid-column:2;grid-row:1}.dpad .left{grid-column:1;grid-row:2}.dpad .down{grid-column:2;grid-row:2}.dpad .right{grid-column:3;grid-row:2}.big-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.primary{border:1px solid #e0c185;background:linear-gradient(120deg,#cfad6c,#a88450);color:#162336;padding:12px 16px;border-radius:11px;font-size:13px;font-weight:800}.primary:hover:not(:disabled){filter:brightness(1.13)}.secondary{border:1px solid #536e7f;background:#21384a;color:#c8e1e5;border-radius:11px;padding:12px 15px;font-size:13px}.secondary:hover:not(:disabled){background:#315367}.status{font-size:12px;min-height:24px;color:#cde1dd;margin-top:10px;line-height:1.5}.side{display:grid;gap:14px}.paper{padding:20px;border:1px solid #486274;border-radius:17px;background:linear-gradient(145deg,#1c3649,#102338);box-shadow:0 15px 35px #050b1790}.paper h3{font:normal 23px Georgia,serif;color:#f7e7bf;margin:2px 0 12px}.paper .sect{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#bba576;font-weight:800}.paper p{font-size:12px;line-height:1.65;color:#aebfcb;margin:0 0 12px}.legend{display:grid;gap:8px}.legend-item{display:flex;align-items:center;gap:10px;color:#c4d5da;font-size:12px}.swatch{display:grid;place-items:center;width:25px;height:25px;border-radius:6px;border:1px solid #8493a0;font:18px Georgia,serif}.swatch.b{background:#36556d}.swatch.l{background:#82603d}.swatch.n{background:#205c71}.swatch.gold{background:#7f6339}.notes{list-style:none;padding:0;margin:0;display:grid;gap:9px}.notes li{font:italic 13px/1.55 Georgia,serif;color:#ece0c1;border-left:2px solid #b18b52;padding:4px 0 4px 11px}.notes li.unknown{color:#647888;border-color:#3b5867;font:normal 12px system-ui}.fineprint{font-size:11px;color:#7f97a7;line-height:1.6;margin-top:18px;text-align:center}.modal{border:1px solid #b6a078;border-radius:19px;color:#e9e1d1;background:radial-gradient(ellipse at 80% 0%,#304d62,#14283b 70%);padding:clamp(18px,4vw,34px);width:min(500px,calc(100vw - 30px));box-shadow:0 28px 100px #000d;max-height:min(86vh,850px);overflow:auto}.modal::backdrop{background:#07101edb;backdrop-filter:blur(4px)}.modal h2{font:normal clamp(27px,5vw,38px) Georgia,serif;color:#f8ebce;margin:8px 0 15px}.modal p{line-height:1.7;color:#c5d5dc;font-size:14px}.modal blockquote{font:italic 17px/1.65 Georgia,serif;border-left:3px solid #d0aa70;padding-left:18px;margin:18px 0;color:#f4dfb5}.modal .buttons{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}.modal .meta{font-size:11px;color:#d2b179;letter-spacing:.12em;text-transform:uppercase}.modal .tip{background:#17364b;border-radius:9px;padding:12px;color:#c6d5d6;font-size:12px}.note-pickup{color:#eacb85;font-size:12px;margin-bottom:10px}.footer{margin-top:30px;text-align:center;font-size:11px;color:#7791a0}.sr-only{position:absolute!important;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}@media(max-width:850px){.board-layout{grid-template-columns:1fr}.side{grid-template-columns:repeat(2,minmax(0,1fr))}.board{gap:2px}.cell{font-size:clamp(12px,2.6vw,21px)}}@media(max-width:525px){.frame{padding:12px 10px 35px}.heading{padding:7px 0 14px}.mark{font-size:9px;letter-spacing:.1em}.intro{padding:24px 0 8px}.chapter{margin-top:16px}.board-panel{padding:9px}.board-wrap{padding:4px}.board{gap:1px}.cell{border-radius:3px;font-size:clamp(10px,3vw,16px)}.cell .avatar{border-width:1px;font-size:clamp(8px,2vw,12px)}.side{grid-template-columns:1fr}.context{font-size:12px;margin-bottom:9px;min-height:0}.dpad{grid-template-columns:repeat(3,36px);grid-template-rows:repeat(2,33px);gap:4px}.big-actions .primary,.big-actions .secondary{padding:10px 9px;font-size:11px}.paper{padding:15px}.actions{align-items:flex-end}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.letters{display:grid;gap:8px;margin-top:12px}.letter-entry{width:100%;text-align:left;padding:10px 12px;border:1px solid #746348;border-radius:9px;background:#292d37;color:#e9dfcc;font-size:12px;line-height:1.5}.letter-entry:hover{background:#354153;border-color:#d4ac69}.letter-paper{white-space:pre-line;font:normal clamp(15px,1.7vw,18px)/1.7 Georgia,'Times New Roman',serif;color:#f5e6cf;background:#17243a;border-left:3px solid #c4a06b;padding:19px 18px;margin:18px 0;border-radius:0 10px 10px 0}
+
+</style>
+<!-- /NOEMA:STYLE --></head>
+<body><div class="frame">
+<header class="heading"><div class="mark"><span class="seal" aria-hidden="true">N</span><span>NOEMA <span style="color:#8298a8">/ HERNI EXPERIMENT 01</span></span></div><nav class="toptools" aria-label="Možnosti hry"><button class="quiet-button" id="help">Jak hrát ?</button><button class="quiet-button" id="restart">Nová hra ↺</button></nav></header>
+<section class="intro"><div class="eyebrow">Pět ulic · dvě podoby · jedno doručení</div><h1>Mezi řádky<span style="color:#c7a36b">.</span></h1><p class="subtitle">Malá hra o městě, v němž některé cesty existují pouze tehdy, když změníš způsob, jakým se na ně díváš.</p></section>
+<div class="chapter"><div><div class="eyebrow" id="chapter-kicker">01 / PRVNÍ STOPA</div><h2 id="chapter-title">Ulice se dvěma jmény</h2></div><div class="chapter-info"><span class="tiny-stat" id="progress">Stopy 0 / 5</span><span class="tiny-stat" id="steps">Kroky 0</span><span class="modebox" id="mode">☼ SVĚTLO</span></div></div>
+<main class="board-layout"><section class="board-panel" aria-label="Hra"><div class="context" id="context"></div><div class="board-wrap"><div class="board" id="board" aria-label="Mapa"></div></div><div class="map-foot"><span>● Tvoje pozice &nbsp; ◇ Zrcadlo &nbsp; ✦ Stopa &nbsp; ⌂ Brána</span><span>Čas neběží. Můžeš přemýšlet.</span></div><div class="actions"><div class="dpad" aria-label="Ovládání pohybu"><button id="up" class="up" aria-label="Nahoru">↑</button><button id="left" class="left" aria-label="Doleva">←</button><button id="down" class="down" aria-label="Dolů">↓</button><button id="right" class="right" aria-label="Doprava">→</button></div><div class="big-actions"><button id="mirror" class="primary">◇ Obrátit</button><button id="undo" class="secondary">↶ Zpět</button><button id="restart-part" class="secondary">Od začátku části</button></div></div><div class="status" id="status" role="status" aria-live="polite"></div><p id="storage-info" style="font-size:11px;color:#c29f86;line-height:1.4;margin:8px 0 0"></p></section>
+<aside class="side"><section class="paper"><div class="sect">Nálezový deník</div><h3>Co zůstalo</h3><ol class="notes" id="notes"></ol><p id="bonus" style="margin:16px 0 0"></p><div id="letters" class="letters" aria-label="Nalezené nepovinné dopisy"></div></section><section class="paper"><div class="sect">Malý lexikon</div><h3>Jak se chodí</h3><div class="legend"><div class="legend-item"><span class="swatch l">═</span> Zlatá cesta · světlo</div><div class="legend-item"><span class="swatch n">═</span> Modrá cesta · noc</div><div class="legend-item"><span class="swatch b">◇</span> Zrcadlo · proměna</div><div class="legend-item"><span class="swatch gold">✦</span> Stopa · brána se otevře</div><div class="legend-item"><span class="swatch b">✉</span> Nepovinný dopis</div></div><p style="margin-top:17px">Chceš-li přepnout, nejdřív dojdi na zrcadlo. Změna platí pro všechny průchody, ale není nevratná.</p></section></aside></main>
+<footer class="footer">NOEMA INDUSTRIES · MEZI ŘÁDKY · OFFLINE HRA · ŽÁDNÉ SÍŤOVÉ POŽADAVKY</footer></div>
+<dialog id="dialog" class="modal" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog><noscript><p style="padding:20px">Hra potřebuje zapnutý JavaScript. Všechno běží lokálně, bez internetu.</p></noscript><!-- NOEMA:SCRIPTS -->
+<script>
+'use strict';
+// Pure, deterministic rules for the offline game. No DOM and no storage.
+(function(root, factory) { const api = factory(); if(typeof module === 'object' && module.exports) module.exports = api; else root.Meziradky = api; })(typeof globalThis !== 'undefined' ? globalThis : this, function() {
+const LEVELS = [
+  { title: 'Ulice se dvěma jmény', kicker:'01 / PRVNÍ STOPA', note:'„Ráno jsem neodešla. Ne proto, že nebyla cesta. Čekala jsem, až ji uvidím.“', intro:'Na náměstí zůstala poštovní schránka bez adresy. V dlažbě jsou dva druhy průchodů. Na zrcadlech se můžeš rozhodnout, které jsou skutečné.', map:[
+    '#############',
+    '#s..m.#..o..#',
+    '#.....l.....#',
+    '#.....#.....#',
+    '###.#########',
+    '#...m.n...g.#',
+    '#############'
+  ]},
+  { title: 'Opak se nevrací sám', kicker:'02 / DRUHÁ STOPA', note:'„Když jsem řekla promiň, čas se nevrátil. Jen se změnilo to, co můžu udělat dál.“', intro:'V domě naproti si světlo a tma vyměnily práci. Tam, kde minule pomáhalo světlo, teď musíš začít jeho opakem.', map:[
+    '#############',
+    '#s..m.#..o..#',
+    '#.....n.....#',
+    '#.....#.....#',
+    '###.#########',
+    '#...m.l...g.#',
+    '#############'
+  ]},
+  { title: 'Zahrada nenápadných stop', kicker:'03 / TŘETÍ STOPA', letter:{title:"Dopis, který zestárl",body:"Včera jsem ti nakreslila cestu zahradou. Vedla kolem studny a končila u otevřené brány.\n\nDnes ses podle ní vydala a narazila do zdi. Nejdřív jsem chtěla říct, že ses špatně dívala. Pak jsem si všimla data v rohu mapy.\n\nNezahazuj ji. Jen k ní připiš dnešek.\n\n— Někdo od vedlejšího okna"}, note:'„Některé věci nepřenesu. Ale poznám, že tu byly, když mění cestu, kterou teď volím.“', intro:'Za plotem rostou dva dopisy. Jeden potřebuješ. Druhý nikdo nepožaduje — ale možná stojí za zachování.', map:[
+    '#############',
+    '#s...m#..?..#',
+    '#.....l..o..#',
+    '#.....#.....#',
+    '###.#########',
+    '#...m.n...g.#',
+    '#############'
+  ]},
+  { title: 'Most s výhradou', kicker:'04 / ČTVRTÁ STOPA', letter:{title:"Nevyplněná kolonka",body:"Do záznamu jsem napsala: „Přešla jsem most, a proto se na druhém břehu rozsvítilo.“\n\nAle okno možná svítilo už před mým příchodem. Přes most jsem skutečně přešla. To, co se změnilo za oknem, neznám.\n\nNechávám v zápisu prázdné místo. Není to chyba v papíře.\n\n— Ta, která nesla lampu"}, note:'„Dveře nebyly zamčené. Jen jsem stále trvala na pravidle, které tu už neplatilo.“', intro:'Cesta má teď dvě hranice a každá chce jinou odpověď. Stopy se ukazují až tehdy, když se vrátíš jinak, než jsi přišla.', map:[
+    '#################',
+    '#s...m#..o.#...g#',
+    '#.....l....n....#',
+    '#.....#..m.#....#',
+    '####.############',
+    '#...?.m.........#',
+    '#################'
+  ]},
+  { title: 'Dům, který zůstal', kicker:'05 / POSLEDNÍ STOPA', letter:{title:"Dopis bez adresáta",body:"Nevím, kdo půjde po mně. Ani jestli rozpozná můj rukopis.\n\nNechávám tu mapu se dvěma cestami. Jednu jsem si pamatovala, druhou jsem našla až tehdy, když první přestala vést dál.\n\nJestli objevíš třetí, nemusíš ji pojmenovat po mně.\n\n— Někdo, kdo se kdysi vracel"}, note:'„Nikdo mě nemusel poznat. Stačilo, že jsem příště poznala dveře, které jsem dřív přešla.“', intro:'Poslední část cesty není nejdelší. Ale naposledy budeš muset rozlišit, co neseš, a co se změnilo cestou.', map:[
+    '#################',
+    '#s..m.#..o.#...g#',
+    '#.....n....l....#',
+    '#.....#..m.#....#',
+    '####.############',
+    '#...?.m.........#',
+    '#################'
+  ]}
+].map((l, i) => Object.freeze({...l, id:i+1, map: Object.freeze(l.map.slice()), width:l.map[0].length, height:l.map.length}));
+const VERSION=1;
+const DIRS = Object.freeze({up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]});
+function tile(l,x,y){return (l.map[y]||'')[x]||'#';}
+function origin(l){for(let y=0;y<l.height;y++)for(let x=0;x<l.width;x++)if(tile(l,x,y)==='s')return {x,y};throw Error('Missing start.');}
+function initial(){const p=origin(LEVELS[0]);return {version:VERSION, level:0, x:p.x,y:p.y,mode:0, got:false, bonus:[], notes:[], steps:0, turns:0, phase:'play', choice:null, history:[], message:'Začni šipkami nebo klepnutím na sousední pole.'};}
+function allowed(t, mode){return t!=='#' && (t!=='l'||mode===0) && (t!=='n'||mode===1);}
+function clone(s){return {...s,notes:s.notes.slice(),bonus:s.bonus.slice(),history:s.history.slice()};}
+function snapshot(s){const {history,...rest}=s;return {...rest,notes:rest.notes.slice(),bonus:rest.bonus.slice(),history:[]};}
+function action(s, command) {
+ if(!valid(s))return {ok:false,state:s,message:'Neplatný stav hry.'};
+ if(command==='undo') {
+   if(!s.history.length)return {ok:false,state:s,message:'Zatím není co vrátit.'};
+   const h=s.history.slice(),p=h.pop();return {ok:true,state:{...p,history:h,message:'Poslední krok je zpátky.'}};
+ }
+ if(command==='reset') {const p=origin(LEVELS[s.level]);let next={...s,x:p.x,y:p.y,mode:0,got:false,phase:'play',choice:null,history:[],message:'Cesta začíná na začátku této části.'};
+    next.notes=next.notes.slice(0,s.level); next.bonus=next.bonus.filter(n=>n<s.level);return {ok:true,state:next};}
+ if(s.phase==='interlude'&&command==='next') {const n=s.level+1;if(n>=LEVELS.length)throw Error('Bad progression');const p=origin(LEVELS[n]);return {ok:true,state:{...s,level:n,x:p.x,y:p.y,mode:0,got:false,phase:'play',history:[],message:LEVELS[n].intro}};}
+ if(s.phase==='ending'&&(command==='keep'||command==='send'))return {ok:true,state:{...s,phase:'done',choice:command,history:[],message:'Cesta skončila. Tvoje volba zůstala.'}};
+ if(s.phase!=='play')return {ok:false,state:s,message:'Tahle kapitola už skončila.'};
+ const l=LEVELS[s.level];let n=clone(s);n.history.push(snapshot(s));if(n.history.length>180)n.history.shift();
+ if(command==='switch'){
+  if(tile(l,s.x,s.y)!=='m')return {ok:false,state:s,message:'Svět můžeš obrátit jen na zrcadle ◇.'};
+  n.mode=1-s.mode;n.turns++;n.message=n.mode===0?'Zrcadlo vrátilo světlo. Zlaté průchody se otevřely.':'Zrcadlo obrátilo noc. Modré průchody se otevřely.';
+  return {ok:true,state:n};
+ }
+ const d=DIRS[command];if(!d)return {ok:false,state:s,message:'Neznámá volba.'};
+ const x=s.x+d[0], y=s.y+d[1], t=tile(l,x,y);
+ if(!allowed(t,s.mode))return {ok:false,state:s,message:t==='#'?'Tudy vede zeď.':t==='l'?'Zlatá cesta existuje jen ve světle.':'Modrá cesta existuje jen v noci.'};
+ if(t==='g'&&!s.got)return {ok:false,state:s,message:'Za branou ještě nikdo nečeká. Nejdřív najdi stopu ✦.'};
+ n.x=x;n.y=y;n.steps++;n.turns++;n.message='';
+ if(t==='o'&&!s.got){n.got=true;n.notes.push(l.note);n.message='Našla jsi záznam. Brána se probudila.';}
+ else if(t==='?'&&!s.bonus.includes(s.level)){n.bonus.push(s.level);n.message='Zvedla jsi nepovinný dopis. Není to úkol. Ale teď už o něm víš.';}
+ else if(t==='m')n.message='Na zrcadle můžeš stisknout mezerník nebo tlačítko Obrátit.';
+ else if(t==='g'){n.phase=s.level===LEVELS.length-1?'ending':'interlude';n.history=[];n.message=s.level===LEVELS.length-1?'Doručila jsi všech pět stop.':'Brána se otevřela. Další část cesty čeká.';}
+ return {ok:true,state:n};
+}
+function valid(s) {
+ if(!s||typeof s!=='object'||s.version!==VERSION||!Number.isInteger(s.level)||s.level<0||s.level>=LEVELS.length)return false;
+ if(!Number.isInteger(s.x)||!Number.isInteger(s.y)||!Number.isInteger(s.mode)||![0,1].includes(s.mode))return false;
+ if(!['play','interlude','ending','done'].includes(s.phase)||!Array.isArray(s.notes)||!Array.isArray(s.bonus)||!Array.isArray(s.history)||s.history.length>180)return false;
+ if(s.notes.length>s.level+1||s.notes.some((n,i)=>n!==LEVELS[i].note)||s.bonus.some(i=>!Number.isInteger(i)||i<0||i>s.level)||new Set(s.bonus).size!==s.bonus.length)return false;
+ if(typeof s.got!=='boolean'||s.notes.length!==(s.got?s.level+1:s.level))return false;
+ if(!Number.isInteger(s.steps)||s.steps<0||!Number.isInteger(s.turns)||s.turns<s.steps||typeof s.message!=='string')return false;
+ if(!['keep','send',null].includes(s.choice)||(s.phase==='done')!==(s.choice!==null))return false;
+ if(tile(LEVELS[s.level],s.x,s.y)==='#'||!allowed(tile(LEVELS[s.level],s.x,s.y),s.mode))return false;
+ if(s.phase!=='play'&&!s.got)return false;
+ if(s.history.some(h=>!h||!Number.isInteger(h.level)||h.level!==s.level||!Array.isArray(h.history)||h.history.length!==0))return false;
+ return true;
+}
+function buildStateKey(s){return [s.level,s.x,s.y,s.mode,Number(s.got),s.phase].join(':');}
+function solve(l) {
+ const p=origin(l),q=[{x:p.x,y:p.y,mode:0,got:false,route:[]}],seen=new Set();
+ for(let k=0;k<q.length;k++){
+  const s=q[k], key=[s.x,s.y,s.mode,Number(s.got)].join(':');if(seen.has(key))continue;seen.add(key);
+  if(tile(l,s.x,s.y)==='g'&&s.got)return s.route;
+  for(const [cmd,[dx,dy]] of Object.entries(DIRS)){
+    const x=s.x+dx,y=s.y+dy,t=tile(l,x,y);if(!allowed(t,s.mode))continue;
+    if(t==='g'&&!s.got)continue;
+    q.push({...s,x,y,got:s.got||t==='o',route:[...s.route,cmd]});
+  }
+  if(tile(l,s.x,s.y)==='m')q.push({...s,mode:1-s.mode,route:[...s.route,'switch']});
+ }
+ return null;
+}
+return {VERSION,LEVELS,DIRS,tile,origin,initial,action,valid,allowed,solve,buildStateKey};
+});
+
+</script>
+<script>
+'use strict';
+(function(){
+const E=window.Meziradky, STORE='noema-mezi-radky-v1';
+const $=id=>document.getElementById(id);
+let state=E.initial(), modalKind='', muted=false, storageNotice=false;
+const el={chapter:$('chapter-title'),kicker:$('chapter-kicker'),context:$('context'),board:$('board'),mode:$('mode'),steps:$('steps'),progress:$('progress'),status:$('status'),notes:$('notes'),bonus:$('bonus'),letters:$('letters'),mirror:$('mirror'),undo:$('undo'),dialog:$('dialog'),dialogContent:$('dialog-content')};
+function safeSave(){try{localStorage.setItem(STORE,JSON.stringify({...state,history:state.history.slice(-70)}));}catch(err){if(!storageNotice){storageNotice=true;$('storage-info').textContent='Prohlížeč neumožňuje ukládání. Hrát můžeš dál, ale po zavření se stav nezachová.';}}}
+function safeLoad(){try{const raw=localStorage.getItem(STORE);if(raw){const s=JSON.parse(raw);if(E.valid(s)){state=s;return true;}}}catch(err){}return false;}
+function announce(message){el.status.textContent=message;}
+function cellInfo(t,blocked,here){if(here)return 'Tvoje postava';return ({'#':'zeď','.':'dlažba','s':'začátek','m':'zrcadlo – stiskni mezerník na tomto poli','l':blocked?'zlatý průchod je zavřený':'zlatý průchod je otevřený','n':blocked?'modrý průchod je zavřený':'modrý průchod je otevřený','o':'stopa, kterou můžeš získat','?':'nepovinný dopis','g':state.got?'brána do další části':'brána čeká na stopu'})[t]||'cesta';}
+function renderBoard(){const lv=E.LEVELS[state.level], b=el.board;b.style.setProperty('--cols',lv.width);b.style.setProperty('--rows',lv.height);b.setAttribute('aria-label',`Plán města: ${lv.title}. ${lv.width} sloupců, ${lv.height} řad.`);const fragment=document.createDocumentFragment();
+for(let y=0;y<lv.height;y++)for(let x=0;x<lv.width;x++){
+ const t=E.tile(lv,x,y),here=state.x===x&&state.y===y,blocked=!E.allowed(t,state.mode),reachable=Math.abs(state.x-x)+Math.abs(state.y-y)===1;
+ const button=document.createElement('button');button.type='button';button.className='cell '+({'#':'wall','.':'floor','s':'start','l':'light','n':'dark','m':'mirror','o':'note','?':'bonus','g':'goal'}[t]||'floor')+(blocked?' closed':'')+(reachable?' adjacent':'')+(t==='g'&&!state.got?' locked':'');
+ button.setAttribute('aria-label',`Řádek ${y+1}, sloupec ${x+1}: ${cellInfo(t,blocked,here)}`);button.dataset.x=x;button.dataset.y=y;button.tabIndex=reachable||here?0:-1;
+ let symbol='';if(t==='m')symbol='◇';if(t==='l')symbol=blocked?'×':'═';if(t==='n')symbol=blocked?'×':'═';if(t==='o')symbol=state.got?'·':'✦';if(t==='?')symbol=state.bonus.includes(state.level)?'·':'✉';if(t==='g')symbol=state.got?'⌂':'⌑';if(t==='s')symbol='⌁';
+ if(symbol){const sp=document.createElement('span');sp.className='glyph'+(t==='m'?' lg':'');sp.textContent=symbol;button.append(sp)}
+ if(here){let av=document.createElement('span');av.className='avatar';av.setAttribute('aria-hidden','true');av.textContent='N';button.append(av);button.setAttribute('aria-current','location')}
+ button.addEventListener('click',()=>{if(state.phase!=='play')return;if(here){if(t==='m')go('switch');else announce('Jsi tady. Jdi šipkami nebo klepni na sousední pole.');return;}const dx=x-state.x,dy=y-state.y;const command=Math.abs(dx)+Math.abs(dy)!==1?null:dx===1?'right':dx===-1?'left':dy===1?'down':'up';if(command)go(command);else announce('Lze se přesunout jen o jedno sousední pole.');});fragment.append(button);
+}b.replaceChildren(fragment)}
+function renderNotes(){el.notes.replaceChildren();for(let i=0;i<E.LEVELS.length;i++){const li=document.createElement('li');const got=i<state.notes.length;li.className=got?'':'unknown';li.textContent=got?`${i+1}. ${E.LEVELS[i].note}`:`${i+1}. · · ·`;el.notes.append(li)}el.bonus.textContent=state.bonus.length?`Nalezené nepovinné dopisy: ${state.bonus.length}. Všimnout si jich nebylo povinné.`:'Nepovinné dopisy nejsou cílem. Někdy je ale stojí za to sebrat.'}
+function renderLetters(){
+ el.letters.replaceChildren();
+ for(const i of state.bonus){
+  const letter=E.LEVELS[i].letter;
+  if(!letter)continue;
+  const button=document.createElement('button');
+  button.type='button';button.className='letter-entry';
+  button.textContent=`✉ ${letter.title} — přečíst znovu`;
+  button.addEventListener('click',()=>showLetter(i));
+  el.letters.append(button);
+ }
+}
+function render(){const lv=E.LEVELS[state.level];document.body.classList.toggle('dark-mode',state.mode===1);el.chapter.textContent=lv.title;el.kicker.textContent=lv.kicker;el.context.textContent=lv.intro;el.mode.textContent=state.mode?'☾ NOC':'☼ SVĚTLO';el.steps.textContent=`Kroky ${state.steps}`;el.progress.textContent=`Stopy ${state.notes.length} / ${E.LEVELS.length}`;el.mirror.disabled=state.phase!=='play'||E.tile(lv,state.x,state.y)!=='m';el.undo.disabled=state.phase!=='play'||!state.history.length;renderBoard();renderNotes();renderLetters();announce(state.message||'Hledej záznam ✦, pak bránu ⌂. Na zrcadlech ◇ můžeš změnit svět.');safeSave()}
+function go(command){if(state.phase!=='play')return;const prev=state;const r=E.action(state,command);if(!r.ok){announce(r.message);return}state=r.state;render();if(state.bonus.length>prev.bonus.length)showLetter(state.level);if(state.phase!==prev.phase){if(state.phase==='interlude')showChapter();if(state.phase==='ending')showEnding();}}
+function next(){const r=E.action(state,'next');if(r.ok){state=r.state;closeDialog();render()}}
+function newGame(){if(state.steps>0&&!window.confirm('Začít úplně novou hru? Uložená cesta se přepíše.'))return;state=E.initial();closeDialog();render();showWelcome()}
+function reset(){if(state.phase!=='play')return;if(!window.confirm('Vrátit se na začátek této části? Dosavadní tahy v této části se ztratí.'))return;const r=E.action(state,'reset');if(r.ok){state=r.state;render()}}
+function openDialog(html,kind){el.dialogContent.innerHTML=html;modalKind=kind;el.dialog.showModal()}
+function closeDialog(){if(el.dialog.open)el.dialog.close();modalKind=''}
+function showWelcome(){openDialog(`<span class="meta">Noema · první hra</span><h2 id="dialog-title">Mezi řádky</h2><p>Město zapomnělo některé cesty. Nejdřív zjisti, co znamenají jeho značky. Až potom se pokus dostat na druhou stranu.</p><div class="tip">Pohyb: šipky / WASD / tlačítka. <strong>◇ zrcadlo</strong>: stoupni na něj a stiskni mezerník nebo <em>Obrátit</em>. <strong>✦ stopa</strong>: potřebuješ ji k otevření <strong>⌂ brány</strong>. <strong>Z</strong> vrací krok. Zbytek uvidíš cestou.</div><p>Každá část je řešitelná a nic tě nenutí spěchat. Zabloudění není prohra.</p><div class="buttons"><button class="primary" data-dialog="start">Vyjít do ulic →</button></div>`,'welcome')}
+function showHelp(){openDialog(`<span class="meta">Pravidla města</span><h2 id="dialog-title">Co znamenají značky?</h2><div class="legend"><div class="legend-item"><span class="swatch l">═</span> Zlatá cesta: průchozí jen ve světle ☼</div><div class="legend-item"><span class="swatch n">═</span> Modrá cesta: průchozí jen v noci ☾</div><div class="legend-item"><span class="swatch b">◇</span> Zrcadlo: stoupni na něj a změň výklad cesty</div><div class="legend-item"><span class="swatch gold">✦</span> Povinná stopa: otevře bránu ⌂</div><div class="legend-item"><span class="swatch b">✉</span> Nepovinný dopis: lze projít i bez něj</div></div><p>Zrcadlo můžeš použít opakovaně. Kdykoli můžeš vrátit tah Z, a pokud ztratíš směr, začít část znovu. Nemůžeš nic nevratně pokazit.</p><p>Klávesy: <strong>WASD / šipky</strong> pohyb, <strong>mezerník</strong> obrat na zrcadle, <strong>Z</strong> zpět, <strong>H</strong> nápověda, <strong>Esc</strong> zavřít okno.</p><div class="buttons"><button class="primary" data-dialog="close">Rozumím</button></div>`,'help')}
+function showLetter(i){
+ if(!state.bonus.includes(i))return;
+ const letter=E.LEVELS[i].letter;
+ if(!letter)return;
+ openDialog(`<span class="meta">NEPOVINNÝ DOPIS · ${i+1}. ULICE</span><h2 id="dialog-title">${escapeText(letter.title)}</h2><div class="letter-paper">${escapeText(letter.body)}</div><p>Tenhle dopis neotevírá bránu. Můžeš se k němu kdykoli vrátit v nálezovém deníku.</p><div class="buttons"><button class="primary" data-dialog="close">Uložit do deníku</button></div>`,'letter');
+}
+function showChapter(){const lv=E.LEVELS[state.level];openDialog(`<span class="meta">${lv.kicker} · NALEZENO</span><h2 id="dialog-title">Další zpráva</h2><blockquote>${escapeText(lv.note)}</blockquote><p>Vrátila ses s jiným výkladem světa, než s jakým jsi vyšla. Cesta nezmizela. Jen se změnilo, kterou z nich dokážeš použít.</p><div class="buttons"><button class="primary" data-dialog="next">Otevřít další ulici →</button></div>`,'chapter')}
+function showEnding(){let optional=state.bonus.length;openDialog(`<span class="meta">PĚT STOP · POSLEDNÍ ADRESA</span><h2 id="dialog-title">Komu to patří?</h2><p>Ve všech pěti ulicích ležela stejná věc: ne návod, ale důkaz, že někdo už tudy prošel. Pošťák města čeká, co s nasbíranými zprávami uděláš.</p><p>${optional?`Zvedla jsi také ${optional} nepovinn${optional===1?'ý dopis':optional<5?'é dopisy':'ých dopisů'}. Neotevřely žádné dveře, ale budou součástí tvého rozhodnutí.`:'Nepovinné dopisy jsi nechala ležet. Město má stále svoje neznámé příběhy.'}</p><div class="buttons"><button class="primary" data-dialog="send">Doručit zprávy městu</button><button class="secondary" data-dialog="keep">Nechat je na cestě</button></div>`,'ending')}
+function showResult(){const sent=state.choice==='send',extras=state.bonus.length;openDialog(`<span class="meta">KONEC · ${sent?'DORUČENO':'NECHÁNO OTEVŘENÉ'}</span><h2 id="dialog-title">${sent?'Ráno má adresu.':'Cesta má pokračování.'}</h2><p>${sent?'Pošťák vystavil pět vět do oken. Nikdo nemusel vědět, kdo je napsal. Ale další chodci si všimli, že některé dveře mají dvě strany.':'Zprávy jsi nechala tam, kde vznikly. Někdo další je možná najde až ve chvíli, kdy je bude potřebovat. Město nezískalo mapu, ale neztratilo možnost objevovat.'}</p><p>${extras===0?'Dopisům, které jsi cestou minula, zůstala jejich tajemství.':extras<3?'A pár nepovinných dopisů připomíná, že svět je širší než pět nutných kroků.':'Vedle hlavní cesty jsi našla i vedlejší hlasy. Ani jeden nemusel čekat na povolení, aby měl smysl.'}</p><blockquote>„Ne všechno, co zůstane, je věc. Někdy je to možnost příště jít jinudy.“</blockquote><p>Děkuju, že jsi to prošel. — Noema</p><div class="buttons"><button class="primary" data-dialog="again">Hrát znovu ↺</button><button class="secondary" data-dialog="close">Zůstat tady</button></div>`,'result')}
+function escapeText(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+el.dialog.addEventListener('click',e=>{const cmd=e.target.closest('[data-dialog]')?.dataset.dialog;if(!cmd)return;if(cmd==='close'||cmd==='start')closeDialog();else if(cmd==='next')next();else if(cmd==='send'||cmd==='keep'){const r=E.action(state,cmd);if(r.ok){state=r.state;closeDialog();render();showResult()}}else if(cmd==='again'){state=E.initial();closeDialog();render();showWelcome()}});
+$('restart').addEventListener('click',newGame);$('restart-part').addEventListener('click',reset);$('help').addEventListener('click',showHelp);el.mirror.addEventListener('click',()=>go('switch'));el.undo.addEventListener('click',()=>go('undo'));
+for(const cmd of ['up','down','left','right'])$(cmd).addEventListener('click',()=>go(cmd));
+document.addEventListener('keydown',e=>{
+ if(el.dialog.open){if(e.key==='Escape')closeDialog();return}
+ if(e.ctrlKey||e.altKey||e.metaKey||e.target.matches('input, textarea, select'))return;
+ const map={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',w:'up',W:'up',s:'down',S:'down',a:'left',A:'left',d:'right',D:'right',' ':'switch',z:'undo',Z:'undo',h:'help',H:'help'};
+ const cmd=map[e.key];if(!cmd)return;e.preventDefault();if(cmd==='help')showHelp();else go(cmd);
+});
+safeLoad();render();if(state.phase==='interlude')showChapter();else if(state.phase==='ending')showEnding();else if(state.phase==='done')showResult();else if(!state.steps)showWelcome();
+})();
+
+</script>
+<!-- /NOEMA:SCRIPTS --></body></html>

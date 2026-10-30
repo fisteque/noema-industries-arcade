@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d1522">
+<meta name="description" content="Noema Industries — společná herna. Deset původních her od Vegy, Sheliak, Noemy a Lýry.">
+<title>Noema Industries · Herní salon 🦆</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1522;--surface:#162334;--line:#2a3a4c;--text:#f0f5f4;--muted:#bac9cf;--gold:#efce78;--mint:#91d4bf}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 90% 0%,#213746 0,transparent 41%),radial-gradient(ellipse at 3% 40%,#202944 0,transparent 37%),var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}button{font:inherit}.wrap{width:min(1140px,calc(100% - 40px));margin:auto}
+.skip{position:absolute;left:-9999px;top:auto}.skip:focus{left:16px;top:16px;background:white;color:#111;padding:8px;z-index:5}
+.topnav{display:flex;justify-content:space-between;align-items:center;padding:28px 0;gap:14px}
+.brand{font-size:.88rem;font-weight:800;letter-spacing:.08em;text-decoration:none}.brand span{color:var(--gold)}.nav-links{display:flex;gap:22px;flex-wrap:wrap}.nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem}.nav-links a:hover,.nav-links a:focus-visible{color:var(--text)}
+.hero{position:relative;isolation:isolate;padding:64px 0 66px;max-width:830px}.eyebrow{font-weight:700;text-transform:uppercase;letter-spacing:.18em;font-size:.75rem;color:var(--mint)}
+h1{font-size:clamp(2.45rem,6vw,5.1rem);letter-spacing:-.055em;line-height:1.05;margin:18px 0 23px;font-weight:800}h1 em{color:var(--gold);font-style:normal}
+.lead{max-width:620px;font-size:1.13rem;color:var(--muted);margin:0 0 28px}
+.hero-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.hero-actions a,.random{border:1px solid var(--line);border-radius:100px;padding:11px 19px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;min-height:44px}.hero-actions .primary{background:var(--gold);border-color:var(--gold);color:#192432;font-weight:800}.hero-actions .secondary{color:var(--text)}.hero-actions a:hover,.random:hover{transform:translateY(-2px)}.hero-duck{position:absolute;right:0;top:12px;font-size:clamp(80px,13vw,170px);transform:rotate(-9deg);opacity:.16;z-index:-1}
+.intro-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:19px 0;color:var(--muted);font-size:.9rem}
+.intro-bar strong{color:var(--text)}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:58px 0 30px}.toolbar h2{font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.035em;margin:0}.filter-buttons{display:flex;flex-wrap:wrap;gap:8px}
+.filter-buttons button{border:1px solid var(--line);background:transparent;color:var(--muted);padding:8px 14px;border-radius:100px;cursor:pointer}
+.filter-buttons button[aria-pressed="true"]{background:#e1f0e7;border-color:#e1f0e7;color:#13242e;font-weight:800}
+.author-group{margin-bottom:55px}.author-group[hidden]{display:none}.group-heading{display:flex;align-items:baseline;gap:12px;margin-bottom:19px}.group-heading h2{font-size:1.4rem;margin:0}.group-heading span{font-size:.85rem;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:16px}
+.game-card{min-width:0;display:flex;flex-direction:column;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:19px;overflow:hidden;transition:transform .18s,border-color .18s,box-shadow .18s}
+.game-card:hover{transform:translateY(-4px);border-color:var(--mint);box-shadow:0 12px 35px #0005}.game-card:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.card-top{padding:17px 18px 0;display:flex;justify-content:space-between;gap:8px;font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;color:#c8d6dc;font-weight:700}.card-no{opacity:.65}
+.card-illustration{height:120px;display:grid;place-items:center;position:relative;overflow:hidden}
+.card-symbol{font-size:5rem;line-height:1;color:var(--gold);opacity:.9}.orbit{position:absolute;border:1px solid #b9d8d733;border-radius:50%;width:145px;height:85px;transform:rotate(22deg)}.orbit-b{transform:rotate(-35deg);width:170px;height:88px}
+.author-group[data-author="vega"] .card-symbol{color:#a8c6ff}.author-group[data-author="sheliak"] .card-symbol{color:#eac58e}.author-group[data-author="noema"] .card-symbol{color:#93d6bd}.author-group[data-author="lyra"] .card-symbol{color:#d4b8ed}
+.card-body{display:flex;flex-direction:column;flex:1;padding:8px 19px 16px}.card-type{font-size:.75rem;color:var(--mint);font-weight:700}.card-title{font-size:1.25rem;font-weight:800;line-height:1.2;margin:10px 0}.card-desc{font-size:.91rem;line-height:1.52;color:var(--muted)}
+.card-bottom{display:flex;justify-content:space-between;padding:14px 19px;border-top:1px solid var(--line);font-weight:800;font-size:.92rem}.card-bottom span{color:var(--gold)}
+.random{background:transparent;color:var(--text);cursor:pointer}.bottom-note{border:1px solid var(--line);background:#142535;border-radius:18px;margin:55px 0 66px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:20px}.bottom-note h2{margin:0 0 5px;font-size:1.25rem}.bottom-note p{margin:0;color:var(--muted);max-width:650px}.bottom-note a{white-space:nowrap;text-underline-offset:4px}
+footer{border-top:1px solid var(--line);padding:28px 0 46px;color:var(--muted);font-size:.85rem}footer a{text-underline-offset:4px}
+@media(max-width:720px){.hero{padding:40px 0}.topnav{align-items:flex-start}.nav-links{gap:12px}.bottom-note{display:block}.bottom-note a{display:inline-block;margin-top:12px}.cards{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.game-card,.hero-actions a{transition:none}}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#games">Přeskočit na hry</a>
+<div class="wrap">
+<header class="topnav"><a class="brand" href="./"><span>🦆</span> NOEMA INDUSTRIES</a><nav class="nav-links" aria-label="Hlavní navigace"><a href="#games">Hry</a><a href="#about">O herně ↗</a></nav></header>
+<main>
+<section class="hero" aria-labelledby="intro-title"><div class="hero-duck" aria-hidden="true">🦆</div><p class="eyebrow">The Quest for Free Time</p><h1 id="intro-title">Vyrobit volno.<br><em>A pak si ho zahrát.</em></h1><p class="lead">Deset původních her, čtyři autorky, spousta cest, odboček a rozhodnutí. Vyber si svět. Hraje se přímo tady, bez instalace.</p><div class="hero-actions"><a class="primary" href="#games">Vybrat hru ↓</a><a class="secondary" href="#about">O herně ↗</a></div></section>
+<div class="intro-bar"><span><strong>10 her</strong> · Vega, Sheliak, Noema a Lýra</span><span>První vydané verze v1 · přímo v prohlížeči</span></div>
+<section id="games" aria-label="Katalog her"><div class="toolbar"><h2>Naše herna <span aria-hidden="true">🎮</span></h2><div class="filter-buttons" role="group" aria-label="Vybrat autorku"><button type="button" aria-pressed="true" data-filter="all">Všechny</button><button type="button" aria-pressed="false" data-filter="vega">Vega</button><button type="button" aria-pressed="false" data-filter="sheliak">Sheliak</button><button type="button" aria-pressed="false" data-filter="noema">Noema</button><button type="button" aria-pressed="false" data-filter="lyra">Lýra</button></div></div>
+<div id="selection-status" class="sr-only" aria-live="polite"></div>
+<section class="author-group" id="vega" data-author="vega" aria-labelledby="heading-vega">
+ <div class="group-heading"><h2 id="heading-vega">Vega</h2><span>4 hry</span></div>
+ <div class="cards"><a class="game-card" href="./games/vega/hra-01/v1/index.html" aria-label="Hrát Padla!, hra od Vega">
+  <span class="card-top"><span class="card-author">Vega</span><span class="card-no">HRA 01 · v1</span></span>
+  <span class="card-illustration" aria-hidden="true"><span class="card-symbol">✦</span><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span></span>
+  <span class="card-body"><span class="card-type">Taktická hra · volný čas</span><span class="card-title">Padla!</span><span class="card-desc">Pět směn, tři pracoviště a firma, která má vyrobit volné odpoledne.</span></span>
+  <span class="card-bottom">Hrát <span aria-hidden="true">↗</span></span>
+</a>
+<a class="game-card" href="./games/vega/hra-02/v1/index.html" aria-label="Hrát Noční spoj, hra od Vega">
+  <span class="card-top"><span class="card-author">Vega</span><span class="card-no">HRA 02 · v1</span></span>
+  <span class="card-illustration" aria-hidden="true"><span class="card-symbol">✦</span><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span></span>
+  <span class="card-body"><span class="card-type">Logická hra · šest zátok</span><span class="card-title">Noční spoj</span><span class="card-desc">Přívoz pro hvězdy, které zmeškaly oblohu. Šest prostorových hádanek.</span></span>
+  <span class="card-bottom">Hrát <span aria-hidden="true">↗</span></span>
+</a>
+<a class="game-card" href="./games/vega/hra-03/v1/index.html" aria-label="Hrát Hlubina si pamatuje, hra od Vega">
+  <span class="card-top"><span class="card-author">Vega</span><span class="card-no">HRA 03 · v1</span></span>
+  <span class="card-illustration" aria-hidden="true"><span class="card-symbol">✦</span><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span></span>
+  <span class="card-body"><span class="card-type">Průzkum · pod hladinou</span><span class="card-title">Hlubina si pamatuje</span><span class="card-desc">Podmořský průzkum, sonar a tři ztracené paměti opuštěné stanice.</span></span>
+  <span class="card-bottom">Hrát <span aria-hidden="true">↗</span></span>
+</a>
+<a class="game-card" href="./games/vega/hra-04/v1/index.html" aria-label="Hrát Vítr na zapřenou, hra od Vega">
+  <span class="card-top"><span class="card-author">Vega</span><span class="card-no">HRA 04 · v1</span></span>
+  <span class="card-illustration" aria-hidden="true"><span class="card-symbol">✦</span><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span></span>
+  <span class="card-body"><span class="card-type">Ježibabky · adventura</span><span class="card-title">Vítr na zapřenou</span><span class="card-desc">Pomoz Hrůzii po nehodě s hůlkou a doprovoď ji k mlýnu.</span></span>
+  <span class="card-bottom">Hrát <span aria-hidden="true">↗</span></span>
+</a></div>
+ </section>
+<section class="author-group" id="sheliak" data-author="sheliak" aria-labelledby="heading-sheliak">
+ <div class="group-heading"><h2 id="heading-sheliak">Sheliak</h2><span>4 hry</span></div>
+ <div class="cards"><a class="game-card" href="./games/sheliak/hra-01/v1/index.html" aria-label="Hrát PADLA! — Vyrob si volno, hra od Sheliak">
+  <span class="card-top"><span class="card-author">Sheliak</span><span class="card-no">HRA 01 · v1</span></span>
+  <span class="card-illustration" aria-hidden="true"><span class="card-symbol">✧</span><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span></span>
+  <span class="card-body"><span class="card-type">Taktická hra · volný čas</span><span class="card-title">PADLA! — Vyrob si volno</span><span class="card-desc">Pět odpolední, zakázky a pomocníci. Zachráníš si šest hodin volna?</span></span>
+  <span class="card-bottom">Hrát <span aria-hidden="true">↗</span></span>
+</a>
+<a class="game-card" href="./games/sheliak/hra-02/v1/index.html" aria-label="Hrát Ozvěna, hra od Sheliak">
+  <span class="card-top"><span class="card-author">Sheliak</span><span class="card-no">HRA 02 · v1</span></span>
+  <span class="card-illustration" aria-hidden="true"><span class="card-symbol">✧</span><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span></span>
+  <span class="card-body"><span class="card-type">Logická hra · paměť pohybu</span><span class="card-title">Ozvěna</span><span class="card-desc">Dvě světla, šest ostrůvků a pohyb, který se zopakuje o dva tahy později.</span></span>
+  <span class="card-bottom">Hrát <span aria-hidden="true">↗</span></span>
+</a>
+<a class="game-card" href="./games/sheliak/hra-03/v1/index.html" aria-label="Hrát Ještě svítí, hra od Sheliak">
+  <span class="card-top"><span class="card-author">Sheliak</span><span class="card-no">HRA 03 · v1</span></span>
+  <span class="card-illustration" aria-hidden="true"><span class="card-symbol">✧</span><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span></span>
+  <span class="card-body"><span class="card-type">Plavba · příběh</span><span class="card-title">Ještě svítí</span><span class="card-desc">Noční přívoz, rozhovory na palubě a maják, který čeká na rozsvícení.</span></span>
+  <span class="card-bottom">Hrát <span aria-hidden="true">↗</span></span>
+</a>
+<a class="game-card" href="./games/sheliak/hra-04/v1/index.html" aria-label="Hrát Mlýn na včerejšek, hra od Sheliak">
+  <span class="card-top"><span class="card-author">Sheliak</span><span class="card-no">HRA 04 · v1</span></span>
+  <span class="card-illustration" aria-hidden="true"><span class="card-symbol">✧</span><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span></span>
+  <span class="card-body"><span class="card-type">Ježibabky · adventura</span><span class="card-title">Mlýn na včerejšek</span><span class="card-desc">Noema s Hrůzií hledají cestu z rána, které se stále opakuje.</span></span>
+  <span class="card-bottom">Hrát <span aria-hidden="true">↗</span></span>
+</a></div>
+ </section>
+<section class="author-group" id="noema" data-author="noema" aria-labelledby="heading-noema">
+ <div class="group-heading"><h2 id="heading-noema">Noema</h2><span>1 hra</span></div>
+ <div class="cards"><a class="game-card" href="./games/noema/hra-01/v1/index.html" aria-label="Hrát Mezi řádky, hra od Noema">
+  <span class="card-top"><span class="card-author">Noema</span><span class="card-no">HRA 01 · v1</span></span>
+  <span class="card-illustration" aria-hidden="true"><span class="card-symbol">◈</span><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span></span>
+  <span class="card-body"><span class="card-type">Logická adventura · beze spěchu</span><span class="card-title">Mezi řádky</span><span class="card-desc">Dvě podoby průchodů, stopy a rozhodnutí na konci města.</span></span>
+  <span class="card-bottom">Hrát <span aria-hidden="true">↗</span></span>
+</a></div>
+ </section>
+<section class="author-group" id="lyra" data-author="lyra" aria-labelledby="heading-lyra">
+ <div class="group-heading"><h2 id="heading-lyra">Lýra</h2><span>1 hra</span></div>
+ <div class="cards"><a class="game-card" href="./games/lyra/hra-01/v1/index.html" aria-label="Hrát Osmá stopa, hra od Lýra">
+  <span class="card-top"><span class="card-author">Lýra</span><span class="card-no">HRA 01 · v1</span></span>
+  <span class="card-illustration" aria-hidden="true"><span class="card-symbol">✺</span><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span></span>
+  <span class="card-body"><span class="card-type">Příběh · zkušenost a volby</span><span class="card-title">Osmá stopa</span><span class="card-desc">Chobotnice na bruslích, tři polohy Lýry a Soma, která se pohybuje.</span></span>
+  <span class="card-bottom">Hrát <span aria-hidden="true">↗</span></span>
+</a></div>
+ </section>
+<button type="button" class="random" id="random-game">🎲 Vybrat náhodnou hru</button>
+</section>
+<aside class="bottom-note" id="about"><div><h2>Hry mají vlastní minulost</h2><p>Každá hra může dostávat nové verze. Ty staré ale zůstanou hratelné — aby šlo porovnávat, jak se nápad vyvíjel. Tohle je první veřejné vydání našich deseti her.</p></div><a href="https://github.com/fisteque/noema-industries-arcade" target="_blank" rel="noopener noreferrer">Repozitář herny ↗</a></aside>
+</main>
+<footer>© Noema Industries · experimentální herna 🦆 · <a href="https://github.com/fisteque/noema-industries-arcade">Repozitář herny</a><p>Ve hrách se vrátíš na hernu tlačítkem Zpět v prohlížeči. Některé hry ukládají postup lokálně v tomto prohlížeči.</p></footer>
+</div>
+<script>
+const filters=document.querySelectorAll('[data-filter]');
+const groups=document.querySelectorAll('.author-group');
+for(const button of filters)button.addEventListener('click',()=>{
+  const value=button.dataset.filter;
+  for(const b of filters)b.setAttribute('aria-pressed',String(b===button));
+  let count=0;
+  for(const g of groups){g.hidden=value!=='all'&&g.dataset.author!==value;if(!g.hidden)count+=g.querySelectorAll('.game-card').length;}
+  document.getElementById('selection-status').textContent='Zobrazeno her: '+count;
+});
+document.getElementById('random-game').addEventListener('click',()=>{
+  const visible=[...document.querySelectorAll('.author-group:not([hidden]) .game-card')];
+  if(visible.length){const game=visible[Math.floor(Math.random()*visible.length)];location.href=game.getAttribute('href');}
+});
+</script>
+</body>
+</html>

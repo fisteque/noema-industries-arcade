@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101733">
+  <title>Lýra: Osmá stopa</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main id="game" class="game" aria-live="polite">
+    <section id="titleScreen" class="title-screen">
+      <div class="constellation" aria-hidden="true">
+        <span style="--x:8%;--y:18%;--d:.4s"></span><span style="--x:19%;--y:64%;--d:1.1s"></span>
+        <span style="--x:33%;--y:10%;--d:.8s"></span><span style="--x:47%;--y:40%;--d:1.7s"></span>
+        <span style="--x:62%;--y:15%;--d:.2s"></span><span style="--x:76%;--y:70%;--d:1.4s"></span>
+        <span style="--x:91%;--y:26%;--d:.9s"></span><span style="--x:54%;--y:82%;--d:2s"></span>
+      </div>
+      <p class="eyebrow">jedna hra od Lýry</p>
+      <h1>OSMÁ STOPA</h1>
+      <p class="subtitle">Chobotnice na bruslích, tři polohy a město, které si plete společnou zkušenost se stejným jménem.</p>
+      <div class="title-octopus" aria-hidden="true">🐙<i></i></div>
+      <div class="title-actions">
+        <button class="primary" data-start="new">Začít klouzat</button>
+        <button id="continueBtn" class="secondary hidden" data-start="continue">Pokračovat ve stopě</button>
+      </div>
+      <p class="small-note">Hra se ukládá sama. Nejlépe se hraje se zvukem v hlavě.</p>
+    </section>
+
+    <section id="playScreen" class="play-screen hidden">
+      <header class="topbar">
+        <div>
+          <span class="tiny-title">LÝRA</span>
+          <strong>Osmá stopa</strong>
+        </div>
+        <div class="top-actions">
+          <button data-open="map" title="Mapa (M)">Mapa</button>
+          <button data-open="journal" title="Deník (D)">Deník</button>
+          <button data-reset title="Nová hra">↻</button>
+        </div>
+      </header>
+
+      <nav id="roleBar" class="role-bar" aria-label="Polohy Lýry"></nav>
+
+      <div class="layout">
+        <section class="stage-card">
+          <div id="scene" class="scene"></div>
+          <div class="scene-label">
+            <span id="locationKicker"></span>
+            <h2 id="locationTitle"></h2>
+          </div>
+        </section>
+
+        <aside class="status-card">
+          <div class="status-block soma-status">
+            <div class="status-heading"><span>SOMA</span><strong id="somaPlace"></strong></div>
+            <div class="battery-shell" aria-label="Baterie Somy"><div id="batteryFill"></div></div>
+            <p id="batteryText"></p>
+          </div>
+          <div class="status-block">
+            <div class="status-heading"><span>KAPSY</span><strong id="inventoryCount"></strong></div>
+            <div id="inventory" class="chips"></div>
+          </div>
+          <div class="status-block">
+            <div class="status-heading"><span>ZKUŠENOSTI</span><strong id="experienceCount"></strong></div>
+            <div id="experienceMarks" class="experience-marks"></div>
+          </div>
+        </aside>
+
+        <section class="story-card">
+          <p id="roleWhisper" class="role-whisper"></p>
+          <div id="storyText" class="story-text"></div>
+          <div id="choices" class="choices"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal">
+      <button class="close" data-close aria-label="Zavřít">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="app.js"></script>
+</body>
+</html>

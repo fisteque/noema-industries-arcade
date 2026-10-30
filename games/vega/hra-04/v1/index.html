@@ -1,0 +1,693 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#e9dfc8"><title>Ježibabky — Vítr na zapřenou</title><style>:root{--paper:#eee5cf;--light:#f7f0df;--ink:#304438;--dim:#6f7868;--forest:#294b3d;--plum:#77647f;--rust:#a85e49;--gold:#bc9148;--line:#314c3526}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background-image:radial-gradient(ellipse at 15% 2%,#fff9e9bb,transparent 55%),linear-gradient(110deg,#c9b99712 25%,transparent 25%);min-height:100vh}button,a{ -webkit-tap-highlight-color:transparent}button{font:inherit;color:var(--ink);background:#faf5e55c;border:1px solid var(--line);border-radius:7px;padding:10px 15px;cursor:pointer;transition:background .15s,transform .15s}button:hover:not(:disabled){background:#fff7df}button:active:not(:disabled){transform:translateY(1px)}button:disabled{opacity:.45;cursor:default}button:focus-visible,a:focus-visible{outline:3px solid var(--rust);outline-offset:3px}button.primary{background:var(--forest);color:#fff3d5;border-color:var(--forest);font-weight:650}button.primary:hover{background:#365f49}button.secondary{background:transparent;border-color:#4a604655}button.quiet{padding:7px 3px;background:transparent;border-color:transparent;color:var(--dim);font-size:12px}button.quiet:hover{color:var(--ink);background:transparent}h1,h2,h3,p{margin:0}h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:normal}h1{letter-spacing:-.045em}h2{font-size:29px;line-height:1.2}h3{font-size:23px}a{color:var(--forest)}[hidden]{display:none!important}.page{max-width:1430px;margin:auto;padding:23px 35px}.mast{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-bottom:19px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px;font-family:Georgia,serif;font-size:23px;text-decoration:none;line-height:1.25}.brand small{display:block;font:9px system-ui;text-transform:uppercase;letter-spacing:.25em;color:var(--dim);margin-bottom:2px}.brand-icon{font-size:35px;color:var(--plum)}.edition{font-size:10px;letter-spacing:.1em;color:var(--dim)}#tools{display:flex;gap:8px}#tools button{font-size:12px;padding:8px 12px}#note-count{display:inline-block;margin-left:8px;color:var(--plum);font-size:11px}.eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--rust)}.fine{font-size:11px;color:var(--dim);line-height:1.7}.landing{position:relative;min-height:670px;display:flex;align-items:center;isolation:isolate;overflow:hidden}.cover-art{position:absolute;right:-6%;top:0;width:88%;height:100%;z-index:-1;opacity:.9}.cover-art svg{width:100%;height:100%;object-fit:cover}.cover-copy{padding:35px 0 55px 3%;max-width:520px;position:relative}.cover-copy::before{content:"";position:absolute;inset:-15px -45px -15px -50px;background:radial-gradient(ellipse at 20% 50%,#eee5cfff 45%,#eee5cf00 73%);z-index:-1}.cover-copy h1{font-size:clamp(60px,7vw,104px);line-height:1.03;margin:23px 0 25px}.cover-copy h1 em{font-weight:normal;color:var(--plum)}.lead{font:26px/1.45 Georgia,serif;margin-bottom:16px}.cover-description{font-size:14px;color:#647061;max-width:335px;margin-bottom:25px}.cover-buttons{display:flex;align-items:center;gap:17px;flex-wrap:wrap;margin-bottom:13px}.cover-buttons .primary{padding:14px 19px;display:flex;align-items:center;gap:35px}.cover-bottom{position:absolute;bottom:18px;left:3%;right:3%;display:flex;justify-content:space-between;font-size:10px;color:var(--dim);letter-spacing:.06em}.footer{display:flex;justify-content:space-between;gap:14px;border-top:1px solid var(--line);padding:17px 0 5px;font-size:10px;color:var(--dim);letter-spacing:.04em}.chapter-head{display:flex;justify-content:space-between;align-items:end;gap:20px;padding:22px 0 17px}.chapter-head .eyebrow{margin-bottom:5px}.play-grid{display:grid;grid-template-columns:minmax(0,1fr) 335px;gap:24px;align-items:stretch}.world-column{min-width:0}.scene-frame{position:relative;background:#d9d7ba;border:1px solid #5f72545c;border-radius:12px;overflow:hidden;box-shadow:0 8px 30px #554d2811;isolation:isolate}.scene-frame::after{content:"";position:absolute;inset:5px;border:1px solid #f6edc943;pointer-events:none;border-radius:8px}.scene-frame svg{display:block;width:100%;height:auto}.hotspots{position:absolute;inset:0;pointer-events:none}.hotspot{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;min-width:38px;min-height:38px;border:0;padding:6px;background:transparent;border-radius:50%;display:grid;place-items:center;z-index:2}.hotspot:hover:not(:disabled){background:transparent}.hotspot:active{transform:translate(-50%,-50%)}.hotspot .dot{display:block;width:12px;height:12px;border-radius:50%;border:1px solid #fff9dc;background:#314e3d85;box-shadow:0 0 0 3px #f6e4b42a}.hotspot .label{position:absolute;top:33px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:550;white-space:nowrap;background:#f8efdbef;color:#344637;border:1px solid #6e785445;padding:2px 7px;border-radius:4px;opacity:0;transition:opacity .15s;box-shadow:0 2px 7px #122e2120;max-width:165px}.hotspots.labels .hotspot .label,.hotspot:hover .label,.hotspot:focus-visible .label{opacity:1}.hotspot:hover .dot,.hotspot:focus-visible .dot{background:var(--rust);box-shadow:0 0 0 7px #fff1c633}.hotspots.using .hotspot .dot{background:#987d40;box-shadow:0 0 0 4px #f5d78466}.selected-banner{position:absolute;top:12px;left:12px;right:12px;padding:8px 12px;background:#354c3bed;color:#fff2d0;border-radius:5px;z-index:4;font-size:12px;pointer-events:none;text-align:center}.map{display:flex;gap:6px;flex-wrap:wrap;padding:12px 0 13px;border-bottom:1px solid var(--line)}.map button{font-size:11px;padding:7px 10px;background:transparent}.map button.active{background:#d3dcc3;color:#2d503c;border-color:#6a86584d}.map button span{font-size:9px;opacity:.6;margin-right:5px}.companion{display:flex;align-items:center;gap:12px;margin:12px 0 0}.companion>span:first-child{width:42px;height:42px;background:#e0d8bd;border-radius:50%;overflow:hidden;display:grid;place-items:center}.companion>span:first-child svg{width:42px;height:42px}.companion strong{display:block;font-family:Georgia,serif;font-weight:400;font-size:17px}.companion div>span{display:block;font-size:10px;color:var(--dim)}.companion-note{font:italic 12px/1.45 Georgia,serif;color:#8b826d;margin-left:auto;text-align:right}.story-column{display:flex;flex-direction:column;min-width:0}.goal-card{padding:14px 17px;background:#e3dbc0;border:1px solid #a6a17c4a;border-radius:8px;margin-bottom:14px}.goal-card .eyebrow{font-size:9px;color:#7d7048;letter-spacing:.1em}.goal-card>p:last-child{font-size:13px;line-height:1.6;margin-top:5px}.dialogue{background:#f6efdc;border:1px solid var(--line);border-radius:9px;padding:21px 22px;flex:1;min-height:290px;box-shadow:0 5px 15px #61573908}.speaker{font:11px system-ui;text-transform:uppercase;letter-spacing:.12em;color:var(--plum);font-weight:650;margin-bottom:14px}.dialogue-text{font:18px/1.65 Georgia,serif;white-space:pre-line;outline:none}.choices{display:grid;gap:8px;margin-top:22px}.choices:empty{margin:0}.choices button{text-align:left;font-size:12px;line-height:1.5;padding:11px 12px;background:#ede4cb;border-color:#b3ac8e66;border-left:3px solid #8c927170}.choices button:hover{background:#e0e8ce}.story-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:11px;font-size:9px;color:var(--dim)}.inventory{background:#e6ddc5;border:1px solid #a4a37b4a;border-radius:9px;padding:14px 17px;margin:22px 0}.inventory-head{display:flex;align-items:baseline;gap:15px;flex-wrap:wrap}.inventory-head h3{font-size:20px}.inventory-head p{font-size:10px;flex:1;min-width:200px;color:var(--dim)}.inventory-head button{font-size:10px}.bag{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;min-height:63px;align-items:start}.item{display:flex;align-items:center;gap:7px;font-size:11px;padding:7px 11px 7px 5px;background:#f4ecd7;border-color:#a3a1856b;position:relative}.item svg{width:36px;height:36px;flex-shrink:0}.item.selected{background:#314c3d;color:#f9ebc5;border-color:#314c3d;box-shadow:0 0 0 2px #9b8d5e55}.item:hover:not(.selected){background:#fff4d9}.item-description{font-size:11px;line-height:1.6;color:#7b7766;min-height:18px;margin-top:7px}.empty-bag{font:italic 15px Georgia,serif;color:#8b8874;padding:15px 0}.ending{text-align:center;max-width:1050px;margin:35px auto}.ending h1{font-size:60px;line-height:1.1;margin:14px 0 25px}.ending-art{max-width:850px;margin:auto;border:1px solid var(--line);border-radius:12px;overflow:hidden}.ending-art svg{width:100%;display:block}.ending-prose{max-width:610px;margin:25px auto;font:19px/1.8 Georgia,serif}.ending-prose p{margin:0 0 17px}.ending-prose .small{font:12px/1.7 system-ui;color:var(--dim)}.ending-buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:25px 0 18px}.overlay{position:fixed;inset:0;z-index:30;background:#263c2dc2;backdrop-filter:blur(5px);padding:20px;display:grid;place-items:center}.modal{background:var(--light);width:min(650px,100%);max-height:calc(100dvh - 40px);overflow:auto;border:1px solid #b4b18b;border-radius:12px;box-shadow:0 25px 90px #11201877;padding:27px 31px}.modal-top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:12px}.modal-top button{padding:0 5px;border:none;background:none;font-size:25px;color:var(--dim)}.modal h2{font-size:32px}.modal-body,#modal-body{margin:22px 0;font-size:14px;line-height:1.8;white-space:pre-line}.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.modal-actions button{font-size:12px}.journal-entry{padding:16px 0;border-bottom:1px solid var(--line)}.journal-entry:first-child{padding-top:0}.journal-entry h3{font-size:23px;margin-bottom:7px}.journal-entry p{font-size:13px;color:#67705f;line-height:1.8}.hint-text{font:20px/1.75 Georgia,serif}.howto{display:grid;gap:13px}.howto p{padding-bottom:12px;border-bottom:1px solid var(--line);white-space:normal}.howto b{color:var(--plum)}.sr{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}.sway{transform-box:fill-box;transform-origin:50% 100%;animation:sway 6s ease-in-out infinite alternate}@keyframes sway{to{transform:rotate(2deg)}}.scene-frame.gust{animation:gust .5s ease-in-out 2}@keyframes gust{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}.gust-lines{animation:windpass .8s ease-out 2}@keyframes windpass{from{opacity:0;transform:translateX(-40px)}50%{opacity:1}to{opacity:0;transform:translateX(40px)}}@media(max-width:1050px){.page{padding:20px 24px}.play-grid{grid-template-columns:minmax(0,1fr) 300px;gap:17px}.dialogue{padding:18px}.dialogue-text{font-size:17px}.hotspot .label{font-size:9px}.map button{padding:6px 8px;font-size:10px}.cover-art{right:-16%;width:105%}.landing{min-height:610px}.cover-copy h1{font-size:84px}}@media(max-width:780px){.page{padding:17px 18px}.mast{padding-bottom:15px;gap:10px}.brand{font-size:20px;gap:7px}.brand-icon{font-size:27px}.brand small{font-size:8px}.edition{font-size:9px;max-width:120px;text-align:right}.play-grid{grid-template-columns:1fr;gap:19px}.dialogue{min-height:0;padding:21px}.dialogue-text{font-size:19px}.story-column{gap:0}.goal-card{margin-bottom:11px}.story-foot{padding-top:10px}.chapter-head{padding:20px 0 13px}.chapter-head h2{font-size:26px}.reveal{font-size:10px!important;max-width:98px;line-height:1.4}.companion{margin-top:8px}.companion-note{font-size:11px}.map button{padding:7px 10px;font-size:11px}.inventory{margin-top:18px}.inventory-head p{flex-basis:100%;order:3}.bag{gap:7px}.item{font-size:11px;padding:6px 8px 6px 3px}.item svg{width:31px;height:31px}.cover-art{width:150%;right:-55%;height:60%;top:0;opacity:.6}.cover-copy{padding:270px 0 75px;max-width:100%}.cover-copy::before{background:linear-gradient(0deg,#eee5cf 73%,#eee5cf00);inset:140px -30px 0;z-index:-1}.landing{min-height:0;overflow:hidden}.cover-copy h1{font-size:67px;line-height:1.02;margin-top:17px}.cover-copy h1 br{display:none}.lead{font-size:23px;margin-bottom:13px}.cover-description{max-width:400px}.cover-copy>.eyebrow{font-size:9px}.cover-bottom{bottom:20px;left:0;right:0;font-size:9px;gap:20px}.cover-bottom span:last-child{text-align:right}.cover-buttons .primary{padding:13px 17px}.footer{font-size:9px}.ending h1{font-size:42px}.ending-prose{font-size:18px}.ending{margin-top:25px}.modal{padding:23px}.modal h2{font-size:28px}.modal-actions button{padding:11px 13px}#tools{gap:5px}#tools button{font-size:11px;padding:7px 9px}#note-count{margin-left:3px}.hotspot{min-width:34px;min-height:34px}.hotspot .label{font-size:9px;top:28px;padding:1px 5px;max-width:125px}.selected-banner{font-size:11px;padding:5px 8px;inset:7px 7px auto}.choices button{font-size:13px}.modal{max-height:calc(100dvh - 24px)}.overlay{padding:12px}}@media(max-width:390px){.page{padding:13px 12px}.brand{font-size:17px}.brand-icon{font-size:23px}.edition{display:none}#tools button{padding:7px;font-size:10px}.chapter-head h2{font-size:23px}.hotspot .label{font-size:8px;padding:1px 3px}.map{gap:5px}.map button{font-size:10px;padding:6px 8px}.companion-note{display:none}.cover-copy h1{font-size:57px}.cover-copy{padding-top:230px}.dialogue{padding:17px}.inventory{padding:12px}.item{font-size:10px}.item svg{width:28px;height:28px}.footer{font-size:8px}.modal{padding:18px}.modal h2{font-size:26px}.hint-text{font-size:18px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Druhý průchod: brašna u scény a dotykové cíle bez překrývání. */
+.scene-list,.mobile-only{display:none}.inventory{margin:16px 0 0}.story-column{align-self:start}.dialogue{flex:none;min-height:290px}.inventory-head p{font-size:11px}.inventory-head{gap:10px}.bag{min-height:48px}.map::before{content:"Cesty";font-size:10px;align-self:center;margin-right:4px;color:var(--dim)}
+@media(min-width:781px){.page{max-width:1300px}.play-grid{grid-template-columns:minmax(0,1fr) 335px}.inventory-head h3{font-size:18px}.item-description{font-size:11px}.cover-copy h1{font-size:clamp(60px,7vw,96px)}}
+@media(max-width:1050px) and (min-width:781px){.play-grid{grid-template-columns:minmax(0,1fr) 300px}}
+@media(max-width:780px){.scene-list{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}.scene-list button{font-size:12px;line-height:1.4;min-height:44px;padding:8px;text-align:left;background:#f4ecd7}.scene-list.using button{border-color:#9e824e;background:#eadfbe}.hotspots{display:none}.mobile-only{display:inline-block}.story-foot{flex-wrap:wrap}.story-foot #save-status{flex-basis:100%;text-align:right}.cover-art{width:160%;right:-8%;height:300px;top:0;opacity:.9}.cover-copy h1 br{display:inline}.cover-copy h1 br::after{content:" "}.cover-copy h1{font-size:62px}.inventory{margin-bottom:0}.inventory-head p{font-size:11px}.inventory-head button{font-size:11px}.selected-banner{font-size:10px}.companion-note{display:none}}
+@media(max-width:390px){.cover-copy h1{font-size:55px}.cover-copy{padding-top:250px}.brand{font-size:16px}.brand-icon{display:none}.scene-list button{font-size:11px}.chapter-head .eyebrow{font-size:8px}}
+
+@media(max-width:780px){.reveal,.inventory.empty{display:none}.dialogue{min-height:0}.inventory-head p{min-width:0}.scene-list button:focus-visible{outline-offset:1px}}
+
+/* Zásahové plochy odpovídají kresbě; popisek i postava aktivují stejnou akci. */
+.hotspot{min-width:44px;min-height:44px;border-radius:12px}
+.hotspot:active:not(:disabled){transform:translate(-50%,-50%)}
+.hotspot .label{top:calc(50% + 12px)}
+.hotspot:hover:not(:disabled),.hotspot:focus-visible{background:#fff4d326;box-shadow:inset 0 0 0 1px #fff5d477}
+.map button:disabled{cursor:default}
+
+.trial-rotor.turning{transform-box:fill-box;transform-origin:center;animation:trial-turn 6s linear infinite}
+@keyframes trial-turn{to{transform:rotate(360deg)}}
+</style></head><body>
+<div class="page"><header class="mast"><a class="brand" href="#" id="brand" aria-label="Titulní obrazovka"><span class="brand-icon" aria-hidden="true">✧</span><span><small>Ježibabky</small>Vítr na zapřenou</span></a><div class="edition" id="edition">Autorská adventura · Vega / 04</div><nav id="tools" hidden><button id="journal-button">Zápisník <span id="note-count">0</span></button><button id="help-button" aria-label="Nápověda a ovládání">?</button><button id="menu-button" aria-label="Herní menu">☰</button></nav></header>
+<main><section class="landing" id="landing"><div class="cover-art" id="cover-art" aria-hidden="true"></div><div class="cover-copy"><p class="eyebrow">Jedna kamarádka. Poněkud mnoho větru.</p><h1>Vítr<br> na <em>zapřenou.</em></h1><p class="lead">Hrůzie je kachna.<br>To nebyl plán.</p><p class="cover-description">Jako Noema pomoz Hrůzii zpátky do její podoby. Pak ji doprovoď k mlýnu, kde chce zkusit vítr po svém — pomalu a ze země.</p><div class="cover-buttons"><button class="primary" id="start">Vstoupit do příběhu <span>→</span></button><button class="quiet" id="new-start" hidden>Nové dobrodružství</button></div><p class="fine" id="resume-note">Klikání, předměty, rozhovory. Bez časového limitu.</p></div><div class="cover-bottom"><span>Podle první série s ježibabkami</span><span>Samostatný příběh · offline</span></div></section>
+<section id="play" hidden><div class="chapter-head"><div><p class="eyebrow" id="scene-tag"></p><h2 id="scene-name" tabindex="-1"></h2></div><button class="quiet reveal" id="reveal">Místa: popisky zapnuté</button></div>
+<div class="play-grid"><div class="world-column"><div class="scene-frame" id="scene-frame"><div id="art" aria-hidden="true"></div><div id="hotspots" class="hotspots labels"></div><div id="selected-banner" class="selected-banner" hidden></div></div><nav id="scene-list" class="scene-list" aria-label="Místa ve scéně"></nav><nav id="map" class="map" aria-label="Cesty mezi místy"></nav><div class="companion"><span id="companion-picture" aria-hidden="true"></span><div><strong id="companion-name">Hrůzie</strong><span id="companion-status"></span></div><span class="companion-note">Kroky dohodneme<br>společně.</span></div><section class="inventory" aria-label="Brašna"><div class="inventory-head"><h3>Brašna</h3><p id="inventory-help">Vyber věc, potom postavu či místo. Pro spojení vyber dvě věci. Po pokusu se výběr odloží.</p><button class="quiet mobile-only" id="use-selection" hidden>Použít ve scéně ↑</button><button class="quiet" id="clear-selection" hidden>Zrušit výběr ×</button></div><div id="bag" class="bag"></div><p id="item-description" class="item-description"></p></section></div>
+<aside class="story-column"><div class="goal-card"><p class="eyebrow">Na čem teď záleží</p><p id="goal"></p></div><section class="dialogue" aria-label="Rozhovor a pozorování"><p class="speaker" id="speaker"></p><div class="dialogue-text" id="dialogue-text" tabindex="-1"></div><div class="choices" id="choices"></div></section><div class="story-foot"><button class="quiet" id="hint-button">Trochu postrčit?</button><button id="back-scene" class="quiet mobile-only">Zpátky ke scéně ↑</button><span id="save-status">Cesta se ukládá.</span></div></aside></div>
+</section>
+<section class="ending" id="ending" hidden><p class="eyebrow">Konec jedné zkoušky</p><h1 id="ending-title"></h1><div id="ending-art" class="ending-art" aria-hidden="true"></div><div class="ending-prose" id="ending-prose"></div><div class="ending-buttons"><button class="primary" id="restart">Zahrát znovu</button><button class="secondary" id="revisit">Ještě chvíli v táboře</button></div><p class="fine">Děkuju za cestu. — Vega</p></section></main>
+<footer class="footer"><span>Ježibabky · 2026</span><span>Hůlky půjčujeme s dovolením.</span></footer></div>
+<div class="overlay" id="overlay" hidden><section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1"><div class="modal-top"><p class="eyebrow" id="modal-tag"></p><button id="modal-close" aria-label="Zavřít okno">×</button></div><h2 id="modal-title"></h2><div id="modal-body"></div><div id="modal-actions" class="modal-actions"></div></section></div><p class="sr" id="live" aria-live="polite" aria-atomic="true"></p>
+<script>/* Autorská adventura podle kroniky v HRA_04_ZADANI.md.
+   Dialogy a příčiny této výpravy jsou vlastní doplnění, ne přepis původní série. */
+(function(root) {
+'use strict';
+const scenes = {
+  camp: {name:'Tábor ježibabek',tag:'Nejdřív kamarádka',intro:'Hraješ za Noemu. Hrůzii proměnila nehoda s hůlkou v kachnu a cestou si odřela nohy. Přinesla jsi ji do tábora. Serpentýna odloží lexikon: „Tak ji posaď. Podíváme se na ty nohy i na tu podobu.“'},
+  pond: {name:'Tůň nedorozumění',tag:'Obojživelné potíže',intro:'U tůně sedí člověk v leknínovém klobouku a opírá se o rovný rákos. Zapomněnka nad ním listuje v zápisníku. „Tohle měla být jen oprava výslovnosti,“ zamumlá.'},
+  hat: {name:'Uvnitř klobouku',tag:'Větší uvnitř. Otravnější taky.',intro:'S Hrůzií nahlédnete pod krempu. Uvnitř se otevře chodba se třemi kapsami. Klobouk má velmi sebevědomý názor na to, co potřebuješ.'},
+  grove: {name:'Hájek zkušených stromů',tag:'Než se vítr vrátí',intro:'Zvonek sem doléhá jen slabě. Garmina opírá koště o ceduli „Neopírat košťata“. Nejstarší strom nechává doznívat poslední pohyb větví.'},
+  mill: {name:'Mlýn na zítřejší vítr',tag:'Zkouška ze země',intro:'Křídla mlýna stojí. Vedle nich čeká malý zkušební větrník a prázdný stojan. Poplašný zvonek přitom nepřestává cinkat.'}
+};
+const items={balm:{name:'Curon 5000',short:'Mast',icon:'balm',desc:'Mast na odřené nohy. „Neopravuje povahu,“ stojí na plechovce.'},shoes:{name:'Cvičky',short:'Cvičky',icon:'shoes',desc:'Dvě levé cvičky. Klobouk tvrdí, že pravá je otázka perspektivy.'},ribbon:{name:'Stuha',short:'Stuha',icon:'ribbon',desc:'Dlouhá stuha. Ve vzduchu ukáže i pohyb, který okem skoro nevidíš.'},cup:{name:'Prázdný hrnek',short:'Hrnek',icon:'cup',desc:'Hrnek bez čaje. Není v něm nic. To ještě není totéž jako ticho.'},quiet:{name:'Hrnek ticha',short:'Ticho',icon:'quiet',desc:'V hrnku je chvíle, kdy po tobě nikdo nic nechtěl. Zacházet potichu.'},reed:{name:'Dutý rákos',short:'Rákos',icon:'reed',desc:'Rovný, lehký rákos. Se stuhou by z něj byla citlivá směrovka.'},vane:{name:'Větrná směrovka',short:'Směrovka',icon:'vane',desc:'Rákos se stuhou. Aby vítr věděl, kudy šel, a ty, jak silně.'},wand:{name:'Půjčená hůlka',short:'Hůlka',icon:'wand',desc:'Hrůziina hůlka. Půjčená se souhlasem. O tom, kdo s ní opravdu kouzlí, mlčí.'},button:{name:'Lesklý knoflík',short:'Knoflík',icon:'button',desc:'Knoflík se tváří jako důležitá mince. Je to jeho jediná kvalifikace.'}};
+const flagDefaults = {
+  balmDeal:'none',treated:false,shod:false,shoesTaken:false,ribbonTaken:false,cupTaken:false,
+  buttonTaken:false,reedTaken:false,book:false,wand:false,frog:false,human:false,quest:false,
+  metGarmina:false,age:'none',promise:'none',listened:false,quietMade:false,vaneMade:false,
+  vaneInstalled:false,bellQuiet:false,millTold:false,lesson:false,pushed:false,
+  apologized:false,kept:false,trial:false,windActive:false,gusts:0,thread:false
+};
+const journals = {
+  care:['Ošetřené nohy','Curon pomohl. Hrůzie už při došlápnutí neucukává. Cvičky bude možné obout v její ježibabské podobě.'],
+  book:['Rollback má adresáta','ROOLBACK SLASH 675 vrací poslední proměnu vybraného cíle. Hůlku je potřeba půjčit a dotyčného se před proměnou zeptat.'],
+  frog:['Znovu skokan','Pan Skok se chtěl vrátit do vody. Po proměně nám přenechal rákos, který už nepotřebuje jako oporu.'],
+  human:['Znovu Hrůzie','Hrůzie má zpátky svou podobu. Rozesmála se a objala mě. Vedle nás přitom šustl ještě něčí rukáv.'],
+  quest:['Proč zpátky k mlýnu','Hrůzie chce zjistit, jestli můžeme zkoušet vítr tak, aby mohla pokus kdykoli zastavit. Začneme na zemi. O létání se rozhodne později.'],
+  problem:['Přes zvonek není slyšet','Hrůziina slova zanikla v cinkání. Před dalším pokusem potřebujeme slyšet jedna druhou a vidět i malý pohyb vzduchu. Vrchní nás poslala za Garminou do hájku.'],
+  wind:['Garminina lekce','Hůlku zvednout jen tolik, aby se pohnula stuha; sklopením vítr zastavit. Směrovku uděláme z rovného rákosu a stuhy. Nejstarší strom umí zachytit ticho do prázdného hrnku.'],
+  quiet:['Chvíle mezi dvěma poryvy','Nejstarší strom nás nechal poslouchat, až ustal šelest. Do téhle chvíle se dá podržet prázdný hrnek.'],
+  promise:['Dohoda s Hrůzií','Hrůzie bude říkat, kdy chce přestat. Jakmile řekne „dost“, skloníme hůlku.'],
+  gust:['Poryv po slově dost','Přidala jsem vítr, přestože Hrůzie chtěla přestat. Vrchní zachytila poryv. Směrovka je zpátky v brašně a Hrůzie chce nejprve mluvit.'],
+  repair:['Další pokus','Hrůzie přijala omluvu a souhlasí s menším pokusem. Směrovka musí být znovu ve stojanu.'],
+  trial:['Zastavený vánek','Stuha se pohnula. Když Hrůzie řekla „dost“, vítr ustal. U mlýna se teď můžeme domluvit na zakončení.'],
+  thread:['Tenká nit','Vrchní má u mlýnského křídla napnutou nit. Nevíme, jestli zachycuje nepovedená kouzla, pomáhá těm povedeným, nebo obojí.']
+};
+const clone = s => JSON.parse(JSON.stringify(s));
+const choice = (id,label) => ({id,label});
+function say(s,who,text,choices=[]) {
+  s.line={who,text,choices}; s.dialog=null; s.spellTarget=null;
+  return s;
+}
+function note(s,id) { if(!s.journal.includes(id)) s.journal.push(id); }
+function give(s,id) { if(!s.bag.includes(id)) s.bag.push(id); }
+function take(s,id) { s.bag=s.bag.filter(x=>x!==id); }
+function fresh() {
+  return {version:2,scene:'camp',f:clone(flagDefaults),bag:[],journal:[],seen:['camp'],
+    turns:0,ending:null,finished:false,dialog:null,spellTarget:null,
+    line:{who:'Noema',text:scenes.camp.intro,choices:[
+      choice('first_help','Poprosit Serpentýnu o pomoc.'),
+      choice('first_hruzie','Podívat se na Hrůzii.')
+    ]}};
+}
+function routes(s) {
+  return Object.keys(scenes).filter(id=>['camp','pond','hat'].includes(id) ||
+    (id==='mill'&&s.f.quest) || (id==='grove'&&s.f.millTold) || s.seen.includes(id));
+}
+function phase(s) { return s.ending?'epilogue':!s.f.human?'duck':!s.f.trial?'wind':'choice'; }
+function goal(s) {
+  const f=s.f;
+  if(s.ending) return 'Výprava je uzavřená. Ještě se můžeš rozloučit s ostatními.';
+  if(f.windActive) return 'Hrůzie řekla „dost“. Odpověz jí u větrníku.';
+  if(!f.treated) return 'Ošetři Hrůziiny odřené nohy. Serpentýna má mast.';
+  if(!f.human) return 'Vrať Hrůzii podobu s pomocí lexikonu a půjčené hůlky.';
+  if(!f.quest) return 'Promluv s Hrůzií o tom, co chce udělat dál.';
+  if(!f.millTold) return 'Doprovoď Hrůzii k mlýnu.';
+  if(!f.lesson) return 'Zeptej se Garminy v hájku, jak připravit malý vítr.';
+  if(f.pushed&&!f.apologized) return 'Promluv si s Hrůzií o tom poryvu.';
+  if(!f.bellQuiet && !f.vaneInstalled) return 'Utiš zvonek a postav směrovku, abyste se slyšely a viděly vítr.';
+  if(!f.bellQuiet) return 'Utiš mlýnský zvonek hrnkem ticha.';
+  if(!f.vaneInstalled) return 'Postav směrovku do stojanu u mlýna.';
+  if(f.promise==='none') return 'Domluv se s Hrůzií na znamení k zastavení.';
+  if(!f.trial) return 'U mlýna vyzkoušej malý vítr.';
+  return s.scene==='mill'?'Domluvte se, zda zůstanete na zemi, nebo zkusíte malý let.':
+    'Zkouška se povedla. Pro zakončení se vraťte k mlýnu.';
+}
+function finalChoices(s) {
+  return [choice('end_ground','Posadit se spolu pod mlýnem.'),
+    s.f.shod?choice('ask_flight','Zeptat se Hrůzie, zda chce zkusit malý let.'):
+      choice('flight_needs','Co bychom potřebovaly, kdybychom chtěly létat?'),
+    choice('later','Ještě se tu porozhlédnout.')];
+}
+function hruzie(s) {
+  const f=s.f;
+  if(!f.human) {
+    say(s,'Hrůzie',f.treated?
+      'Hrůzie si opatrně stoupne. Nohy už ji nepálí. Zkusí tě obejmout a zarazí se u vlastního křídla. „Kvak.“':
+      'Hrůzie odlehčuje jednu nohu. Když se k ní skloníš, přitiskne ti hlavu do dlaně. Pak se podívá na hůlku.',
+      [...(!f.wand?[choice('borrow','Můžu si půjčit tvou hůlku?')]:[]),
+       choice('duck_help','Zjistit, jak jí pomoct.'),choice('duck_comfort','Chvíli s ní zůstat.')]);
+    return;
+  }
+  if(f.pushed&&!f.apologized) {
+    say(s,'Hrůzie','„Řekla jsem dost a ty jsi přidala.“ Dívá se na tebe, ne na mlýn.',[
+      choice('apologize','Promiň. Slyšela jsem tě a měla jsem přestat.'),
+      choice('defend','Chtěla jsem zjistit, co dokážeme.'),
+      choice('space','Dám ti chvíli prostoru.')]);
+    return;
+  }
+  if(!f.treated) {
+    say(s,'Hrůzie','„Už nejsem kachna. Nohy to bohužel nevzaly na vědomí.“ Opatrně si sedne.',[
+      choice('hruzie_feet','Kde seženeme něco na nohy?'),
+      ...(!f.wand?[choice('borrow','Můžu si půjčit tvou hůlku?')]:[])]);
+    return;
+  }
+  if(!f.quest) {
+    say(s,'Hrůzie','Od mlýna sem dolehne cinkání. Hrůzie zvedne hlavu. „Předtím jsem se lekla, sevřela hůlku a místo větru ze mě byla kachna. Chtěla bych zjistit, jestli to jde pomalu. Zatím ze země. Půjdeš tam se mnou?“',[
+      choice('start_quest','Půjdu. Nejdřív se podíváme, co se u mlýna stalo.'),
+      choice('rest_first','Ještě chvíli odpočívejme.')]);
+    return;
+  }
+  if(f.trial) {
+    if(s.scene!=='mill') {
+      say(s,'Hrůzie','„Zkouška už se povedla. Až se vrátíme k mlýnu, rozhodneme se, jestli chceme ještě něco zkusit, nebo si sednout.“');
+    } else {
+      say(s,'Hrůzie','Hrůzie se podívá na nehybnou stuhu. „Teď už se toho pokusu nebojím tolik. Létání je ale ještě něco jiného.“',finalChoices(s));
+    }
+    return;
+  }
+  const agreements=f.lesson&&f.promise==='none'?
+    [choice('promise_stop','Na tvoje „dost“ hned skloním hůlku.'),
+     choice('promise_open','Říkej mi, jak ti je. Při „dost“ zastavíme.')]:[];
+  say(s,'Hrůzie',!f.millTold?'„Pojďme se nejdřív podívat k mlýnu. Zatím nebudeme nic rozfoukávat.“':
+    !f.lesson?'„Přes ten zvonek jsem sotva slyšela sebe. Garmina snad ví, co s ním.“':
+    f.promise==='none'?'„Až to budeme zkoušet, chci mít možnost říct dost. I když se větrník teprve roztočí.“':
+    '„Dohodly jsme se: při dost skloníš hůlku. Ostatní můžeme zkoušet pomalu.“',
+    [...agreements,choice('hruzie_feet','Jak jsou na tom nohy?'),
+     ...(!f.wand?[choice('borrow','Můžu si půjčit tvou hůlku?')]:[])]);
+}
+function serpent(s) {
+  const f=s.f;
+  const opening=f.balmDeal==='story'?'„Á, odbornice na pohyb po kořenech. Jak pokračuje výzkum?“':
+    f.balmDeal==='button'?'Serpentýna zapíná lexikon knoflíkem. „Konečně se mi samovolně neotvírá na hesle nehody.“':
+    'Serpentýna odloží lexikon. „Na nohy mám Curon. Na tu podobu se podíváme do opravy kouzel.“';
+  say(s,'Serpentýna',opening,[
+    ...(!s.bag.includes('balm')&&!f.treated?[choice('ask_balm','Potřebujeme mast na odřené nohy.')]:[]),
+    choice('ask_book',f.book?'Podívat se znovu na pravidlo rollbacku.':'Jak bezpečně vrátíme proměnu?'),
+    choice('ask_age','Kolik je tu komu let?'),
+    ...(f.quest?[choice('serpent_story','Proč se mlýnu říká „na zítřejší vítr“?')]:[])]);
+}
+function book(s) {
+  s.f.book=true; note(s,'book');
+  say(s,'Serpentýnin lexikon','ROOLBACK SLASH 675\n„Vrať poslední proměnu tohoto cíle.“\n\nSerpentýna přidržuje stránku. „Dvě O. Jedno by bylo příliš srozumitelné. Půjč si od Hrůzie hůlku, použij ji na toho, kdo se chce proměnit zpátky, a nejdřív se zeptej.“');
+}
+function garmina(s) {
+  const first=!s.f.metGarmina;
+  s.f.metGarmina=true;
+  say(s,'Garmina',first?'„Garmina. Sedmatřicetiletá puberťačka. Tobě hádám tak devadesát osm?“':
+    s.f.age==='old'?'„Devadesát osm, a ještě se učíš nové věci. To schvaluju.“':
+    s.f.age==='unknown'?'„Věk pořád neuzavřen?“ Garmina zaklapne zápisník. „Dobře, vítr se na něj neptá.“':
+    'Garmina odloží koště. „Tak co potřebujete vyzkoušet?“',[
+    ...(s.f.age==='none'?[choice('age_old','Přibližně. V některých tématech víc.'),
+      choice('age_unknown','Tohle měření bych zatím neuzavírala.')]:[]),
+    ...(s.f.millTold?[choice('lesson',s.f.lesson?'Připomenout, jak připravit a zastavit vítr.':'U mlýna se neslyšíme. Jak připravit bezpečný pokus?')]:[]),
+    ...(s.f.lesson?[choice('wind_help','Jak poznám dost slabý vítr?')]:[])]);
+}
+function millProblem(s) {
+  s.f.millTold=true; note(s,'problem');
+  say(s,'U mlýna','Hrůzie zkusí něco říct, ale zvonek ji přehluší. Vrchní stáhne ruce z větrníku. „Takto nezačneme. Zvonek se rozeznívá vlastním cinkáním. A bez směrovky ani neuvidíme, kdy už fouká. Garmina v hájku vám ukáže, co s tím.“');
+}
+function elder(s) {
+  const f=s.f;
+  if(!f.quest) { say(s,'Vrchní ježibaba','„Nejdřív se domluv s Hrůzií, jestli se chce ke zkoušce vrátit.“'); return; }
+  if(!f.millTold) { millProblem(s); return; }
+  const text=f.trial?'„Větrník stojí, protože jste ho zastavily. Pro dnešek splněno.“':
+    f.pushed&&!f.apologized?'„Směrovku můžete narovnat později. Hrůzie na něco čeká.“':
+    !f.lesson?'„Garmina čeká v hájku. Vysvětlí vám přípravu i pohyb hůlky.“':
+    !f.bellQuiet&&!f.vaneInstalled?'„Ještě se potřebujete slyšet a vidět slabý vítr. Zvonek i stojan čekají.“':
+    !f.bellQuiet?'„Směrovka už stojí. Teď ještě utišit zvonek, abychom slyšely Hrůzii.“':
+    !f.vaneInstalled?'„Konečně se slyšíme. Do stojanu ještě patří směrovka.“':
+    f.promise==='none'?'„Vybavení je připravené. Ještě se spolu domluvte, kdy přestanete.“':
+    '„Teď můžete k větrníku. Já budu za vámi a zachytím případný poryv.“';
+  say(s,'Vrchní ježibaba',text,[
+    ...(f.lesson&&!f.trial&&(!f.vaneInstalled||!f.bellQuiet)?[choice('elder_hint','Připomenout, co ještě chybí.')]:[]),
+    choice('elder_magic','Poznáme, kdo s tím větrem pohnul?'),
+    ...(f.trial?[choice('final_talk','Promluvit s Hrůzií o zakončení.')]:[])]);
+}
+function tree(s) {
+  say(s,'Nejstarší strom',s.f.listened?
+    'Strom znovu skloní větev. „Ta chvíle mezi poryvy tu pořád je. Jen se musí počkat, až došustí listy.“':
+    '„Od mlýna?“ Strom zvedne větev. Ta ještě chvíli šustí, i když už se nehýbe. „Když se čeká na ticho, poslední slovo mívají listy.“',[
+    choice('listen',s.f.listened?'Znovu chvíli poslouchat.':'Chvíli jen poslouchat.'),
+    choice('tree_talk','Dá se takové ticho odnést?')]);
+}
+function cast(s,target) {
+  if(!s.f.wand) { say(s,'Noema','Nejdřív požádám Hrůzii o půjčení hůlky.'); return; }
+  if(target==='frog'&&s.f.frog) { say(s,'Skokan','„Kvak.“ Skokan je ve své podobě a právě chytil mouchu. Další proměnu nechce.'); return; }
+  if(target==='hruzie'&&s.f.human) { say(s,'Hrůzie','„Tahle podoba mi vyhovuje. Další rollback nepotřebuju.“'); return; }
+  if(!s.f.book) { say(s,'Noema','Pravidlo ještě neznám. V táboře můžu otevřít Serpentýnin lexikon; hůlka zůstává v brašně.'); return; }
+  say(s,target==='frog'?'Pan Skok':'Hrůzie',target==='frog'?
+    '„Ano, chci zpátky do vody. Jako člověku mi všichni radí na kolena.“ Pan Skok se pevně opře o rákos.':
+    '„Chceš vrátit svou podobu?“ Hrůzie přikývne a přitiskne ti zobák do dlaně.',[
+    choice('cast_one','ROOLBACK SLASH 675 — vrátit poslední proměnu tohoto cíle.'),
+    choice('cast_whole','Ověřit, zda se tím nevrátí celé odpoledne.'),
+    choice('cast_cancel','Ještě počkat.')]);
+  s.spellTarget=target; s.dialog='spell';
+}
+function windResponse(s) {
+  say(s,'Hrůzie','Stuha se pohne a větrník se pomalu otočí. Hrůzie ti sevře ruku. „Dost.“ Vítr ještě trvá; teď je na tobě sklonit hůlku.',[
+    choice('stop_now','Hned sklonit hůlku a zastavit vítr.'),
+    choice('one_more','Přesto přidat ještě jeden nádech větru.')]);
+  s.dialog='trial';
+}
+function wind(s) {
+  const f=s.f;
+  if(f.windActive) { windResponse(s); return; }
+  if(f.trial) { hruzie(s); return; }
+  if(!f.human||!f.treated||!f.quest) { say(s,'Vrchní ježibaba','„Na pokus je brzy. Nejdřív pomoz Hrůzii a domluv se s ní, co chce dál.“'); return; }
+  if(f.pushed&&!f.apologized) { hruzie(s); return; }
+  if(!f.millTold||!f.lesson||!f.vaneInstalled||!f.bellQuiet) { elder(s); return; }
+  if(!f.wand) { say(s,'Hrůzie','„K pokusu si můžeš půjčit mou hůlku. Nejprve se mě zeptej.“'); return; }
+  if(f.promise==='none') { hruzie(s); return; }
+  say(s,'Zkušební větrník','Zvonek mlčí. Hrůzie se postaví vedle tebe a vrchní za vás. „Začneme jen tak, aby se pohnula stuha,“ připomene Hrůzie.',[
+    choice('wind_soft','Zvednout hůlku a zkusit vánek.'),
+    choice('wind_wait','Ještě nezačínat.')]);
+  s.dialog='wind';
+}
+function gust(s) {
+  const f=s.f;
+  f.windActive=false; f.gusts++; f.pushed=true; f.apologized=false;
+  f.trial=false; f.kept=false; f.vaneInstalled=false; give(s,'vane'); note(s,'gust');
+  say(s,'Hrůzie','Přidáš další nádech. Stuha švihne do strany a směrovka vypadne. Vrchní zachytí poryv do rukávu. Zvedneš rákos ze země. Hrůzie pustí tvou ruku. „Řekla jsem dost.“',[
+    choice('talk_after_gust','Promluvit s Hrůzií.')]);
+}
+function hotspots(s) {
+  let a=[];
+  const human=s.f.human;
+  switch(s.scene) {
+    case 'camp': a=[
+      ['hruzie',human?'Hrůzie':'Hrůzie, zatím kachna',human?69:70,human?61:71,12,human?35:16],
+      ['serpent','Serpentýna',31,55,12,33],['book','Lexikon',39,65,9,10],
+      ['hat','Klobouk',16,69,17,28],['sign','Táborová cedule',82,46,16,13],
+      ...(!s.f.cupTaken?[['cup','Prázdný hrnek',49,78,7,10]]:[])]; break;
+    case 'pond': a=[
+      ['zapomnenka','Zapomněnka',74,50,12,34],
+      ['frog',s.f.frog?'Skokan':'Člověk v leknínu',43,s.f.frog?67:60,14,s.f.frog?16:32],
+      ['reed','Rákosí',21,66,12,28],['water','Tůň',64,85,34,14],
+      ...(!s.f.buttonTaken?[['button','Něco lesklého',81,78,7,10]]:[])]; break;
+    case 'hat': a=[
+      ['shoeDrawer','Co je potřeba',27,55,21,23],['ribbonDrawer','Co by mohlo být',62,45,22,23],
+      ['murmur','Co se určitě nehodí',76,72,17,20],['hatExit','Ven z klobouku',18,82,21,14]]; break;
+    case 'grove': a=[
+      ['garmina','Garmina',66,59,15,36],['oldtree','Nejstarší strom',30,43,23,42],
+      ['weatherstone','Kámen zkoušek',47,76,13,10],['hruzie','Hrůzie',80,human?70:78,11,human?26:13]]; break;
+    case 'mill': a=[
+      ['elder','Vrchní ježibaba',23,57,13,38],['bell','Poplašný zvonek',70,35,10,14],
+      ['socket','Stojan směrovky',54,63,9,19],['wheel','Zkušební větrník',43,52,15,27],
+      ['hruzie','Hrůzie',75,human?70:80,12,human?30:14],['thread','Tenká nit',35,30,12,10]]; break;
+  }
+  return a.map(([id,name,x,y,w,h])=>({id,name,x,y,w,h}));
+}
+function postInspect(s,id) {
+  const text={
+    hruzie:s.ending==='flight'?'Hrůzie si prohlíží cvičky. „Obě levé. A přece jsme se zvedly rovně.“ Hůlku už má zase u sebe.':
+      'Hrůzie si protáhne nohy. „Dneska mi země vyhovuje.“ Hůlku už má zase u sebe.',
+    serpent:s.f.balmDeal==='story'?'„Pozor na kořeny, odbornice,“ zavolá Serpentýna. Hrůzie se zasměje a vezme tě za ruku.':
+      'Serpentýna zapne lexikon tvým knoflíkem. „Vidíš? Přesná velikost. To je víc než přesná cena.“',
+    frog:'Skokan sedí na leknínu. Když mu zamáváš, bez obtíží skočí na další. Rákos už opravdu nepotřebuje.',
+    reed:'Rákos, který držel pana Skoka na nohou, teď drží stuhu u mlýna.',
+    zapomnenka:'Zapomněnka si zapsala: „Pan Skok opět skáče.“ Tentokrát stránku neztratila.',
+    garmina:'„Splněno,“ řekne Garmina. „A do maturity ještě tolik času, že o tom nemusíme mluvit.“',
+    oldtree:'Větve došumí. Tentokrát už kvůli té chvíli nemusíš nic nosit v hrnku.',
+    wheel:'Zkušební větrník stojí. Dnes už se nemusí roztočit.',
+    bell:'Zvonek mlčí. Od tůně je slyšet jedno spokojené kváknutí.',
+    socket:'Stuha je volně svěšená. Ve stojanu zůstal rákos od pana Skoka.',
+    elder:'„Pro dnešek máme hotovo,“ řekne vrchní a jde si sednout.',
+    book:'Lexikon zůstal Serpentýně. Opravu proměny už máte zapsanou.',
+    shoeDrawer:s.f.shod?'Kapsa je prázdná. Obě levé cvičky má Hrůzie na nohou.':'„Cvičky tu budou i příště,“ zamumlá klobouk.',
+    ribbonDrawer:'Kapsa je prázdná. Stuha zůstala na směrovce u mlýna.',
+    button:'Knoflík se ještě leskne v blátě. Dnes už ho pro mast nepotřebujete.',
+    sign:'Na ceduli pod „DNES: VÍTR“ přibylo: „A pak přestalo.“',
+    thread:'Nit nad mlýnem se krátce zaleskne. Vrchní jen povytáhne obočí.'
+  };
+  if(id==='hat') { travel(s,'hat'); return; }
+  if(id==='hatExit') { travel(s,'camp'); return; }
+  say(s,hotspots(s).find(h=>h.id===id)?.name||'Noema',text[id]||'Ještě se tu chvíli rozhlížíte. Dnes už není potřeba nic shánět.');
+}
+function inspect(s,id) {
+  if(s.ending) { postInspect(s,id); return; }
+  switch(id) {
+    case 'hruzie': hruzie(s); break;
+    case 'serpent': serpent(s); break;
+    case 'book': book(s); break;
+    case 'hat': travel(s,'hat'); break;
+    case 'hatExit': travel(s,'camp'); break;
+    case 'sign': say(s,'Táborová cedule','„Dnes: slabý vítr u mlýna. Zítra: podle následků.“\nPod tím je připsáno: Maturita přibližně ve 198 letech. Dřívější panika dobrovolná.'); break;
+    case 'cup': s.f.cupTaken=true; give(s,'cup'); say(s,'Noema','Vedle ohniště zůstal čistý prázdný hrnek. Vezmeš ho do brašny; na čaj se může hodit.'); break;
+    case 'zapomnenka': say(s,'Zapomněnka',s.f.frog?
+      '„Pan Skok opět skáče,“ čte Zapomněnka ze zápisníku. „Tohle si podtrhnu.“':
+      '„Chtěla jsem žábě vylepšit výslovnost. Výsledkem je ten pán. Serpentýna má v lexikonu opravu. Něco se dvěma O.“'); break;
+    case 'frog': say(s,s.f.frog?'Skokan':'Pan Skok',s.f.frog?
+      'Skokan chytí mouchu a spokojeně kvákne. Zapomněnka už se nesnaží opravit mu výslovnost.':
+      '„Jsem pan Skok. Před chvílí ještě žába. Chci zpátky, ale Zapomněnka si nepamatuje opravu.“ Opře se o rákos. „Tenhle mi zatím pomáhá chodit.“'); break;
+    case 'reed': say(s,s.f.reedTaken?'Rákosí':'Pan Skok',s.f.vaneInstalled?
+      'Rovný rákos už drží stuhu u mlýna. Tady se zbytek stébel ohýbá do všech stran.':
+      s.bag.includes('vane')?'Rovné stéblo už máš spojené se stuhou v brašně.':
+      s.bag.includes('reed')?'Rákos od pana Skoka máš v brašně.':
+      '„Ten rovný je můj. Teď ho potřebuju místo hole. Až budu zase skákat po čtyřech, rád vám ho přenechám.“'); break;
+    case 'button': s.f.buttonTaken=true; give(s,'button'); say(s,'Noema',
+      s.f.balmDeal==='none'?'Z bláta vytáhneš lesklý knoflík. '+(s.f.human?'Hrůzie si ho prohlédne. „Někomu teď musí padat kabát.“':'Hrůzie si ho prohlédne; do zobáku se jí naštěstí nevejde.'):
+      'Z bláta vytáhneš lesklý knoflík. Mast už máte, ale knoflík tu nemusí ležet navždy.'); break;
+    case 'water': say(s,'Tůň','Ve vodě vypadáš trochu jako někdo, kdo umí kouzlit. Jakmile se nakloníš blíž, vypadáš jako někdo, kdo si namočí nos.'); break;
+    case 'shoeDrawer':
+      if(!s.f.shoesTaken) { s.f.shoesTaken=true; give(s,'shoes'); say(s,'Klobouk','Vytáhneš dvě levé cvičky. „Pravou jsem zkoušel,“ zamumlá klobouk. „Vyšla mi další levá.“ Obě jsou měkké a stejně velké.'); }
+      else say(s,'Klobouk',s.f.shod?'„Obě už má Hrůzie. Pořád jsou dvě, kontroloval jsem to.“':'„Cvičky už máš v brašně. Další pokus o pravou dnes nedělám.“');
+      break;
+    case 'ribbonDrawer':
+      if(!s.f.ribbonTaken) { s.f.ribbonTaken=true; give(s,'ribbon'); say(s,'Noema','V kapse je dlouhá stuha. Vytáhneš ji a ona se zatřepotá už při tvém výdechu.'); }
+      else say(s,'Kapsa',s.f.vaneMade?'Stuha už patří ke směrovce. Kapsa ze sebe vydá jen chomáč prachu.':'Stuha už je v brašně. Kapsa ze sebe vydá jen chomáč prachu.');
+      break;
+    case 'murmur': say(s,'Klobouk','V kapse je malý slaměný manažer. „Nechceš místo kamarádky spravovat tři procesy?“\nKapsu opatrně zase zavřeš.'); break;
+    case 'garmina': garmina(s); break;
+    case 'oldtree': tree(s); break;
+    case 'weatherstone': say(s,'Kámen zkoušek','Na kameni jsou tři rýhy: pírko, větev, vyvrácený strom. Pod pírkem stojí: „Dost na začátek.“ Pod stromem: „Dost práce na příště.“'); break;
+    case 'elder': elder(s); break;
+    case 'bell': say(s,'Poplašný zvonek',s.f.bellQuiet?'Zvonek mlčí. „Teď mě slyšíš?“ zeptá se Hrůzie. Slyšíš.':
+      'Zvonek cinkne a jeho ozvěna ho rozezní znovu. Hrůzie počká na mezeru. Žádná nepřijde.'); break;
+    case 'socket': say(s,'Stojan směrovky',s.f.vaneInstalled?'Rákos drží pevně. Stuha ukáže i pohyb vzduchu, který nepohne mlýnským křídlem.':
+      'Ve stojanu je úzký otvor. Na cedulce je nakreslený rovný rákos se stuhou. Nejdřív je potřeba je spojit, potom zasadit.'); break;
+    case 'wheel': wind(s); break;
+    case 'thread': s.f.thread=true; note(s,'thread'); say(s,'Vrchní ježibaba','U křídla mlýna se leskne tenká nit. „Zachytávám s ní, co se nepovede.“ Vrchní si všimne tvého pohledu. „Na zbytek se mě zeptej, až budeme po zkoušce.“'); break;
+  }
+}
+function travel(s,scene) {
+  if(!scenes[scene]||s.finished||s.scene===scene) return;
+  if(!routes(s).includes(scene)) { say(s,'Noema',goal(s)); return; }
+  s.scene=scene;
+  const first=!s.seen.includes(scene);
+  if(first) s.seen.push(scene);
+  if(scene==='mill'&&s.f.quest&&!s.f.millTold&&!s.ending) { millProblem(s); return; }
+  let text=scenes[scene].intro;
+  if(scene==='camp') text=s.ending?'Vrátíte se k ohni. Serpentýna zvedne oči od lexikonu. Tentokrát od vás nikdo nic nepotřebuje.':
+    s.f.human?'Hrůzie se posadí u ohniště. '+(s.f.treated?'Nohy už ji nepálí.':'Odřené nohy ještě bolí.'):
+    'S Hrůzií se vrátíš k ohništi. '+(s.f.treated?'Kachní nohy už ji nepálí, podobu ale ještě potřebuje vrátit.':'Odlehčuje jednu odřenou nohu.');
+  if(scene==='pond'&&s.f.frog) text='Skokan přeskočí na vedlejší leknín. Zapomněnka už má v zápisníku podtrženo, že se proměna povedla.';
+  if(scene==='grove'&&s.f.bellQuiet) text='Do hájku už nedoléhá cinkání. Garmina to zaznamená dřív, než stačíš něco říct.';
+  if(scene==='mill'&&s.f.bellQuiet) text=s.f.trial?
+    'U mlýna je klid. Stuha visí ve stojanu a zkušební větrník stojí. Váš pokus už je hotový.':
+    'U mlýna už necinká zvonek. Hrůzie řekne tvoje jméno docela potichu. Je jí rozumět.';
+  say(s,'Noema',text);
+}
+function use(s,item,target) {
+  if(!s.bag.includes(item)) { say(s,'Noema','Tu věc teď v brašně nemám.'); return; }
+  if(item==='wand'&&(target==='hruzie'||target==='frog')) { cast(s,target); return; }
+  if(item==='wand'&&target==='wheel') { wind(s); return; }
+  if(item==='wand'&&target==='book') { book(s); return; }
+  if(item==='balm'&&target==='hruzie') {
+    if(s.f.treated) { say(s,'Hrůzie',s.f.human?'„Už je to lepší. Další mast není potřeba.“':'Hrůzie už došlapuje bez ucuknutí. Mast si zatím necháš.'); return; }
+    s.f.treated=true; note(s,'care');
+    say(s,'Noema','„Můžu ti ošetřit nohy?“ Hrůzie přikývne. Opatrně rozetřeš Curon. Po chvíli zkusí došlápnout a tentokrát neucukne.');
+    return;
+  }
+  if(item==='shoes'&&target==='hruzie') {
+    if(!s.f.human) { say(s,'Noema','Na plovací blány by cvičky nesedly. Necháš je v brašně, dokud Hrůzii nevrátíte podobu.'); return; }
+    if(!s.f.treated) { say(s,'Hrůzie','„Nejdřív mast, prosím. Přes odřeniny by mě tlačily i cvičky.“'); return; }
+    s.f.shod=true; take(s,'shoes');
+    say(s,'Hrůzie','„Obě levé?“ Chvíli přešlapuje. „Tak budu zatím odvážná doleva.“ Pak zkusí krok doprava. Jde to taky.');
+    return;
+  }
+  if(item==='button'&&target==='serpent') {
+    if(s.bag.includes('balm')||s.f.treated) { say(s,'Serpentýna','„Mast už máte. Knoflík si nech, druhou platbu nechci.“'); return; }
+    take(s,'button'); give(s,'balm'); s.f.balmDeal='button';
+    say(s,'Serpentýna','Serpentýna zkusí knoflík na zapínání lexikonu. Sedí. „Platba přijata. Konečně nebude pořád otevřený.“ Podá ti Curon 5000.');
+    return;
+  }
+  if(item==='cup'&&target==='oldtree') {
+    if(s.f.bellQuiet) { say(s,'Nejstarší strom','„U mlýna už je ticho. Ten hrnek si nech na čaj.“'); return; }
+    if(!s.f.listened) { say(s,'Nejstarší strom','„Ještě šustím. Nejdřív chvíli poslouchej, až větve doznějí.“'); return; }
+    take(s,'cup'); give(s,'quiet'); s.f.quietMade=true; note(s,'quiet');
+    say(s,'Noema','Počkáš, až poslední list přestane šustit, a podržíš hrnek pod větví. Když ho přiblížíš k rukávu, ztichne i jeho šustění.');
+    return;
+  }
+  if(item==='quiet'&&target==='bell') {
+    if(s.f.bellQuiet) { say(s,'Noema','Zvonek už mlčí. Další ticho nepotřebuje.'); return; }
+    s.f.bellQuiet=true; take(s,'quiet'); give(s,'cup');
+    say(s,'U mlýna','Přiložíš hrnek ke zvonku. Poslední cinknutí do něj spadne a ozvěna už se nevrátí. Hrůzie zkusí potichu: „Dost.“ Tentokrát ji slyšíš. Prázdný hrnek uložíš zpátky do brašny.');
+    return;
+  }
+  if(item==='vane'&&target==='socket') {
+    s.f.vaneInstalled=true; take(s,'vane');
+    say(s,'Noema','Zasadíš rákos od pana Skoka do stojanu. Stuha se pohne při tvém výdechu; pak zase klesne. Ukazatel funguje i bez kouzlení.');
+    return;
+  }
+  if(item==='balm'&&target==='wheel') { say(s,'Noema','Větrník není odřený. Mast necháš v brašně. Pro pokus použij hůlku, nebo klikni přímo na větrník.'); return; }
+  if(item==='reed'&&target==='socket') { say(s,'Noema','Rákos do stojanu pasuje, ale samotný slabý vítr neukáže. Nejdřív k němu přivaž stuhu: vyber rákos a potom stuhu v brašně.'); return; }
+  if(item==='ribbon'&&target==='socket') { say(s,'Noema','Stuha potřebuje rovnou oporu. Nejdřív ji v brašně spoj s rákosem.'); return; }
+  if(item==='cup'&&target==='bell') { say(s,'Noema','Prázdný hrnek zvonek neutiší. '+(s.f.lesson?'Nejstarší strom v hájku ví, jak do něj zachytit ticho.':'Garmina v hájku může poradit.')); return; }
+  say(s,'Noema',items[item].name+' na tomto místě nic nezmění. Věc zůstává v brašně; výběr je odložený.');
+}
+function combine(s,a,b) {
+  if(!s.bag.includes(a)||!s.bag.includes(b)||a===b) return;
+  if([a,b].includes('reed')&&[a,b].includes('ribbon')) {
+    take(s,'reed'); take(s,'ribbon'); give(s,'vane'); s.f.vaneMade=true;
+    say(s,'Noema','Přivážeš stuhu na rákos. Když na ni foukneš, zvedne se. Když přestaneš, klesne. Směrovka je hotová.');
+  } else say(s,'Noema',items[a].name+' a '+items[b].name+' k sobě takto nepatří. Obě věci zůstávají v brašně; výběr je odložený.');
+}
+function choose(s,id) {
+  if(!s.line.choices.some(c=>c.id===id)) return;
+  const f=s.f,target=s.spellTarget;
+  switch(id) {
+    case 'first_help': serpent(s); break;
+    case 'first_hruzie': hruzie(s); break;
+    case 'borrow': f.wand=true; give(s,'wand'); say(s,'Hrůzie',f.human?'„Můžeš.“ Hrůzie ti podá hůlku. „Po zkoušce mi ji vrať.“':
+      'Hrůzie přikývne a sama k tobě přistrčí hůlku. Vezmeš ji opatrně do brašny.'); break;
+    case 'duck_comfort': say(s,'Noema','Posadíš se s Hrůzií do závětří. Opře se o tebe a přestane se tolik třást.'); break;
+    case 'duck_help': say(s,'Noema',(!f.treated?'Na nohy potřebuje Curon od Serpentýny. ':'Nohy už jsou ošetřené. ')+
+      (f.book?'Pravidlo proměny už máme zapsané. ':'Serpentýnin lexikon vysvětlí navrácení podoby. ')+
+      (f.wand?'Půjčenou hůlku pak použij na Hrůzii.':'O hůlku můžeme požádat Hrůzii.')); break;
+    case 'ask_balm': say(s,'Serpentýna','„Curon ti dám za drobnou vlastní ostudu. Nebo za lesklý knoflík: jeden jsem zahlédla u tůně a lexikon se mi pořád otvírá.“',[
+      choice('balm_story','Přiznat, jak jsem zakopla o úplně nehybný kořen.'),
+      choice('balm_trade',s.bag.includes('button')?'Nabídnout nalezený knoflík.':'Půjdu se podívat po knoflíku.')]); break;
+    case 'balm_story': f.balmDeal='story'; give(s,'balm'); say(s,'Serpentýna','Vyprávíš o kořeni. Serpentýna se rozesměje a podá ti Curon 5000. „Kořeny obvykle neuhýbají. Špatně se s nimi vyjednává.“'); break;
+    case 'balm_trade': if(s.bag.includes('button')) use(s,'button','serpent'); else say(s,'Serpentýna','„U tůně hledej něco lesklého v blátě. Přines knoflík a použij ho na mě. Když ho nenajdeš, pořád beru tu historku.“'); break;
+    case 'ask_book': book(s); break;
+    case 'ask_age': say(s,'Serpentýna','„Garmině je sedmatřicet. Těžká puberta. Maturita bývá kolem sto devadesáti osmi. Vrchní se neptáme — pamatuje dobu, kdy se věk zaokrouhloval na lesy.“'); break;
+    case 'serpent_story': say(s,'Serpentýna','„Co se tam vítr naučí dnes, nebude zítra zkoušet na našich střechách. Aspoň tak zní plán. Teď bychom pro začátek rády slyšely jedna druhou.“'); break;
+    case 'cast_one':
+      if(target==='frog') { f.frog=true; note(s,'frog'); give(s,'reed'); f.reedTaken=true;
+        say(s,'Skokan','Pan Skok se složí do skokana. Zkusí jeden skok, pak druhý. Rákos už nepotřebuje; přistrčí ti ho na břeh. Za tebou šustne Zapomněnčin rukáv.'); }
+      else if(target==='hruzie') { f.human=true; note(s,'human');
+        say(s,'Hrůzie','Kachní křídlo se promění v ruku. Hrůzie se rozesměje a obejme tě. „Už nikdy nechci řešit tkaničky zobákem.“ Vedle vás cosi šustne. '+(f.treated?
+          'Opatrně došlápne. Mast pomohla i nohám v téhle podobě.':'Při došlápnutí ale ucukne. Odřeniny zůstaly.')); }
+      break;
+    case 'cast_whole': say(s,'Noema','Vybavíš si přesné znění z lexikonu: poslední proměna vybraného cíle. Čas ani ostatní události se nevracejí.',[
+      choice('cast_one','Vrátit jen tu proměnu.'),choice('cast_cancel','Ještě počkat.')]); s.spellTarget=target; s.dialog='spell'; break;
+    case 'cast_cancel': say(s,'Noema','Skloníš hůlku. K proměně se můžete vrátit později.'); break;
+    case 'start_quest': f.quest=true; note(s,'quest'); say(s,'Hrůzie','„Půjdeme se podívat. Ještě nemusíme nic zkoušet.“ Ukáže na cestu k mlýnu. Přibyla mezi cestami pod obrázkem.'); break;
+    case 'rest_first': say(s,'Noema','Ještě chvíli sedíte u ohně. Až budete chtít vyrazit, promluv znovu s Hrůzií.'); break;
+    case 'age_old': f.age='old'; say(s,'Garmina','„Já to věděla. Ty devadesát osmičky poznám podle rozvážného váhání.“',s.f.millTold?[choice('lesson','Zeptat se na přípravu větru.')]:[]); break;
+    case 'age_unknown': f.age='unknown'; say(s,'Garmina','„To říkají všichni nad devadesát.“ Poznamená si: věk dosud neuzavřen.',s.f.millTold?[choice('lesson','Zeptat se na přípravu větru.')]:[]); break;
+    case 'lesson': f.lesson=true; note(s,'wind'); say(s,'Garmina','Garmina zvedne hůlku jen o kousek. Cíp jejího pláště se pohne. Když ji skloní, látka klesne.\n„Tohle budeme zkoušet. Na ukazatel stačí rovný rákos a stuha; spojíš je v brašně. Se zvonkem pomůže hrnek ticha. Nejstarší strom ti ukáže, jak ho nabrat.“'); break;
+    case 'wind_help': say(s,'Garmina','„Když se pohne stuha, stačí. Pak skloň hůlku. Na velká křídla mlýna dnes nesahej; zkoušíme ten malý větrník vedle.“'); break;
+    case 'promise_stop': case 'promise_open':
+      f.promise=id==='promise_stop'?'stop':'open'; note(s,'promise');
+      say(s,'Hrůzie',id==='promise_stop'?'„Dobře. Řeknu dost a ty hůlku skloníš.“ Hrůzie ti ukáže, kde bude stát.':
+        '„Budu ti říkat, jak mi je. A dost znamená hůlku dolů.“ Počká na tvé přikývnutí.'); break;
+    case 'hruzie_feet': say(s,'Hrůzie',!f.treated?'„Serpentýna má Curon. Nejdřív mast, boty až potom.“':
+      !f.shod?'„Už nepálí. Na zemi to zvládnu, ale kdybych chtěla létat, potřebovala bych měkké boty na přistání. Podívej se do klobouku.“':
+      '„Dobré. Obě levé cvičky se kupodivu pohádaly tak, že je každá na jiné noze.“'); break;
+    case 'listen': f.listened=true; note(s,'quiet'); say(s,'Nejstarší strom',s.f.bellQuiet?
+      'Posloucháte, až dozní listy. Tentokrát už neruší ani vzdálený zvonek.':
+      'Nejdřív slyšíš listy. Potom ptáka. Nakonec ani rukáv nešustí. Strom skloní větev. „Teď sem podrž prázdný hrnek.“'); break;
+    case 'tree_talk': say(s,'Nejstarší strom',s.f.bellQuiet?'„Už jsi ho odnesla tam, kde bylo potřeba. Teď můžeš chvíli jen sedět.“':
+      '„Zkus nejdřív poslouchat. Až větve doznějí, podrž pod nimi prázdný hrnek. Do plného se ticho nevejde.“'); break;
+    case 'elder_hint': {
+      const parts=[];
+      if(!f.vaneInstalled) parts.push(s.bag.includes('vane')?'„Směrovku už máš. Použij ji na stojan.“':
+        f.frog?'„Rákos od Skoka spoj se stuhou z klobouku. Směrovka patří do stojanu.“':
+        '„Rovný rákos teď podpírá pana Skoka u tůně. Stuha je v klobouku. Spojené patří do stojanu.“');
+      if(!f.bellQuiet) parts.push(s.bag.includes('quiet')?'„Hrnek ticha přilož ke zvonku.“':
+        '„V táboře je prázdný hrnek. U nejstaršího stromu nejdřív poslouchej, pak mu ho nabídni.“');
+      say(s,'Vrchní ježibaba',parts.join('\n')); break;
+    }
+    case 'elder_magic': say(s,'Vrchní ježibaba',f.trial?
+      '„Já hlídala, aby se nikomu nic nestalo.“ Vrchní si smotá kousek tenké niti. Na otázku, kdo přesně roztočil větrník, tím neodpověděla.':
+      '„Budu stát za vámi. Kdyby přišel velký poryv, zachytím ho.“ Vrchní se dotkne tenké niti nad křídlem. „Začneme malým pokusem.“'); break;
+    case 'final_talk': case 'talk_after_gust': hruzie(s); break;
+    case 'wind_wait': say(s,'Noema','Hůlka zůstane sklopená. Zatím nic nefouká.'); break;
+    case 'wind_soft': f.windActive=true; windResponse(s); break;
+    case 'one_more': gust(s); break;
+    case 'stop_now': f.windActive=false; f.kept=true; f.trial=true; note(s,'trial');
+      say(s,'Hrůzie',f.pushed?
+        'Skloníš hůlku. Stuha klesne a větrník se zastaví. Hrůzie ještě chvíli čeká, potom tě znovu vezme za ruku. „Teď ano.“':
+        'Skloníš hůlku. Stuha klesne a větrník se zastaví. Hrůzie se podívá z něj na tebe. „Slyšela jsi mě.“',finalChoices(s)); break;
+    case 'apologize': f.apologized=true; f.promise='stop'; note(s,'repair');
+      say(s,'Hrůzie','„Dobře. Zkusím to ještě jednou. Ale bez toho dalšího nádechu.“ Podá ti ruku. '+
+        (f.vaneInstalled?'Směrovka už stojí.':'Směrovku bude potřeba vrátit do stojanu.')); break;
+    case 'defend': say(s,'Hrůzie','„Já vím. Ale já jsem v tom větru taky.“',[choice('apologize','Promiň. Slyšela jsem tě a měla jsem přestat.'),choice('space','Dám ti chvíli prostoru.')]); break;
+    case 'space': say(s,'Noema','Posadíte se od sebe o kousek dál. Když se budeš chtít ke zkoušce vrátit, nejdřív s Hrůzií znovu promluv.'); break;
+    case 'later': say(s,'Noema','Zkouška už se povedla. Ještě se můžete porozhlédnout a pro zakončení se vrátit k mlýnu.'); break;
+    case 'flight_needs': say(s,'Hrůzie',s.bag.includes('shoes')?
+      '„Ty cvičky, které neseš. Na přistání bych chtěla něco měkkého. Pak se můžeme domluvit.“':
+      s.f.shoesTaken?'„Cvičky z klobouku. Až je budu mít na nohou, můžeme se domluvit.“':
+      '„Na přistání bych chtěla měkké boty. Mohly by být v klobouku, v kapse Co je potřeba. Na zemi můžeme skončit i bez nich.“',
+      [choice('end_ground','Posadit se spolu pod mlýnem.'),choice('later','Podívat se po cvičkách.')]); break;
+    case 'ask_flight': say(s,'Hrůzie','Hrůzie zkusí, jestli jí cvičky drží na nohou. „Chtěla bych to zkusit. Jen nad trávu. A držet tě za ruku.“',[
+      choice('end_flight','Vzít ji za ruku a zkusit malý let.'),
+      choice('end_ground','Domluvit se, že dnes zůstaneme na zemi.'),
+      choice('later','Ještě počkat.')]); break;
+    case 'end_ground': end(s,'ground'); break;
+    case 'end_flight': end(s,'flight'); break;
+  }
+}
+function end(s,kind) {
+  const f=s.f;
+  if(s.scene!=='mill'||!f.trial||!f.treated||!f.human||f.windActive||(kind==='flight'&&!f.shod)) return;
+  s.finished=true; s.ending=kind; f.wand=false; take(s,'wand');
+  say(s,'Konec výpravy','');
+}
+function hint(s,exact=false) {
+  const f=s.f;
+  let pair;
+  if(s.ending) pair=['Výprava už má konec. Můžete se ještě rozloučit.','Další úkol už není. Nové dobrodružství začneš přes menu.'];
+  else if(f.windActive) pair=['Hrůzie právě požádala o zastavení.','Vyber „Hned sklonit hůlku a zastavit vítr“. Rozběhnutý pokus nejprve dokonči.'];
+  else if(!f.treated) pair=['Než vyrazíte dál, pomoz Hrůzii s bolavými nohami.',
+    s.bag.includes('balm')?'Použij Curon z brašny na Hrůzii v táboře.':'V táboře požádej Serpentýnu o mast. Nabídni historku, nebo knoflík od tůně.'];
+  else if(!f.human&&!f.book) pair=['Proměna potřebuje přesné pravidlo.','Otevři lexikon v táboře.'];
+  else if(!f.human&&!f.wand) pair=['Hůlku může půjčit její majitelka.','Promluv s Hrůzií v táboře a požádej o hůlku.'];
+  else if(!f.human) pair=['Hůlka potřebuje správného adresáta a jeho souhlas.','Vyber hůlku, použij ji na Hrůzii a potvrď vrácení poslední proměny.'];
+  else if(!f.quest) pair=['Hrůzie je zase sebou. Zeptej se jí, co chce dál.','Promluv s Hrůzií v táboře a přijmi její návrh jít se podívat k mlýnu.'];
+  else if(!f.millTold) pair=['Nejdřív se podívejte, co u mlýna brání pokusu.','Přejdi k mlýnu cestou pod obrázkem.'];
+  else if(!f.lesson) pair=['Garmina ví, jak se připravuje malý vítr.','V hájku promluv s Garminou a zeptej se na přípravu pokusu.'];
+  else if(f.pushed&&!f.apologized) pair=['Vybavení může počkat. Hrůzie chce mluvit.','Promluv s Hrůzií u mlýna a omluv se za pokračování po slově dost.'];
+  else if(!f.vaneInstalled) {
+    if(s.bag.includes('vane')) pair=['Ukazatel je hotový, potřebuje místo.','Použij směrovku na stojan u mlýna.'];
+    else if(!f.frog) pair=['Rovný rákos teď někomu pomáhá chodit.','U tůně použij půjčenou hůlku na pana Skoka. Souhlasí s návratem do žabí podoby a přenechá ti rákos.'];
+    else if(!s.bag.includes('ribbon')) pair=['Klobouk skrývá něco, co se pohne i při nádechu.','V klobouku otevři kapsu Co by mohlo být a vezmi stuhu.'];
+    else pair=['Spoj oporu s něčím, co ukáže pohyb vzduchu.','V brašně vyber rákos a potom stuhu. Směrovku použij na stojan u mlýna.'];
+  } else if(!f.bellQuiet) {
+    if(s.bag.includes('quiet')) pair=['Zvonek čeká na chvíli, kterou neseš.','Použij hrnek ticha na poplašný zvonek u mlýna.'];
+    else if(!s.bag.includes('cup')) pair=['I prázdná nádoba může něco přinést.','Vezmi prázdný hrnek u ohniště v táboře.'];
+    else if(!f.listened) pair=['Strom ještě nedošustil.','Promluv s nejstarším stromem v hájku a chvíli poslouchej.'];
+    else pair=['Teď už víš, na kterou chvíli počkat.','Použij prázdný hrnek na nejstarší strom, potom hrnek ticha na zvonek u mlýna.'];
+  } else if(f.promise==='none') pair=['Vybavení je připravené. Ještě potřebujete dohodu.','Promluv s Hrůzií a domluv se na znamení dost.'];
+  else if(!f.trial) pair=['Zkus malý vítr a poslouchej Hrůzii.','U mlýna klikni na větrník nebo na něj použij hůlku. Zkus vánek a po slově dost skloň hůlku.'];
+  else pair=['Teď můžete zůstat na zemi, nebo se domluvit na malém letu.','Promluv s Hrůzií u mlýna. Let nabídne po obutí cviček; konec na zemi je dostupný i bez nich.'];
+  return pair[exact?1:0];
+}
+function act(state,a) {
+  const s=clone(state);
+  if(!a||typeof a.type!=='string'||(s.finished&&a.type!=='revisit')) return s;
+  if(s.f.windActive) {
+    if(a.type==='choose'&&['stop_now','one_more'].includes(a.id)) { s.turns++; choose(s,a.id); }
+    else { windResponse(s); }
+    return s;
+  }
+  s.turns++;
+  if(a.type==='revisit') {
+    if(!s.ending) return s;
+    s.finished=false; s.scene='camp';
+    say(s,'Noema','Výprava už má svůj konec. V táboře se ještě můžete rozloučit; hotovou zkoušku není potřeba opakovat.');
+  } else if(s.ending&&['use','combine','choose'].includes(a.type)) {
+    say(s,'Noema','Dnes už máte hotovo. Věci můžou odpočívat v brašně.');
+  } else if(a.type==='travel') travel(s,a.scene);
+  else if(a.type==='inspect'&&hotspots(s).some(h=>h.id===a.target)) inspect(s,a.target);
+  else if(a.type==='use'&&hotspots(s).some(h=>h.id===a.target)) use(s,a.item,a.target);
+  else if(a.type==='combine') combine(s,a.a,a.b);
+  else if(a.type==='choose') choose(s,a.id);
+  return s;
+}
+function serialize(s) {
+  return JSON.stringify({version:2,scene:s.scene,f:s.f,bag:s.bag,journal:s.journal,
+    seen:s.seen,turns:s.turns,ending:s.ending,finished:s.finished});
+}
+function restore(raw) {
+  try {
+    const v=JSON.parse(raw);
+    if(![1,2].includes(v?.version)||!scenes[v.scene]||!v.f) return null;
+    const s=fresh();
+    for(const [k,def] of Object.entries(flagDefaults)) {
+      if(v.version===1&&['quest','windActive'].includes(k)) continue;
+      if(typeof v.f[k]!==typeof def) return null;
+      if(typeof def==='boolean') s.f[k]=v.f[k];
+      else if(k==='gusts') {
+        if(!Number.isInteger(v.f[k])||v.f[k]<0||v.f[k]>1e6) return null;
+        s.f[k]=v.f[k];
+      } else {
+        const allowed=k==='balmDeal'?['none','story','button']:k==='age'?['none','old','unknown']:['none','stop','open'];
+        if(!allowed.includes(v.f[k])) return null;
+        s.f[k]=v.f[k];
+      }
+    }
+    for(const [k,allowed] of Object.entries({bag:Object.keys(items),journal:Object.keys(journals),seen:Object.keys(scenes)})) {
+      if(!Array.isArray(v[k])||new Set(v[k]).size!==v[k].length||v[k].some(x=>!allowed.includes(x))) return null;
+      s[k]=v[k];
+    }
+    if(!Number.isInteger(v.turns)||v.turns<0||v.turns>1e7||
+      ![null,'ground','flight'].includes(v.ending)||typeof v.finished!=='boolean'||
+      (v.finished&&!v.ending)) return null;
+    s.turns=v.turns; s.scene=v.scene; s.ending=v.ending; s.finished=v.finished;
+    if(v.version===1) {
+      s.f.quest=s.f.human&&s.f.treated&&(s.f.lesson||s.f.millTold||s.f.trial||s.seen.includes('mill')||s.seen.includes('grove'));
+      s.f.millTold=s.f.millTold||s.f.lesson||s.f.vaneInstalled||s.f.bellQuiet;
+      if(s.f.quest) note(s,'quest');
+    }
+    const f=s.f;
+    if((f.trial||s.ending)&&(!f.human||!f.treated||!f.kept||!f.lesson||!f.vaneInstalled||!f.bellQuiet)) return null;
+    if(f.trial&&f.pushed&&!f.apologized) return null;
+    if(s.ending==='flight'&&!f.shod) return null;
+    if(f.windActive&&(!f.human||!f.treated||!f.quest||!f.lesson||!f.wand||
+      !f.vaneInstalled||!f.bellQuiet||f.promise==='none'||f.trial||s.ending||s.scene!=='mill'||
+      (f.pushed&&!f.apologized))) return null;
+    if(s.ending) { f.wand=false; take(s,'wand'); }
+    if(f.windActive) windResponse(s);
+    else say(s,'Noema',s.ending?'Výprava je uzavřená. Můžeme se ještě rozloučit.':
+      'Vracíme se tam, kde jsme přestaly. '+goal(s));
+    return s;
+  } catch(e) { return null; }
+}
+root.Witch={scenes,items,journals,fresh,act,phase,goal,hint,hotspots,routes,serialize,restore};
+})(typeof module==='object'?module.exports:globalThis);
+</script><script>/* Vektorové ilustrace vytvořené pro tuto hru. */
+(function(root){'use strict';
+const defs=`<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#d5ddc0"/><stop offset="1" stop-color="#f1ddaa"/></linearGradient><linearGradient id="pond" x2="0" y2="1"><stop stop-color="#7faaa0"/><stop offset="1" stop-color="#466f69"/></linearGradient><linearGradient id="bark"><stop stop-color="#555f47"/><stop offset=".5" stop-color="#75785a"/><stop offset="1" stop-color="#485641"/></linearGradient><pattern id="grain" width="37" height="29" patternUnits="userSpaceOnUse"><path d="M3 7h2M18 22h1M29 12h2" stroke="#283a2d" stroke-opacity=".09" stroke-width="1.4"/></pattern></defs>`;
+let serial=0;
+const svg=body=>{const prefix=`witch-art-${++serial}-`;return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="presentation">${defs}${body}<rect width="1000" height="600" fill="url(#grain)" pointer-events="none"/></svg>`.replace(/id="(sky|pond|bark|grain)"/g,(_,id)=>`id="${prefix}${id}"`).replace(/url\(#(sky|pond|bark|grain)\)/g,(_,id)=>`url(#${prefix}${id})`);};
+function tree(x,y,k=1,c='#3d5746'){return `<g transform="translate(${x} ${y}) scale(${k})"><path d="M-14 0L-7-270 12-270 25 0Z" fill="#52624b"/><path d="M0-120l-50-58M6-187l55-64" stroke="#52624b" stroke-width="11"/><path d="M-101-165Q-144-249-70-285Q-79-363-11-382Q70-385 75-309Q139-294 112-213Q76-165 40-182Q-33-135-101-165" fill="${c}"/><path d="M-45-300q38 20 68-28M-83-232q35 23 76-5" stroke="#c4d4ac" stroke-opacity=".12" stroke-width="3" fill="none"/></g>`;}
+const grass=(x,y)=>`<path d="M${x} ${y}l-9-19m9 19l2-26m-2 26l13-14" stroke="#728661" stroke-width="2" fill="none"/>`;
+function forest(){return `<rect width="1000" height="600" fill="url(#sky)"/><circle cx="763" cy="103" r="48" fill="#f8e8be" opacity=".85"/><path d="M0 239Q170 192 320 251T640 238T1000 221V600H0Z" fill="#b5c1a0"/>${[[-20,400,1.1],[130,365,.85],[268,352,.6],[847,375,.87],[1030,400,1.25]].map(([x,y,k])=>tree(x,y,k,'#829779')).join('')}<path d="M0 415Q180 360 402 405T1000 399V600H0Z" fill="#aab084"/><path d="M0 506Q214 442 396 480T1000 460V600H0Z" fill="#c5bc90"/><path d="M435 600Q546 500 550 424T664 342" stroke="#dfd0a2" stroke-width="73" fill="none"/>${[60,180,350,790,920].map((x,i)=>grass(x,515+i*10)).join('')}`;}
+function witch(x,y,k=1,kind='hruzie',shod=false){const p={hruzie:['#82718e','#5a4a68','#b99158','#e9bf98'],noema:['#456f69','#2f5352','#3e3937','#e4bb9d'],serpent:['#685773','#42384b','#c1b9ab','#dfb899'],zapomnenka:['#7e8d68','#58654c','#e2d6bc','#e5bc95'],garmina:['#ac7151','#735039','#9b543d','#ecc098'],elder:['#3b6453','#254536','#ded5b8','#d9b693']}[kind];let [coat,hat,hair,skin]=p;return `<g transform="translate(${x} ${y}) scale(${k})"><ellipse cy="5" rx="43" ry="9" fill="#3f51442b"/><path d="M-17-24l-4 29h-18q1-12 19-15M17-24l5 29h21q-1-11-23-15" fill="${shod?'#ddce9e':'#49483d'}" stroke="#49483d" stroke-width="2"/><path d="M-19-109Q-37-100-45-30Q-1-18 44-30L23-108Z" fill="${coat}" stroke="${hat}" stroke-width="2"/><path d="M-20-103q-23 15-30 38l11 6 24-30M24-104q26 17 33 38l-10 8-28-30" fill="${coat}" stroke="${hat}" stroke-width="2"/><ellipse cx="-45" cy="-59" rx="7" ry="8" fill="${skin}"/><ellipse cx="51" cy="-60" rx="7" ry="8" fill="${skin}"/><path d="M-33-139q-6 41 12 45l9-17 24 12 22-9 2-38" fill="${hair}"/><ellipse cy="-134" rx="26" ry="31" fill="${skin}"/><path d="M-26-142q3-36 35-26l18 25q-24-15-33-9l-13 18Z" fill="${hair}"/><path d="M-9-133v3m23-3v3" stroke="#443c3b" stroke-width="3" stroke-linecap="round"/><path d="M-5-117q8 6 15-1" stroke="#9c6d57" stroke-width="2" fill="none"/>${kind==='noema'?`<path d="M-24-110l44-4 3 11-44 7Z" fill="#b7774d"/><path d="M14-108l12 37 12-9-14-30" fill="#b7774d"/>`:`<path d="M-36-160L-18-205Q-5-231 21-217L13-205 31-161Z" fill="${hat}"/><path d="M-56-158q49-22 108 0-47 21-108 0" fill="${hat}"/><path d="M-30-171l54-3 6 12-64 2Z" fill="${kind==='garmina'?'#d7b66d':'#b19a63'}"/>`}${kind==='serpent'?`<path d="M-35-80l37-5 8 31-38 6Z" fill="#b78956" stroke="#453c37" stroke-width="3"/><path d="M-27-73l24-4m-22 11l22-4" stroke="#e8d5a4" stroke-width="2"/>`:''}${kind==='garmina'?`<path d="M57 0L92-170" stroke="#795539" stroke-width="6"/><path d="M60-28L29 16 75 25 72-24Z" fill="#c2a668" stroke="#8e7546" stroke-width="2"/>`:''}<path d="M-5-90v48" stroke="${hat}" stroke-width="2"/><circle cx="5" cy="-85" r="2" fill="#dbca91"/><circle cx="5" cy="-68" r="2" fill="#dbca91"/></g>`;}
+function duck(x,y,k=1){return `<g transform="translate(${x} ${y}) scale(${k})"><ellipse cy="4" rx="38" ry="7" fill="#47563e25"/><path d="M-15-8l-6 14h19M13-6l6 12h15" stroke="#bb7947" stroke-width="5" fill="none"/><path d="M-31-35l-14-17q2 35 29 42 38 9 46-26L13-59Z" fill="#ead493" stroke="#a88c58" stroke-width="2"/><circle cx="20" cy="-58" r="24" fill="#efdc9d"/><path d="M41-62l26 8-26 7Z" fill="#c38851"/><circle cx="28" cy="-64" r="2.8" fill="#3f473a"/><path d="M-19-34q15-15 30 3-8 16-25 9" fill="#ddc77d"/><path d="M9-40l-13-9v16l13-7 15 7v-17Z" fill="#82718e"/></g>`;}
+function hr(s,x,y,k=1){return s.f.human?witch(x,y,k,'hruzie',s.f.shod):duck(x,y,k);}
+function itemBody(id){switch(id){case'balm':return `<ellipse cx="30" cy="18" rx="20" ry="7" fill="#8a8c67"/><path d="M10 18v27q20 13 40 0V18" fill="#c7b575" stroke="#56654d" stroke-width="2"/><ellipse cx="30" cy="18" rx="20" ry="6" fill="#66795d"/><path d="M14 30h32v12H14Z" fill="#eee0b1"/><text x="30" y="39" text-anchor="middle" fill="#4b614b" font-size="9">5000</text>`;case'shoes':return `<path d="M7 17h15l4 22q-10 13-22 4l3-26M34 13h14l9 24q-8 14-22 5Z" fill="#dfc98d" stroke="#766e50" stroke-width="2"/><path d="M8 24h14M35 20h14M9 29h14M37 25h14" stroke="#eee3b6" stroke-width="3"/>`;case'ribbon':return `<path d="M8 13q42-8 35 10S8 20 15 34s33-7 33 13" stroke="#ab6b67" stroke-width="10" fill="none"/>`;case'cup':case'quiet':return `<path d="M41 23q22-5 13 15l-13 3" stroke="#6a7d65" stroke-width="5" fill="none"/><path d="M8 20h35l-2 28q-16 8-31 0Z" fill="#a2b196" stroke="#566e5b" stroke-width="2"/><ellipse cx="25" cy="20" rx="17" ry="5" fill="${id==='quiet'?'#81928f':'#ddd3ad'}"/>${id==='quiet'?'<path d="M19 17q-8-7 0-13M30 15q8-7 0-12" stroke="#899e96" stroke-width="2" fill="none"/>':''}`;case'reed':return `<path d="M17 53L41 5" stroke="#a99558" stroke-width="5"/><path d="M22 43l-4-17 12 1m4-11l10 3" stroke="#6e875e" stroke-width="3" fill="none"/>`;case'vane':return `<path d="M22 55V6" stroke="#9b8453" stroke-width="4"/><path d="M23 9q12-10 28 0l-5 10q-13-10-23 0Z" fill="#ad6d6d"/>`;case'wand':return `<path d="M12 51L43 9" stroke="#6e5143" stroke-width="5" stroke-linecap="round"/><path d="M43 2v-6m8 13h7m-5-10l-4 4" stroke="#b4955a" stroke-width="2"/>`;case'button':return `<circle cx="30" cy="30" r="21" fill="#cfb96f" stroke="#8e814e" stroke-width="3"/><circle cx="30" cy="30" r="15" fill="none" stroke="#ead795" stroke-width="2"/><g fill="#726c4d"><circle cx="25" cy="25" r="3"/><circle cx="35" cy="25" r="3"/><circle cx="25" cy="35" r="3"/><circle cx="35" cy="35" r="3"/></g>`;default:return '';}}
+const obj=(id,x,y,k=1)=>`<g transform="translate(${x-30*k} ${y-30*k}) scale(${k})">${itemBody(id)}</g>`;
+function camp(s){return forest()+`<path d="M63 415l130-204 150 204Z" fill="#aa775d" stroke="#6c6348" stroke-width="3"/><path d="M193 211l-38 204h127Z" fill="#785d4a"/><path d="M193 211l26 204" stroke="#d6bc87" stroke-width="3"/><path d="M66 416l-22 20m296-21l22 20" stroke="#766343" stroke-width="3"/>${witch(306,423,.83,'serpent')}<path d="M351 416h92v15h-92Z" fill="#7a6349"/><path d="M362 429v44m66-44v44" stroke="#756348" stroke-width="8"/><path d="M352 380l37 4 41-9 2 28-41 10-36-5Z" fill="#e8d8ac" stroke="#776c4e" stroke-width="3"/><path d="M389 384l2 29m7-23l25-6m-24 14l24-6m-41 0l-21-4" stroke="#9f9471" stroke-width="2"/>${witch(592,463,.88,'noema')}${hr(s,691,459,.86)}<g transform="translate(155 465)"><path d="M-41 0l26-97q20-27 51-13l-29 19 35 91Z" fill="#625168"/><ellipse rx="79" ry="21" fill="#514653"/><ellipse cy="-2" rx="37" ry="9" fill="#292e30"/><path d="M-26-29l56-5 6 17-65 1Z" fill="#ad965b"/></g>${!s.f.cupTaken?obj('cup',489,468,.86):''}<path d="M821 349V249" stroke="#7c694d" stroke-width="10"/><path d="M758 252l139-10-4 55-139 10Z" fill="#d3ba83" stroke="#806d4d" stroke-width="3"/><text x="822" y="276" font-family="Georgia" font-size="17" text-anchor="middle" fill="#685942" transform="rotate(-4 822 276)">DNES: VÍTR</text><path d="M424 521l59 24m-53 1l48-31" stroke="#735f43" stroke-width="9"/><path d="M441 533q-20-32 2-42-5 20 14 19-1-26 15-38 19 49-12 63" fill="#bb8855"/><path d="M451 531q-10-18 4-29 0 18 8 13l-3 16" fill="#e8c882"/>`;}
+function pondScene(s){return forest()+`<path d="M180 476Q147 370 424 404T934 413Q1032 468 862 556T308 557Z" fill="url(#pond)"/><path d="M345 492q51-11 98 0m161-33q57-15 117 0m-168 66q49-10 121 0" stroke="#b3c5ac" stroke-width="3" opacity=".6" fill="none"/><ellipse cx="444" cy="439" rx="70" ry="18" fill="#718c5c"/>${s.f.frog?`<g transform="translate(425 408)"><path d="M-25 8q-22 20-44 4l20-18M25 8q24 19 45 3L45-7" stroke="#455e40" stroke-width="8" fill="none"/><ellipse rx="33" ry="23" fill="#7d9a5d"/><circle cx="-18" cy="-22" r="12" fill="#90a56b"/><circle cx="18" cy="-22" r="12" fill="#90a56b"/><circle cx="-18" cy="-24" r="4" fill="#374b3b"/><circle cx="18" cy="-24" r="4" fill="#374b3b"/><path d="M-17 3q17 11 33-1" fill="none" stroke="#425640" stroke-width="2"/></g>`:`<g transform="translate(425 431)"><path d="M-15-23l-22 36m48-36l29 37" stroke="#775b43" stroke-width="10"/><path d="M-26-92l-13 64q42 18 76 1L23-93Z" fill="#858a60"/><circle cy="-113" r="25" fill="#d4ad85"/><ellipse cy="-134" rx="41" ry="11" fill="#7e965b"/><path d="M-4-135q-16-25 8-32" stroke="#7d8e52" stroke-width="4" fill="none"/><path d="M-8-113v2m20-2v2" stroke="#554c3e" stroke-width="3"/><path d="M-24-76l-29 30m76-30l22 29" stroke="#858a60" stroke-width="14"/></g>`}${witch(739,393,.88,'zapomnenka')}<path d="M684 345l61 14-5 24-61-16Z" fill="#e4d5ab" stroke="#817956" stroke-width="2"/>${[170,192,209,227,246].map((x,i)=>`<path d="M${x} 468q${i%2?25:-18}-58 ${i%2?8:-4}-129" stroke="#778359" stroke-width="4" fill="none"/><path d="M${x+(i%2?8:-4)} 343v-34" stroke="#6c6041" stroke-width="9" stroke-linecap="round"/>`).join('')}${!s.f.buttonTaken?obj('button',814,467,.55):''}<ellipse cx="836" cy="545" rx="28" ry="8" fill="#889d68"/><path d="M843 544l-7-14-6 14" fill="#e3d2b3"/>`;}
+function hatScene(s){return `<rect width="1000" height="600" fill="#55485d"/><path d="M130 600Q150 310 470-50Q802 217 928 600" fill="#716179"/><path d="M172 600Q209 333 473-32Q742 225 864 600" fill="#817084"/><path d="M480 0Q387 310 554 600" stroke="#b49a9a" stroke-width="3" stroke-dasharray="6 9" fill="none"/><path d="M233 175Q492 62 735 166" stroke="#c1a665" stroke-width="5" fill="none"/>${[245,340,445,550,650,731].map((x,i)=>`<path d="M${x} ${149-i%3*12}v30" stroke="#c1a665" stroke-width="2"/><circle cx="${x}" cy="${179-i%3*12}" r="6" fill="#dcc086"/>`).join('')}<path d="M166 276l205-14-5 136q-101 48-202 0Z" fill="#9c8293" stroke="#c3a4a6" stroke-width="3"/><path d="M176 290l180-11-2 112q-78 33-179-3Z" fill="none" stroke="#d1b4b2" stroke-dasharray="5 6"/><path d="M515 221l205-26 8 134q-82 39-195 7Z" fill="#a78a87" stroke="#c6a6a0" stroke-width="3"/><path d="M526 234l183-23 8 112q-88 29-172 3Z" fill="none" stroke="#dcc0a5" stroke-dasharray="5 6"/><path d="M683 388l160-3 2 109q-88 34-160-1Z" fill="#615569" stroke="#b19b9f" stroke-width="3"/>${!s.f.shoesTaken?obj('shoes',269,323,1.6):''}${!s.f.ribbonTaken?obj('ribbon',620,271,1.6):''}<text x="760" y="446" font-family="Georgia" text-anchor="middle" fill="#c4adab" font-size="50">?</text><ellipse cx="179" cy="492" rx="106" ry="44" fill="#d9cba0"/><ellipse cx="179" cy="490" rx="77" ry="27" fill="#789176"/><path d="M126 487l70-15m-70 15l22-21m-22 21l29 9" stroke="#e9ddbb" stroke-width="6" fill="none"/><path d="M899 201q-36-40-18-79" stroke="#c6b694" stroke-width="2" fill="none"/><path d="M858 114q17-6 27 7-16 7-27-7" fill="#c6b694"/>`;}
+function grove(s){return forest()+`<path d="M139 485Q219 346 208 25L383-12Q345 239 408 476l-66-28-26 44-53-33-44 37Z" fill="url(#bark)"/><path d="M240 441q38-164 1-348m49 285q47-179 35-332M210 186l-85-99m221 92l113-97" stroke="#424e3e" stroke-width="7" fill="none" opacity=".5"/><path d="M242 252q14-16 28 0m47 0q16-16 28 0" stroke="#3f4c3b" stroke-width="5" fill="none"/><path d="M282 265l-7 32 21 1m-36 20q36 29 63-3" stroke="#3f4c3b" stroke-width="4" fill="none"/><path d="M110 99Q46 42 105-11H476q83 31 22 90-56 29-108-2-36 70-96 16-116 58-184 6" fill="#455e47"/><path d="M79 122q70 27 83-25m203-54q55 42 85 0" fill="none" stroke="#82956b" stroke-width="5" opacity=".5"/>${witch(659,459,.95,'garmina')}${hr(s,800,492,.66)}<path d="M414 462q-3-44 46-48 49 5 63 43Z" fill="#858c71"/><path d="M434 448l8-14m14 18l8-18m14 18l8-15" stroke="#c8c8a1" stroke-width="3"/><path d="M605 397v-103m-36 0l86-4 3 48-85 3Z" fill="#baa878" stroke="#756e4c" stroke-width="3"/><path d="M582 306l61 21m0-22l-60 23" stroke="#8b6552" stroke-width="3"/>${s.f.listened?'<path d="M351 346q45-19 71 3m-42-24q43-7 63 7" stroke="#e4d6b2" stroke-width="3" fill="none"/>':''}`;}
+function millBuilding(){return `<path d="M535 426l35-277h132l42 277Z" fill="#d3bd8c" stroke="#81704f" stroke-width="3"/><path d="M548 150l88-112 90 112Z" fill="#88654e" stroke="#6f5a43" stroke-width="3"/><path d="M570 151h132" stroke="#b99268" stroke-width="10"/><path d="M615 427v-75q21-24 44 0v75" fill="#696a4e"/><path d="M623 220v-36h30v36Z" fill="#546452"/><path d="M631 184v36m-8-18h30" stroke="#c5b27d" stroke-width="3"/><g transform="translate(635 277) rotate(25)"><path d="M-158-6h316M-6-158v316" stroke="#665e44" stroke-width="10"/><g fill="#d5c294" stroke="#8c7d56" stroke-width="3"><path d="M12-155h38v106H12Z"/><path d="M51 12h106v38H51Z"/><path d="M-50 51h38v106h-38Z"/><path d="M-155-50h106v38h-106Z"/></g><path d="M12-130h38m-38 25h38m-38 25h38M80 12v38m25-38v38m25-38v38M-50 80h38m-38 25h38m-38 25h38M-130-50v38m25-38v38m25-38v38" stroke="#9e8f65" stroke-width="2"/><circle r="14" fill="#85744e"/></g>`;}
+function mill(s){return forest()+millBuilding()+`${witch(230,449,.97,'elder')}${hr(s,745,508,.76)}<path d="M430 415V281" stroke="#807049" stroke-width="7"/><g transform="translate(430 312)"><g class="trial-rotor${s.f.windActive?' turning':''}"><path d="M0 0l-12-61 40 24ZM0 0l61-12-24 40ZM0 0l12 61-40-24ZM0 0l-61 12 24-40Z" fill="${s.f.trial?'#b17e64':'#9aa077'}" stroke="#6d7756" stroke-width="2"/><circle r="7" fill="#d7bd7c"/></g></g><path d="M510 422h63m-30-35v35" stroke="#857751" stroke-width="9"/>${s.f.vaneInstalled?obj('vane',541,367,1.7):'<ellipse cx="543" cy="384" rx="9" ry="4" fill="#505940"/>'}<path d="M720 284V180l-29-11" stroke="#796342" stroke-width="5"/><path d="M687 182q-16 9-14 34l-10 9h62l-9-10q-1-25-15-33" fill="${s.f.bellQuiet?'#89947b':'#b5a264'}" stroke="#756e46" stroke-width="2"/><circle cx="695" cy="227" r="6" fill="#776642"/>${!s.f.bellQuiet?'<path d="M656 190q-11 13-4 27m79-28q10 15 2 27" stroke="#b5a264" stroke-width="3" fill="none"/>':'<path d="M679 193l29 26m-28 0l28-26" stroke="#c2c8ab" stroke-width="2"/>'}<path d="M351 181Q420 236 523 195" stroke="#c5bc90" stroke-width="1.5" fill="none"/><path d="M345 176l14 9-12 3Z" fill="#c9c5a2"/>${s.f.windActive?'<g class="gust-lines" stroke="#e7e1be" stroke-width="4" fill="none"><path d="M90 270q160-70 270 0t270 0M170 350q180-45 350 0t340 0"/></g>':''}`;}
+function render(scene,s){return svg(({camp,pond:pondScene,hat:hatScene,grove,mill}[scene])(s));}
+function cover(){return svg(forest()+`<g opacity=".72" transform="translate(145 25) scale(.8)">${millBuilding()}</g>${tree(897,517,1.4,'#405b48')}${tree(491,507,.55,'#647e5c')}<path d="M450 552q216-49 550-8v56H450" fill="#8e9b70"/>${witch(655,507,1.18,'noema')}${duck(774,505,1.15)}<path d="M684 408q46-29 68 17" stroke="#456f69" stroke-width="17" fill="none"/><path d="M702 281q40-21 72-11m-5-23q25-13 51-4" stroke="#e7d8ad" stroke-width="3" fill="none"/>`);}
+function ending(s){const flying=s.ending==='flight';return svg(forest()+`<g opacity=".7" transform="translate(190 60) scale(.67)">${millBuilding()}</g>${tree(158,531,1.4,'#425e48')}${!flying?'<path d="M300 483h435" stroke="#80714e" stroke-width="17"/><path d="M350 486v65m330-65v65" stroke="#746849" stroke-width="12"/>':''}<ellipse cx="565" cy="534" rx="134" ry="15" fill="#6d7e5920"/>${witch(490,flying?473:518,1.08,'noema')}${witch(617,flying?473:518,1.08,'hruzie',s.f.shod)}<path d="M537 ${flying?406:451}q21 10 32-2" stroke="#d6ae8d" stroke-width="10" fill="none"/>${flying?'<path d="M441 510q61-11 89 0m45 0q40-9 80 0" stroke="#e5d5a5" stroke-width="3" fill="none"/>':''}<path d="M749 222q-19-18-35 2 8-32 35-20 20-19 31 1-21-3-31 17" fill="#e9dcb9"/>`);}
+root.WitchArt={render,cover,ending,item:id=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" aria-hidden="true">${itemBody(id)}</svg>`,portrait:s=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="-60 -225 120 240" aria-hidden="true">${s.f.human?witch(0,0,1,'hruzie',s.f.shod):duck(0,-60,1.1)}</svg>`};
+})(globalThis);
+</script><script>(function(){'use strict';
+const E=Witch,A=WitchArt,$=id=>document.getElementById(id),KEY='vega-witches-wind-v1';
+let s=E.fresh(),selected=null,mode='landing',labels=true,returnFocus=null,saveOK=true,saved=null;
+try{saved=E.restore(localStorage.getItem(KEY));}catch(e){saveOK=false;}
+if(saved)s=saved;
+const button=(label,fn,className='')=>{const b=document.createElement('button');b.textContent=label;b.className=className;b.addEventListener('click',fn);return b;};
+const para=(text,className='')=>{const p=document.createElement('p');p.textContent=text;p.className=className;return p;};
+const focus=(id)=>$(id).focus({preventScroll:true});
+function save(){try{localStorage.setItem(KEY,E.serialize(s));saved=s;saveOK=true;}catch(e){saveOK=false;} $('save-status').textContent=saveOK?'Cesta je uložená.':'Ukládání není dostupné.';}
+function showMode(next){mode=next;$('landing').hidden=next!=='landing';$('play').hidden=next!=='play';$('ending').hidden=next!=='ending';$('tools').hidden=next==='landing';$('edition').hidden=next!=='landing';}
+function landing(){showMode('landing');$('cover-art').innerHTML=A.cover();$('start').replaceChildren(document.createTextNode(saved?'Pokračovat v příběhu ':'Vstoupit do příběhu '),Object.assign(document.createElement('span'),{textContent:'→'}));$('new-start').hidden=!saved;$('resume-note').textContent=saved?'Uložená cesta tu na tebe čeká.':'Klikání, předměty, rozhovory. Bez časového limitu.';window.scrollTo(0,0);}
+function run(action){const oldScene=s.scene,oldGusts=s.f.gusts;selected=null;s=E.act(s,action);save();render();if(s.finished){window.scrollTo(0,0);$('ending-title').tabIndex=-1;focus('ending-title');return;}if(s.f.gusts>oldGusts){$('scene-frame').classList.remove('gust');void $('scene-frame').offsetWidth;$('scene-frame').classList.add('gust');}if(s.scene!==oldScene){focus('scene-name');if(matchMedia('(max-width:780px)').matches)$('scene-name').scrollIntoView({block:'start'});}else{focus('dialogue-text');if(matchMedia('(max-width:780px)').matches)$('speaker').scrollIntoView({block:'start'});} $('live').textContent=`${s.line.who}: ${s.line.text}`;}
+function render(){if(s.finished){renderEnding();return;}showMode('play');$('scene-tag').textContent=E.scenes[s.scene].tag;$('scene-name').textContent=E.scenes[s.scene].name;$('art').innerHTML=A.render(s.scene,s);$('goal').textContent=E.goal(s);$('speaker').textContent=s.line.who;$('dialogue-text').textContent=s.line.text;$('choices').replaceChildren(...s.line.choices.map(c=>{const b=button(c.label,()=>run({type:'choose',id:c.id}));b.dataset.choice=c.id;return b;}));
+$('hotspots').replaceChildren(...E.hotspots(s).map(h=>{const b=button('',()=>run(selected?{type:'use',item:selected,target:h.id}:{type:'inspect',target:h.id}),'hotspot');b.dataset.target=h.id;b.style.left=h.x+'%';b.style.top=h.y+'%';b.style.width=h.w+'%';b.style.height=h.h+'%';b.setAttribute('aria-label',h.name);const dot=document.createElement('span');dot.className='dot';const label=document.createElement('span');label.className='label';label.textContent=h.name;b.append(dot,label);return b;}));
+const short={camp:'Tábor',pond:'Tůň',hat:'Klobouk',grove:'Hájek',mill:'Mlýn'};$('scene-list').replaceChildren(...E.hotspots(s).map(h=>{const b=button(h.name,()=>run(selected?{type:'use',item:selected,target:h.id}:{type:'inspect',target:h.id}));b.dataset.spot=h.id;return b;}));$('map').replaceChildren(...E.routes(s).map(id=>{const b=button(`${String(Object.keys(E.scenes).indexOf(id)+1).padStart(2,'0')}  ${short[id]}`,()=>run({type:'travel',scene:id}));b.dataset.scene=id;b.disabled=s.f.windActive;b.classList.toggle('active',s.scene===id);if(s.scene===id)b.setAttribute('aria-current','location');return b;}));
+$('companion-picture').innerHTML=A.portrait(s);$('companion-status').textContent=s.ending?'Zkouška je hotová. Hůlku má zase u sebe.':s.f.windActive?'Řekla dost. Čeká, až skloníš hůlku.':!s.f.human?'Zatím kachna. Pořád kamarádka.':s.f.pushed&&!s.f.apologized?'Čeká na rozhovor, ne na další poryv.':s.f.trial?'Věří, že společně umíte přestat.':s.f.promise==='stop'?'Pamatuje si slib.':s.f.treated?'Nohy už nebolí. Strach si dává na čas.':'Je zase sebou. Jen nohy pořád bolí.';
+$('note-count').textContent=s.journal.length;renderBag();renderSelection();$('save-status').textContent=saveOK?'Cesta je uložená.':'Ukládání není dostupné.';}
+function renderBag(){document.querySelector('.inventory').classList.toggle('empty',!s.bag.length);if(!s.bag.length){$('bag').replaceChildren(para('Zatím jen drobky a dobré úmysly.','empty-bag'));return;}$('bag').replaceChildren(...s.bag.map(id=>{const b=button('',()=>selectItem(id),'item');b.dataset.item=id;b.disabled=s.f.windActive;b.setAttribute('aria-label',E.items[id].name);b.innerHTML=A.item(id);const label=document.createElement('span');label.textContent=E.items[id].short;b.append(label);return b;}));}
+function selectItem(id){if(s.f.windActive)return;if(selected&&selected!==id){run({type:'combine',a:selected,b:id});return;}selected=selected===id?null:id;renderSelection();if(selected){$('live').textContent=E.items[id].desc+' Vyber místo ve scéně nebo druhou věc v brašně.';}}
+function renderSelection(){$('hotspots').classList.toggle('labels',labels||!!selected);$('hotspots').classList.toggle('using',!!selected);$('clear-selection').hidden=!selected;$('use-selection').hidden=!selected;$('scene-list').classList.toggle('using',!!selected);$('selected-banner').hidden=!selected;$('selected-banner').textContent=selected?`${E.items[selected].name} → vyber místo ve scéně`:'';$('item-description').textContent=selected?E.items[selected].desc:s.f.windActive?'Pokus právě běží. Nejdřív odpověz Hrůzii v rozhovoru.':'Žádná věc není vybraná. Kliknutím na postavu nebo označené místo s nimi jednáš přímo.';document.querySelectorAll('[data-item]').forEach(b=>{b.classList.toggle('selected',b.dataset.item===selected);b.setAttribute('aria-pressed',String(b.dataset.item===selected));});document.querySelectorAll('[data-target],[data-spot]').forEach(b=>{const h=E.hotspots(s).find(x=>x.id===(b.dataset.target||b.dataset.spot));b.setAttribute('aria-label',selected?`Použít ${E.items[selected].name} na: ${h.name}`:h.name);});}
+function renderEnding(){
+  showMode('ending');
+  $('note-count').textContent=s.journal.length;
+  $('ending-title').textContent=s.ending==='flight'?'O kousek výš. Spolu.':'Oběma nohama. Spolu.';
+  $('ending-art').innerHTML=A.ending(s);
+  const ps=[
+    s.ending==='flight'?'Hrůzie tě vezme za ruku. „Jen nad trávu.“ Cvičky se na okamžik odlepí od země. Při přistání se obě rozesmějete. „Tak obě levé taky umějí dolů,“ řekne.':
+      'Posadíte se pod mlýnem. Hrůzie si protáhne nohy. „Dneska už létat nechci.“ Zkušební větrník stojí a vrchní odnáší koště. Pro dnešek je hotovo.',
+    s.f.pushed?'Směrovka stojí trochu nakřivo po prvním poryvu. Hrůzie se na ni podívá, pak ti znovu stiskne ruku. Tentokrát jsi přestala, když požádala.':
+      'Hrůzie zkusí docela potichu: „Dost.“ Tentokrát už nic neběží. Jen zkouší, jak dobře je ji slyšet.',
+    s.f.balmDeal==='story'?'Vrátíš Hrůzii hůlku. Cestou k táboru ukáže na kořen: „Tenhle už znáš?“ Serpentýna se začne smát ještě dřív, než dorazíte k ohni.':
+      'Vrátíš Hrůzii hůlku. V táboře Serpentýna zapne lexikon tvým knoflíkem. Kniha zůstane zavřená. „Dneska se opravilo víc než jedny nohy,“ řekne a podá vám čaj.',
+    s.f.thread?'Nad mlýnem se zaleskne nit. Vrchní ji stáhne do rukávu. Pořád nevíš, kolik větru šlo z tvé hůlky a kolik od ní. Hrůzie už tě táhne k ohni.':
+      'Vrchní si cestou uhladí rukáv. Nevíš, jestli pomohla i s povedeným vánkem. Hrůzie ještě jednou zvedne a skloní prázdnou ruku. „Takhle,“ řekne.'
+  ];
+  $('ending-prose').replaceChildren(...ps.map(p=>para(p)),para('Konec jedné zkoušky. Maturita má ještě čas.','small'));
+}
+function modal(title,tag,body,actions=[]){if($('overlay').hidden)returnFocus=document.activeElement;$('modal-title').textContent=title;$('modal-tag').textContent=tag;$('modal-body').replaceChildren(...(Array.isArray(body)?body:[para(body)]));$('modal-actions').replaceChildren(...actions.map(a=>button(a.label,a.fn,a.primary?'primary':'secondary')));$('overlay').hidden=false;document.querySelector('.page').inert=true;document.body.style.overflow='hidden';focus('modal-close');}
+function closeModal(){$('overlay').hidden=true;document.querySelector('.page').inert=false;document.body.style.overflow='';if(returnFocus?.isConnected)returnFocus.focus({preventScroll:true});}
+function notebook(){const rows=s.journal.map(id=>{const e=document.createElement('article');e.className='journal-entry';const h=document.createElement('h3');h.textContent=E.journals[id][0];e.append(h,para(E.journals[id][1]));return e;});modal('Co už víme','Noemin zápisník',rows.length?rows:[para('Zatím prázdná stránka. Důležité poznatky se sem zapisují samy.')],[{label:'Zpátky do příběhu',fn:closeModal}]);}
+function hint(exact=false){modal(exact?'Konkrétní další krok':'Jenom malé postrčení','Když se cesta zamotá',[para(E.hint(s,exact),'hint-text')],[...(!exact?[{label:'Potřebuju konkrétnější radu',fn:()=>hint(true)}]:[]),{label:'Zkusím to',fn:closeModal,primary:true}]);}
+function help(){const box=document.createElement('div');box.className='howto';for(const t of ['Prohlížej a mluv: klikni na postavu, věc nebo její popisek v obrázku. Na telefonu používej velká tlačítka míst přímo pod obrázkem.','Použij předmět: vyber ho v brašně a pak klikni na místo v obrázku.','Spoj dvě věci: vyber první v brašně a pak klikni na druhou. Špatný nápad nic nespotřebuje.','Cestuj tlačítky pod obrázkem. Další cesty se objeví během příběhu. Rozběhnutý větrný pokus nejprve dokonči. V zápisníku najdeš důležité poznatky. „Trochu postrčit?“ poradí podle tvého postupu.','Klávesnice: Tab přechází mezi tlačítky, Enter nebo mezerník je stiskne. Escape zavře okno nebo odloží vybranou věc.','Cesta se ukládá v tomto prohlížeči, pokud to jeho nastavení dovolí. Není tu časový limit ani zvuk.'])box.append(para(t));modal('Jak se toulat','Bez spěchu', [box],[{label:'Jdeme na to',fn:closeModal,primary:true}]);}
+function newGame(){closeModal();s=E.fresh();selected=null;save();render();window.scrollTo(0,0);focus('scene-name');}
+function confirmNew(){modal('Začít nové dobrodružství?','Od prvního kvaknutí','Dosavadní uložená cesta se nahradí. Hrůzie bude znovu kachna a brašna znovu prázdná.',[{label:'Ještě ne',fn:closeModal},{label:'Začít znovu',fn:newGame,primary:true}]);}
+function menu(){modal('Chvíli si sednout','Táborové menu',saveOK?'Cesta je uložená v tomto prohlížeči.':'Prohlížeč teď nedovoluje ukládání. Hrát můžeš dál, ale po zavření okna by se postup ztratil.',[{label:'Pokračovat',fn:closeModal,primary:true},{label:'Titulní obrazovka',fn:()=>{closeModal();landing();}},{label:'Nové dobrodružství',fn:confirmNew}]);}
+$('start').onclick=()=>{if(!saved)save();render();window.scrollTo(0,0);focus(s.finished?'ending-title':'scene-name');};$('new-start').onclick=confirmNew;$('restart').onclick=confirmNew;$('revisit').onclick=()=>run({type:'revisit'});$('brand').onclick=e=>{e.preventDefault();if(mode!=='landing')menu();};$('journal-button').onclick=notebook;$('help-button').onclick=help;$('menu-button').onclick=menu;$('hint-button').onclick=()=>hint();$('clear-selection').onclick=()=>{selected=null;renderSelection();};$('back-scene').onclick=()=>{$('scene-name').scrollIntoView({block:'start'});focus('scene-name');};$('use-selection').onclick=()=>{$('scene-list').scrollIntoView({block:'center'});};$('reveal').onclick=()=>{labels=!labels;$('reveal').textContent=`Místa: popisky ${labels?'zapnuté':'vypnuté'}`;renderSelection();};$('modal-close').onclick=closeModal;$('overlay').onclick=e=>{if(e.target===$('overlay'))closeModal();};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('overlay').hidden)closeModal();else if(selected){selected=null;renderSelection();}return;}if(e.key==='Tab'&&!$('overlay').hidden){const bs=[...$('modal').querySelectorAll('button,a,[tabindex="0"]')].filter(x=>!x.disabled&&!x.hidden);const first=bs[0],last=bs[bs.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+window.WitchView=Object.freeze({snapshot:()=>JSON.parse(JSON.stringify(s)),mode:()=>mode});landing();
+})();
+</script></body></html>
