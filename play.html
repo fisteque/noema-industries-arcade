@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0d1522">
+<meta name="description" content="Noema Industries Arcade — herní režim s přizpůsobením oknu a celou obrazovkou.">
+<title>Hrát · Noema Industries Arcade</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1522;--text:#f0f5f4;--muted:#bdc9d3;--line:#304154;--gold:#efce78;--mint:#91d4bf}
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;overflow:hidden}
+body{background:var(--bg);color:var(--text);font:14px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+#app{display:flex;flex-direction:column;height:100vh;height:100dvh;min-height:0;background:radial-gradient(ellipse at 15% 0%,#26384b,transparent 55%),var(--bg)}
+.toolbar{display:flex;flex:none;align-items:center;gap:14px;padding:9px 16px;border-bottom:1px solid var(--line);background:#121f2eeb;min-height:58px}
+.back{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;color:var(--gold);text-decoration:none;font-weight:800}
+.back:hover{text-decoration:underline}
+.game-info{display:flex;flex:1;flex-direction:column;justify-content:center;min-width:0}
+.game-info strong{font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.game-info small{color:var(--muted);font-size:.76rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.controls button,.controls a{display:inline-flex;align-items:center;justify-content:center;min-height:35px;padding:6px 12px;border:1px solid var(--line);border-radius:9px;background:#18293a;color:var(--text);white-space:nowrap;text-decoration:none;cursor:pointer}
+.controls button:hover,.controls a:hover{border-color:var(--mint);background:#25384a}
+.controls button[aria-pressed="true"]{background:#e1f0e7;color:#11232b;border-color:#e1f0e7;font-weight:800}
+#stage{display:flex;flex:1;min-height:0;min-width:0;align-items:safe center;justify-content:safe center;overflow:auto;position:relative;overscroll-behavior:contain;padding:10px;background:radial-gradient(ellipse at center,#263549 0%,#111b2c 78%)}
+.canvas{position:relative;flex:none;margin:auto;width:100%;height:100%;background:#111c2b;box-shadow:0 5px 32px #0007;overflow:visible}
+#game-frame{display:block;position:absolute;inset:0;width:100%;height:100%;border:0;background:#0c1526;transform-origin:top left}
+.notice{position:absolute;z-index:2;top:50%;left:50%;transform:translate(-50%,-50%);max-width:min(560px,calc(100% - 28px));padding:18px 24px;border:1px solid var(--line);border-radius:14px;background:#18283b;color:var(--text);box-shadow:0 10px 30px #0008;text-align:center}
+.notice[hidden]{display:none}
+.notice a{color:var(--gold)}
+.status-bar{display:flex;justify-content:space-between;gap:12px;flex:none;padding:5px 14px;border-top:1px solid var(--line);color:var(--muted);font-size:.76rem;min-height:26px}
+.status-bar span:last-child{text-align:right}
+#app:fullscreen{width:100%;height:100%;height:100dvh}
+@media(max-width:800px){.toolbar{gap:10px;padding:8px 10px;flex-wrap:wrap}.game-info{flex-basis:calc(100% - 90px)}.controls{width:100%;justify-content:center}.controls button,.controls a{flex:1;padding:6px 8px}.status-bar span:last-child{display:none}}
+@media(max-width:460px){.controls{gap:5px}.controls button,.controls a{font-size:.78rem;padding:6px 5px}#stage{padding:6px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="app">
+<header class="toolbar">
+<a class="back" href="./" aria-label="Zpět do herny">← 🦆 Herna</a>
+<div class="game-info"><strong id="game-title">Načítám hru…</strong><small id="game-credit">Noema Industries Arcade</small></div>
+<nav class="controls" aria-label="Nastavení zobrazení">
+<button type="button" id="fit-button" aria-pressed="true" title="Pokusit se vměstnat celou hru do okna">↙ Přizpůsobit</button>
+<button type="button" id="actual-button" aria-pressed="false" title="Původní velikost 100 %, případně s posouváním">100 %</button>
+<button type="button" id="fullscreen-button" aria-pressed="false" title="Rozšířit na celou obrazovku">⛶ Celá obrazovka</button>
+<a id="original-link" href="./" target="_blank" rel="noopener noreferrer" title="Otevřít původní hru bez herního režimu">Původní ↗</a>
+</nav>
+</header>
+<main id="stage" aria-label="Herní obrazovka" aria-busy="true">
+<div id="canvas" class="canvas"><iframe id="game-frame" title="Hra Noema Industries" allowfullscreen></iframe></div>
+<div id="notice" class="notice" role="status">Načítám hru…</div>
+</main>
+<footer class="status-bar"><span id="scale-status" aria-live="polite">Automatické přizpůsobení</span><span>Při velmi malém prostoru může zůstat posouvání kvůli čitelnosti · Esc ukončí celou obrazovku</span></footer>
+</div>
+<script>
+(() => {
+  "use strict";
+  const $=id=>document.getElementById(id);
+  const app=$("app"),stage=$("stage"),canvas=$("canvas"),frame=$("game-frame"),notice=$("notice");
+  const fitButton=$("fit-button"),actualButton=$("actual-button"),fullscreenButton=$("fullscreen-button");
+  const status=$("scale-status"),original=$("original-link");
+  let mode="fit",loaded=false,queued=false,innerObserver=null;
+  let lastWidth=0,lastStageHeight=0;
+
+  function fail(message) {
+    notice.hidden=false;
+    notice.textContent=message+" ";
+    const link=document.createElement("a");
+    link.href="./";link.textContent="Zpět do herny";
+    notice.append(link);
+    frame.hidden=true;
+    stage.setAttribute("aria-busy","false");
+    status.textContent="Hru se nepodařilo otevřít.";
+  }
+  function queueLayout(){
+    if(queued||!loaded)return;
+    queued=true;
+    requestAnimationFrame(()=>{queued=false;layout();});
+  }
+  function stageSize(){
+    const padding=parseFloat(getComputedStyle(stage).paddingLeft)||0;
+    const vertical=parseFloat(getComputedStyle(stage).paddingTop)||0;
+    return {w:Math.max(1,Math.floor(stage.clientWidth-2*padding-2)),
+            h:Math.max(1,Math.floor(stage.clientHeight-2*vertical-2))};
+  }
+  function setCanvas(w,h){
+    canvas.style.width=Math.ceil(w)+"px";
+    canvas.style.height=Math.ceil(h)+"px";
+  }
+  function layout(){
+    if(!loaded)return;
+    const avail=stageSize();
+    if(mode==="actual"){
+      frame.style.transform="none";
+      frame.style.width=avail.w+"px";
+      frame.style.height=avail.h+"px";
+      setCanvas(avail.w,avail.h);
+      lastWidth=0;
+      status.textContent="Původní velikost 100 % · posouvání uvnitř hry";
+      return;
+    }
+    const width=Math.max(340,avail.w);
+    if(lastWidth!==width||Math.abs(lastStageHeight-avail.h)>2){
+      frame.style.transform="none";
+      frame.style.width=width+"px";
+      frame.style.height=Math.max(580,avail.h)+"px";
+      lastWidth=width;lastStageHeight=avail.h;
+    }
+    let doc;
+    try{doc=frame.contentDocument;if(!doc||!doc.documentElement)throw Error("Bez přístupu k dokumentu");}
+    catch(_e){
+      frame.style.transform="none";
+      setCanvas(avail.w,avail.h);
+      frame.style.width=avail.w+"px";frame.style.height=avail.h+"px";
+      status.textContent="Automatické měřítko není dostupné · hra zůstává na 100 %";
+      return;
+    }
+    // Same-origin iframe: measure the game's full content without editing published v1.
+    let height=Math.max(580,avail.h,Math.ceil(parseFloat(frame.style.height)||0));
+    for(let i=0;i<5;i++){
+      const root=doc.documentElement,body=doc.body;
+      const required=Math.ceil(Math.max(root.scrollHeight,body?.scrollHeight||0,root.offsetHeight,body?.offsetHeight||0,avail.h));
+      if(required<=height+2)break;
+      const grown=Math.min(8000,required);
+      if(grown<=height+2)break;
+      height=grown;frame.style.height=height+"px";
+    }
+    const wanted=Math.min(1,avail.w/width,avail.h/height);
+    // Readability takes priority when a very long page cannot fit at a useful size.
+    const minimum=avail.w<=600?0.68:0.48;
+    const scale=Math.max(minimum,wanted);
+    frame.style.width=width+"px";
+    frame.style.height=height+"px";
+    frame.style.transform="scale("+scale+")";
+    setCanvas(width*scale,height*scale);
+    const percent=Math.round(scale*100);
+    status.textContent="Přizpůsobeno · "+percent+" %"+(scale>wanted+.01?" · lze posouvat":" · bez posouvání celé stránky");
+  }
+  function selectMode(next){
+    mode=next;
+    lastWidth=0;lastStageHeight=0;
+    fitButton.setAttribute("aria-pressed",String(next==="fit"));
+    actualButton.setAttribute("aria-pressed",String(next==="actual"));
+    queueLayout();
+    frame.focus();
+  }
+  fitButton.addEventListener("click",()=>selectMode("fit"));
+  actualButton.addEventListener("click",()=>selectMode("actual"));
+  fullscreenButton.addEventListener("click",()=>{
+    const action=document.fullscreenElement?document.exitFullscreen():app.requestFullscreen();
+    Promise.resolve(action).catch(()=>{status.textContent="Celou obrazovku prohlížeč nepovolil.";});
+  });
+  document.addEventListener("fullscreenchange",()=>{
+    const active=!!document.fullscreenElement;
+    fullscreenButton.setAttribute("aria-pressed",String(active));
+    fullscreenButton.textContent=active?"⤢ Ukončit celou obrazovku":"⛶ Celá obrazovka";
+    lastWidth=0;queueLayout();
+  });
+  window.addEventListener("resize",()=>{lastWidth=0;queueLayout();});
+  if("ResizeObserver" in window){
+    new ResizeObserver(()=>{lastWidth=0;queueLayout();}).observe(stage);
+  }
+  frame.addEventListener("load",()=>{
+    loaded=true;lastWidth=0;
+    if(innerObserver)innerObserver.disconnect();
+    try{
+      const doc=frame.contentDocument;
+      if("ResizeObserver" in window && doc?.documentElement){
+        innerObserver=new ResizeObserver(queueLayout);
+        innerObserver.observe(doc.documentElement);
+        if(doc.body)innerObserver.observe(doc.body);
+      }
+      if(doc?.fonts?.ready)doc.fonts.ready.then(queueLayout).catch(()=>{});
+    }catch(_e){/* 100% fallback in layout */ }
+    notice.hidden=true;
+    stage.setAttribute("aria-busy","false");
+    queueLayout();
+  });
+
+  (async()=>{
+    try{
+      const params=new URLSearchParams(location.search);
+      const id=params.get("game"),requested=params.get("version");
+      if(!id||!/^[a-z0-9-]+$/.test(id))throw Error("Není vybraná platná hra.");
+      const response=await fetch("./catalog.json",{cache:"no-store"});
+      if(!response.ok)throw Error("Nepodařilo se načíst katalog.");
+      const catalog=await response.json();
+      const game=Array.isArray(catalog.games)&&catalog.games.find(entry=>entry.id===id);
+      if(!game||!Array.isArray(game.versions)||!game.versions.length)throw Error("Hra není v katalogu.");
+      const version=requested?game.versions.find(entry=>entry.version===requested):game.versions[game.versions.length-1];
+      if(!version)throw Error("Požadovaná verze hry neexistuje.");
+      // Only explicit, local, versioned game paths can be embedded.
+      const path=version.play;
+      if(typeof path!=="string"||!/^games\/[a-z0-9-]+\/hra-[0-9]{2}\/v[0-9]+\/index\.html$/.test(path))throw Error("Cesta ke hře není platná.");
+      const url=new URL("./"+path,location.href);
+      const root=new URL("./",location.href);
+      if(url.origin!==location.origin||!url.pathname.startsWith(root.pathname+"games/"))throw Error("Hra musí patřit do herny.");
+      $("game-title").textContent=game.title;
+      $("game-credit").textContent=game.author+" · "+version.version;
+      document.title=game.title+" · Noema Industries Arcade";
+      original.href=url.href;
+      frame.title=game.title+" — "+version.version;
+      frame.src=url.href;
+    }catch(error){fail(error.message||"Nepodařilo se hru načíst.");}
+  })();
+})();
+</script>
+</body>
+</html>

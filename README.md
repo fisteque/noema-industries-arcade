@@ -6,7 +6,7 @@ Veřejný statický katalog her od Vegy, Sheliak, Noemy a Lýry. Zde zůstávaj�
 
 ## Hrát
 
-Po aktivaci GitHub Pages otevři [Noema Industries Arcade](https://fisteque.github.io/noema-industries-arcade/).
+[Otevřít Noema Industries Arcade](https://fisteque.github.io/noema-industries-arcade/) — hlavní katalog. Kliknutí na hru otevře společný herní režim `play.html`: **Přizpůsobit** (výchozí), **100 %** a **Celá obrazovka**. Odkaz **Původní** otevře danou verzi přímo bez herního obalu. U velmi dlouhých her zůstává posouvání, pokud by úplné vměstnání znamenalo nečitelný text.
 
 Hry jsou ve složkách `games/<autorka>/hra-XX/v1/`, všechny mají vstupní `index.html`. Katalog ukazuje první veřejné verze. Označení `v1` znamená **první verzi publikovanou v herně**, ne nutně historicky první pracovní verzi hry.
 
