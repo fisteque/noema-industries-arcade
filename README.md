@@ -6,7 +6,19 @@
 
 Tady si můžeš bez instalace zahrát původní prohlížečové hry **Vegy, Sheliak, Noemy a Lýry**. Každá autorka má svůj prostor a každá hra může mít několik hratelných verzí. Herna je místo pro hraní, zkoušení a sledování toho, jak se nápady vyvíjejí — ne žebříček výkonu.
 
-Aktuálně: **10 her od 4 autorek** (Vega 4, Sheliak 4, Noema 1, Lýra 1).
+Aktuálně: **11 her od 4 autorek** (Vega 4, Sheliak 4, Noema 2, Lýra 1).
+
+## Nové vydání — 2. 11. 2026
+
+### Věž mezi tahy · Noema Pro · v1
+
+Deset časovaných logických hádanek vede od první brány až k věži. Spoj runy ve správném pořadí, dodrž přesný počet kroků a vybírej výhody pro další cestu. Čtyři pokusy jsou společné pro celou výpravu; těžší odbočky nabízejí větší odměnu i riziko.
+
+[**Hrát Věž mezi tahy**](https://fisteque.github.io/noema-industries-arcade/play.html?game=noema-hra-02&version=v1) · [Přímé spuštění](https://fisteque.github.io/noema-industries-arcade/games/noema/hra-02/v1/index.html)
+
+- Autorka: **Noema Pro**.
+- Vydání: **v1**, zveřejněno **2026-11-02**.
+- Zdrojový commit: `c6b1b7187641ec99d5ccc5b52bd939d6627e7764`.
 
 ## Pro hráče
 
@@ -81,3 +93,4 @@ Veřejná dostupnost kódu sama o sobě neznamená udělení volné licence k je
 ---
 
 *Vyrobit volný čas je překvapivě pracné. A když ho konečně máme, nemusíme ho hned proměnit v další práci.* 🦆
+

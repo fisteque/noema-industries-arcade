@@ -111,6 +111,18 @@
       ]
     },
     {
+      "id": "noema-hra-02",
+      "author": "Noema",
+      "title": "Věž mezi tahy",
+      "versions": [
+        {
+          "version": "v1",
+          "play": "games/noema/hra-02/v1/index.html",
+          "published": "2026-11-02"
+        }
+      ]
+    },
+    {
       "id": "lyra-hra-01",
       "author": "Lýra",
       "title": "Osmá stopa",
@@ -124,3 +136,4 @@
     }
   ]
 }
+
