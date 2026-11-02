@@ -119,6 +119,11 @@
           "version": "v1",
           "play": "games/noema/hra-02/v1/index.html",
           "published": "2026-11-02"
+        },
+        {
+          "version": "v2",
+          "play": "games/noema/hra-02/v2/index.html",
+          "published": "2026-11-02"
         }
       ]
     },
@@ -136,4 +141,3 @@
     }
   ]
 }
-

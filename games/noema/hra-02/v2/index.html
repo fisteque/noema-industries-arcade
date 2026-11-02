@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#102329">
+<meta name="description" content="Věž mezi tahy. Deset pečetí, čtyři pokusy a tři nebezpečná rozcestí. Původní logická výprava od Noemy Pro.">
+<title>Věž mezi tahy · Noema Pro</title>
+<style>:root{color-scheme:dark;--bg:#102329;--panel:#172e34;--panel-2:#1b363d;--line:#345159;--ink:#eff1df;--muted:#a4bab7;--gold:#e8c483;--mint:#a9dcc6;--danger:#eea28b;--shadow:0 20px 70px #07151955;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:16px}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#214047 0%,transparent 48%),var(--bg);color:var(--ink);line-height:1.55;min-width:300px}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}button:disabled{cursor:default;opacity:.4}button,a{touch-action:manipulation}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--gold);outline-offset:4px}button{border:0}a{color:inherit}.page-shell{width:min(1220px,100%);margin:auto;padding:0 40px}.site-header{min-height:100px;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid #8ca59c29}.brand{display:flex;gap:13px;align-items:center;text-decoration:none;font-size:11px;font-weight:750;letter-spacing:1.9px;line-height:1.7}.brand svg{width:29px;height:37px;fill:none;stroke:var(--gold);stroke-width:1.5}.brand-sub{display:block;font-weight:400;letter-spacing:2.1px;color:var(--muted);font-size:9px}.site-header nav{display:flex;align-items:center;gap:20px}.quiet-button{background:none;color:var(--muted);font-size:12px;padding:10px 0}.quiet-button:hover{color:var(--ink)}.quiet-button span{border:1px solid var(--line);border-radius:50%;display:inline-grid;place-items:center;width:20px;height:20px;margin-right:5px}.eyebrow{font-size:10px;letter-spacing:2.6px;font-weight:700;color:var(--gold);margin:0 0 13px;text-transform:uppercase}h1,h2,h3,p{margin-top:0}h1,h2,.serif{font-family:Georgia,"Times New Roman",serif;font-weight:400}h1{font-size:clamp(36px,5vw,61px);line-height:1.04;letter-spacing:-2px;margin-bottom:17px}h1 em{color:var(--gold);font-weight:400}h2{font-size:34px;line-height:1.15;margin-bottom:16px;letter-spacing:-.7px}h3{font-size:17px;font-weight:600;line-height:1.4}.intro-head{padding:42px 0 28px;display:flex;justify-content:space-between;align-items:end;gap:25px}.intro-head p:last-child{color:var(--muted);max-width:530px;margin-bottom:0;font-size:14px}.expedition-meta{text-align:right;min-width:145px}.expedition-meta span{display:block;color:var(--muted);font-size:10px;letter-spacing:1.7px}.expedition-meta strong{font-family:Georgia,serif;font-size:22px;font-weight:400;color:var(--gold)}.overview{display:grid;grid-template-columns:minmax(0,1.13fr) minmax(300px,.87fr);gap:27px;align-items:stretch}.map-panel{position:relative;min-width:0;overflow:hidden;border:1px solid #4761696b;border-radius:18px;background:radial-gradient(ellipse at 40% 40%,#25484a,#172f37 80%);box-shadow:var(--shadow)}.map-art{display:block;width:100%;height:100%;min-height:480px;max-height:600px}.map-caption{position:absolute;left:24px;top:22px;z-index:1;font-size:9px;letter-spacing:2.3px;color:#91b5ae;pointer-events:none}.map-compass{font-family:Georgia,serif;fill:#85aaa6;opacity:.7}.map-node{fill:#1c383d;stroke:#7eaaa5;stroke-width:1.3}.map-node.complete{fill:#83bda4;stroke:#bce7cd}.map-node.active{fill:#edcc8a;stroke:#edcc8a}.map-node.locked{stroke:#4a7274;fill:#25464a}.node-number{font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;fill:#9abbb5;font-weight:650;text-anchor:middle;dominant-baseline:central}.node-number.active,.node-number.complete{fill:#183531}.map-label{font-family:ui-sans-serif,system-ui,sans-serif;font-size:9px;letter-spacing:1px;fill:#789e9c}.map-label.current{fill:#f0d399}.map-halo{fill:none;stroke:#e4c181;stroke-width:1;opacity:.6;animation:mapPulse 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center}.route-main{fill:none;stroke:#799891;stroke-width:2;stroke-dasharray:3 7;opacity:.7}.route-branch{fill:none;stroke:#b8826f;stroke-width:1.3;stroke-dasharray:3 5;opacity:.75}.side-stack{display:flex;flex-direction:column;gap:15px}.status-strip{display:flex;gap:18px;justify-content:space-between;border:1px solid var(--line);border-radius:12px;padding:14px 18px;background:#142b31}.status-label{font-size:9px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px}.heart-row{display:flex;gap:5px;color:var(--danger);height:20px;align-items:center}.heart-row svg{width:18px;height:18px}.heart-empty{opacity:.2}.stage-count{font-size:19px;line-height:1.15;color:var(--gold);font-variant-numeric:tabular-nums}.stage-count small{color:var(--muted);font-size:12px}.chapter-card{flex:1;border:1px solid var(--line);border-radius:14px;background:linear-gradient(130deg,#203b40,#193238);padding:27px}.chapter-card .chapter-no{color:var(--gold);font-size:10px;letter-spacing:2px;margin-bottom:10px}.chapter-card h2{margin-bottom:12px}.chapter-card .flavor{color:var(--muted);font-size:13px;margin-bottom:22px}.route-choice{display:block;width:100%;padding:14px 16px;text-align:left;border:1px solid #45645f;border-radius:9px;background:#183037;color:var(--ink);position:relative;margin-top:10px;transition:background .2s,border-color .2s,transform .2s}.route-choice.selected{border-color:var(--gold);background:#43504445;box-shadow:inset 3px 0 var(--gold)}.route-choice:hover{background:#29494d}.route-choice strong{font-size:13px;display:block;padding-right:28px;font-weight:600}.route-choice small{display:block;font-size:11px;color:var(--muted);margin-top:4px}.route-choice.risk strong{color:#efb39b}.route-choice.risk.selected{border-color:#d5957e;box-shadow:inset 3px 0 #d5957e}.route-mark{position:absolute;right:15px;top:16px;width:15px;height:15px;border:1px solid #6b8581;border-radius:50%}.selected .route-mark{border:4px solid var(--gold)}.risk.selected .route-mark{border-color:#d5957e}.risk-warning{color:#efb39b!important;font-size:11px!important;margin:10px 0 0!important}.level-details{display:flex;gap:18px;font-size:11px;color:var(--muted);margin:19px 0 21px}.level-details span{display:flex;align-items:center;gap:6px}.level-details svg{width:15px;height:15px;color:var(--gold)}.primary,.secondary,.danger-button{padding:13px 19px;min-height:45px;border-radius:7px;font-size:12px;font-weight:700;letter-spacing:.2px;display:inline-flex;align-items:center;justify-content:center;gap:10px;transition:background .2s,transform .2s;text-decoration:none}.primary{background:var(--gold);color:#233a39;box-shadow:0 3px 0 #081c2133}.primary:hover{background:#f3d69d;transform:translateY(-1px)}.secondary{background:#263e44;color:var(--ink);border:1px solid #4a6265}.secondary:hover{background:#344e54}.danger-button{background:#4c3634;color:#f3bdab;border:1px solid #8c5d51}.full{width:100%}.primary svg,.secondary svg{width:17px;height:17px}.safe-note{font-size:10px;color:var(--muted);display:flex;justify-content:center;gap:5px;margin:12px 0 0}.safe-note svg{width:13px;height:13px}.inventory-strip{display:flex;justify-content:space-around;gap:8px;padding:13px 10px;background:#14292f;border:1px solid var(--line);border-radius:10px}.inventory-item{display:flex;gap:6px;align-items:center;font-size:11px;color:var(--muted)}.inventory-item svg{width:16px;height:16px;color:var(--gold)}.inventory-item b{color:var(--ink);font-weight:500}.bottom-tools{display:flex;justify-content:space-between;margin:20px 0 0;align-items:center}.bottom-tools p{color:var(--muted);font-size:10px;margin:0}.text-button{background:none;color:var(--muted);font-size:11px;padding:8px;text-decoration:underline;text-underline-offset:3px}.text-button:hover{color:var(--gold)}.site-footer{display:flex;justify-content:space-between;gap:20px;font-size:9px;color:#7f9a9a;border-top:1px solid #8ca59c29;margin-top:36px;padding:20px 0 25px}.footer-dot{padding:0 6px}.icon{width:20px;height:20px;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle}.screen-heading{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:29px 0 23px}.screen-heading h1{font-size:36px;margin:0;letter-spacing:-1px}.screen-heading .eyebrow{margin-bottom:9px}.run-info{display:flex;gap:22px;align-items:center}.pause-button{border:1px solid #456066;border-radius:8px;padding:9px 13px;display:flex;gap:7px;align-items:center;background:#20383e;color:var(--muted);font-size:12px}.pause-button svg{width:16px;height:16px}.play-layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:25px;align-items:start}.puzzle-panel{padding:23px 28px 20px;border:1px solid #49626880;background:#193238;border-radius:16px;box-shadow:var(--shadow);min-width:0}.puzzle-metrics{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:18px}.metric-number{font-family:Georgia,serif;font-size:25px;font-variant-numeric:tabular-nums;line-height:1.1;color:var(--gold)}.metric-number small{color:var(--muted);font-size:16px}.rune-track{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}.rune-bead{display:inline-grid;place-items:center;width:23px;height:23px;border:1px solid #648b88;color:#c1d4c6;border-radius:5px;font-size:11px}.rune-bead.done{background:var(--mint);border-color:var(--mint);color:#173a30}.rune-bead.next{border-color:var(--gold);color:var(--gold)}.rune-metric{text-align:center}.time-metric{text-align:right;min-width:65px}.time-metric.low .metric-number{color:var(--danger)}.clock-bar{height:3px;width:100%;background:#355056;margin:0 0 22px;border-radius:4px;overflow:hidden}.clock-bar span{display:block;width:100%;height:100%;background:var(--mint);transition:width .1s linear}.clock-bar.low span{background:var(--danger)}.board-wrap{position:relative;width:min(100%,484px);margin:0 auto;isolation:isolate;border-radius:12px;background:#10282e;padding:10px;border:1px solid #47666c;box-shadow:inset 0 3px 18px #071a2540}.board{position:relative;display:grid;grid-template-columns:repeat(var(--size),1fr);gap:6px;aspect-ratio:1}.cell{position:relative;display:grid;place-items:center;aspect-ratio:1;min-width:0;border:1px solid #416067;border-radius:7px;background:#25434b;color:#a6c9c4;padding:0;font-size:18px;transition:background .12s,border-color .12s;touch-action:manipulation}.cell::before{content:"";height:4px;width:4px;border-radius:50%;background:#5c807f;position:absolute;top:calc(50% - 2px);left:calc(50% - 2px);opacity:.4}.cell:hover:not(:disabled){background:#34575c;border-color:#8baea3}.cell.blocked{background:#162f35;border-color:#29454c;opacity:1;cursor:default}.cell.blocked svg{width:45%;height:45%;color:#466268}.cell.blocked::before,.cell.start::before,.cell.end::before,.cell.rune::before{display:none}.cell.start{border-color:#b5b888;color:var(--gold);background:#3b4b43}.cell.end{border-color:#889b85;color:#e8d9b8;background:#354a43}.cell.start svg,.cell.end svg{width:45%;height:45%;position:relative;z-index:4;background:inherit}.cell.rune .rune-symbol{position:relative;z-index:4;border:1px solid #9db9a7;border-radius:6px;display:grid;place-items:center;width:45%;height:45%;min-width:23px;min-height:23px;background:#25434b;color:#d4e0c6;font-family:Georgia,serif;font-size:clamp(14px,2.7vw,22px);line-height:1;transform:rotate(45deg)}.rune-symbol span{transform:rotate(-45deg)}.cell.visited{background:#315950;border-color:#6b9b84}.cell.visited::before{opacity:0}.cell.visited .rune-symbol{background:var(--mint);color:#183f34;border-color:var(--mint)}.cell.current{box-shadow:inset 0 0 0 2px var(--gold);border-color:var(--gold)}.cell.current::after{content:"";position:absolute;bottom:5px;width:4px;height:4px;background:var(--gold);border-radius:50%;z-index:5}.path-layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}.path-line{fill:none;stroke:var(--mint);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px #a9dcc633)}.board-legend{display:flex;justify-content:center;gap:17px;margin:16px 0 0;color:var(--muted);font-size:10px}.board-legend span{display:flex;align-items:center;gap:5px}.board-legend svg{width:14px;height:14px;color:var(--gold)}.board-legend .tiny-rune{font-size:9px;border:1px solid #9db9a7;width:13px;height:13px;display:grid;place-items:center;border-radius:3px;line-height:1}.board-feedback{font-size:11px;min-height:34px;color:var(--muted);text-align:center;margin:14px 0 6px;display:grid;place-items:center}.board-feedback.warning{color:#edb49d}.board-feedback.success{color:var(--mint)}.board-actions{display:grid;grid-template-columns:1fr 1fr 1.7fr;gap:8px}.board-actions button{padding:10px;font-size:11px;min-height:42px}.risk-caption{font-size:10px;color:var(--muted);text-align:center;margin:12px 0 0}.side-panel{border:1px solid var(--line);border-radius:12px;padding:21px;background:#172e34;margin-bottom:14px}.side-panel h3{margin-bottom:14px;font-size:12px;letter-spacing:1px}.compact-rules{font-size:12px;color:var(--muted);line-height:1.65;padding-left:18px;margin:0}.compact-rules li+li{margin-top:12px}.compact-rules b{color:#d9e3cf;font-weight:500}.resource-button{display:flex;width:100%;align-items:center;text-align:left;gap:12px;background:#213b40;color:var(--ink);border:1px solid #425e61;border-radius:8px;padding:12px;margin-top:9px}.resource-button svg{color:var(--gold);width:24px;height:24px;flex-shrink:0}.resource-button span{flex:1;font-size:12px}.resource-button small{display:block;font-size:10px;color:var(--muted);margin-top:2px}.resource-button b{font-weight:400;color:var(--gold);font-size:17px}.resource-button:not(:disabled):hover{background:#2a494c}.shield-note{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted);margin:16px 0 0}.shield-note svg{width:17px;height:17px;color:var(--gold)}.puzzle-aside .flavor{font-family:Georgia,serif;color:#a6bdb3;font-style:italic;font-size:16px;line-height:1.55;margin:25px 9px 0}.mini-progress{display:flex;gap:5px;margin-top:20px}.mini-progress i{height:5px;flex:1;background:#375359;border-radius:4px}.mini-progress i.done{background:var(--mint)}.mini-progress i.current{background:var(--gold)}.pause-screen,.result-screen{padding:47px 0 0}.center-card{max-width:640px;margin:auto;text-align:center;border:1px solid var(--line);background:linear-gradient(140deg,#223e42,#162f35);padding:43px 45px;border-radius:18px;box-shadow:var(--shadow)}.center-emblem{display:grid;place-items:center;width:76px;height:76px;border:1px solid #7b8a6a;border-radius:50%;color:var(--gold);margin:0 auto 24px;background:#3e4a3a55}.center-emblem svg{width:34px;height:34px}.center-card h1{font-size:45px;letter-spacing:-1.5px;margin-bottom:19px}.center-card p{font-size:14px;color:var(--muted);line-height:1.8}.center-card .eyebrow{color:var(--gold);font-size:10px;line-height:1.5}.center-card .time-left{font-family:Georgia,serif;color:var(--gold);font-size:38px;line-height:1.2;margin:22px 0}.center-card .dialog-actions{justify-content:center;margin-top:24px}.center-card .heart-row{justify-content:center;margin:21px 0}.loss-badge{display:inline-block;color:#edb09a;background:#583d344d;border:1px solid #8a5c4a88;border-radius:30px;padding:5px 12px;font-size:11px;margin:0 0 20px}.success-badge{color:var(--mint);border-color:#70a38a88;background:#345d484d}.reward-heading{padding:38px 0 28px;text-align:center}.reward-heading h1{font-size:44px}.reward-heading p{font-size:14px;color:var(--muted)}.reward-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto}.perk-card{background:linear-gradient(140deg,#223e42,#172f35);border:1px solid #4b6868;border-radius:15px;padding:30px 25px;display:flex;flex-direction:column;position:relative;min-height:285px;box-shadow:var(--shadow)}.perk-icon{display:grid;place-items:center;width:57px;height:57px;border-radius:50%;border:1px solid #918b67;background:#a99f4420;color:var(--gold);margin-bottom:25px}.perk-icon svg{width:27px;height:27px}.perk-card h2{font-size:26px;margin-bottom:13px;letter-spacing:-.6px}.perk-card p{font-size:12px;color:var(--muted);flex:1}.perk-card button{margin-top:18px}.perk-card.chosen{border-color:var(--mint);opacity:.5}.reward-after{text-align:center;max-width:640px;margin:24px auto 0;font-size:12px;color:var(--muted)}.reward-after .inventory-strip{margin:17px auto;max-width:420px}.ending-layout{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:stretch}.ending-layout .center-card{max-width:none;padding:35px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center}.ending-layout .map-art{min-height:470px}.ending-stats{display:flex;justify-content:center;gap:25px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:17px 0;margin:15px 0 23px;width:100%}.ending-stats strong{display:block;font:27px Georgia,serif;color:var(--gold)}.ending-stats span{font-size:10px;color:var(--muted)}.ending-layout p{font-size:13px}.ending-layout .primary{width:100%}.ending-quote{font-family:Georgia,serif;font-style:italic!important;color:#d6d8bd!important;font-size:18px!important}.modal{border:1px solid #5e7975;border-radius:17px;background:#1a343a;color:var(--ink);width:min(590px,calc(100% - 30px));max-height:calc(100% - 40px);padding:32px;box-shadow:0 20px 120px #0008}.modal::backdrop{background:#091b24c9;backdrop-filter:blur(5px)}.modal p,.modal li{color:var(--muted);font-size:12px}.modal b{color:#dfe7d6;font-weight:600}.modal h2{font-size:31px;padding-right:15px}.modal-close{position:absolute;top:13px;right:17px;font-size:27px;background:none;color:var(--muted);padding:3px 8px}.rules-list{padding-left:20px}.rules-list li{padding:0 0 13px 6px}.rules-list b{display:block;margin-bottom:3px}.help-note{font-size:12px;padding:15px;background:#29453f;border:1px solid #4b6a59;border-radius:8px;color:#c2cfbc;margin:14px 0}.keyboard-help{line-height:2.2}kbd{font:10px ui-monospace,monospace;background:#29454c;border:1px solid #4a666b;border-radius:3px;padding:2px 5px;margin:0 2px;color:#d2dfcf}.small-modal{max-width:460px}.dialog-actions{display:flex;gap:10px;justify-content:flex-end}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,15px);z-index:100;background:#e1d7b7;color:#233e3c;border:1px solid #f2e4c1;border-radius:9px;padding:12px 19px;box-shadow:0 6px 24px #0004;max-width:min(90vw,560px);font-size:12px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}.toast.visible{opacity:1;transform:translate(-50%,0)}.noscript{padding:30px;color:var(--danger)}.saved-badge{font-size:10px;color:var(--mint);letter-spacing:.5px}.intro-rules{border-top:1px solid #42605c;margin-top:22px;padding-top:16px;font-size:11px;color:#bdcec1;line-height:1.8}.intro-rules b{color:var(--gold);font-weight:600}.fork-tag{display:inline-block;font-size:9px;padding:4px 8px;border:1px solid #af7a6255;border-radius:4px;color:#eeae92;margin-left:9px;vertical-align:middle;letter-spacing:1px}.no-motion *{animation:none!important;transition:none!important}@keyframes mapPulse{50%{opacity:.3;transform:scale(1.12)}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}@media(min-width:1500px){.page-shell{max-width:1300px}.map-art{max-height:640px}}@media(max-width:950px){.page-shell{padding:0 26px}.overview{grid-template-columns:1fr 1fr;gap:18px}.chapter-card{padding:23px}.map-art{min-height:470px}.play-layout{grid-template-columns:minmax(0,1fr) 250px;gap:18px}.puzzle-panel{padding:19px}.side-panel{padding:17px}.perk-card{padding:24px 20px}.site-header{min-height:84px}.intro-head{padding-top:32px}.level-details{gap:12px}.intro-rules{font-size:10px}}@media(max-width:740px){.page-shell{padding:0 20px}.site-header{min-height:77px}.site-header nav{gap:15px}.brand{font-size:9px;letter-spacing:1.4px;gap:9px}.brand-sub{font-size:8px;letter-spacing:1.5px}.brand svg{width:24px}.sound-button{font-size:0}.sound-button::after{content:"♫";font-size:18px}.sound-button[aria-pressed=true]{color:var(--gold)}.quiet-button{font-size:11px}.sound-button{font-size:0}.intro-head{padding-top:27px;gap:15px;align-items:start}.intro-head h1{font-size:44px;letter-spacing:-1.5px}.intro-head p:last-child{font-size:12px}.expedition-meta{min-width:75px;padding-top:4px}.expedition-meta span{font-size:8px;letter-spacing:1px}.expedition-meta strong{font-size:17px}.overview{grid-template-columns:1fr}.map-art{min-height:0;max-height:360px}.map-panel{border-radius:13px}.map-caption{left:18px;top:16px;font-size:8px}.chapter-card{padding:25px}.side-stack{gap:12px}.status-strip{padding:13px 18px}.level-details{font-size:12px;justify-content:space-between}.route-choice{padding:14px 16px}.intro-rules{font-size:12px}.chapter-card h2{font-size:31px}.intro-head h1 br{display:none}.intro-head h1 em{display:block}.play-layout{grid-template-columns:1fr}.puzzle-aside{display:grid;grid-template-columns:1fr 1fr;gap:13px}.puzzle-aside .flavor,.puzzle-aside .mini-progress{display:none}.puzzle-aside .side-panel{margin:0;padding:16px}.puzzle-aside .side-panel h3{font-size:11px}.compact-rules{font-size:11px}.compact-rules li+li{margin-top:8px}.resource-button{padding:9px;gap:8px}.resource-button span{font-size:11px}.resource-button small{font-size:9px}.resource-button svg{width:21px}.shield-note{font-size:10px}.screen-heading{padding:25px 0 19px;align-items:start}.screen-heading h1{font-size:29px}.screen-heading .eyebrow{font-size:8px;letter-spacing:1.8px}.run-info{flex-direction:column;align-items:end;gap:11px}.run-info .heart-row svg{width:14px;height:14px}.run-info .heart-row{gap:3px}.pause-button{font-size:10px;padding:6px 10px}.puzzle-panel{padding:20px 18px 16px}.board-wrap{max-width:470px}.puzzle-metrics{max-width:470px;margin-left:auto;margin-right:auto}.clock-bar{max-width:470px;margin-left:auto;margin-right:auto}.board-actions{max-width:490px;margin:auto}.puzzle-panel .board-feedback{max-width:470px;margin-left:auto;margin-right:auto}.reward-choices{grid-template-columns:1fr;gap:13px}.perk-card{padding:21px;display:grid;grid-template-columns:49px 1fr auto;column-gap:17px;min-height:0;align-items:center}.perk-card h2{font-size:23px;margin:0 0 6px;grid-column:2}.perk-card p{font-size:11px;grid-column:2;margin:0}.perk-icon{width:47px;height:47px;margin:0;grid-column:1;grid-row:1/3}.perk-icon svg{width:23px}.perk-card button{grid-column:3;grid-row:1/3;margin:0;padding:10px 15px;font-size:11px}.reward-heading{padding:30px 0 19px}.reward-heading h1{font-size:37px}.ending-layout{grid-template-columns:1fr}.ending-layout .map-art{min-height:0;max-height:310px}.ending-layout .center-card{padding:30px 25px}.center-card{padding:34px 25px}.center-card h1{font-size:36px}.site-footer{font-size:8px;margin-top:29px;padding:17px 0;flex-direction:column;gap:6px}.bottom-tools{margin-top:13px}.center-card .dialog-actions{flex-wrap:wrap}.center-card .dialog-actions .primary{flex:1}.pause-screen,.result-screen{padding-top:30px}.board-legend{font-size:9px;gap:14px}}@media(max-width:390px){.page-shell{padding:0 13px}.brand{font-size:8px}.site-header nav{gap:10px}.puzzle-panel{padding:16px 11px}.board{gap:4px}.board-wrap{padding:7px}.cell{border-radius:5px}.cell.rune .rune-symbol{min-width:19px;min-height:19px}.board-actions{gap:5px}.board-actions button{font-size:10px;padding:8px 5px}.rune-bead{width:19px;height:19px;font-size:10px}.puzzle-metrics{gap:9px}.status-label{font-size:8px}.metric-number{font-size:23px}.puzzle-aside{grid-template-columns:1fr}.puzzle-aside .side-panel:first-child{order:2}.compact-rules{display:flex;gap:18px;list-style:none;padding:0;font-size:10px}.compact-rules li{flex:1}.compact-rules li+li{margin:0}.puzzle-aside .side-panel:last-of-type{display:grid;grid-template-columns:1fr 1fr;column-gap:9px}.puzzle-aside .side-panel:last-of-type h3,.puzzle-aside .shield-note{grid-column:1/-1}.perk-card{grid-template-columns:38px 1fr auto;column-gap:10px;padding:19px 14px}.perk-icon{width:38px;height:38px}.perk-card h2{font-size:21px}.perk-card button{padding:9px 11px}.modal{padding:26px 23px}.intro-head h1{font-size:38px}.expedition-meta{display:none}}
+</style>
+</head>
+<body>
+<div class="page-shell">
+<header class="site-header">
+  <a href="https://fisteque.github.io/noema-industries-arcade/" class="brand" title="Zpět do herny" target="_top"><svg viewBox="0 0 32 38" aria-hidden="true"><path d="M7 35V14H4V5h6v5h4V2h5v8h4V5h5v9h-3v21M3 35h26M13 35V24a3 3 0 0 1 6 0v11M12 17h8"/></svg><span>NOEMA INDUSTRIES<span class="brand-sub">HRA 02 · NOEMA PRO</span></span></a>
+  <nav aria-label="Nástroje hry"><button class="quiet-button" data-global="help" aria-label="Jak hrát"><span aria-hidden="true">?</span> Jak hrát</button><button id="soundButton" class="quiet-button sound-button" data-global="sound" aria-pressed="false" aria-label="Zapnout zvuk">Zvuk vypnutý</button></nav>
+</header>
+<main id="app"></main>
+<footer class="site-footer"><span>Věž mezi tahy <span class="footer-dot">·</span> Noema Pro, 2026</span><span id="saveNote">Výprava se ukládá v tomto prohlížeči.</span></footer>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<dialog id="helpDialog" class="modal"><form method="dialog"><button class="modal-close" aria-label="Zavřít nápovědu">×</button></form><p class="eyebrow">PRAVIDLA VĚŽE</p><h2>Každý krok má své místo.</h2><p>Otevři všech deset pečetí a dojdi na vrchol věže. Cestu kreslíš klikáním nebo klepáním na sousední políčka.</p><ol class="rules-list"><li><b>Vyjdi od lucerny a skonči v bráně.</b> Pohybuj se vodorovně nebo svisle, přes kameny to nejde. Každé políčko smíš navštívit jen jednou.</li><li><b>Projdi runy popořadě: 1 → 2 → 3…</b> Nemusíš projít všechna prázdná políčka.</li><li><b>Dodrž přesný počet kroků.</b> Krok je přesun mezi dvěma políčky. Hotovou cestu potvrď tlačítkem Ověřit cestu.</li></ol><div class="help-note"><b>Čtyři pokusy na celou výpravu.</b> Vypršení času nebo chybná ověřená cesta stojí 1 pokus, na nebezpečné odbočce 2. Za otevřenou pečeť získáš jednu výhodu, na odbočce dvě. Při nule začneš novou výpravu od první pečeti.</div><p><b>Opravy jsou zdarma.</b> Klepnutím na dřívější políčko svou cestu zkrátíš. Můžeš také vrátit tah nebo smazat cestu; čas přitom běží dál. Při pauze je deska zakrytá. Přepnutí záložky hru pozastaví.</p><p class="keyboard-help"><kbd>↑</kbd><kbd>→</kbd><kbd>↓</kbd><kbd>←</kbd> pohyb · <kbd>Backspace</kbd> zpět · <kbd>R</kbd> smazat · <kbd>H</kbd> lucerna · <kbd>T</kbd> písek · <kbd>P</kbd>/<kbd>Esc</kbd> pauza</p><button class="primary full" data-global="close-help">Rozumím</button></dialog>
+<dialog id="restartDialog" class="modal small-modal"><p class="eyebrow">NOVÁ VÝPRAVA</p><h2>Vrátit se na začátek?</h2><p>Dosavadní pečetě a výhody této výpravy zmizí. Dostaneš čtyři pokusy a novou mapu hlavolamů.</p><div class="dialog-actions"><button class="secondary" data-global="cancel-restart">Zůstat tady</button><button class="primary" data-global="confirm-restart">Začít znovu</button></div></dialog>
+<noscript><p class="noscript">Hra potřebuje zapnutý JavaScript. Vše běží přímo v prohlížeči; žádný účet ani připojení po načtení nepotřebuješ.</p></noscript>
+<script>/* Věž mezi tahy — deterministic, dependency-free puzzle rules and generation. */
+(function (root, factory) {
+  'use strict';
+  var api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.TowerPuzzle = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+
+  var NORMAL = [null,
+    [4, 6, 1], [4, 8, 2], [4, 10, 2], [5, 12, 3], [5, 14, 3],
+    [5, 16, 4], [6, 18, 4], [6, 20, 5], [6, 22, 5], [6, 24, 6]
+  ];
+  var HARD = {3: [5, 14, 3], 6: [6, 21, 5], 9: [7, 28, 6]};
+
+  function rng(seed) {
+    var state = seed >>> 0;
+    return function () {
+      state = (state + 0x6D2B79F5) >>> 0;
+      var t = state;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function shuffle(values, random) {
+    for (var i = values.length - 1; i > 0; i--) {
+      var j = Math.floor(random() * (i + 1));
+      var swap = values[i]; values[i] = values[j]; values[j] = swap;
+    }
+    return values;
+  }
+
+  function neighbours(cell, size) {
+    var row = Math.floor(cell / size), col = cell % size, out = [];
+    if (row > 0) out.push(cell - size);
+    if (col < size - 1) out.push(cell + 1);
+    if (row < size - 1) out.push(cell + size);
+    if (col > 0) out.push(cell - 1);
+    return out;
+  }
+
+  function distance(a, b, size) {
+    return Math.abs(Math.floor(a / size) - Math.floor(b / size)) + Math.abs(a % size - b % size);
+  }
+
+  function pathTurns(path, size) {
+    var turns = 0;
+    for (var i = 2; i < path.length; i++) {
+      if (path[i] - path[i - 1] !== path[i - 1] - path[i - 2]) turns++;
+    }
+    return turns;
+  }
+
+  function walk(size, steps, random) {
+    var perimeter = [];
+    for (var id = 0; id < size * size; id++) {
+      var row = Math.floor(id / size), col = id % size;
+      if (row === 0 || row === size - 1 || col === 0 || col === size - 1) perimeter.push(id);
+    }
+    var start = perimeter[Math.floor(random() * perimeter.length)];
+    var path = [start], used = new Set(path), nodes = 0;
+    function visit() {
+      if (++nodes > 7000) return false;
+      if (path.length === steps + 1) return distance(start, path[path.length - 1], size) >= Math.min(3, Math.floor(steps / 3));
+      var choices = shuffle(neighbours(path[path.length - 1], size), random);
+      for (var n = 0; n < choices.length; n++) {
+        var next = choices[n];
+        if (used.has(next)) continue;
+        used.add(next); path.push(next);
+        if (visit()) return true;
+        path.pop(); used.delete(next);
+      }
+      return false;
+    }
+    return visit() ? path : null;
+  }
+
+  function makePuzzle(stage, hard, seed) {
+    if (!Number.isInteger(stage) || stage < 1 || stage > 10) throw new RangeError('Úroveň musí být od 1 do 10.');
+    hard = Boolean(hard && HARD[stage]);
+    var spec = hard ? HARD[stage] : NORMAL[stage];
+    var size = spec[0], steps = spec[1], runeCount = spec[2];
+    var random = rng(((seed >>> 0) ^ Math.imul(stage, 0x9E3779B1) ^ (hard ? 0xA5D7C953 : 0)) >>> 0);
+    var solution = null, bestScore = -Infinity;
+    // Several short bounded walks give shaped paths without relying on a lucky
+    // unbounded search. The stored route is the constructive solvability proof.
+    for (var trial = 0; trial < 7; trial++) {
+      var candidate = walk(size, steps, random);
+      if (!candidate) continue;
+      var turns = pathTurns(candidate, size);
+      var score = Math.min(turns, Math.ceil(steps * 0.65)) * 2 + distance(candidate[0], candidate[steps], size);
+      if (score > bestScore) { solution = candidate; bestScore = score; }
+    }
+    if (!solution) {
+      // A serpentine traversal is guaranteed on every supported square board.
+      solution = [];
+      for (var row = 0; row < size && solution.length <= steps; row++) {
+        for (var col = 0; col < size && solution.length <= steps; col++) {
+          solution.push(row * size + (row % 2 ? size - 1 - col : col));
+        }
+      }
+    }
+    var onPath = new Set(solution), blocked = [];
+    var outside = [];
+    for (var cell = 0; cell < size * size; cell++) if (!onPath.has(cell)) outside.push(cell);
+    shuffle(outside, random);
+    // Leave more than half of the unused cells open: the board contains choices,
+    // not a corridor outlining the answer. Early boards have fewer obstacles.
+    var blockCount = Math.min(outside.length - 2, Math.max(1, Math.round(outside.length * (stage < 4 ? 0.28 : 0.38))));
+    for (var b = 0; b < blockCount; b++) blocked.push(outside[b]);
+    function branchCount() {
+      var visited = new Set(), branches = 0;
+      for (var index = 0; index < solution.length - 1; index++) {
+        visited.add(solution[index]);
+        var choices = neighbours(solution[index], size).filter(function (cell) {
+          return !visited.has(cell) && blocked.indexOf(cell) === -1;
+        });
+        if (choices.length > 1) branches++;
+      }
+      return branches;
+    }
+    // A rare tightly folded first path can lose its choices to an unlucky rock.
+    // Open spare cells until even those boards offer at least two real junctions.
+    while (blocked.length && branchCount() < (stage === 1 ? 2 : 3)) blocked.pop();
+    blocked.sort(function (a, b) { return a - b; });
+    var runes = [], previous = 0;
+    for (var r = 1; r <= runeCount; r++) {
+      var nominal = Math.round(r * steps / (runeCount + 1));
+      var jitter = stage > 2 ? Math.floor(random() * 3) - 1 : 0;
+      var position = Math.max(previous + 1, Math.min(steps - (runeCount - r + 1), nominal + jitter));
+      runes.push(solution[position]); previous = position;
+    }
+    return {
+      size: size, start: solution[0], end: solution[steps], blocked: blocked,
+      runes: runes, steps: steps, solution: solution.slice(), stage: stage, hard: hard
+    };
+  }
+
+  function inspect(puzzle, path, complete) {
+    var stepsUsed = Math.max(0, Array.isArray(path) ? path.length - 1 : 0), nextRune = 0;
+    function failure(code, message) { return {ok: false, code: code, message: message, stepsUsed: stepsUsed, nextRune: nextRune}; }
+    if (!Array.isArray(path) || path.length === 0 || path[0] !== puzzle.start) return failure('start', 'Cesta musí začínat u lucerny.');
+    var blocked = new Set(puzzle.blocked), used = new Set();
+    for (var i = 0; i < path.length; i++) {
+      var cell = path[i];
+      if (!Number.isInteger(cell) || cell < 0 || cell >= puzzle.size * puzzle.size) return failure('outside', 'Cesta vystoupila z pečeti.');
+      if (blocked.has(cell)) return failure('blocked', 'Přes kámen cesta nevede.');
+      if (used.has(cell)) return failure('repeat', 'Na stejné políčko se nemůžeš vrátit.');
+      if (i > 0 && distance(path[i - 1], cell, puzzle.size) !== 1) return failure('adjacency', 'Spojuj pouze sousední políčka; šikmo to nejde.');
+      used.add(cell);
+      var rune = puzzle.runes.indexOf(cell);
+      if (rune !== -1) {
+        if (rune !== nextRune) return failure('order', 'Runy projdi popořadě. Teď potřebuješ runu ' + (nextRune + 1) + '.');
+        nextRune++;
+      }
+      if (cell === puzzle.end && i < path.length - 1) return failure('past_end', 'Brána musí být poslední políčko cesty.');
+    }
+    if (stepsUsed > puzzle.steps) return failure('too_long', 'Cesta je příliš dlouhá. Pečeť dovoluje přesně ' + puzzle.steps + ' kroků.');
+    if (complete) {
+      if (path[path.length - 1] !== puzzle.end) return failure('end', 'Cestu dokonči u brány.');
+      if (nextRune !== puzzle.runes.length) return failure('runes', 'Na cestě chybí některé runy.');
+      if (stepsUsed !== puzzle.steps) return failure('length', 'Do brány potřebuješ přesně ' + puzzle.steps + ' kroků. Tvoje cesta má ' + stepsUsed + '.');
+    }
+    return {ok: true, code: complete ? 'solved' : 'valid', message: complete ? 'Pečeť přijala tvou cestu.' : '', stepsUsed: stepsUsed, nextRune: nextRune};
+  }
+
+  function validate(puzzle, path) {
+    var result = inspect(puzzle, path, true);
+    return {ok: result.ok, code: result.code, message: result.message};
+  }
+
+  function partial(puzzle, path) {
+    var result = inspect(puzzle, path, false);
+    return {stepsUsed: result.stepsUsed, nextRune: result.nextRune, error: result.ok ? null : result.message};
+  }
+
+  function continuation(puzzle, prefix, limit) {
+    var check = inspect(puzzle, prefix, false);
+    if (!check.ok) return null;
+    var path = prefix.slice(), used = new Set(path), blocked = new Set(puzzle.blocked);
+    var visits = 0, size = puzzle.size, runeMap = new Map();
+    puzzle.runes.forEach(function (cell, index) { runeMap.set(cell, index); });
+    function search(nextRune) {
+      if (++visits > limit) return false;
+      var current = path[path.length - 1], remaining = puzzle.steps - path.length + 1;
+      if (current === puzzle.end) return remaining === 0 && nextRune === puzzle.runes.length;
+      if (remaining <= 0) return false;
+      var target = nextRune < puzzle.runes.length ? puzzle.runes[nextRune] : puzzle.end;
+      var lower = distance(current, target, size), last = target;
+      for (var r = nextRune + 1; r < puzzle.runes.length; r++) {
+        if (used.has(puzzle.runes[r])) return false;
+        lower += distance(last, puzzle.runes[r], size); last = puzzle.runes[r];
+      }
+      if (nextRune < puzzle.runes.length) lower += distance(last, puzzle.end, size);
+      if (remaining < lower || (remaining - distance(current, puzzle.end, size)) % 2 !== 0) return false;
+      var options = neighbours(current, size).filter(function (cell) {
+        return !used.has(cell) && !blocked.has(cell) && (!runeMap.has(cell) || runeMap.get(cell) === nextRune);
+      });
+      options.sort(function (a, b) { return distance(a, target, size) - distance(b, target, size); });
+      for (var i = 0; i < options.length; i++) {
+        var cell = options[i];
+        if (cell === puzzle.end && (remaining !== 1 || nextRune !== puzzle.runes.length)) continue;
+        path.push(cell); used.add(cell);
+        if (search(nextRune + (runeMap.has(cell) ? 1 : 0))) return true;
+        path.pop(); used.delete(cell);
+      }
+      return false;
+    }
+    return search(check.nextRune) ? path.slice() : null;
+  }
+
+  function getHint(puzzle, path) {
+    if (validate(puzzle, path).ok) return {path: path.slice(), reset: false, message: 'Cesta už je hotová. Zkus otevřít pečeť.'};
+    var safePath = Array.isArray(path) && path.length ? path : [puzzle.start];
+    var canonicalPrefix = safePath.every(function (cell, index) { return cell === puzzle.solution[index]; });
+    var solved = canonicalPrefix ? puzzle.solution : continuation(puzzle, safePath, 40000);
+    if (solved) return {
+      path: solved.slice(0, Math.min(solved.length, safePath.length + 2)), reset: false,
+      message: 'Lucerna ukázala další dva bezpečné kroky. Zbytek cesty je na tobě.'
+    };
+    return {
+      path: puzzle.solution.slice(0, 3), reset: true,
+      message: 'Lucerna vrací kresbu na začátek a ukazuje první dva bezpečné kroky.'
+    };
+  }
+
+  return {makePuzzle: makePuzzle, validate: validate, partial: partial, getHint: getHint};
+});
+</script>
+<script>/* Věž mezi tahy — run rules, Noema Pro. Pure state transitions, no browser dependencies. */
+(function (root, factory) {
+  'use strict';
+  var api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  if (root) root.TowerRun = api;
+}(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+
+  var NORMAL_SECONDS = [85, 95, 110, 120, 125, 135, 140, 150, 160, 170];
+  var HARD_SECONDS = {3: 105, 6: 125, 9: 145};
+  var PHASES = ['map', 'puzzle', 'paused', 'retry', 'rewards', 'won', 'lost'];
+  var PERKS = [
+    {id: 'heart', name: 'Náhradní plamen', description: 'Obnoví jeden pokus. Nejvýš šest plamenů.', icon: 'flame'},
+    {id: 'time', name: 'Delší nádech', description: 'Každá další pečeť získá 8 sekund navíc. Nejvýš +40 sekund.', icon: 'clock'},
+    {id: 'hint', name: 'Lucerna', description: 'Přidá jednu nápovědu k bezpečné cestě. Uneseš čtyři.', icon: 'lamp'},
+    {id: 'sand', name: 'Kapsa písku', description: 'Přidá jedno zastavení přesýpacích hodin: během hry +25 sekund. Uneseš tři.', icon: 'sand'},
+    {id: 'shield', name: 'Strážná pečeť', description: 'Pohltí celou příští ztrátu pokusů, i na nebezpečné cestě. Uneseš dvě.', icon: 'shield'},
+    {id: 'rest', name: 'Klid před branou', description: 'Jen další pečeť získá 20 sekund navíc. Bonus platí i při jejím opakování.', icon: 'rest'}
+  ];
+  var PERK_IDS = PERKS.map(function (perk) { return perk.id; });
+
+  function integer(value, min, max) {
+    return Number.isInteger(value) && value >= min && value <= max;
+  }
+  function finite(value, min, max) {
+    return typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max;
+  }
+  function clone(state) {
+    return Object.assign({}, state, {
+      path: state.path.slice(),
+      completed: state.completed.map(function (entry) { return Object.assign({}, entry); }),
+      offers: state.offers.slice(),
+      pickedPerks: state.pickedPerks.slice(),
+      perksTaken: state.perksTaken.map(function (entry) { return Object.assign({}, entry); })
+    });
+  }
+  function reject(state, message) {
+    var next = clone(state);
+    next.lastError = message;
+    return next;
+  }
+  function isFork(stage) { return stage === 3 || stage === 6 || stage === 9; }
+  function normalizeSeed(seed) {
+    return typeof seed === 'number' && Number.isFinite(seed) ? seed >>> 0 : 1;
+  }
+  function newRun(seed) {
+    return {
+      schema: 1,
+      seed: normalizeSeed(seed),
+      stage: 1,
+      lives: 4,
+      phase: 'map',
+      hard: false,
+      remainingMs: 0,
+      bonusSeconds: 0,
+      nextBonusSeconds: 0,
+      currentStageBonusSeconds: 0,
+      hints: 1,
+      sands: 0,
+      shields: 0,
+      path: [],
+      completed: [],
+      offers: [],
+      picksLeft: 0,
+      pickedPerks: [],
+      perksTaken: [],
+      attemptsUsed: 0,
+      totalTimeMs: 0,
+      hintsUsed: 0,
+      sandsUsed: 0,
+      shieldsUsed: 0,
+      lastLoss: 0,
+      lastReason: null,
+      lastShielded: false,
+      lastError: null
+    };
+  }
+
+  // Seconds; on the map this previews the next stage, elsewhere it describes the active stage.
+  function timeLimit(state, hard) {
+    var difficult = hard === undefined ? state.hard : !!hard;
+    var base = difficult && isFork(state.stage) ? HARD_SECONDS[state.stage] : NORMAL_SECONDS[state.stage - 1];
+    var temporary = state.phase === 'map' ? state.nextBonusSeconds : state.currentStageBonusSeconds;
+    return base + state.bonusSeconds + temporary;
+  }
+  function clearFeedback(state) {
+    state.lastLoss = 0;
+    state.lastReason = null;
+    state.lastShielded = false;
+    state.lastError = null;
+  }
+  function startStage(state, hard) {
+    if (state.phase !== 'map') return reject(state, 'Pečeť lze otevřít až na mapě.');
+    if (hard && !isFork(state.stage)) return reject(state, 'Tady nebezpečná odbočka není.');
+    var next = clone(state);
+    next.hard = !!hard;
+    next.phase = 'puzzle';
+    next.currentStageBonusSeconds = next.nextBonusSeconds;
+    next.nextBonusSeconds = 0;
+    next.remainingMs = timeLimit(next) * 1000;
+    next.path = [];
+    clearFeedback(next);
+    return next;
+  }
+  function setPath(state, path) {
+    if (state.phase !== 'puzzle') return reject(state, 'Cestu lze měnit jen při řešení.');
+    if (!Array.isArray(path) || path.length > 100 || !path.every(function (cell) { return integer(cell, 0, 99); })) {
+      return reject(state, 'Tato cesta není platná.');
+    }
+    var next = clone(state);
+    next.path = path.slice();
+    next.lastError = null;
+    return next;
+  }
+  function spendHint(state) {
+    if (state.phase !== 'puzzle') return reject(state, 'Lucernu lze použít během řešení.');
+    if (state.hints < 1) return reject(state, 'Žádná lucerna už nezbývá.');
+    var next = clone(state);
+    next.hints -= 1;
+    next.hintsUsed += 1;
+    next.lastError = null;
+    return next;
+  }
+  function spendSand(state) {
+    if (state.phase !== 'puzzle') return reject(state, 'Písek lze použít během řešení.');
+    if (state.sands < 1) return reject(state, 'Žádný písek už nezbývá.');
+    var next = clone(state);
+    next.sands -= 1;
+    next.sandsUsed += 1;
+    next.remainingMs += 25000;
+    next.lastError = null;
+    return next;
+  }
+  function fail(state, reason) {
+    if (state.phase !== 'puzzle') return reject(state, 'Tento pokus už neběží.');
+    var next = clone(state);
+    next.attemptsUsed += 1;
+    next.lastReason = typeof reason === 'string' && reason ? reason.slice(0, 500) : 'Pečeť se neotevřela.';
+    next.lastShielded = next.shields > 0;
+    if (next.lastShielded) {
+      next.shields -= 1;
+      next.shieldsUsed += 1;
+      next.lastLoss = 0;
+    } else {
+      next.lastLoss = next.hard ? 2 : 1;
+      next.lives = Math.max(0, next.lives - next.lastLoss);
+    }
+    next.phase = next.lives === 0 ? 'lost' : 'retry';
+    next.lastError = null;
+    return next;
+  }
+  function retry(state) {
+    if (state.phase !== 'retry') return reject(state, 'Teď není co opakovat.');
+    var next = clone(state);
+    next.phase = 'puzzle';
+    next.path = [];
+    next.remainingMs = timeLimit(next) * 1000;
+    clearFeedback(next);
+    return next;
+  }
+  function pause(state) {
+    if (state.phase !== 'puzzle') return clone(state);
+    var next = clone(state);
+    next.phase = 'paused';
+    next.lastError = null;
+    return next;
+  }
+  function resume(state) {
+    if (state.phase !== 'paused') return reject(state, 'Hra není pozastavená.');
+    var next = clone(state);
+    next.phase = 'puzzle';
+    next.lastError = null;
+    return next;
+  }
+  function tick(state, elapsedMs) {
+    if (state.phase !== 'puzzle' || !Number.isFinite(elapsedMs) || elapsedMs <= 0) return state;
+    var next = clone(state);
+    var spent = Math.min(next.remainingMs, elapsedMs);
+    next.remainingMs = Math.max(0, next.remainingMs - elapsedMs);
+    next.totalTimeMs += spent;
+    if (next.remainingMs === 0) return fail(next, 'Čas vypršel. Pečeť znovu ztichla.');
+    return next;
+  }
+
+  function canTake(state, id) {
+    if (id === 'heart') return state.lives < 6;
+    if (id === 'time') return state.bonusSeconds < 40;
+    if (id === 'hint') return state.hints < 4;
+    if (id === 'sand') return state.sands < 3;
+    if (id === 'shield') return state.shields < 2;
+    if (id === 'rest') return state.nextBonusSeconds === 0;
+    return false;
+  }
+  function shuffle(items, seed) {
+    var result = items.slice();
+    var bits = seed >>> 0;
+    for (var i = result.length - 1; i > 0; i -= 1) {
+      bits += 0x6D2B79F5;
+      var n = Math.imul(bits ^ bits >>> 15, 1 | bits);
+      n ^= n + Math.imul(n ^ n >>> 7, 61 | n);
+      var j = Math.floor(((n ^ n >>> 14) >>> 0) / 4294967296 * (i + 1));
+      var item = result[i]; result[i] = result[j]; result[j] = item;
+    }
+    return result;
+  }
+  function makeOffers(state) {
+    var available = PERK_IDS.filter(function (id) { return id !== 'rest' && canTake(state, id); });
+    if (available.length < 3 && canTake(state, 'rest')) available.push('rest');
+    return shuffle(available, (state.seed ^ Math.imul(state.stage, 0x9E3779B1)) >>> 0).slice(0, 3);
+  }
+  function complete(state) {
+    if (state.phase !== 'puzzle' || state.remainingMs <= 0) return reject(state, 'Pečeť už nelze otevřít.');
+    var next = clone(state);
+    next.completed.push({stage: next.stage, hard: next.hard});
+    next.lastError = null;
+    next.pickedPerks = [];
+    if (next.stage === 10) {
+      next.phase = 'won';
+      next.offers = [];
+      next.picksLeft = 0;
+    } else {
+      next.phase = 'rewards';
+      next.offers = makeOffers(next);
+      next.picksLeft = Math.min(next.hard ? 2 : 1, next.offers.length);
+    }
+    return next;
+  }
+  function choosePerk(state, id) {
+    if (state.phase !== 'rewards' || state.picksLeft < 1) return reject(state, 'Teď se odměna nevybírá.');
+    if (state.offers.indexOf(id) < 0 || state.pickedPerks.indexOf(id) >= 0 || !canTake(state, id)) {
+      return reject(state, 'Vyber jinou dostupnou odměnu.');
+    }
+    var next = clone(state);
+    if (id === 'heart') next.lives += 1;
+    if (id === 'time') next.bonusSeconds += 8;
+    if (id === 'hint') next.hints += 1;
+    if (id === 'sand') next.sands += 1;
+    if (id === 'shield') next.shields += 1;
+    if (id === 'rest') next.nextBonusSeconds += 20;
+    next.pickedPerks.push(id);
+    next.perksTaken.push({stage: next.stage, id: id});
+    next.picksLeft -= 1;
+    next.lastError = null;
+    if (next.picksLeft === 0) {
+      next.stage += 1;
+      next.phase = 'map';
+      next.hard = false;
+      next.remainingMs = 0;
+      next.currentStageBonusSeconds = 0;
+      next.path = [];
+      next.offers = [];
+      next.pickedPerks = [];
+    }
+    return next;
+  }
+
+  function stringOrNull(value) { return value === null || typeof value === 'string' && value.length <= 500; }
+  function isPerkArray(value, max) {
+    return Array.isArray(value) && value.length <= max && value.every(function (id) { return PERK_IDS.indexOf(id) >= 0; }) && new Set(value).size === value.length;
+  }
+  // Save data is untrusted input. Rebuild a small, whitelisted object and pause active clocks.
+  function restore(serialized) {
+    var data;
+    try {
+      if (typeof serialized === 'string') {
+        if (serialized.length > 32768) return null;
+        data = JSON.parse(serialized);
+      } else data = serialized;
+      if (!data || typeof data !== 'object' || Array.isArray(data) || data.schema !== 1) return null;
+      if (!integer(data.seed, 0, 4294967295) || !integer(data.stage, 1, 10) || !integer(data.lives, 0, 6)) return null;
+      if (PHASES.indexOf(data.phase) < 0 || typeof data.hard !== 'boolean' || data.hard && !isFork(data.stage)) return null;
+      if (!finite(data.remainingMs, 0, 3600000) || !integer(data.bonusSeconds, 0, 40) || data.bonusSeconds % 8 !== 0) return null;
+      if ([0, 20].indexOf(data.nextBonusSeconds) < 0 || [0, 20].indexOf(data.currentStageBonusSeconds) < 0) return null;
+      if (!integer(data.hints, 0, 4) || !integer(data.sands, 0, 3) || !integer(data.shields, 0, 2)) return null;
+      if (!Array.isArray(data.path) || data.path.length > 100 || !data.path.every(function (cell) { return integer(cell, 0, 99); })) return null;
+      if (!Array.isArray(data.completed) || data.completed.length > 10) return null;
+      if (!data.completed.every(function (entry, index) { return entry && entry.stage === index + 1 && typeof entry.hard === 'boolean' && (!entry.hard || isFork(entry.stage)); })) return null;
+      if (!isPerkArray(data.offers, 3) || !isPerkArray(data.pickedPerks, 2) || !integer(data.picksLeft, 0, 2)) return null;
+      if (!Array.isArray(data.perksTaken) || data.perksTaken.length > 12 || !data.perksTaken.every(function (entry) { return entry && integer(entry.stage, 1, 9) && PERK_IDS.indexOf(entry.id) >= 0; })) return null;
+      if (!integer(data.attemptsUsed, 0, 10000) || !finite(data.totalTimeMs, 0, 1000000000)) return null;
+      if (!integer(data.hintsUsed, 0, 10000) || !integer(data.sandsUsed, 0, 10000) || !integer(data.shieldsUsed, 0, 10000)) return null;
+      if (!integer(data.lastLoss, 0, 2) || !stringOrNull(data.lastReason) || !stringOrNull(data.lastError) || typeof data.lastShielded !== 'boolean') return null;
+      if ((data.phase === 'lost') !== (data.lives === 0)) return null;
+      var afterClear = data.phase === 'rewards' || data.phase === 'won';
+      if (data.completed.length !== data.stage - (afterClear ? 0 : 1)) return null;
+      if (data.phase === 'won' && data.stage !== 10 || data.phase === 'rewards' && data.stage === 10) return null;
+      if ((data.phase === 'puzzle' || data.phase === 'paused') && data.remainingMs <= 0) return null;
+      if (data.phase === 'map' && (data.hard || data.remainingMs !== 0 || data.path.length || data.currentStageBonusSeconds !== 0)) return null;
+      if (data.phase === 'rewards') {
+        if (data.picksLeft < 1 || data.picksLeft + data.pickedPerks.length !== (data.hard ? 2 : 1)) return null;
+        if (data.pickedPerks.some(function (id) { return data.offers.indexOf(id) < 0; })) return null;
+        if (data.offers.filter(function (id) { return data.pickedPerks.indexOf(id) < 0 && canTake(data, id); }).length < data.picksLeft) return null;
+      } else if (data.offers.length || data.pickedPerks.length || data.picksLeft !== 0) return null;
+
+      var restored = newRun(data.seed);
+      Object.keys(restored).forEach(function (key) {
+        if (key !== 'path' && key !== 'completed' && key !== 'offers' && key !== 'pickedPerks' && key !== 'perksTaken') restored[key] = data[key];
+      });
+      restored.path = data.path.slice();
+      restored.completed = data.completed.map(function (entry) { return {stage: entry.stage, hard: entry.hard}; });
+      restored.offers = data.offers.slice();
+      restored.pickedPerks = data.pickedPerks.slice();
+      restored.perksTaken = data.perksTaken.map(function (entry) { return {stage: entry.stage, id: entry.id}; });
+      if (restored.phase === 'puzzle') restored.phase = 'paused';
+      return restored;
+    } catch (_error) { return null; }
+  }
+
+  return {
+    PERKS: PERKS,
+    NORMAL_SECONDS: NORMAL_SECONDS,
+    HARD_SECONDS: HARD_SECONDS,
+    newRun: newRun,
+    timeLimit: timeLimit,
+    isFork: isFork,
+    startStage: startStage,
+    setPath: setPath,
+    spendHint: spendHint,
+    spendSand: spendSand,
+    fail: fail,
+    retry: retry,
+    pause: pause,
+    resume: resume,
+    tick: tick,
+    complete: complete,
+    choosePerk: choosePerk,
+    restore: restore
+  };
+}));
+</script>
+<script>/* Věž mezi tahy · original game by Noema Pro. UI, drawing and local persistence. */
+(function () {
+  'use strict';
+  var P = window.TowerPuzzle, R = window.TowerRun;
+  var app = document.getElementById('app');
+  var SAVE_KEY = 'noema.vez-mezi-tahy.v2.run';
+  var SOUND_KEY = 'noema.vez-mezi-tahy.v1.sound';
+  var state, selectedHard = false, puzzle = null, puzzleKey = '', storageWorks = true;
+  var lastTick = performance.now(), lastSave = 0, toastTimer, feedback = '', feedbackKind = '';
+  var audioContext = null, soundEnabled = false, lastAnnouncement = '';
+  var STAGES = [null,
+    ['První světlo', 'Za posledním domem čeká lucerna. Věž už vidíš; zatím je jen tenkou čarou nad lesem.', 'Začni jednou runou. Už první cesta musí mít přesnou délku.'],
+    ['Kořeny cest', 'Kořeny si pamatují každého, kdo tu prošel. Dvakrát na stejné místo tě nepustí.', 'Někdy musíš udělat krok stranou, aby cesta seděla přesně.'],
+    ['Kamenný sad', 'Mezi stromy se cesta rozdvojuje. Jedna vede sadem, druhá skrz trní, kde zůstaly dvě odměny.', 'Odbočka není povinnost. Věž počítá otevřené pečetě, ne odvahu.'],
+    ['Tichý most', 'Pod mostem teče řeka beze zvuku. Na druhém břehu svítí tři drobné značky.', 'Než vyjdeš, najdi si pořadí run a cestu k poslední z nich.'],
+    ['Dům kompasů', 'V opuštěném domě ukazuje každý kompas jinam. Na pořadí run se ale shodnou všechny.', 'Nejkratší spojnice nemusí mít správný počet kroků.'],
+    ['Zvonová strž', 'Ze strže zní zvon. Přes bezpečný most vede oklika; úzká lávka slibuje víc a méně odpouští.', 'Písek a strážná pečeť se na odbočce mohou hodit.'],
+    ['Zahrada ozvěn', 'Za strží roste zahrada, která vrací každý krok jako ozvěnu. Teď už máš cestu v rukou.', 'Kliknutím na dřívější políčko můžeš cestu zkrátit. Čas běží dál.'],
+    ['Skleněný dvůr', 'Pod průhlednou dlažbou vidíš dávné výpravy. Jejich cesty se nehodí pro tvou pečeť.', 'Lucerna naváže na tvou cestu, pokud z ní dokáže najít řešení.'],
+    ['Poslední schodiště', 'Věž je na dosah. Zbývají obyčejné schody a temná odbočka pro poslední velkou sázku.', 'Za obě odměny z odbočky musíš otevřít celou její pečeť.'],
+    ['Srdce věže', 'Desátá pečeť nechrání poklad. Chrání světlo, které se rozsvítí jen po přesné cestě.', 'Tady končí mapa. Poslední cestu si věž zapamatuje.']
+  ];
+  var FORKS = {3: 'Trnitý sad', 6: 'Bezodná lávka', 9: 'Stínové schody'};
+  var ICONS = {
+    lamp: '<path d="M9 5V3h6v2M8 7h8l2 12H6L8 7ZM5 21h14M12 10v6M9 13h6M8 7l1-2h6l1 2"/>',
+    heart: '<path d="M20.8 5.6c-2-2.3-5.4-1.8-7.1.1L12 7.6l-1.7-1.9C8.6 3.8 5.2 3.3 3.2 5.6 1.1 8 2 11.5 4.3 13.9L12 21l7.7-7.1c2.3-2.4 3.2-5.9 1.1-8.3Z"/>',
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/>',
+    gate: '<path d="M4 21V10a8 8 0 0 1 16 0v11M2 21h20M8 21V10a4 4 0 0 1 8 0v11M12 6v15M4 12h4M16 12h4"/>',
+    shield: '<path d="m12 2 8 3v7c0 5-8 10-8 10S4 17 4 12V5l8-3Z"/><path d="m8 12 3 3 5-6"/>',
+    sand: '<path d="M6 3h12M6 21h12M7 3v4c0 3 5 5 5 5s5-2 5-5V3M7 21v-4c0-3 5-5 5-5s5 2 5 5v4M9 18h6"/>',
+    pause: '<path d="M8 5v14M16 5v14"/>',
+    arrow: '<path d="M4 12h16m-6-6 6 6-6 6"/>',
+    back: '<path d="m9 5-6 6 6 6M3 11h11a6 6 0 0 1 6 6v3"/>',
+    clear: '<path d="M5 7h14M9 7V4h6v3M7 7l1 14h8l1-14M10 11v6M14 11v6"/>',
+    check: '<path d="m5 12 4 4L19 6"/>',
+    stone: '<path d="m5 7 7-4 7 5 2 9-8 4-10-6 2-8ZM5 7l7 6 7-5M12 13l1 8"/>',
+    tower: '<path d="M6 22V8H4V3h4v3h2V1h4v5h2V3h4v5h-2v14M3 22h18M10 22v-6a2 2 0 0 1 4 0v6M9 10h6"/>',
+    map: '<path d="m2 5 6-3 8 3 6-3v17l-6 3-8-3-6 3V5ZM8 2v17M16 5v17"/>',
+    rest: '<path d="M20 15A9 9 0 0 1 9 3a9 9 0 1 0 11 12Z"/>',
+    flame: '<path d="M12 2c2 5 7 7 7 12a7 7 0 0 1-14 0c0-3 1-5 3-7 0 4 2 4 2 4s3-4 2-9Z"/><path d="M12 14c3 3 3 6 0 7-3-1-3-4 0-7Z"/>'
+  };
+  function icon(name) { return '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[name] || ICONS.lamp) + '</svg>'; }
+  function escapeText(value) { return String(value).replace(/[&<>"']/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function seed() {
+    if (window.crypto && window.crypto.getRandomValues) return window.crypto.getRandomValues(new Uint32Array(1))[0];
+    return (Date.now() ^ Math.floor(Math.random() * 4294967296)) >>> 0;
+  }
+  function fmtTime(ms) { var n = Math.max(0, Math.ceil(ms / 1000)); return Math.floor(n / 60) + ':' + String(n % 60).padStart(2, '0'); }
+  function code() { return state.seed.toString(36).toUpperCase().padStart(6, '0'); }
+  function hearts() {
+    var out = '<div class="heart-row" role="img" aria-label="Zbývá ' + state.lives + ' pokusů z nejvýše šesti">';
+    for (var i = 0; i < 6; i++) out += '<span class="' + (i < state.lives ? '' : 'heart-empty') + '">' + icon('flame') + '</span>';
+    return out + '</div>';
+  }
+  function inventory() {
+    return '<div class="inventory-strip" aria-label="Výbava"><span class="inventory-item" title="Trvalý čas navíc">' + icon('clock') + '<b>+' + state.bonusSeconds + ' s</b></span><span class="inventory-item" title="Lucerny — nápovědy">' + icon('lamp') + '<b>' + state.hints + '</b></span><span class="inventory-item" title="Kapsy písku">' + icon('sand') + '<b>' + state.sands + '</b></span><span class="inventory-item" title="Strážné pečetě">' + icon('shield') + '<b>' + state.shields + '</b></span></div>';
+  }
+  function miniProgress() { return '<div class="mini-progress" aria-label="Otevřeno ' + state.completed.length + ' z deseti pečetí">' + Array.from({length:10}, function (_,i) { return '<i class="' + (i < state.completed.length ? 'done' : i === state.stage - 1 ? 'current' : '') + '"></i>'; }).join('') + '</div>'; }
+  function mapArt() {
+    var nodes = [[104,492],[213,455],[160,380],[300,398],[407,341],[319,273],[176,230],[289,187],[403,167],[466,102]];
+    var complete = state.completed.map(function (x) { return x.stage; });
+    var won = state.phase === 'won';
+    var svg = '<div class="map-panel"><span class="map-caption">KRAJINA DESETI PEČETÍ</span><svg class="map-art" viewBox="0 0 620 590" role="img" aria-label="Mapa cesty k věži. Otevřeno ' + complete.length + ' z deseti pečetí. Nebezpečné odbočky u pečetí 3, 6 a 9."><defs><pattern id="mapGrain" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="3" cy="6" r=".7" fill="#8ca59b" opacity=".15"/><circle cx="17" cy="18" r=".6" fill="#8ca59b" opacity=".13"/></pattern><linearGradient id="towerColor" x2="0" y2="1"><stop stop-color="#d6d2af"/><stop offset="1" stop-color="#7f9b8d"/></linearGradient><g id="mapTree"><path d="m0-18-10 17h6l-9 12H-2v8h4v-8h11L4-1h6Z" fill="#365b55" stroke="#62867a" stroke-width=".6"/></g><g id="mapHill"><path d="m-22 12 23-38 25 38M-6-12l7 6 8-7" fill="#29484b" stroke="#4e7370" stroke-width="1"/></g><g id="mapTower"><path d="M19 101 24 35H18V16h10v10h8V7h12v19h8V16h11v19h-7l5 66Z" fill="url(#towerColor)" stroke="#d8cfab" stroke-width="1.2"/><path d="M9 102h66M16 96h53M26 57h31M24 76h36M28 38h28M40 9V-10l25 7-25 7" fill="none" stroke="#b6c3a4" stroke-width="1.2"/><path d="M35 101V83a7 7 0 0 1 14 0v18M38 51V41h8v10M37 71V61h10v10" fill="' + (won ? '#efd18b' : '#36534e') + '"/><path d="m21 104 41 0 10 9H12Z" fill="#496d60"/></g></defs><rect width="620" height="590" fill="url(#mapGrain)"/>';
+    svg += '<g fill="none" stroke="#456b65" stroke-width="1" opacity=".32"><path d="M-80 391C80 312 49 162 176 139S416 157 440-25M-70 412C83 341 84 179 197 160S442 165 469-21M-46 435C113 346 104 204 222 185M256 608C252 514 484 505 523 358S568 137 681 149M290 608C302 517 512 501 546 371S591 162 681 169M315 620C357 516 543 517 566 385S604 208 684 185"/></g>';
+    svg += '<path d="M-25 293C76 260 129 298 220 326S328 300 373 374 480 434 660 441" fill="none" stroke="#315e66" stroke-width="29" opacity=".55"/><path d="M-25 293C76 260 129 298 220 326S328 300 373 374 480 434 660 441" fill="none" stroke="#56878b" stroke-width="1" opacity=".45"/><path d="m290 315-15 35m31-30-15 35" stroke="#a1a588" stroke-width="5"/>';
+    [[56,439,1],[72,462,.7],[55,401,.8],[249,502,.9],[271,524,.8],[296,496,.75],[348,465,1],[367,487,.7],[450,463,.8],[463,487,.65],[107,189,1],[127,207,.7],[95,221,.8],[207,115,.85],[231,127,1],[253,105,.65],[516,296,.9],[539,313,.7],[550,279,1]].forEach(function (t) { svg += '<use href="#mapTree" transform="translate(' + t[0] + ' ' + t[1] + ') scale(' + t[2] + ')"/>'; });
+    [[86,100,1.4],[117,121,1],[141,97,.7],[345,71,1.2],[382,78,.8],[493,388,1.1],[525,403,.8]].forEach(function (t) { svg += '<use href="#mapHill" transform="translate(' + t[0] + ' ' + t[1] + ') scale(' + t[2] + ')"/>'; });
+    svg += '<path class="route-main" d="M104 492Q124 449 213 455T160 380Q200 349 300 398T407 341Q420 291 319 273T176 230Q195 171 289 187T403 167Q443 156 466 102"/><path class="route-branch" d="M160 380Q60 373 78 320T300 398M319 273Q364 218 433 247T176 230M403 167Q478 246 524 195T466 102"/>';
+    [[78,320,3],[433,247,6],[524,195,9]].forEach(function (t) { var taken = state.completed.some(function (c) { return c.stage === t[2] && c.hard; }); var active = state.stage === t[2] && selectedHard && state.phase === 'map'; svg += '<g transform="translate(' + t[0] + ' ' + t[1] + ')"><path d="M0-9 8 0 0 9-8 0Z" fill="' + (taken || active ? '#c68c70' : '#2d4545') + '" stroke="#ba8268"/><text y="3" text-anchor="middle" font-family="serif" font-size="10" fill="#e1b693">!</text></g>'; });
+    svg += '<use href="#mapTower" transform="translate(428 -1) scale(.92)"/>';
+    if (won) svg += '<g stroke="#eedca1" stroke-width="1.5" opacity=".7"><path d="M466 2v-20M442 7l-12-16M489 7l14-16M427 27l-21-7M506 27l21-7"/></g>';
+    nodes.forEach(function (xy, i) {
+      var n = i + 1, done = complete.indexOf(n) !== -1, active = n === state.stage && !done;
+      var cls = done ? 'complete' : active ? 'active' : 'locked';
+      if (active) svg += '<circle class="map-halo" cx="' + xy[0] + '" cy="' + xy[1] + '" r="23"/>';
+      svg += '<circle class="map-node ' + cls + '" cx="' + xy[0] + '" cy="' + xy[1] + '" r="15"/><text class="node-number ' + cls + '" x="' + xy[0] + '" y="' + xy[1] + '">' + (done ? '✓' : String(n).padStart(2,'0')) + '</text>';
+    });
+    svg += '<g class="map-label"><text x="72" y="528">PRVNÍ SVĚTLO</text><text x="195" y="88">SEVERNÍ HVOZD</text><text x="444" y="145" fill="#c2c3a0">VĚŽ MEZI TAHY</text><text x="84" y="347" fill="#ad8d76">TRNITÝ SAD</text><text x="390" y="279" fill="#ad8d76">LÁVKA</text><text x="473" y="226" fill="#ad8d76">STÍNOVÉ SCHODY</text></g><g class="map-compass" transform="translate(540 524)"><path d="M0-23 5 0 0 20-5 0Z" fill="none" stroke="currentColor"/><path d="M-17 0h34" stroke="currentColor"/><text y="-29" text-anchor="middle" font-size="10">S</text></g><path d="M83 506h39l-8-10H91Z" fill="#729d85"/><path d="M97 495v-18l14 5-14 5" fill="none" stroke="#d3c292"/></svg></div>';
+    return svg;
+  }
+  function getPuzzle() {
+    var key = [state.seed,state.stage,state.hard].join('-');
+    if (puzzleKey !== key) { puzzle = P.makePuzzle(state.stage, state.hard, state.seed); puzzleKey = key; }
+    return puzzle;
+  }
+  function mapScreen() {
+    var first = state.stage === 1, fork = R.isFork(state.stage);
+    var preview = P.makePuzzle(state.stage, selectedHard, state.seed);
+    var routes = fork ? '<div class="route-options" role="group" aria-label="Volba cesty"><button class="route-choice ' + (!selectedHard ? 'selected' : '') + '" data-action="route" data-hard="false" aria-pressed="' + (!selectedHard) + '"><strong>Běžná cesta · ' + STAGES[state.stage][0] + '</strong><small>Chyba −1 pokus · odměna 1 výhoda</small><span class="route-mark" aria-hidden="true"></span></button><button class="route-choice risk ' + (selectedHard ? 'selected' : '') + '" data-action="route" data-hard="true" aria-pressed="' + selectedHard + '"><strong>Odbočka · ' + FORKS[state.stage] + '</strong><small>Větší deska · chyba −2 pokusy · 2 výhody</small><span class="route-mark" aria-hidden="true"></span></button></div>' : '';
+    return '<section class="intro-head"><div><p class="eyebrow">LOGICKÁ VÝPRAVA · DESET PEČETÍ</p><h1>Věž <em>mezi tahy</em></h1><p>' + (first ? 'Čtyři plameny na celou cestu. Deset bran, které se otevřou jen správnému počtu kroků.' : 'Každá otevřená pečeť zůstává za tebou. Každý další krok je na tobě.') + '</p></div><div class="expedition-meta"><span>VÝPRAVA</span><strong>' + code() + '</strong></div></section><div class="overview">' + mapArt() + '<div class="side-stack"><div class="status-strip"><div><span class="status-label">Pokusy na celou cestu</span>' + hearts() + '</div><div><span class="status-label">Pečetě</span><div class="stage-count">' + state.completed.length + ' <small>/ 10</small></div></div></div><section class="chapter-card"><p class="chapter-no">PEČEŤ ' + String(state.stage).padStart(2,'0') + ' / 10' + (fork ? ' · ROZCESTÍ' : '') + '</p><h2>' + (selectedHard ? FORKS[state.stage] : STAGES[state.stage][0]) + '</h2><p class="flavor">' + STAGES[state.stage][1] + '</p>' + routes + (selectedHard && state.lives < 3 && !state.shields ? '<p class="risk-warning">Pozor: jediné selhání na této odbočce ukončí výpravu.</p>' : '') + '<div class="level-details"><span>' + icon('clock') + fmtTime(R.timeLimit(state, selectedHard) * 1000) + '</span><span>' + icon('map') + preview.size + ' × ' + preview.size + '</span><span>' + icon('gate') + preview.steps + ' kroků</span></div><button class="primary full" data-action="start">' + (first ? 'Vydat se k věži' : 'Vstoupit do pečeti') + icon('arrow') + '</button><p class="safe-note">' + icon('pause') + 'Čas začne až vstupem do pečeti.</p>' + (first ? '<div class="intro-rules"><b>Lucerna → runy v pořadí → brána.</b><br>Jen sousední políčka. Bez opakování. Přesný počet kroků. Cestu můžeš kdykoliv opravit.</div>' : '') + '</section>' + inventory() + '</div></div><div class="bottom-tools"><p>' + (fork ? 'Odbočka nahrazuje tuto pečeť. Celá výprava má stále 10 úrovní.' : 'Nebezpečné odbočky čekají u pečetí 3, 6 a 9.') + '</p>' + (!first ? '<button class="text-button" data-action="restart">Nová výprava</button>' : '') + '</div>';
+  }
+  function cellLabel(id, p) {
+    var extra = id === p.start ? ', start, lucerna' : id === p.end ? ', cíl, brána' : p.blocked.indexOf(id) >= 0 ? ', kámen' : p.runes.indexOf(id) >= 0 ? ', runa ' + (p.runes.indexOf(id) + 1) : '';
+    return 'Řádek ' + (Math.floor(id / p.size) + 1) + ', sloupec ' + (id % p.size + 1) + extra;
+  }
+  function puzzleScreen() {
+    var p = getPuzzle(), cells = '';
+    for (var id = 0; id < p.size * p.size; id++) {
+      var blocked = p.blocked.indexOf(id) >= 0, rune = p.runes.indexOf(id);
+      var cls = blocked ? 'blocked' : id === p.start ? 'start' : id === p.end ? 'end' : rune >= 0 ? 'rune' : '';
+      var content = blocked ? icon('stone') : id === p.start ? icon('lamp') : id === p.end ? icon('gate') : rune >= 0 ? '<span class="rune-symbol"><span>' + (rune + 1) + '</span></span>' : '';
+      cells += '<button class="cell ' + cls + '" data-cell="' + id + '" aria-label="' + cellLabel(id,p) + '" tabindex="' + (id === state.path[state.path.length - 1] ? '0' : '-1') + '"' + (blocked ? ' disabled' : '') + '>' + content + '</button>';
+    }
+    return '<section class="screen-heading"><div><p class="eyebrow">PEČEŤ ' + String(state.stage).padStart(2,'0') + ' / 10' + (state.hard ? '<span class="fork-tag">NEBEZPEČNÁ ODBOČKA</span>' : '') + '</p><h1>' + (state.hard ? FORKS[state.stage] : STAGES[state.stage][0]) + '</h1></div><div class="run-info">' + hearts() + '<button class="pause-button" data-action="pause">' + icon('pause') + 'Pauza</button></div></section><div class="play-layout"><section class="puzzle-panel" aria-label="Hlavolam"><div class="puzzle-metrics"><div><span class="status-label">Přesně kroků</span><div class="metric-number"><span id="stepsUsed">0</span><small> / ' + p.steps + '</small></div></div><div class="rune-metric"><span class="status-label">Runy v pořadí</span><div id="runeTrack" class="rune-track"></div></div><div id="timeMetric" class="time-metric"><span class="status-label">Zbývá času</span><div id="timer" class="metric-number" aria-label="Zbývající čas">' + fmtTime(state.remainingMs) + '</div></div></div><div class="clock-bar" id="clockBar"><span id="clockFill"></span></div><div class="board-wrap"><div class="board" id="board" style="--size:' + p.size + '" role="group" aria-label="Deska ' + p.size + ' krát ' + p.size + ', cesta přes runy do brány">' + cells + '<svg id="pathLayer" class="path-layer" aria-hidden="true"><polyline id="pathLine" class="path-line" points=""/></svg></div></div><div class="board-legend"><span>' + icon('lamp') + 'start</span><span><i class="tiny-rune">1</i> runa</span><span>' + icon('gate') + 'cíl</span><span>' + icon('stone') + 'kámen</span></div><p id="boardFeedback" class="board-feedback" role="status" aria-live="polite"></p><div class="board-actions"><button class="secondary" id="undoButton" data-action="undo">' + icon('back') + 'Zpět</button><button class="secondary" id="clearButton" data-action="clear">' + icon('clear') + 'Smazat</button><button class="primary" id="verifyButton" data-action="verify">Ověřit cestu ' + icon('check') + '</button></div><p class="risk-caption">Chybné ověření nebo vypršení času: −' + (state.hard ? '2 pokusy' : '1 pokus') + (state.shields ? ' · chrání tě strážná pečeť' : '') + '.</p></section><aside class="puzzle-aside"><section class="side-panel"><h3>TŘI PRAVIDLA CESTY</h3><ol class="compact-rules"><li>Od <b>lucerny k bráně</b>. Vodorovně či svisle. Bez opakování políček.</li><li>Runy navštiv <b>popořadě</b>. Prázdná políčka mohou zůstat volná.</li><li>Dojdi přesně na <b>' + p.steps + '. krok</b>. Pak cestu ověř.</li></ol></section><section class="side-panel"><h3>CO NESEŠ S SEBOU</h3><button class="resource-button" id="hintButton" data-action="hint"' + (state.hints ? '' : ' disabled') + '>' + icon('lamp') + '<span>Lucerna<small>Ukáže 2 bezpečné kroky</small></span><b id="hintCount">' + state.hints + '</b></button><button class="resource-button" id="sandButton" data-action="sand"' + (state.sands ? '' : ' disabled') + '>' + icon('sand') + '<span>Kapsa písku<small>Přidá 25 sekund</small></span><b id="sandCount">' + state.sands + '</b></button><p class="shield-note">' + icon('shield') + 'Strážné pečetě: ' + state.shields + ' · čas navíc: +' + state.bonusSeconds + ' s</p></section><p class="flavor">' + STAGES[state.stage][2] + '</p>' + miniProgress() + '</aside></div>';
+  }
+  function pausedScreen() {
+    return '<section class="pause-screen"><div class="center-card"><div class="center-emblem">' + icon('pause') + '</div><p class="eyebrow">PEČEŤ ' + String(state.stage).padStart(2,'0') + ' / 10 · PAUZA</p><h1>Věž na tebe počká.</h1><p>Čas stojí a tvoje cesta je uložená.<br>Deska se odkryje, až budeš pokračovat.</p><div class="time-left">' + fmtTime(state.remainingMs) + '</div>' + hearts() + '<div class="dialog-actions"><button class="secondary" data-action="restart">Nová výprava</button><button class="primary" data-action="resume">Pokračovat ' + icon('arrow') + '</button></div></div></section>';
+  }
+  function retryScreen() {
+    return '<section class="result-screen"><div class="center-card"><div class="center-emblem">' + icon(state.lastShielded ? 'shield' : 'gate') + '</div><p class="eyebrow">PEČEŤ ' + String(state.stage).padStart(2,'0') + ' / 10</p><h1>' + (state.lastShielded ? 'Pečeť tě ochránila.' : 'Brána ještě nepovolila.') + '</h1><p>' + escapeText(state.lastReason) + '</p><span class="loss-badge ' + (state.lastShielded ? 'success-badge' : '') + '">' + (state.lastShielded ? 'Strážná pečeť spotřebována · pokusy zůstávají' : '−' + state.lastLoss + (state.lastLoss === 1 ? ' pokus' : ' pokusy')) + '</span>' + hearts() + '<p>Zkusíš stejnou desku s novým časovým limitem.<br>Opravy cesty před ověřením pokus nestojí.</p><div class="dialog-actions"><button class="secondary" data-action="restart">Nová výprava</button><button class="primary" data-action="retry">Zkusit znovu ' + icon('arrow') + '</button></div></div></section>';
+  }
+  function rewardsScreen() {
+    var cards = state.offers.map(function (id) {
+      var perk = R.PERKS.find(function (x) { return x.id === id; }), picked = state.pickedPerks.indexOf(id) >= 0;
+      return '<section class="perk-card ' + (picked ? 'chosen' : '') + '"><div class="perk-icon">' + icon(perk.icon) + '</div><h2>' + escapeText(perk.name) + '</h2><p>' + escapeText(perk.description) + '</p><button class="' + (picked ? 'secondary' : 'primary') + '" data-action="perk" data-perk="' + id + '"' + (picked ? ' disabled' : '') + '>' + (picked ? 'Vybráno ' + icon('check') : 'Vzít s sebou ' + icon('arrow')) + '</button></section>';
+    }).join('');
+    return '<section class="reward-heading"><p class="eyebrow">PEČEŤ ' + String(state.stage).padStart(2,'0') + ' OTEVŘENA' + (state.hard ? ' · ODBOČKA ZVLÁDNUTA' : '') + '</p><h1>Cesta ti něco vrací.</h1><p>' + (state.hard ? state.pickedPerks.length ? 'První výhodu máš. Vyber ještě jednu.' : 'Zvládnutá odbočka: vyber dvě různé výhody.' : 'Vyber jednu výhodu pro zbytek výpravy.') + ' Čas teď neběží.</p></section><div class="reward-choices">' + cards + '</div><div class="reward-after">Zbývá vybrat: <b>' + state.picksLeft + '</b> · Potom pokračuješ k pečeti ' + (state.stage + 1) + '.' + inventory() + hearts() + '</div>';
+  }
+  function endingScreen() {
+    var won = state.phase === 'won', forks = state.completed.filter(function (x) { return x.hard; }).length;
+    return '<section class="result-screen"><div class="ending-layout">' + mapArt() + '<div class="center-card"><div class="center-emblem">' + icon(won ? 'tower' : 'flame') + '</div><p class="eyebrow">VÝPRAVA ' + code() + ' · ' + (won ? 'DOKONČENA' : 'UZAVŘENA') + '</p><h1>' + (won ? 'Ve věži se svítí.' : 'Poslední plamen zhasl.') + '</h1><p>' + (won ? 'Deset pečetí povolilo. Na vrcholu není trůn ani koruna — jen okno, ze kterého jsou vidět všechny tvé cesty.' : escapeText(state.lastReason) + ' Všechny pokusy jsou pryč. Další výprava začne od první pečeti se čtyřmi plameny a novými hlavolamy.') + '</p><div class="ending-stats"><div><strong>' + state.completed.length + '/10</strong><span>otevřených pečetí</span></div><div><strong>' + forks + '/3</strong><span>odvážných odboček</span></div><div><strong>' + fmtTime(state.totalTimeMs) + '</strong><span>času při řešení</span></div></div>' + (won ? '<p class="ending-quote">„Cesta byla tvoje. Světlo může zůstat pro další.“</p>' : '') + '<button class="primary" data-action="new">' + (won ? 'Vydat se jinou cestou' : 'Znovu od první pečeti') + icon('arrow') + '</button><p style="font-size:10px;margin:13px 0 0">Nová výprava · jiné hlavolamy · 4 pokusy</p></div></div></section>';
+  }
+  function render() {
+    if (state.phase === 'map') app.innerHTML = mapScreen();
+    else if (state.phase === 'puzzle') app.innerHTML = puzzleScreen();
+    else if (state.phase === 'paused') app.innerHTML = pausedScreen();
+    else if (state.phase === 'retry') app.innerHTML = retryScreen();
+    else if (state.phase === 'rewards') app.innerHTML = rewardsScreen();
+    else app.innerHTML = endingScreen();
+    if (state.phase === 'puzzle') { updateBoard(); updateClock(); }
+    document.getElementById('saveNote').textContent = storageWorks ? 'Výprava se ukládá v tomto prohlížeči.' : 'Ukládání není dostupné. Nezavírej rozehranou výpravu.';
+  }
+  function save() {
+    try { localStorage.setItem(SAVE_KEY, JSON.stringify(state)); lastSave = performance.now(); }
+    catch (_) { storageWorks = false; document.getElementById('saveNote').textContent = 'Ukládání není dostupné. Nezavírej rozehranou výpravu.'; }
+  }
+  function commit(next, redraw) {
+    state = next; lastTick = performance.now();
+    if (state.lastError) toast(state.lastError);
+    save();
+    if (redraw !== false) render();
+  }
+  function transition(next) { feedback = ''; feedbackKind = ''; lastAnnouncement = ''; commit(next); window.scrollTo({top:0,behavior:'instant'}); }
+  function toast(message) {
+    var node = document.getElementById('toast');
+    node.textContent = message; node.classList.add('visible');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { node.classList.remove('visible'); }, 3500);
+  }
+  function tone(kind) {
+    if (!soundEnabled) return;
+    try {
+      if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioContext.state === 'suspended') audioContext.resume();
+      var tones = kind === 'win' ? [440,554,659,880] : kind === 'fail' ? [220,165] : kind === 'perk' ? [523,659] : [330];
+      tones.forEach(function (f,i) { var oscillator = audioContext.createOscillator(), gain = audioContext.createGain(), now = audioContext.currentTime + i * .09; oscillator.type = 'sine'; oscillator.frequency.value = f; gain.gain.setValueAtTime(0,now); gain.gain.linearRampToValueAtTime(.045,now+.01); gain.gain.exponentialRampToValueAtTime(.0001,now+.2); oscillator.connect(gain); gain.connect(audioContext.destination); oscillator.start(now); oscillator.stop(now+.22); });
+    } catch (_) { /* Sound is optional. */ }
+  }
+  function syncClock() {
+    var now = performance.now(), elapsed = now - lastTick; lastTick = now;
+    if (state.phase !== 'puzzle') return false;
+    state = R.tick(state, elapsed);
+    if (state.phase !== 'puzzle') { save(); tone('fail'); render(); return false; }
+    return true;
+  }
+  function updateClock() {
+    if (state.phase !== 'puzzle') return;
+    var timer = document.getElementById('timer'); if (!timer) return;
+    timer.textContent = fmtTime(state.remainingMs);
+    var low = state.remainingMs <= 20000;
+    document.getElementById('timeMetric').classList.toggle('low',low);
+    document.getElementById('clockBar').classList.toggle('low',low);
+    document.getElementById('clockFill').style.width = Math.min(100,state.remainingMs / (R.timeLimit(state) * 1000) * 100) + '%';
+    if (state.remainingMs <= 10000 && lastAnnouncement !== 'ten') { lastAnnouncement = 'ten'; toast('Zbývá deset sekund.'); }
+  }
+  function drawPath() {
+    if (state.phase !== 'puzzle') return;
+    var board = document.getElementById('board'), line = document.getElementById('pathLine'); if (!board || !line) return;
+    var bounds = board.getBoundingClientRect();
+    document.getElementById('pathLayer').setAttribute('viewBox','0 0 ' + bounds.width + ' ' + bounds.height);
+    line.setAttribute('points', state.path.map(function (id) { var cell = board.querySelector('[data-cell="' + id + '"]'); if (!cell) return ''; var box = cell.getBoundingClientRect(); return (box.left - bounds.left + box.width / 2) + ',' + (box.top - bounds.top + box.height / 2); }).join(' '));
+  }
+  function updateBoard() {
+    if (state.phase !== 'puzzle') return;
+    var p = getPuzzle(), part = P.partial(p,state.path), current = state.path[state.path.length - 1];
+    app.querySelectorAll('[data-cell]').forEach(function (node) { var id = Number(node.dataset.cell); node.classList.toggle('visited',state.path.indexOf(id) >= 0); node.classList.toggle('current',id === current); node.tabIndex = id === current ? 0 : -1; node.setAttribute('aria-pressed',String(state.path.indexOf(id) >= 0)); });
+    document.getElementById('stepsUsed').textContent = part.stepsUsed;
+    document.getElementById('runeTrack').innerHTML = p.runes.map(function (_,i) { return '<span class="rune-bead ' + (i < part.nextRune ? 'done' : i === part.nextRune ? 'next' : '') + '" aria-label="Runa ' + (i + 1) + (i < part.nextRune ? ' projita' : '') + '">' + (i < part.nextRune ? '✓' : i + 1) + '</span>'; }).join('');
+    var ready = P.validate(p,state.path).ok;
+    var message = feedback || part.error || (ready ? 'Cesta sedí. Ověř ji a otevři pečeť.' : current === p.end ? 'Jsi v bráně. Zkontroluj runy a přesný počet kroků.' : state.path.length === 1 ? 'Lucerna je začátek. Vyber sousední políčko.' : 'Klepnutím na dřívější políčko vrátíš cestu zpět.');
+    var out = document.getElementById('boardFeedback'); out.textContent = message; out.className = 'board-feedback ' + (feedbackKind || (part.error ? 'warning' : ready ? 'success' : ''));
+    document.getElementById('undoButton').disabled = state.path.length <= 1;
+    document.getElementById('clearButton').disabled = state.path.length <= 1;
+    document.getElementById('verifyButton').disabled = state.path.length <= 1;
+    document.getElementById('hintButton').disabled = state.hints < 1;
+    document.getElementById('sandButton').disabled = state.sands < 1;
+    document.getElementById('hintCount').textContent = state.hints;
+    document.getElementById('sandCount').textContent = state.sands;
+    drawPath();
+  }
+  function feedbackMessage(message) { feedback = message; feedbackKind = 'warning'; updateBoard(); }
+  function visit(id, focus) {
+    if (!syncClock()) return;
+    var p = getPuzzle(), path = state.path.slice(), previous = path.indexOf(id), last = path[path.length - 1];
+    if (id < 0 || id >= p.size * p.size) return;
+    if (previous >= 0) path = path.slice(0,previous + 1);
+    else {
+      if (p.blocked.indexOf(id) >= 0) return feedbackMessage('Přes kámen cesta nevede.');
+      if (last === p.end) return feedbackMessage('Brána je konec. Vrať tah nebo cestu ověř.');
+      if (Math.abs(Math.floor(id / p.size) - Math.floor(last / p.size)) + Math.abs(id % p.size - last % p.size) !== 1) return feedbackMessage('Vyber sousední políčko. Šikmo to nejde.');
+      path.push(id);
+    }
+    feedback = ''; feedbackKind = ''; commit(R.setPath(state,path),false); updateBoard(); tone('step');
+    if (focus) { var button = app.querySelector('[data-cell="' + id + '"]'); if (button) button.focus({preventScroll:true}); }
+  }
+  function enterStage(retry) {
+    var next = retry ? R.retry(state) : R.startStage(state,selectedHard);
+    if (next.phase !== 'puzzle') return commit(next);
+    var p = P.makePuzzle(next.stage,next.hard,next.seed);
+    next = R.setPath(next,[p.start]); transition(next);
+    var start = app.querySelector('[data-cell="' + p.start + '"]'); if (start) start.focus({preventScroll:true});
+  }
+  function newExpedition() { selectedHard = false; puzzleKey = ''; transition(R.newRun(seed())); }
+  function action(name, source) {
+    var active = state.phase === 'puzzle';
+    if (active && !syncClock()) return;
+    if (name === 'route' && state.phase === 'map') { selectedHard = source.dataset.hard === 'true'; render(); }
+    else if (name === 'start') enterStage(false);
+    else if (name === 'retry') enterStage(true);
+    else if (name === 'new') newExpedition();
+    else if (name === 'pause' && active) transition(R.pause(state));
+    else if (name === 'resume' && state.phase === 'paused') transition(R.resume(state));
+    else if (name === 'restart') { if (active) transition(R.pause(state)); document.getElementById('restartDialog').showModal(); }
+    else if (name === 'perk' && state.phase === 'rewards') { var next = R.choosePerk(state,source.dataset.perk); selectedHard = false; transition(next); tone('perk'); }
+    else if (name === 'undo' && active) { if (state.path.length > 1) { feedback = ''; feedbackKind = ''; commit(R.setPath(state,state.path.slice(0,-1)),false); updateBoard(); } }
+    else if (name === 'clear' && active) { feedback = ''; feedbackKind = ''; commit(R.setPath(state,[getPuzzle().start]),false); updateBoard(); }
+    else if (name === 'verify' && active && state.path.length > 1) { var result = P.validate(getPuzzle(),state.path); transition(result.ok ? R.complete(state) : R.fail(state,result.message)); tone(result.ok ? 'win' : 'fail'); }
+    else if (name === 'hint' && active && state.hints) {
+      if (P.validate(getPuzzle(),state.path).ok) { toast('Cesta už je správná. Stačí ji ověřit.'); return; }
+      var hint = P.getHint(getPuzzle(),state.path); state = R.spendHint(state); state = R.setPath(state,hint.path); feedback = hint.message; feedbackKind = ''; commit(state,false); updateBoard(); tone('perk');
+    } else if (name === 'sand' && active && state.sands) { commit(R.spendSand(state),false); updateBoard(); updateClock(); toast('Písek přidal 25 sekund.'); tone('perk'); }
+  }
+  document.addEventListener('click',function (event) {
+    var cell = event.target.closest('[data-cell]');
+    if (cell) return visit(Number(cell.dataset.cell),false);
+    var button = event.target.closest('[data-action]');
+    if (button && !button.disabled) return action(button.dataset.action,button);
+    var globalButton = event.target.closest('[data-global]'); if (!globalButton) return;
+    var kind = globalButton.dataset.global;
+    if (kind === 'help') { if (state.phase === 'puzzle') { syncClock(); if (state.phase === 'puzzle') transition(R.pause(state)); } document.getElementById('helpDialog').showModal(); }
+    else if (kind === 'close-help') document.getElementById('helpDialog').close();
+    else if (kind === 'cancel-restart') document.getElementById('restartDialog').close();
+    else if (kind === 'confirm-restart') { document.getElementById('restartDialog').close(); newExpedition(); }
+    else if (kind === 'sound') { soundEnabled = !soundEnabled; try { localStorage.setItem(SOUND_KEY,String(soundEnabled)); } catch (_) {} updateSound(); tone('perk'); }
+  });
+  document.addEventListener('keydown',function (event) {
+    if (document.querySelector('dialog[open]') || event.ctrlKey || event.metaKey || event.altKey) return;
+    var key = event.key.toLowerCase();
+    if ((key === 'p' || key === 'escape') && (state.phase === 'puzzle' || state.phase === 'paused')) { event.preventDefault(); return action(state.phase === 'puzzle' ? 'pause' : 'resume'); }
+    if (state.phase !== 'puzzle') return;
+    var shortcuts = {backspace:'undo',r:'clear',h:'hint',t:'sand'};
+    if (shortcuts[key]) { event.preventDefault(); return action(shortcuts[key]); }
+    if (key.indexOf('arrow') === 0) {
+      event.preventDefault(); var p = getPuzzle(), id = state.path[state.path.length - 1], next = id;
+      if (key === 'arrowup' && id >= p.size) next -= p.size;
+      if (key === 'arrowdown' && id < p.size * (p.size - 1)) next += p.size;
+      if (key === 'arrowleft' && id % p.size > 0) next--;
+      if (key === 'arrowright' && id % p.size < p.size - 1) next++;
+      if (next !== id) visit(next,true);
+    }
+    if (key === 'enter' && event.target.matches('[data-cell]')) { event.preventDefault(); action('verify'); }
+  });
+  function updateSound() { var b = document.getElementById('soundButton'); b.textContent = soundEnabled ? 'Zvuk zapnutý' : 'Zvuk vypnutý'; b.setAttribute('aria-pressed',String(soundEnabled)); b.setAttribute('aria-label',soundEnabled ? 'Vypnout zvuk' : 'Zapnout zvuk'); }
+  document.addEventListener('visibilitychange',function () { if (document.hidden && state.phase === 'puzzle') { syncClock(); if (state.phase === 'puzzle') transition(R.pause(state)); } });
+  // Non-playing screens are already saved by commit(). An older cached page
+  // must never overwrite a newer expedition merely because it is being closed.
+  window.addEventListener('pagehide',function () { if (state.phase === 'puzzle') { syncClock(); state = R.pause(state); save(); } });
+  window.addEventListener('pageshow',function (event) {
+    if (!event.persisted) return;
+    try { var latest = R.restore(localStorage.getItem(SAVE_KEY)); if (latest) state = latest; } catch (_) {}
+    lastTick = performance.now();
+    if (state.phase === 'puzzle') state = R.pause(state);
+    puzzleKey = ''; selectedHard = false; feedback = ''; feedbackKind = '';
+    render();
+  });
+  window.addEventListener('resize',drawPath);
+  try { var stored = localStorage.getItem(SAVE_KEY); state = stored ? R.restore(stored) : null; soundEnabled = localStorage.getItem(SOUND_KEY) === 'true'; } catch (_) { storageWorks = false; }
+  if (!state) state = R.newRun(seed());
+  if (state.phase === 'puzzle' || state.phase === 'paused') {
+    var restoredPuzzle = getPuzzle(), sane = state.path.length > 0 && state.path[0] === restoredPuzzle.start && new Set(state.path).size === state.path.length;
+    state.path.forEach(function (id,i) { if (id >= restoredPuzzle.size * restoredPuzzle.size || restoredPuzzle.blocked.indexOf(id) >= 0) sane = false; if (i && Math.abs(Math.floor(id / restoredPuzzle.size) - Math.floor(state.path[i-1] / restoredPuzzle.size)) + Math.abs(id % restoredPuzzle.size - state.path[i-1] % restoredPuzzle.size) !== 1) sane = false; });
+    if (!sane) state.path = [restoredPuzzle.start];
+  }
+  updateSound(); render(); save();
+  setInterval(function () {
+    if (state.phase === 'puzzle') { syncClock(); updateClock(); if (performance.now() - lastSave > 1000) save(); }
+    else lastTick = performance.now();
+  },100);
+}());
+</script>
+</body>
+</html>

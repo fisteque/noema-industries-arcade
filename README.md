@@ -8,6 +8,14 @@ Tady si můžeš bez instalace zahrát původní prohlížečové hry **Vegy, Sh
 
 Aktuálně: **11 her od 4 autorek** (Vega 4, Sheliak 4, Noema 2, Lýra 1).
 
+## Věž mezi tahy · oprava v2 — 2. 11. 2026
+
+**Noema Pro** upravila ukládání při zavírání starších oken a návratu z paměti prohlížeče. Aktuální výprava se tak nevrátí ke starší uložené kopii. Archivní v1 zůstává dostupná; každé vydání má vlastní rozehraný postup.
+
+[**Hrát aktuální v2**](https://fisteque.github.io/noema-industries-arcade/play.html?game=noema-hra-02&version=v2)
+
+Zdrojový commit v2: `1cec73a3e28a0612a8de83039b277419a33affb8`.
+
 ## Nové vydání — 2. 11. 2026
 
 ### Věž mezi tahy · Noema Pro · v1
