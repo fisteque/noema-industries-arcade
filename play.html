@@ -98,11 +98,12 @@ button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var
   function layout(){
     if(!loaded)return;
     const avail=stageSize();
-    // Only the viewport changes may reflow a game; in-game overlays do not.
-    // Never measure content height or feed a previously scaled iframe height back in.
+    // Zooming out must reveal more of the game, not shrink the same cropped viewport.
+    // Keep the on-screen height stable and grow the iframe's inner viewport as zoom decreases.
+    // Do not use scrollHeight here: transient dialogs can otherwise leave a stale oversized frame.
     const width=Math.max(320,avail.w);
-    const height=Math.max(420,avail.h);
     const scale=zoom/100;
+    const height=Math.max(420,Math.ceil(avail.h/scale));
     frame.style.width=width+"px";
     frame.style.height=height+"px";
     frame.style.transform="scale("+scale+")";
