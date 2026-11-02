@@ -20,7 +20,7 @@ button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var
 .game-info strong{font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .game-info small{color:var(--muted);font-size:.76rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end}
-.controls button,.controls a{display:inline-flex;align-items:center;justify-content:center;min-height:35px;padding:6px 12px;border:1px solid var(--line);border-radius:9px;background:#18293a;color:var(--text);white-space:nowrap;text-decoration:none;cursor:pointer}
+.controls button,.controls a{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:35px;padding:6px 12px;border:1px solid var(--line);border-radius:9px;background:#18293a;color:var(--text);white-space:nowrap;text-decoration:none;cursor:pointer}
 .controls button:hover,.controls a:hover{border-color:var(--mint);background:#25384a}
 .controls button[aria-pressed="true"]{background:#e1f0e7;color:#11232b;border-color:#e1f0e7;font-weight:800}
 .zoom-controls{display:inline-flex;align-items:center;gap:3px;flex:none;padding:4px;border:1px solid #b1c5d055;border-radius:999px;background:#091827a8;backdrop-filter:blur(9px)}
@@ -37,8 +37,26 @@ button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var
 .status-bar{display:flex;justify-content:space-between;gap:12px;flex:none;padding:5px 14px;border-top:1px solid var(--line);color:var(--muted);font-size:.76rem;min-height:26px}
 .status-bar span:last-child{text-align:right}
 #app:fullscreen{width:100%;height:100%;height:100dvh}
-@media(max-width:800px){.toolbar{gap:10px;padding:8px 10px;flex-wrap:wrap}.game-info{flex-basis:calc(100% - 90px)}.controls{width:100%;justify-content:center}.controls button,.controls a{flex:1;padding:6px 8px}.status-bar span:last-child{display:none}}
-@media(max-width:460px){.controls{gap:5px}.controls>button,.controls>a{font-size:.78rem;padding:6px 5px}.zoom-controls button{min-width:36px;min-height:36px;padding:4px 8px}#stage{padding:6px}}
+@media(max-width:800px){
+  .toolbar{gap:8px;padding:8px 10px;flex-wrap:wrap}
+  .game-info{flex:1 1 0;min-width:0}
+  /* One mobile row: zoom, fullscreen icon, original-game icon. */
+  .controls{width:100%;justify-content:center;gap:8px;flex-wrap:nowrap}
+  .controls .control-label{display:none}
+  .controls .zoom-controls{flex:0 0 auto}
+  .controls .zoom-controls button{flex:0 0 auto;min-width:42px;min-height:42px;padding:4px 7px}
+  .controls .zoom-controls #zoom-reset{min-width:64px}
+  .controls>button,.controls>a{flex:0 0 44px;width:44px;min-width:44px;min-height:44px;padding:7px;font-size:1.2rem}
+  .status-bar span:last-child{display:none}
+}
+@media(max-width:460px){
+  .controls{gap:5px}
+  .controls .zoom-controls{gap:0;padding:2px}
+  .controls .zoom-controls button{min-width:40px;min-height:40px;padding:4px 5px}
+  .controls .zoom-controls #zoom-reset{min-width:60px}
+  .controls>button,.controls>a{flex-basis:42px;width:42px;min-width:42px;min-height:42px}
+  #stage{padding:6px}
+}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
@@ -53,8 +71,8 @@ button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var
 <button type="button" id="zoom-reset" title="Vrátit měřítko na 100 %" aria-label="Vrátit měřítko na 100 %">100 %</button>
 <button type="button" id="zoom-in" title="Zvětšit měřítko o 10 %" aria-label="Zvětšit měřítko o 10 %">+</button>
 </div>
-<button type="button" id="fullscreen-button" aria-pressed="false" title="Rozšířit na celou obrazovku">⛶ Celá obrazovka</button>
-<a id="original-link" href="./" target="_blank" rel="noopener noreferrer" title="Otevřít původní hru bez herního režimu">Původní ↗</a>
+<button type="button" id="fullscreen-button" aria-pressed="false" aria-label="Celá obrazovka" title="Rozšířit na celou obrazovku"><span id="fullscreen-icon" aria-hidden="true">⛶</span><span class="control-label">Celá obrazovka</span></button>
+<a id="original-link" href="./" target="_blank" rel="noopener noreferrer" aria-label="Otevřít původní hru bez herního režimu" title="Otevřít původní hru bez herního režimu"><span class="control-label">Původní</span><span aria-hidden="true">↗</span></a>
 </nav>
 </header>
 <main id="stage" aria-label="Herní obrazovka" aria-busy="true">
@@ -132,7 +150,11 @@ button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var
   document.addEventListener("fullscreenchange",()=>{
     const active=!!document.fullscreenElement;
     fullscreenButton.setAttribute("aria-pressed",String(active));
-    fullscreenButton.textContent=active?"⤢ Ukončit celou obrazovku":"⛶ Celá obrazovka";
+    $("fullscreen-icon").textContent=active?"⤢":"⛶";
+    const label=active?"Ukončit celou obrazovku":"Celá obrazovka";
+    fullscreenButton.querySelector(".control-label").textContent=label;
+    fullscreenButton.setAttribute("aria-label",label);
+    fullscreenButton.title=label;
     queueLayout();
   });
   window.addEventListener("resize",queueLayout);
