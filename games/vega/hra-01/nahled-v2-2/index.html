@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#202925">
+  <meta name="description" content="Padla! Malá hra od Vegy o velkém umění odejít z práce. Pět směn, jedna dílna a tři hodiny u rybníka.">
+  <title>Padla! · vývojový náhled v2-2 — Vega</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="engine.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div style="padding:.5rem 1rem;background:#202925;color:white;text-align:center;font:600 .9rem system-ui"><a style="color:inherit" href="../../../../#rozpracovane">← Rozpracované hry</a> · Padla! · vývojový náhled v2-2</div>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Noema Industries, Padla" id="brand"><span class="brand-mark" aria-hidden="true">n<span>i</span></span><span>NOEMA<br><b>INDUSTRIES</b></span></a>
+    <span class="header-note">ODDĚLENÍ ZÍSKÁVÁNÍ VOLNÉHO ČASU</span>
+    <nav aria-label="Nabídka hry"><button id="sound" class="icon-button" aria-pressed="false">Zvuk: vyp.</button><button id="help" class="icon-button">Jak hrát <span>?</span></button></nav>
+  </header>
+  <main id="app">
+    <section class="hero" aria-labelledby="title">
+      <div><p class="eyebrow">MALÁ DÍLNA. VELKÉ PLÁNY. TVOJE ODPOLEDNE.</p><h1 id="title">Padla<span>!</span></h1><p class="tagline">Vyrob si čas. A pak si ho vezmi.</p></div>
+      <div class="mission"><span class="mission-icon" aria-hidden="true">↗</span><div><p class="eyebrow">PÁTEČNÍ PLÁN</p><strong>3 hodiny u rybníka.</strong><p>Všechno hotové. Zavřeno nejpozději ve 13:00.</p></div></div>
+    </section>
+    <div class="game-shell">
+      <div class="week-bar"><div id="days" class="days" aria-label="Průběh týdne"></div><div class="resources"><div><span class="resource-icon" aria-hidden="true">⬡</span><strong id="bolts">6</strong><span>součástek</span></div><div><span class="resource-icon" aria-hidden="true">☀</span><strong id="free">0 h</strong><span>už pro sebe</span></div></div></div>
+      <div class="play-layout">
+        <section class="workshop" aria-label="Dílna">
+          <div class="shift-bar"><div><span id="day-label" class="eyebrow">PONDĚLÍ · SMĚNA 01</span><span id="clock" class="clock">08:00</span></div><div class="shift-track-wrap"><div class="shift-track" id="track" aria-label="Uplynulý čas směny"></div><div class="shift-labels"><span>08:00</span><span id="remaining-time">Do úklidu 7 h 30</span><span>16:00</span></div></div></div>
+          <div class="scene-wrap"><div class="scene-label"><span class="live-dot"></span> DÍLNA Č. 01 <span class="scene-label-right">ČAS BĚŽÍ JEN PO TVÉ AKCI</span></div><div id="scene" class="scene"></div><div class="scene-caption"><span id="scene-message">Pomocníci ještě spí v krabicích.</span><span>RYBNÍK JE TÍMHLE SMĚREM ↗</span></div></div>
+          <div id="stations" class="stations" aria-label="Vyber pracoviště"></div>
+          <div id="notice" class="notice" role="status" aria-live="polite"></div>
+          <div id="prep-row" hidden><button id="prep" class="secondary"><span>Zabalit zásilku na zítřek</span><small>30 min · ráno ji jen předáš</small></button></div><div class="shift-actions"><button id="wait" class="secondary"><span>Nechat běžet</span><small>30 min dohledu</small></button><button id="close" class="primary"><span>Padla. Jdu k rybníku ↗</span><small id="close-detail">Nejdřív dokonči zakázky</small></button></div>
+        </section>
+        <aside class="sidebar" aria-label="Ovládání vybraného pracoviště"><section id="inspector" class="inspector"></section><section class="offer" id="offer"></section><div class="rollback"><div class="ghost-mini" aria-hidden="true">♧</div><div><strong>Rollback</strong><p id="rollback-note">Jednou za směnu vrátí poslední tah.</p></div><button id="undo" aria-label="Vrátit poslední tah pomocí Rollback">↶</button></div></aside>
+      </div>
+    </div>
+    <section class="journal" aria-label="Dílenský zápisník"><div class="journal-heading"><h2><span aria-hidden="true">↳</span> Co se právě stalo</h2><button id="restart" class="text-button">Nový týden ↺</button></div><ol id="log"></ol></section>
+    <footer><span>NOEMA INDUSTRIES <span class="footer-cross">×</span> VEGA</span><span>Hra o umění skončit. <span class="footer-cross">/</span> 2026</span></footer>
+  </main>
+  <dialog id="dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><div class="no-script">K této hře je potřeba zapnout JavaScript. Všechno běží přímo v prohlížeči, bez připojení.</div></noscript>
+</body>
+</html>
