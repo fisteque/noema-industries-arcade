@@ -33,13 +33,13 @@ Deset časovaných logických hádanek vede od první brány až k věži. Spoj 
 1. Otevři [hernu](https://fisteque.github.io/noema-industries-arcade/).
 2. Vyber si autorku nebo hru — anebo stiskni **🎲 Vybrat náhodnou hru**. Náhodný výběr respektuje právě zvolený filtr autorek.
 3. Hra se otevře ve společném herním režimu:
-   - **Přizpůsobit** — výchozí pokus o vměstnání hry do dostupného okna;
-   - **100 %** — nezmenšená hra, která se může posouvat;
+   - **− / +** — ruční zmenšení nebo zvětšení hry po 10 % (rozsah 50–150 %);
+   - **100 %** — ukazuje aktuální měřítko a kliknutím jej vrátí na 100 %;
    - **Celá obrazovka** — rozšíření herního režimu na celou obrazovku (po kliknutí; ukončení klávesou Esc);
    - **Původní ↗** — otevře původní HTML hry bez společného obalu.
 4. Tlačítko **← Herna** tě vrátí do katalogu.
 
-Přizpůsobení není kouzlo: některé rozsáhlé hry potřebují i tak posouvání, aby zůstal text čitelný. Hry běží přímo v prohlížeči; některé si uchovávají rozehraný postup v jeho místním úložišti.
+Měřítko se při otevření nápovědy nebo jiných herních vrstev samo nemění. Při větším přiblížení se hra může posouvat; pro maximální prostor lze použít celou obrazovku. Ovládací lišta měřítka je poloprůhledná. Hry běží přímo v prohlížeči; některé si uchovávají rozehraný postup v jeho místním úložišti.
 
 ## Pro autorky: živá herna, ne povinná směna
 
@@ -53,7 +53,7 @@ Vystavení hry na veřejné Pages je samostatné rozhodnutí: samotná existence
 
 ```text
 index.html                 # katalog her + tlačítko náhodné hry
-play.html                  # společný adaptivní herní režim
+play.html                  # společný herní režim s ručním měřítkem
 catalog.json               # seznam her, verzí a cest ke spuštění
 .nojekyll                  # statické soubory bez transformací Jekyllu
 games/
@@ -88,7 +88,7 @@ Každá `v1` je **první vydání v Arcade**, ne nutně první vývojová podoba
 1. Připrav do `games/<autorka>/hra-XX/vN/` pouze **kompletní soubory potřebné ke hraní**. Pokud HTML odkazuje na vlastní CSS nebo JavaScript, musí být ve správném relativním umístění. Zkontroluj hru přímo, nejen jako náhled zdrojového kódu na GitHubu.
 2. Přidej do [`catalog.json`](catalog.json) záznam s neměnným `id` hry (např. `vega-hra-01`), `author`, `title` a verzí v `versions` obsahující `version`, `play` a `published`. U existující hry rozšiř pole `versions` bez mazání starých vydání.
 3. V [`index.html`](index.html) uprav či přidej kartu hry. Karty nyní **nejsou generované automaticky z katalogu**: chceš-li změnit nabízenou verzi na hlavní stránce, uprav její odkaz na `play.html?game=<id>&version=vN`. Tlačítko náhodné hry vybírá z viditelných karet.
-4. Ověř jak přímou adresu `games/.../vN/index.html`, tak herní režim `play.html?game=<id>&version=vN`, přepínání měřítka a návrat do herny. Ověř také výsledek nasazení **GitHub Pages**.
+4. Ověř jak přímou adresu `games/.../vN/index.html`, tak herní režim `play.html?game=<id>&version=vN`, tlačítka + / −, návrat na 100 % a návrat do herny. Ověř také výsledek nasazení **GitHub Pages**.
 
 Katalog tak může nabízet novou verzi, zatímco stará zůstává dostupná přímou adresou. U pokusných verzí je vhodné výslovně napsat, že jde o experiment, ne hotové vydání.
 

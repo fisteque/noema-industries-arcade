@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0d1522">
-<meta name="description" content="Noema Industries Arcade — herní režim s přizpůsobením oknu a celou obrazovkou.">
+<meta name="description" content="Noema Industries Arcade — herní režim s ručním měřítkem a celou obrazovkou.">
 <title>Hrát · Noema Industries Arcade</title>
 <style>
 :root{color-scheme:dark;--bg:#0d1522;--text:#f0f5f4;--muted:#bdc9d3;--line:#304154;--gold:#efce78;--mint:#91d4bf}
@@ -13,7 +13,7 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden}
 body{background:var(--bg);color:var(--text);font:14px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
 button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 #app{display:flex;flex-direction:column;height:100vh;height:100dvh;min-height:0;background:radial-gradient(ellipse at 15% 0%,#26384b,transparent 55%),var(--bg)}
-.toolbar{display:flex;flex:none;align-items:center;gap:14px;padding:9px 16px;border-bottom:1px solid var(--line);background:#121f2eeb;min-height:58px}
+.toolbar{display:flex;flex:none;align-items:center;gap:14px;padding:9px 16px;border-bottom:1px solid var(--line);background:#121f2ebe;backdrop-filter:blur(10px);min-height:58px}
 .back{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;color:var(--gold);text-decoration:none;font-weight:800}
 .back:hover{text-decoration:underline}
 .game-info{display:flex;flex:1;flex-direction:column;justify-content:center;min-width:0}
@@ -23,6 +23,11 @@ button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var
 .controls button,.controls a{display:inline-flex;align-items:center;justify-content:center;min-height:35px;padding:6px 12px;border:1px solid var(--line);border-radius:9px;background:#18293a;color:var(--text);white-space:nowrap;text-decoration:none;cursor:pointer}
 .controls button:hover,.controls a:hover{border-color:var(--mint);background:#25384a}
 .controls button[aria-pressed="true"]{background:#e1f0e7;color:#11232b;border-color:#e1f0e7;font-weight:800}
+.zoom-controls{display:inline-flex;align-items:center;gap:3px;flex:none;padding:4px;border:1px solid #b1c5d055;border-radius:999px;background:#091827a8;backdrop-filter:blur(9px)}
+.zoom-controls button{min-width:38px;min-height:36px;padding:4px 9px;border:0;border-radius:999px;background:transparent;color:var(--text);font-weight:800;font-size:1.14rem}
+.zoom-controls button:hover{border-color:transparent;background:#ffffff26}
+.zoom-controls button:disabled{opacity:.35;cursor:not-allowed;background:transparent}
+.zoom-controls #zoom-reset{min-width:66px;font-size:.88rem;font-variant-numeric:tabular-nums}
 #stage{display:flex;flex:1;min-height:0;min-width:0;align-items:safe center;justify-content:safe center;overflow:auto;position:relative;overscroll-behavior:contain;padding:10px;background:radial-gradient(ellipse at center,#263549 0%,#111b2c 78%)}
 .canvas{position:relative;flex:none;margin:auto;width:100%;height:100%;background:#111c2b;box-shadow:0 5px 32px #0007;overflow:visible}
 #game-frame{display:block;position:absolute;inset:0;width:100%;height:100%;border:0;background:#0c1526;transform-origin:top left}
@@ -33,7 +38,7 @@ button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var
 .status-bar span:last-child{text-align:right}
 #app:fullscreen{width:100%;height:100%;height:100dvh}
 @media(max-width:800px){.toolbar{gap:10px;padding:8px 10px;flex-wrap:wrap}.game-info{flex-basis:calc(100% - 90px)}.controls{width:100%;justify-content:center}.controls button,.controls a{flex:1;padding:6px 8px}.status-bar span:last-child{display:none}}
-@media(max-width:460px){.controls{gap:5px}.controls button,.controls a{font-size:.78rem;padding:6px 5px}#stage{padding:6px}}
+@media(max-width:460px){.controls{gap:5px}.controls>button,.controls>a{font-size:.78rem;padding:6px 5px}.zoom-controls button{min-width:36px;min-height:36px;padding:4px 8px}#stage{padding:6px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
@@ -43,8 +48,11 @@ button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var
 <a class="back" href="./" aria-label="Zpět do herny">← 🦆 Herna</a>
 <div class="game-info"><strong id="game-title">Načítám hru…</strong><small id="game-credit">Noema Industries Arcade</small></div>
 <nav class="controls" aria-label="Nastavení zobrazení">
-<button type="button" id="fit-button" aria-pressed="true" title="Pokusit se vměstnat celou hru do okna">↙ Přizpůsobit</button>
-<button type="button" id="actual-button" aria-pressed="false" title="Původní velikost 100 %, případně s posouváním">100 %</button>
+<div class="zoom-controls" role="group" aria-label="Ruční měřítko hry">
+<button type="button" id="zoom-out" title="Zmenšit měřítko o 10 %" aria-label="Zmenšit měřítko o 10 %">−</button>
+<button type="button" id="zoom-reset" title="Vrátit měřítko na 100 %" aria-label="Vrátit měřítko na 100 %">100 %</button>
+<button type="button" id="zoom-in" title="Zvětšit měřítko o 10 %" aria-label="Zvětšit měřítko o 10 %">+</button>
+</div>
 <button type="button" id="fullscreen-button" aria-pressed="false" title="Rozšířit na celou obrazovku">⛶ Celá obrazovka</button>
 <a id="original-link" href="./" target="_blank" rel="noopener noreferrer" title="Otevřít původní hru bez herního režimu">Původní ↗</a>
 </nav>
@@ -53,17 +61,17 @@ button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var
 <div id="canvas" class="canvas"><iframe id="game-frame" title="Hra Noema Industries" allowfullscreen></iframe></div>
 <div id="notice" class="notice" role="status">Načítám hru…</div>
 </main>
-<footer class="status-bar"><span id="scale-status" aria-live="polite">Automatické přizpůsobení</span><span>Při velmi malém prostoru může zůstat posouvání kvůli čitelnosti · Esc ukončí celou obrazovku</span></footer>
+<footer class="status-bar"><span id="scale-status" aria-live="polite">Měřítko: 100 % · + / − mění velikost</span><span>Hra se může posouvat · Esc ukončí celou obrazovku</span></footer>
 </div>
 <script>
 (() => {
   "use strict";
   const $=id=>document.getElementById(id);
   const app=$("app"),stage=$("stage"),canvas=$("canvas"),frame=$("game-frame"),notice=$("notice");
-  const fitButton=$("fit-button"),actualButton=$("actual-button"),fullscreenButton=$("fullscreen-button");
-  const status=$("scale-status"),original=$("original-link");
-  let mode="fit",loaded=false,queued=false,innerObserver=null;
-  let lastWidth=0,lastStageHeight=0;
+  const outButton=$("zoom-out"),resetButton=$("zoom-reset"),inButton=$("zoom-in");
+  const fullscreenButton=$("fullscreen-button"),status=$("scale-status"),original=$("original-link");
+  const MIN_ZOOM=50,MAX_ZOOM=150,ZOOM_STEP=10;
+  let zoom=100,loaded=false,queued=false;
 
   function fail(message) {
     notice.hidden=false;
@@ -81,74 +89,41 @@ button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var
     requestAnimationFrame(()=>{queued=false;layout();});
   }
   function stageSize(){
-    const padding=parseFloat(getComputedStyle(stage).paddingLeft)||0;
-    const vertical=parseFloat(getComputedStyle(stage).paddingTop)||0;
-    return {w:Math.max(1,Math.floor(stage.clientWidth-2*padding-2)),
-            h:Math.max(1,Math.floor(stage.clientHeight-2*vertical-2))};
-  }
-  function setCanvas(w,h){
-    canvas.style.width=Math.ceil(w)+"px";
-    canvas.style.height=Math.ceil(h)+"px";
+    // Bounds are stable even when the stage gains scrollbars at zoom > 100 %.
+    const bounds=stage.getBoundingClientRect(),style=getComputedStyle(stage);
+    const pad=(side)=>parseFloat(style.getPropertyValue("padding-"+side))||0;
+    return {w:Math.max(1,Math.floor(bounds.width-pad("left")-pad("right")-2)),
+            h:Math.max(1,Math.floor(bounds.height-pad("top")-pad("bottom")-2))};
   }
   function layout(){
     if(!loaded)return;
     const avail=stageSize();
-    if(mode==="actual"){
-      frame.style.transform="none";
-      frame.style.width=avail.w+"px";
-      frame.style.height=avail.h+"px";
-      setCanvas(avail.w,avail.h);
-      lastWidth=0;
-      status.textContent="Původní velikost 100 % · posouvání uvnitř hry";
-      return;
-    }
-    const width=Math.max(340,avail.w);
-    if(lastWidth!==width||Math.abs(lastStageHeight-avail.h)>2){
-      frame.style.transform="none";
-      frame.style.width=width+"px";
-      frame.style.height=Math.max(580,avail.h)+"px";
-      lastWidth=width;lastStageHeight=avail.h;
-    }
-    let doc;
-    try{doc=frame.contentDocument;if(!doc||!doc.documentElement)throw Error("Bez přístupu k dokumentu");}
-    catch(_e){
-      frame.style.transform="none";
-      setCanvas(avail.w,avail.h);
-      frame.style.width=avail.w+"px";frame.style.height=avail.h+"px";
-      status.textContent="Automatické měřítko není dostupné · hra zůstává na 100 %";
-      return;
-    }
-    // Same-origin iframe: measure the game's full content without editing published v1.
-    let height=Math.max(580,avail.h,Math.ceil(parseFloat(frame.style.height)||0));
-    for(let i=0;i<5;i++){
-      const root=doc.documentElement,body=doc.body;
-      const required=Math.ceil(Math.max(root.scrollHeight,body?.scrollHeight||0,root.offsetHeight,body?.offsetHeight||0,avail.h));
-      if(required<=height+2)break;
-      const grown=Math.min(8000,required);
-      if(grown<=height+2)break;
-      height=grown;frame.style.height=height+"px";
-    }
-    const wanted=Math.min(1,avail.w/width,avail.h/height);
-    // Readability takes priority when a very long page cannot fit at a useful size.
-    const minimum=avail.w<=600?0.68:0.48;
-    const scale=Math.max(minimum,wanted);
+    // Only the viewport changes may reflow a game; in-game overlays do not.
+    // Never measure content height or feed a previously scaled iframe height back in.
+    const width=Math.max(320,avail.w);
+    const height=Math.max(420,avail.h);
+    const scale=zoom/100;
     frame.style.width=width+"px";
     frame.style.height=height+"px";
     frame.style.transform="scale("+scale+")";
-    setCanvas(width*scale,height*scale);
-    const percent=Math.round(scale*100);
-    status.textContent="Přizpůsobeno · "+percent+" %"+(scale>wanted+.01?" · lze posouvat":" · bez posouvání celé stránky");
+    canvas.style.width=Math.ceil(width*scale)+"px";
+    canvas.style.height=Math.ceil(height*scale)+"px";
+    resetButton.textContent=zoom+" %";
+    outButton.disabled=zoom<=MIN_ZOOM;
+    inButton.disabled=zoom>=MAX_ZOOM;
+    status.textContent="Měřítko: "+zoom+" % · + / − mění velikost";
   }
-  function selectMode(next){
-    mode=next;
-    lastWidth=0;lastStageHeight=0;
-    fitButton.setAttribute("aria-pressed",String(next==="fit"));
-    actualButton.setAttribute("aria-pressed",String(next==="actual"));
+  function setZoom(next){
+    zoom=Math.max(MIN_ZOOM,Math.min(MAX_ZOOM,next));
+    resetButton.textContent=zoom+" %";
+    outButton.disabled=zoom<=MIN_ZOOM;
+    inButton.disabled=zoom>=MAX_ZOOM;
     queueLayout();
-    frame.focus();
+    if(loaded)frame.focus();
   }
-  fitButton.addEventListener("click",()=>selectMode("fit"));
-  actualButton.addEventListener("click",()=>selectMode("actual"));
+  outButton.addEventListener("click",()=>setZoom(zoom-ZOOM_STEP));
+  resetButton.addEventListener("click",()=>setZoom(100));
+  inButton.addEventListener("click",()=>setZoom(zoom+ZOOM_STEP));
   fullscreenButton.addEventListener("click",()=>{
     const action=document.fullscreenElement?document.exitFullscreen():app.requestFullscreen();
     Promise.resolve(action).catch(()=>{status.textContent="Celou obrazovku prohlížeč nepovolil.";});
@@ -157,24 +132,12 @@ button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var
     const active=!!document.fullscreenElement;
     fullscreenButton.setAttribute("aria-pressed",String(active));
     fullscreenButton.textContent=active?"⤢ Ukončit celou obrazovku":"⛶ Celá obrazovka";
-    lastWidth=0;queueLayout();
+    queueLayout();
   });
-  window.addEventListener("resize",()=>{lastWidth=0;queueLayout();});
-  if("ResizeObserver" in window){
-    new ResizeObserver(()=>{lastWidth=0;queueLayout();}).observe(stage);
-  }
+  window.addEventListener("resize",queueLayout);
+  if("ResizeObserver" in window)new ResizeObserver(queueLayout).observe(stage);
   frame.addEventListener("load",()=>{
-    loaded=true;lastWidth=0;
-    if(innerObserver)innerObserver.disconnect();
-    try{
-      const doc=frame.contentDocument;
-      if("ResizeObserver" in window && doc?.documentElement){
-        innerObserver=new ResizeObserver(queueLayout);
-        innerObserver.observe(doc.documentElement);
-        if(doc.body)innerObserver.observe(doc.body);
-      }
-      if(doc?.fonts?.ready)doc.fonts.ready.then(queueLayout).catch(()=>{});
-    }catch(_e){/* 100% fallback in layout */ }
+    loaded=true;
     notice.hidden=true;
     stage.setAttribute("aria-busy","false");
     queueLayout();
