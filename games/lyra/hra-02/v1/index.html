@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#152335">
+  <title>Město za zavřenými dveřmi · Lýra</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+  <main id="game" class="shell" aria-live="polite">
+    <section id="titleScreen" class="title-screen">
+      <p class="eyebrow">LÝRA · HRA 02 · v1</p>
+      <h1>Město za<br><em>zavřenými dveřmi</em></h1>
+      <p class="lead">Včera tudy vedla ulice. Dnes za modrými dveřmi stojí čerstvá zeď a nad pekárnou zůstalo otevřené okno.</p>
+      <div class="door-mark" aria-hidden="true"><span></span></div>
+      <div class="title-actions">
+        <button class="primary" data-start="new">Vyjít do prvního rána</button>
+        <button id="continueBtn" class="ghost hidden" data-start="continue">Pokračovat městem</button>
+      </div>
+      <p class="small">Tři rána. Jedna hodinová věž. Cesty si pamatují hlavně to, co s nimi uděláš.</p>
+    </section>
+
+    <section id="playScreen" class="play-screen hidden">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">MĚSTO ZA ZAVŘENÝMI DVEŘMI</p>
+          <strong id="dayLabel"></strong>
+        </div>
+        <div class="tools">
+          <button data-notebook>Zápisník <kbd>Z</kbd></button>
+          <button data-reset aria-label="Začít novou cestu">↻</button>
+        </div>
+      </header>
+
+      <div class="grid">
+        <section class="map-card" aria-label="Mapa dnešní cesty">
+          <div class="map-sun" aria-hidden="true"></div>
+          <div id="map" class="map"></div>
+          <div class="bell-row">
+            <span>DO TŘETÍHO ZVONU</span>
+            <strong id="bells"></strong>
+          </div>
+        </section>
+
+        <section class="story-card">
+          <p id="place" class="place"></p>
+          <h2 id="sceneTitle"></h2>
+          <div id="story" class="story"></div>
+          <div id="choices" class="choices"></div>
+        </section>
+
+        <aside class="memory-card">
+          <p class="eyebrow">CO PŘEŠLO DO DALŠÍHO RÁNA</p>
+          <div>
+            <h3>Všimla sis</h3>
+            <ul id="facts"></ul>
+          </div>
+          <div>
+            <h3>Udělala jsi</h3>
+            <ul id="deeds"></ul>
+          </div>
+          <p class="memory-note">Pozorování samo cestu nemění. Jednání někdy ano.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="notebookTitle">
+    <section class="notebook">
+      <button class="close" data-close aria-label="Zavřít zápisník">×</button>
+      <p class="eyebrow">ZÁPISNÍK</p>
+      <h2 id="notebookTitle">Co město skutečně ukázalo</h2>
+      <div id="notebookBody"></div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
