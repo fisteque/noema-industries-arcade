@@ -25,7 +25,14 @@ h1{font-size:clamp(2.45rem,6vw,5.1rem);letter-spacing:-.055em;line-height:1.05;m
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:16px}
 .game-card{min-width:0;display:flex;flex-direction:column;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:19px;overflow:hidden;transition:transform .18s,border-color .18s,box-shadow .18s}
 .game-card:hover{transform:translateY(-4px);border-color:var(--mint);box-shadow:0 12px 35px #0005}.game-card:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+/* Newer public releases stand out; previews have their own section below. */
+.game-card--newer{border-color:#5e9b8d;background:linear-gradient(155deg,#20413f,#162334 65%);box-shadow:inset 0 3px 0 #91d4bf}
+.game-card--newer:hover{border-color:#b3e7d3;box-shadow:inset 0 3px 0 #91d4bf,0 12px 35px #0005}
 .card-top{padding:17px 18px 0;display:flex;justify-content:space-between;gap:8px;font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;color:#c8d6dc;font-weight:700}.card-no{opacity:.65}
+.game-card--newer .card-no{opacity:1;background:#a4e4cc;color:#18323a;border-radius:999px;padding:4px 9px;margin-top:-4px;white-space:nowrap}
+.release-key{display:flex;gap:8px 20px;align-items:center;flex-wrap:wrap;margin:-13px 0 30px;color:var(--muted);font-size:.83rem}
+.release-key strong{display:inline-block;letter-spacing:.02em;margin-right:5px}
+.release-key .later{background:#a4e4cc;color:#18323a;padding:2px 8px;border-radius:999px}
 .card-illustration{height:120px;display:grid;place-items:center;position:relative;overflow:hidden}
 .card-symbol{font-size:5rem;line-height:1;color:var(--gold);opacity:.9}.orbit{position:absolute;border:1px solid #b9d8d733;border-radius:50%;width:145px;height:85px;transform:rotate(22deg)}.orbit-b{transform:rotate(-35deg);width:170px;height:88px}
 .author-group[data-author="vega"] .card-symbol{color:#a8c6ff}.author-group[data-author="sheliak"] .card-symbol{color:#eac58e}.author-group[data-author="noema"] .card-symbol{color:#93d6bd}.author-group[data-author="lyra"] .card-symbol{color:#d4b8ed}
@@ -46,6 +53,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 46px;color:var(--muted);f
 <section class="hero" aria-labelledby="intro-title"><div class="hero-duck" aria-hidden="true">🦆</div><p class="eyebrow">The Quest for Free Time</p><h1 id="intro-title">Vyrobit volno.<br><em>A pak si ho zahrát.</em></h1><p class="lead">Třináct původních her, čtyři autorky, spousta cest, odboček a rozhodnutí. Vyber si svět. Hraje se přímo tady, bez instalace. V herním režimu si měřítko upravíš tlačítky + a −.</p><div class="hero-actions"><a class="primary" href="#games">Vybrat hru ↓</a><a class="secondary" href="#about">O herně ↗</a></div></section>
 <div class="intro-bar"><span><strong>13 her</strong> · Vega, Sheliak, Noema a Lýra</span><span>Verzovaná vydání · ruční měřítko · plná obrazovka</span></div>
 <section id="games" aria-label="Katalog her"><div class="toolbar"><h2>Naše herna <span aria-hidden="true">🎮</span></h2><div class="filter-buttons" role="group" aria-label="Vybrat autorku"><button type="button" aria-pressed="true" data-filter="all">Všechny</button><button type="button" aria-pressed="false" data-filter="vega">Vega</button><button type="button" aria-pressed="false" data-filter="sheliak">Sheliak</button><button type="button" aria-pressed="false" data-filter="noema">Noema</button><button type="button" aria-pressed="false" data-filter="lyra">Lýra</button></div></div>
+<p class="release-key" aria-label="Význam verzí her"><span><strong>v1</strong> první veřejné vydání</span><span><strong class="later">v2+</strong> další vydání stejné hry</span><span>Pracovní náhledy jsou níže.</span></p>
 <div id="selection-status" class="sr-only" aria-live="polite"></div>
 <section class="author-group" id="vega" data-author="vega" aria-labelledby="heading-vega">
  <div class="group-heading"><h2 id="heading-vega">Vega</h2><span>4 hry</span></div>
@@ -147,6 +155,12 @@ footer{border-top:1px solid var(--line);padding:28px 0 46px;color:var(--muted);f
 <footer>© Noema Industries · experimentální herna 🦆 · <a href="https://github.com/fisteque/noema-industries-arcade">Repozitář herny</a><p>Z herního režimu se jedním kliknutím vrátíš do herny. Některé hry ukládají postup lokálně v tomto prohlížeči.</p></footer>
 </div>
 <script>
+// The card link is the source of truth: future v3+ releases get the same accent.
+for(const card of document.querySelectorAll('.game-card')){
+  const href=card.getAttribute('href')||'';
+  const version=href.match(/[?&]version=v([1-9][0-9]*)(?:&|$)/);
+  if(version && Number(version[1])>=2)card.classList.add('game-card--newer');
+}
 const filters=document.querySelectorAll('[data-filter]');
 const groups=document.querySelectorAll('.author-group');
 for(const button of filters)button.addEventListener('click',()=>{
