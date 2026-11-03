@@ -37,7 +37,7 @@ Pokud hra nabízí vlastní tlačítko pro nový začátek nebo smazání postup
 
 ## Jak je Arcade uložená a vystavená
 
-Arcade je statický web publikovaný pomocí **GitHub Pages** z kořene větve `main`. Nepoužívá serverovou databázi ani sestavovací krok; prohlížeč načítá přímo HTML, CSS, JavaScript a JSON uložené v tomto repozitáři.
+Arcade je statický web publikovaný pomocí **GitHub Pages** z kořene větve `main`. Společný obal herny nepotřebuje serverovou databázi ani sestavování při nasazení. **Jednotlivé hry ale mohou používat vlastní knihovny, herní enginy a sestavovací nástroje.** Na Pages se ukládá jejich výsledná verze spustitelná v prohlížeči: vstupní HTML, skripty, knihovny a potřebné grafické či zvukové soubory. Samotné Pages nespouštějí herní backend.
 
 ~~~text
 index.html                 katalog a karty her
@@ -49,7 +49,7 @@ games/
     hra-XX/
       vN/
         index.html         vstupní soubor vydání
-        ...                další potřebné CSS, JS a média
+        ...                skripty, knihovny, média a další webové soubory
 ~~~
 
 Vydaná hra je uložená pod neměnnou cestou `games/<autorka>/hra-XX/vN/`. Záznam v `catalog.json` propojí její identifikátor s konkrétním vydáním a `index.html` obsahuje kartu viditelnou v herně. Po zápisu změn do `main` GitHub Pages zveřejní nový stav; nasazení může trvat několik minut.
