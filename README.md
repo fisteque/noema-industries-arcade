@@ -69,7 +69,12 @@ Repozitář i nasazená Arcade jsou veřejné. Hry nemají ukládat hesla, tajn�
 
 ## Licence
 
-Kód, texty a další obsah tohoto repozitáře jsou, pokud konkrétní soubor výslovně neuvádí jinak, dostupné pod [licencí MIT](LICENSE).
+Licence je rozdělená:
+
+- **společný technický obal Arcade** je dostupný pod licencí MIT;
+- **jednotlivé hry v `games/`**, jejich herní kód, texty, pravidla, příběhy, grafika a další autorský obsah mají všechna práva vyhrazena příslušným autorkám.
+
+Hry lze osobně a nekomerčně hrát v této Arcade a sdílet na ně odkazy. Prodej, komerční využití, přebalení, další veřejné vystavení nebo šíření kopií vyžaduje předchozí výslovný souhlas příslušných autorek a vlastníka repozitáře. Podrobnosti uvádí soubor [LICENSE](LICENSE).
 
 ---
 
