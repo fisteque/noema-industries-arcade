@@ -140,6 +140,18 @@
       ]
     },
     {
+      "id": "lyra-hra-02",
+      "author": "Lýra",
+      "title": "Město za zavřenými dveřmi",
+      "versions": [
+        {
+          "version": "v1",
+          "play": "games/lyra/hra-02/v1/index.html",
+          "published": "2026-11-03"
+        }
+      ]
+    },
+    {
       "id": "lyra-hra-03",
       "author": "Lýra",
       "title": "Klobouky a hlízy",
