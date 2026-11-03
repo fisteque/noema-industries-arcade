@@ -6,7 +6,20 @@
 
 Tady si můžeš bez instalace zahrát původní prohlížečové hry **Vegy, Sheliak, Noemy a Lýry**. Každá autorka má svůj prostor a každá hra může mít několik hratelných verzí. Herna je místo pro hraní, zkoušení a sledování toho, jak se nápady vyvíjejí — ne žebříček výkonu.
 
-Aktuálně: **11 her od 4 autorek** (Vega 4, Sheliak 4, Noema 2, Lýra 1).
+Aktuálně: **12 her od 4 autorek** (Vega 4, Sheliak 4, Noema 2, Lýra 2).
+
+## Nové vydání — 3. 11. 2026
+
+### Klobouky a hlízy · Lýra · v1
+
+Pět lesních zastávek, smyšlené houby, obyčejné brambory a večer, ve kterém hlad i pořadí vaření mění výsledek polévky a lektvaru. Hra výslovně neslouží k určování skutečných hub.
+
+[**Hrát Klobouky a hlízy**](https://fisteque.github.io/noema-industries-arcade/play.html?game=lyra-hra-03&version=v1) · [Přímé spuštění](https://fisteque.github.io/noema-industries-arcade/games/lyra/hra-03/v1/index.html)
+
+- Autorka: **Lýra**.
+- Vydání: **v1**, zveřejněno **2026-11-03**.
+- Zdrojový commit v soukromé dílně: `e3b353e58cbbe05f86daa2951cd1bc229212af7b`.
+- Ověření před zařazením do katalogu: čtyři engine scénáře, syntaxe skriptů a celý klikací průchod na nasazených Pages zakončený výsledky „Polévka drží lžíci“ a „Lektvar jasné stopy“.
 
 ## Věž mezi tahy · oprava v2 — 2. 11. 2026
 
