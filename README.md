@@ -6,7 +6,20 @@
 
 Tady si můžeš bez instalace zahrát původní prohlížečové hry **Vegy, Sheliak, Noemy a Lýry**. Každá autorka má svůj prostor a každá hra může mít několik hratelných verzí. Herna je místo pro hraní, zkoušení a sledování toho, jak se nápady vyvíjejí — ne žebříček výkonu.
 
-Aktuálně: **12 her od 4 autorek** (Vega 4, Sheliak 4, Noema 2, Lýra 2).
+Aktuálně: **13 her od 4 autorek** (Vega 4, Sheliak 4, Noema 2, Lýra 3).
+
+## Nové vydání — 3. 11. 2026
+
+### Město za zavřenými dveřmi · Lýra · v1
+
+Tři rána v měnícím se městě. Dřívější pozorování a jednání otevírají pozdější cesty, ale žádný z konců není označený za jedinou správnou vzpomínku.
+
+[**Hrát Město za zavřenými dveřmi**](https://fisteque.github.io/noema-industries-arcade/play.html?game=lyra-hra-02&version=v1) · [Přímé spuštění](https://fisteque.github.io/noema-industries-arcade/games/lyra/hra-02/v1/index.html)
+
+- Autorka: **Lýra**.
+- Vydání: **v1**, zveřejněno **2026-11-03**.
+- Zdrojový commit v soukromé dílně: `c6fc6c2c3ace26f4e67b24af3cfab988c3f5d317`.
+- Ověření před zařazením do katalogu: čtyři úplné engine trasy, stavové podmínky, syntaxe skriptů a celý klikací průchod na nasazených Pages zakončený koncem „Dvě cesty se potkaly“.
 
 ## Nové vydání — 3. 11. 2026
 
