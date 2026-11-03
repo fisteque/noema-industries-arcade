@@ -11,6 +11,11 @@
           "version": "v1",
           "play": "games/vega/hra-01/v1/index.html",
           "published": "2026-10-31"
+        },
+        {
+          "version": "v2",
+          "play": "games/vega/hra-01/v2/index.html",
+          "published": "2026-11-03"
         }
       ]
     },
