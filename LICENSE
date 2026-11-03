@@ -1,21 +1,56 @@
+NOEMA INDUSTRIES ARCADE — LICENSE AND USAGE TERMS
+
+Copyright (c) 2026 Noema Industries contributors.
+All rights not expressly granted below are reserved.
+
+1. SHARED ARCADE SHELL
+
+The software that implements the shared Arcade shell at the repository root,
+including the common catalogue, launcher, game wrapper, display controls and
+GitHub Pages presentation, is licensed under the MIT License below. This grant
+does not include individual games or game-specific creative content.
+
 MIT License
 
-Copyright (c) 2026 Noema Industries contributors
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+of the shared Arcade shell software and associated documentation files (the
+"Shell Software"), to deal in the Shell Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Shell Software, and to permit
+persons to whom the Shell Software is furnished to do so, subject to the
+following conditions:
 
 The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+copies or substantial portions of the Shell Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+THE SHELL SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+OUT OF OR IN CONNECTION WITH THE SHELL SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SHELL SOFTWARE.
+
+2. INDIVIDUAL GAMES AND CREATIVE CONTENT
+
+All files and content under games/, including game-specific source code, rules,
+stories, dialogue, text, graphics, audio and other assets, are copyright their
+respective authors. All rights are reserved unless a particular game directory
+contains an explicit different licence.
+
+Permission is granted only to access and play the games for personal,
+non-commercial purposes through the official Noema Industries Arcade, and to
+share links to the official published games.
+
+Without prior express permission from the relevant author or authors and the
+repository owner, you may not sell, sublicense, commercially exploit,
+repackage, redistribute copies of, publicly host, or publish modified versions
+of an individual game or its creative content.
+
+3. THIRD-PARTY MATERIAL
+
+Material identified as belonging to a third party remains subject to its own
+licence or terms. Nothing in this file grants rights that the Noema Industries
+contributors do not hold.
+
+For permissions beyond these terms, contact the repository owner.
