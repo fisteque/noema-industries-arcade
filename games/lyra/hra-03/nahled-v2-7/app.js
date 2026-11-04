@@ -112,7 +112,7 @@
           <div class="crosshair" aria-hidden="true"><i></i><i></i></div>
           <div class="forest-hud"><span id="compass">S</span><span id="forest-count">Nálezy ${state.visited.length}/5</span></div>
           <button class="forest-prompt" id="forest-prompt" data-action="inspect" hidden>Prozkoumat nález <b>E</b></button>
-          <div class="look-hint" id="look-hint"><b>Klikni do lesa</b><span>myš · rozhlížení &nbsp; WASD · chůze &nbsp; Shift · běh</span></div>
+          <div class="look-hint" id="look-hint"><b>Klikni do lesa</b><span>myš · rozhlížení i bez pointer locku &nbsp; pravé tlačítko · uvolnit myš</span></div>
         </div>
         <div class="touch-controls" aria-label="Ovládání lesa">
           <div class="turn-controls"><button data-step="turn-left" aria-label="Otočit doleva">↶</button><button data-step="forward" aria-label="Jít dopředu">▲</button><button data-step="turn-right" aria-label="Otočit doprava">↷</button></div>
@@ -210,7 +210,7 @@
       const next = E.resolve(state, button.dataset.resolve);
       const returnsToForest = next.phase === "forest" && !next.current;
       set(next);
-      if (returnsToForest) requestForestPointerLock();
+      if (returnsToForest) scene?.requestLook?.();
     }));
     document.querySelectorAll("[data-order]").forEach((button) => button.addEventListener("click", () => set(E.chooseOrder(state, button.dataset.order))));
     document.querySelectorAll("[data-ingredient]").forEach((input) => input.addEventListener("change", () => {
@@ -245,6 +245,10 @@
     let last = performance.now();
     let target = null;
     let dirtySave = false;
+    let fallbackLook = false;
+    let fallbackTimer = 0;
+    let lastMouseX = null;
+    let lastMouseY = null;
 
     scene = { canvas, keys, raf: 0, cleanups: [], stepPhase: 0, cameraBob: 0, cameraSway: 0, bump: null };
 
@@ -255,27 +259,71 @@
     };
     const onKeyUp = (event) => keys.delete(event.code);
     const onMouseMove = (event) => {
-      if (document.pointerLockElement !== canvas) return;
-      state.explorer.yaw = wrap(state.explorer.yaw + event.movementX * 0.00235);
-      state.explorer.pitch = clamp(state.explorer.pitch - event.movementY * 0.0019, -0.82, 0.82);
+      const locked = document.pointerLockElement === canvas;
+      if (!locked && (!fallbackLook || event.target !== canvas)) return;
+      const fallbackX = lastMouseX === null ? 0 : event.clientX - lastMouseX;
+      const fallbackY = lastMouseY === null ? 0 : event.clientY - lastMouseY;
+      const dx = locked ? event.movementX : (event.movementX || fallbackX);
+      const dy = locked ? event.movementY : (event.movementY || fallbackY);
+      lastMouseX = event.clientX;
+      lastMouseY = event.clientY;
+      state.explorer.yaw = wrap(state.explorer.yaw + clamp(dx, -90, 90) * 0.00235);
+      state.explorer.pitch = clamp(state.explorer.pitch - clamp(dy, -90, 90) * 0.00315, -1.05, 1.05);
       dirtySave = true;
+    };
+    const updateLookUi = () => {
+      const active = document.pointerLockElement === canvas || fallbackLook;
+      lookHint.hidden = active;
+      canvas.classList.toggle("locked", document.pointerLockElement === canvas);
+      forestView.classList.toggle("mouse-active", active);
+      if (active) canvas.focus();
     };
     const onLock = () => {
       const locked = document.pointerLockElement === canvas;
-      lookHint.hidden = locked;
-      canvas.classList.toggle("locked", locked);
-      forestView.classList.toggle("mouse-active", locked);
-      if (locked) canvas.focus();
+      if (locked) {
+        window.clearTimeout(fallbackTimer);
+        fallbackLook = false;
+        lastMouseX = null;
+        lastMouseY = null;
+      }
+      updateLookUi();
     };
-    const requestLook = () => requestForestPointerLock();
+    const requestLook = () => {
+      fallbackLook = false;
+      lastMouseX = null;
+      lastMouseY = null;
+      requestForestPointerLock();
+      window.clearTimeout(fallbackTimer);
+      fallbackTimer = window.setTimeout(() => {
+        if (document.pointerLockElement !== canvas) {
+          fallbackLook = true;
+          updateLookUi();
+        }
+      }, 220);
+    };
+    scene.requestLook = requestLook;
+    const releaseLook = (event) => {
+      if (event.button !== 2 && event.type !== "contextmenu") return;
+      event.preventDefault();
+      window.clearTimeout(fallbackTimer);
+      fallbackLook = false;
+      lastMouseX = null;
+      lastMouseY = null;
+      if (document.pointerLockElement === canvas) document.exitPointerLock?.();
+      else updateLookUi();
+    };
+    const resetFallbackDelta = () => { lastMouseX = null; lastMouseY = null; };
 
     window.addEventListener("keydown", onKeyDown, { passive: false });
     window.addEventListener("keyup", onKeyUp);
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("pointerlockchange", onLock);
     canvas.addEventListener("click", requestLook);
+    canvas.addEventListener("mousedown", releaseLook);
+    canvas.addEventListener("contextmenu", releaseLook);
+    canvas.addEventListener("mouseleave", resetFallbackDelta);
     prompt.addEventListener("click", inspect);
-    scene.cleanups.push(() => window.removeEventListener("keydown", onKeyDown), () => window.removeEventListener("keyup", onKeyUp), () => document.removeEventListener("mousemove", onMouseMove), () => document.removeEventListener("pointerlockchange", onLock), () => canvas.removeEventListener("click", requestLook), () => prompt.removeEventListener("click", inspect));
+    scene.cleanups.push(() => window.clearTimeout(fallbackTimer), () => window.removeEventListener("keydown", onKeyDown), () => window.removeEventListener("keyup", onKeyUp), () => document.removeEventListener("mousemove", onMouseMove), () => document.removeEventListener("pointerlockchange", onLock), () => canvas.removeEventListener("click", requestLook), () => canvas.removeEventListener("mousedown", releaseLook), () => canvas.removeEventListener("contextmenu", releaseLook), () => canvas.removeEventListener("mouseleave", resetFallbackDelta), () => prompt.removeEventListener("click", inspect));
 
     document.querySelectorAll("[data-step]").forEach((button) => {
       const action = () => {
@@ -380,7 +428,7 @@
     const width = canvas.width;
     const height = canvas.height;
     const pitch = state.explorer.pitch || 0;
-    const horizon = clamp(height * (0.455 + pitch * 0.62) + cameraBob * height * 0.8, height * 0.06, height * 0.94);
+    const horizon = clamp(height * (0.455 + pitch * 0.62) + cameraBob * height * 0.8, height * -0.12, height * 1.12);
     const cameraHeight = 1.62 + cameraBob;
 
     const sky = ctx.createLinearGradient(0, 0, 0, Math.max(horizon, 1));
@@ -409,6 +457,7 @@
       const pos = SITE_POSITIONS[site.id];
       pushProjected(objects, { ...pos, site, height: mushroomHeight(site.species) }, "mushroom", width, horizon, cameraHeight, cameraSway);
     });
+    const targetObject = target ? objects.find((object) => object.kind === "mushroom" && object.item.site.id === target.id) : null;
     objects.sort((a, b) => b.depth - a.depth);
     objects.forEach((object) => {
       if (object.kind === "tree") drawTree(ctx, object);
@@ -431,6 +480,18 @@
     vignette.addColorStop(1, "rgba(4,12,8,.48)");
     ctx.fillStyle = vignette;
     ctx.fillRect(0, 0, width, height);
+
+    // A mushroom close enough to inspect must remain readable even when the
+    // player is looking near the edge of the expanded vertical range or a
+    // foreground fern would otherwise cover it.
+    if (targetObject) {
+      drawMushroom(ctx, {
+        ...targetObject,
+        x: clamp(targetObject.x, 105, width - 105),
+        y: clamp(targetObject.y, 180, height - 105),
+        fog: 1
+      }, true);
+    }
     drawCollisionScratch(ctx, width, height, now);
   }
 
