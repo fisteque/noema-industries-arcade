@@ -442,7 +442,7 @@
     const edge = left ? width * 0.015 : width * 0.985;
     const inward = left ? 1 : -1;
     ctx.save();
-    ctx.globalAlpha = Math.sin(remaining * Math.PI) * 0.9;
+    ctx.globalAlpha = Math.pow(remaining, 0.55) * 0.9;
     ctx.strokeStyle = "#d8b786";
     ctx.lineWidth = Math.max(3, width * 0.004);
     ctx.lineCap = "round";
