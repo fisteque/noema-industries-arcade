@@ -89,7 +89,7 @@ shop:{chapter:"KAPITOLA I · ATHÉNY",place:"Tesařova dílna",quest:"Získej od
 cave:{chapter:"KAPITOLA I · ATHÉNY",place:"Jeskyně stínů",quest:"Sestav obraz židle na stěně.",spots:[["shadow","Stěna stínů",510,286],["caveback","Zpět na tržiště",870,380],["figure","Tajemná postava",170,390]]}
 };
 function save(){try{localStorage.setItem(K,JSON.stringify(state));}catch(_e){}}
-function load(){try{const s=JSON.parse(localStorage.getItem(K));if(s&&SCENES[s.scene])state=Object.assign(state,s);}catch(_e){}}
+function load(){try{const s=JSON.parse(localStorage.getItem(K));if(s&&SCENES[s.scene]){state=Object.assign(state,s);if(state.scene==="ikea"&&state.box>0)state.box=0;}}catch(_e){}}
 function reset(){state={scene:"ikea",box:0,definition:false,board:false,lamp:false,shadow:false,finished:false};x=215;goal=null;queue=[];done=null;dialogOpen=false;dlg.classList.remove("open");save();title.hidden=false;render();}
 function note(message){const t=$("toast");t.textContent=message;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2400);}
 function playSound(f=420,d=.09){if(!sound)return;try{if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();const o=audio.createOscillator(),g=audio.createGain();o.type="triangle";o.frequency.value=f;g.gain.setValueAtTime(.045,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+d);o.connect(g);g.connect(audio.destination);o.start();o.stop(audio.currentTime+d);}catch(_e){}}
@@ -161,8 +161,8 @@ const palette='<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#1
 function person(px,py,type,scale=1){
 const suit=type==="jesus"?"#585166":type==="schro"?"#374d53":type==="carpenter"?"#836146":"#3c5468";
 const face=type==="jesus"?"#bc896d":type==="schro"?"#c5a38b":"#cfab83";
-const beard=(type==="jesus"||type==="plato")?'<path d="M-12 -61Q0 -30 13 -61L9 -46Q0 -36 -9 -46Z" fill="'+(type==="jesus"?"#42332f":"#b8b5a4")+'"/>':'';
-const hair=(type==="jesus"||type==="plato")?'<path d="M-17 -73Q-22 -107 -1 -102Q22 -104 17 -73L13 -86Q0 -95 -14 -84Z" fill="'+(type==="jesus"?"#392d29":"#b5b7b1")+'"/>':'<path d="M-18 -78Q-13 -106 5 -102Q20 -96 19 -80Z" fill="#484440"/>';
+const beard=(type==="jesus"||type==="plato")?'<path d="M-12 -61Q0 -30 13 -61L9 -46Q0 -36 -9 -46Z" fill="'+(type==="jesus"?"#42332f":state.scene==="ikea"?"#b8b5a4":"#493b31")+'"/>':'';
+const hair=(type==="jesus"||type==="plato")?'<path d="M-17 -73Q-22 -107 -1 -102Q22 -104 17 -73L13 -86Q0 -95 -14 -84Z" fill="'+(type==="jesus"?"#392d29":state.scene==="ikea"?"#b5b7b1":"#493b31")+'"/>':'<path d="M-18 -78Q-13 -106 5 -102Q20 -96 19 -80Z" fill="#484440"/>';
 const fang=(type==="jesus"||type==="plato")&&state.scene==="ikea"?'<path d="M-4 -55l3 7 3 -7 3 7" stroke="white" stroke-width="1.7" fill="none"/>':'';
 return '<g transform="translate('+px+' '+py+') scale('+scale+')"><ellipse cy="2" rx="24" ry="6" fill="#0a171a" opacity=".4"/><path d="M-11 -26L-18 0H-4L0 -25L5 0H19L11 -26" fill="#222d31"/><path d="M-18 -77Q0 -93 18 -77L22 -30H-22Z" fill="'+suit+'" stroke="#101f26" stroke-width="2"/><path d="M-17 -73L-27 -39M17 -73L27 -39" stroke="'+suit+'" stroke-width="11" stroke-linecap="round"/><ellipse cy="-81" rx="17" ry="22" fill="'+face+'"/>'+hair+beard+'<circle cx="-6" cy="-80" r="1.7" fill="#1c2830"/><circle cx="7" cy="-80" r="1.7" fill="#1c2830"/><path d="M-4 -58Q0 -56 5 -58" stroke="#513e37" fill="none" stroke-width="1.7"/>'+fang+'</g>';
 }
@@ -203,14 +203,14 @@ function interact(){if(dialogOpen){if(queue.length)nextLine();return;}if(!title.
 $("interact").onclick=interact;
 function directional(id,key){const b=$(id);b.addEventListener("pointerdown",e=>{e.preventDefault();pressed.add(key);b.setPointerCapture(e.pointerId);});["pointerup","pointercancel","lostpointercapture"].forEach(evt=>b.addEventListener(evt,()=>pressed.delete(key)));}
 directional("left","ArrowLeft");directional("right","ArrowRight");
-document.addEventListener("keydown",e=>{if(["ArrowLeft","ArrowRight","a","d","A","D","e","E","Enter"].includes(e.key)&&title.hidden&&!(e.target instanceof HTMLButtonElement)){e.preventDefault();if(e.key==="e"||e.key==="E"||e.key==="Enter"){if(!e.repeat)interact();}else pressed.add(e.key.toLowerCase());}});
+document.addEventListener("keydown",e=>{if(["ArrowLeft","ArrowRight","a","d","A","D","e","E"].includes(e.key)&&title.hidden&&!(e.target instanceof HTMLButtonElement)){e.preventDefault();if(e.key==="e"||e.key==="E"){if(!e.repeat)interact();}else pressed.add(e.key.toLowerCase());}});
 document.addEventListener("keyup",e=>pressed.delete(e.key.toLowerCase()));
 window.addEventListener("blur",()=>pressed.clear());
 function frame(t){const dt=Math.min((t-last)/1000||0,.05);last=t;if(!dialogOpen&&title.hidden){let dir=(pressed.has("arrowright")||pressed.has("d")?1:0)-(pressed.has("arrowleft")||pressed.has("a")?1:0);
 if(dir){goal=null;x=Math.max(32,Math.min(955,x+dir*230*dt));updateAvatar();}
 else if(goal){const delta=goal.x-x;const step=210*dt;if(Math.abs(delta)<=Math.max(35,step)){x=goal.x;const target=goal.id;goal=null;updateAvatar();use(target);}else{x+=Math.sign(delta)*step;updateAvatar();}}
 }requestAnimationFrame(frame);}requestAnimationFrame(frame);
-window.addEventListener("keydown",e=>{if(dialogOpen&&e.key==="Enter"&&e.target.tagName!=="BUTTON"&&!e.repeat){e.preventDefault();if(queue.length)nextLine();else if(done)nextLine();}});
+window.addEventListener("keydown",e=>{if(dialogOpen&&e.key==="Enter"&&e.target.tagName!=="BUTTON"&&!e.repeat){e.preventDefault();if($("d-actions").children.length===1)nextLine();}});
 load();render();if(state.finished){title.querySelector(".eyebrow").textContent="KONEC HRATELNÉ UKÁZKY";title.querySelector("h1").innerHTML="IDEA ŽIDLE<span>STÍNOVÁ BRÁNA</span>";title.querySelector("p").textContent="Tuto ukázku už máš dohranou. Můžeš si znovu projít Athény nebo ji začít od začátku.";$("start").textContent="Zahrát znovu";$("start").onclick=()=>{reset();title.hidden=true;opening();};}else if(state.scene!=="ikea"){$("start").textContent="Pokračovat v příběhu";}
 </script>
 </body>
