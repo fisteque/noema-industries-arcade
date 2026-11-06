@@ -385,7 +385,7 @@
       return `<div class="scene-modal-backdrop"><section class="scene-modal confirm-home" role="dialog" aria-modal="true"><p class="kicker">Návrat z lesa</p><h4>Chceš se opravdu vydat domů?</h4><p>Cesta potrvá ${state.carriedItem ? "hodinu, protože něco neseš v ruce" : "30 minut"}.</p><div class="scene-modal-actions"><button class="quiet" data-close-forest-panel><kbd>Q</kbd> Ne, hledat dál</button><button class="primary" data-confirm-home data-key-e><kbd>E</kbd> Ano, jít domů</button></div></section></div>`;
     }
     if (forestPanelView === "notes") {
-      return `<div class="scene-modal-backdrop"><section class="scene-modal forest-book" role="dialog" aria-modal="true"><button class="modal-close" data-close-forest-panel aria-label="Zavřít"><kbd>Q</kbd></button><p class="kicker">Zápisník · Z</p><h4>Stopy dnešní cesty</h4><ol class="overlay-notes">${state.notes.map((note) => `<li>${esc(note)}</li>`).join("")}</ol></section></div>`;
+      return `<div class="scene-modal-backdrop"><section class="scene-modal forest-book" role="dialog" aria-modal="true"><button class="modal-close" data-close-forest-panel aria-label="Zavřít"><kbd>Q</kbd></button><p class="kicker">Zápisník · X</p><h4>Stopy dnešní cesty</h4><ol class="overlay-notes">${state.notes.map((note) => `<li>${esc(note)}</li>`).join("")}</ol></section></div>`;
     }
     if (forestPanelView === "memory") {
       const entries = state.knowledge.map((entry) => {
@@ -401,7 +401,7 @@
       ? basketItemRow(state.carriedItem.id, state.carriedItem.record, "hand", 0)
       : `<article class="basket-overlay-item hand"><span class="large-potato">🥔</span><div class="basket-item-body"><b>Brambora v ruce</b><small>do košíku na houby nepatří</small>${state.phase === "forest" ? '<button class="danger-link" data-discard-inventory="hand:0">Zahodit</button>' : ""}</div></article>`) : "";
     const potatoes = state.potatoes ? `<article class="basket-overlay-item"><span class="large-potato">🥔</span><div class="basket-item-body"><b>Brambory × ${state.potatoes}</b><small>ve spíži</small></div></article>` : "";
-    return `<div class="scene-modal-backdrop"><section class="scene-modal basket-overlay" role="dialog" aria-modal="true"><button class="modal-close" data-close-forest-panel aria-label="Zavřít"><kbd>Q</kbd></button><p class="kicker">Košík · X</p><h4>Co sis odnesla z porostu</h4><div class="basket-overlay-list">${items || (!hand && !potatoes ? "<p class=\"empty\">Košík je zatím prázdný.</p>" : "")}${hand}${potatoes}</div></section></div>`;
+    return `<div class="scene-modal-backdrop"><section class="scene-modal basket-overlay" role="dialog" aria-modal="true"><button class="modal-close" data-close-forest-panel aria-label="Zavřít"><kbd>Q</kbd></button><p class="kicker">Košík · F</p><h4>Co sis odnesla z porostu</h4><div class="basket-overlay-list">${items || (!hand && !potatoes ? "<p class=\"empty\">Košík je zatím prázdný.</p>" : "")}${hand}${potatoes}</div></section></div>`;
   }
 
   function homeArrivalPanel() {
