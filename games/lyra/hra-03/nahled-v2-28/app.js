@@ -531,7 +531,7 @@
       <section class="ending ending-room">
         <div class="ending-window" aria-hidden="true"><i></i><i></i></div>
         <div class="kitchen-shelf cooking-shelf ending-shelf" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div class="kitchen-hearth ending-hearth" aria-hidden="true"><span class="soup-pot"></span><span class="fire">♨</span></div>
+        <div class="kitchen-hearth ending-hearth" aria-hidden="true"><span class="soup-pot"></span><b class="fire">♨</b></div>
         <div class="alchemy-bench ending-bench" aria-hidden="true"><span class="retort">⚗</span><span class="flask flask-a"></span><span class="flask flask-b"></span><span class="candle">♨</span></div>
         <div class="ending-table" aria-hidden="true"><span>🥣</span><i></i><b>🧪</b></div>
         <div class="ending-copy">
