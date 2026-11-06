@@ -44,11 +44,11 @@
   };
 
   const SITES = [
-    { id: "breza", name: "Březový okraj", icon: "🌿", species: "medovka", intro: "Mezi kořeny je teplo a něco zlatého se opírá o břízu." },
-    { id: "mech", name: "Mechová pěšina", icon: "🌲", species: "hnedka", intro: "V mechu sedí hnědý klobouk a splývá s mokrou zemí." },
-    { id: "parez", name: "Starý pařez", icon: "🪵", species: "ohnivka", intro: "Pařez je obsypaný oranžovými nálevkami. Vypadají až příliš ochotně." },
-    { id: "rokle", name: "Bílá rokle", icon: "🕳️", species: "belokruh", intro: "Pod jehličím se leskne bledý klobouk." },
-    { id: "studenka", name: "Měsíční studánka", icon: "🌙", species: "modravec", intro: "Ve stínu studánky svítí modrý klobouk. Voda kolem něj se nehýbe." }
+    { id: "breza", name: "Březový okraj", icon: "🌿", species: "medovka", intro: "Mezi kořeny břízy se pod listím schovává klobouk." },
+    { id: "mech", name: "Mechová pěšina", icon: "🌲", species: "hnedka", intro: "V mechu u pěšiny sedí houba téměř zarovnaná se zemí." },
+    { id: "parez", name: "Starý pařez", icon: "🪵", species: "ohnivka", intro: "U starého pařezu něco prorůstá mezi třískami a kapradím." },
+    { id: "rokle", name: "Bílá rokle", icon: "🕳️", species: "belokruh", intro: "Pod jehličím v mělké roklince se rýsuje klobouk." },
+    { id: "studenka", name: "Měsíční studánka", icon: "🌙", species: "modravec", intro: "Ve vlhkém stínu u studánky vyrůstá osamělá houba." }
   ];
 
   const IDENTIFICATION_OPTIONS = {
