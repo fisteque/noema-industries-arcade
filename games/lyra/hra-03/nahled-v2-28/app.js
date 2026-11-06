@@ -174,7 +174,7 @@
         <p class="lede">V lese hledáš, určuješ nebo si nejistotu neseš domů. Po třech houbách můžeš odejít, košík ale pojme pět. Bramboru či šestou houbu uneseš pouze v ruce.</p>
         <button class="primary big" data-start>Vstoupit do lesa</button>
         <div class="title-help">
-          <span><b>WASD</b> chůze</span><span><b>E</b> potvrdit</span><span><b>Q</b> zavřít</span><span><b>K</b> košík</span><span><b>Z</b> zápisník</span><span><b>P</b> paměť</span><span><b>C</b> chléb</span>
+          <span><b>WASD</b> chůze</span><span><b>E</b> potvrdit</span><span><b>Q</b> zavřít</span><span><b>X</b> košík</span><span><b>Z</b> zápisník</span><span><b>V</b> paměť</span><span><b>C</b> chléb</span>
         </div>
         <p class="small">Na telefonu použij tlačítka pod výhledem. Postup této pracovní verze se ukládá jen v tomto prohlížeči.</p>
       </section>`;
