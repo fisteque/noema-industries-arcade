@@ -85,7 +85,7 @@ function fastTravel(s,id){if(!s.visited.includes(id))return note('Nejdřív si t
 
 function hruzie(s){
  const f=s.flags;if(!companionHere(s))return note('Hrůzie čeká v táboře. Zajdu za ní, až se vrátím.');f.hruzieMet=true;
- let text=ready(s)?'Hrůzie přešlápne v cvičkách. „Tohle je lepší. Mnohem.“':f.feet?'Hrůzie opatrně hýbe ošetřenýma nohama. „Už to neštípe. Jen bych potřebovala něco na ten štěrk.“':f.shod?'Cvičky má Hrůzie u nohou. „Zkusila jsem je, ale ty odřeniny se nejdřív musí zahojit.“':'Hrůzie sedí s nohama nad zemí. „Včera už jsem byla zase ježibabka. Dneska mě pořád bolí ty kachní nohy. Teda moje. Víš jak.“';
+ let text=ready(s)?'Hrůzie přešlápne v cvičkách. „Tohle je lepší. Mnohem.“':f.feet?'Hrůzie opatrně hýbe ošetřenýma nohama. „Už to neštípe. Jen bych potřebovala něco na ten štěrk.“':f.shod?'Cvičky má Hrůzie u nohou. „Zkusila jsem je, ale ty odřeniny se nejdřív musí zahojit.“':'Hrůzie sedí na stoličce a šetří si nohy. „Včera už jsem byla zase ježibabka. Dneska mě pořád bolí ty kachní nohy. Teda moje. Víš jak.“';
  if(f.lever==='hruzie'&&!f.stopped)text+='\n\n„Páku držím. Ty vezmi tu druhou.“';
  if(f.stopped)text+='\n\n„Slyšela jsi? Ten pták zazpíval jinak.“';
  if(f.shaken)text+='\n\n„A ten velký poryv bychom si ještě měly probrat.“';
@@ -306,7 +306,7 @@ const routeLayout={
  pond:{tree:{x:85,y:625},camp:{x:1115,y:620},glade:{x:1090,y:480}},
  glade:{camp:{x:310,y:620},pond:{x:85,y:470},mill:{x:1115,y:625}},
  mill:{glade:{x:430,y:480},loft:{x:735,y:460}},
- loft:{mill:{x:350,y:620},north:{x:1110,y:400}},
+ loft:{mill:{x:350,y:620},north:{x:1120,y:490}},
  north:{loft:{x:650,y:620},camp:{x:85,y:620}}
 };
 for(const [from,exits] of Object.entries(routeLayout))for(const [to,route] of Object.entries(exits)){
@@ -325,8 +325,17 @@ function trails(c,s){
  if(s.scene==='pond'){trail(c,[[300,675],[210,650],end('tree'),[130,520],[170,435]],70);trail(c,[[955,675],end('camp'),[1125,515],[1070,435]],70);trail(c,[[1000,675],[1040,560],end('glade'),[1100,435]],56);}
  if(s.scene==='glade'){trail(c,[[600,675],[460,660],end('camp'),[250,520],[225,435]],76);trail(c,[[520,675],[260,570],end('pond'),[45,435]],60);trail(c,[[800,675],[1010,650],end('mill'),[1060,520],[990,435]],76);}
  if(s.scene==='mill'){trail(c,[[490,675],[495,560],end('glade'),[380,435]],70);trail(c,[[600,675],[660,565],end('loft'),[737,435]],68);}
- // Inside the mill these are floorboards leading to the stair/opening.
- if(s.scene==='loft'){trail(c,[[320,675],end('mill'),[410,600],[950,620],[1130,530],end('north'),[1120,365]],40,18);}
+ // The attic has wooden stairs and a door, not an outdoor dirt path.
+ if(s.scene==='loft'){
+  path(c,[[285,568],[425,568],[405,653],[262,653]],'#39343c','#ac906e',5);
+  for(let i=0;i<4;i++){const y=582+i*18;line(c,[[281-i*5,y],[419-i*5,y]],'#8c715b',8);line(c,[[280-i*5,y-4],[419-i*5,y-4]],'#c0a07b',2);}
+  rr(c,1050,358,133,218,3,'#56494b','#b29a78');
+  if(s.flags.stopped){
+   rr(c,1058,366,117,202,1,'#abb99a');path(c,[[1058,474],[1100,455],[1175,471],[1175,568],[1058,568]],'#7f9670',null);path(c,[[1093,568],[1122,486],[1135,466],[1120,515],[1111,568]],'#cdb88f',null);
+   path(c,[[1182,358],[1198,375],[1198,593],[1182,576]],'#8d715b',ink,2);
+  }else{rr(c,1058,366,117,202,1,'#927960');for(let i=1;i<5;i++)line(c,[[1058+i*23,368],[1058+i*23,566]],'#705d50',2);ellipse(c,1160,479,4,4,'#d1b57c');}
+ }
+
  if(s.scene==='north'){trail(c,[[650,675],end('loft'),[730,540],[860,480],[1000,420]],70);trail(c,[[650,675],[350,650],end('camp'),[185,525],[300,445]],70);}
 }
 
@@ -347,7 +356,7 @@ tree(c,70,568,405,2);tree(c,1160,557,370,12);path(c,[[425,548],[493,459],[697,42
 line(c,[[968,385],[968,173]],'#7d6a58',5);if(f.torn){path(c,[[968,190],[1002,195],[982,211],[969,207]],'#b66f78',ink,1);path(c,[[1039,372],[1061,385],[1044,391]],'#b66f78',ink,1);}else path(c,[[968,190],[1048,207],[1007,224],[1044,238],[968,223]],f.wind==='forward'?'#a18b77':'#b5787e',ink,1.5);rr(c,714,420,124,81,8,'#9b896e',ink);if(f.gearInstalled)wheel(c,775,461,32,.3,'#d0bb8c');else ellipse(c,775,461,30,30,'#4d4c50');person(c,'Vrchní ježibaba',285,567,1,s);path(c,[[502,522],[513,487],[561,484],[583,521],[577,567],[508,568]],'#a58f6f',ink,2);line(c,[[515,499],[569,499]],'#6b6252',3);path(c,[[538,510],[554,515],[546,524]],'#d9bc7d',ink,1);break;}
 case 'loft':{
 c.fillStyle='#6c5c58';c.fillRect(0,0,1200,675);path(c,[[0,0],[620,0],[0,334]],'#554952',null);path(c,[[1200,0],[610,0],[1200,306]],'#594c52',null);for(let i=0;i<10;i++){line(c,[[0,510+i*23],[1200,510+i*23]],'#8b7462',2);}for(let i=0;i<8;i++)line(c,[[i*180,513],[(i-1)*220,675]],'#4f474d',2);line(c,[[53,0],[220,455],[996,455],[1145,0]],'#a38a6d',23);line(c,[[604,0],[604,456]],'#a38a6d',22);line(c,[[221,455],[1000,455]],'#584b4b',4);rr(c,989,164,135,183,62,'#d7d7bc','#473d48');line(c,[[1055,165],[1055,347]],'#76634f',8);line(c,[[989,255],[1123,255]],'#76634f',8);path(c,[[604,113],[698,103],[729,195],[706,320],[613,320],[592,217]],'#b49c79',ink,3);line(c,[[604,132],[703,125]],'#77634f',5);c.save();c.translate(657,216);c.rotate(-.05);c.fillStyle='#61505b';c.textAlign='center';c.font='24px Georgia';c.fillText(f.stopped?'VČERA':'ZÍTRA?',0,0);line(c,[[-37,-22],[37,-22]],'#87705d',2);c.restore();wheel(c,380,335,111,.3,'#7f6b59');wheel(c,482,258,52,-.3,'#a08a6d');wheel(c,834,320,88,.5,'#8b745d');
-trails(c,s);for(const[x,key]of[[540,'left'],[870,'right']]){rr(c,x-42,488,84,55,4,'#8f7c64',ink);line(c,[[x,512],[x+(f.stopped||key==='right'&&f.lever?31:-9),405]],'#c1a57d',9);ellipse(c,x+(f.stopped||key==='right'&&f.lever?31:-9),405,13,10,key==='left'?'#b87c72':'#859e8a');c.fillStyle='#d1c49f';c.textAlign='center';c.font='17px Georgia';c.fillText(key==='left'?'DEN':'NÁVRAT',x,567);}if(f.lever==='weight'){hat(c,932,467,.9,'#77748e');ellipse(c,932,454,16,10,'#9ca087');}if(f.lever==='hruzie')person(c,'Hrůzie',813,535,.86,s);else if(R.ready(s))person(c,'Hrůzie',1088,563,.86,s);break;}
+trails(c,s);for(const[x,key]of[[540,'left'],[870,'right']]){rr(c,x-42,488,84,55,4,'#8f7c64',ink);line(c,[[x,512],[x+(f.stopped||key==='right'&&f.lever?31:-9),405]],'#c1a57d',9);ellipse(c,x+(f.stopped||key==='right'&&f.lever?31:-9),405,13,10,key==='left'?'#b87c72':'#859e8a');c.fillStyle='#d1c49f';c.textAlign='center';c.font='17px Georgia';c.fillText(key==='left'?'DEN':'NÁVRAT',x,567);}if(f.lever==='weight'){hat(c,932,467,.9,'#77748e');ellipse(c,932,454,16,10,'#9ca087');}if(f.lever==='hruzie')person(c,'Hrůzie',813,535,.86,s);else if(R.ready(s))person(c,'Hrůzie',955,575,.86,s);break;}
 case 'north':{
 sky(c,true);path(c,[[0,337],[215,317],[410,345],[600,287],[810,310],[1200,250],[1200,675],[0,675]],'#a9b58e',null);path(c,[[0,484],[210,448],[460,481],[670,457],[940,467],[1200,487],[1200,675],[0,675]],'#8c9c73',null);path(c,[[570,675],[624,566],[731,510],[801,462],[867,416],[996,400],[1080,380],[1022,430],[915,452],[863,493],[800,540],[719,590],[691,675]],'#d4c29b',null);tree(c,116,568,474,6);tree(c,1125,543,360,9);ellipse(c,196,561,88,17,'#52684a40');trails(c,s);if(R.ready(s))person(c,'Hrůzie',455,559,1,s);grass(c,7);for(let i=0;i<8;i++){const x=580+rnd(i+6)*420,y=80+rnd(i+39)*190;line(c,[[x-7,y+3],[x,y],[x+7,y+3]],'#8a8a7a',1.5);}break;}
 }
