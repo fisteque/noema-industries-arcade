@@ -313,10 +313,10 @@ const footY=seated?-3:0,feet=seated?[32,62]:[-22,23];
 line(c,[[-12,-48],[seated?28:-14,seated?-42:footY],[feet[0],footY]],'#5b4b51',7);line(c,[[11,-47],[seated?57:18,seated?-39:footY],[feet[1],footY]],'#5b4b51',7);
 const barefoot=name==='Hrůzie'&&state&&!R.ready(state),footColor=barefoot?st.skin:name==='Hrůzie'&&state?.flags.shod?'#edddc6':'#6b5654';for(const fx of feet){ellipse(c,fx,footY+2,13,5,footColor);if(barefoot&&!state.flags.feet){line(c,[[fx-4,footY],[fx+4,footY+2]],'#bb7371',2);}}
 
-path(c,[[-20,-111],[17,-112],[39,-46],[8,-39],[-39,-45]],st.robe,ink,2);line(c,[[-8,-103],[-14,-50]],'#e5c39555',2);if(facepalm){path(c,[[-25,-103],[-42,-112],[-20,-139],[-10,-128],[-29,-104]],st.robe,ink,1.5);}else{path(c,[[-25,-103],[-42,-72],[-33,-63],[-14,-91]],st.robe,ink,1.5);ellipse(c,-36,-64,7,7,st.skin);}const helping=name==='Hrůzie'&&state?.flags.lever==='hruzie'&&state.scene==='loft';path(c,[[20,-104],[helping?58:35,helping?-104:-70],[helping?66:45,helping?-99:-77],[31,-109]],st.robe,ink,1.5);ellipse(c,helping?64:41,helping?-101:-72,7,7,st.skin);
-c.save();if(facepalm){c.translate(0,-115);c.rotate(-.26);c.translate(0,115);}
+path(c,[[-20,-111],[17,-112],[39,-46],[8,-39],[-39,-45]],st.robe,ink,2);line(c,[[-8,-103],[-14,-50]],'#e5c39555',2);if(facepalm){path(c,[[-25,-103],[-40,-119],[-3,-149],[9,-138],[-25,-116]],st.robe,ink,1.5);}else{path(c,[[-25,-103],[-42,-72],[-33,-63],[-14,-91]],st.robe,ink,1.5);ellipse(c,-36,-64,7,7,st.skin);}const helping=name==='Hrůzie'&&state?.flags.lever==='hruzie'&&state.scene==='loft';path(c,[[20,-104],[helping?58:35,helping?-104:-70],[helping?66:45,helping?-99:-77],[31,-109]],st.robe,ink,1.5);ellipse(c,helping?64:41,helping?-101:-72,7,7,st.skin);
+c.save();if(facepalm){c.translate(0,-115);c.rotate(.26);c.translate(0,115);}
 ellipse(c,0,-132,29,32,st.hair);ellipse(c,4,-133,24,27,st.skin);ellipse(c,-15,-124,8,16,st.hair);line(c,[[-17,-151],[-4,-159],[15,-154],[24,-145]],st.hair,8);ellipse(c,0,-133,2,2,'#493944');ellipse(c,15,-132,2,2,'#493944');ellipse(c,16,-121,5,2,'#d5928159');line(c,[[6,-117],[13,-116]],'#9e6b65',1.3);if(name==='Hrůzie'){c.fillStyle='#b17c69';for(const [a,b]of[[-2,-124],[2,-122],[17,-125],[20,-123]])c.fillRect(a,b,1.5,1.5);}
-if(name!=='Noema'||!state||R.has(state,'hat'))hat(c,0,-158,.97,st.hat);c.restore();if(facepalm){ellipse(c,-9,-139,10,6,st.skin);line(c,[[-14,-143],[-3,-142]],'#bb8e7c',1);}
+if(name!=='Noema'||!state||R.has(state,'hat'))hat(c,0,-158,.97,st.hat);c.restore();if(facepalm){ellipse(c,10,-144,11,7,st.skin);line(c,[[4,-148],[15,-147]],'#bb8e7c',1);}
 if(name==='Garmina'){line(c,[[-18,-117],[-25,-111]],'#c4b6c3',2);ellipse(c,-24,-113,4,5,'#c4b6c3');path(c,[[16,-162],[25,-183],[27,-158]],'#b5a372',ink,1);}
 if(name==='Zapomněnka'||name==='Vrchní ježibaba'){line(c,[[40,-23],[49,-175]],'#7c6058',5);ellipse(c,50,-178,7,10,'#b5aa86');}
 if(name==='Serpentýna'&&!facepalm&&(!state||!R.has(state,'book'))){rr(c,-51,-102,38,45,3,'#9d6b5d',ink);line(c,[[-43,-94],[-23,-94],[-23,-87],[-43,-87]],'#dac89b',1.2);}
@@ -451,7 +451,7 @@ function after(page,clear=false){if(page?.effect==='millSpin'){millPulseLeft=3.5
 function cancelWalk(){waypoints=[];pending=null;$('stage').setAttribute('aria-busy','false');}
 function walkTo(point,done=null,label='místu'){
  cancelWalk();waypoints=WitchArt.walkPath(state.scene,{x:heroX,y:heroY},point);pending=done;
- $('stage').setAttribute('aria-busy','true');$('narration').textContent='Jdu k '+label+'.';
+ $('stage').setAttribute('aria-busy','true');$('narration').textContent='Nejdřív dojdu blíž.';
 }
 function atTarget(id,done){const scene=state.scene,p=R.places(state).find(x=>x.id===id);if(!p)return;walkTo(WitchArt.approach(state,id),()=>{if(state.scene===scene&&R.places(state).some(p=>p.id===id))done();},p.label.toLowerCase());}
 function act(action,data){
