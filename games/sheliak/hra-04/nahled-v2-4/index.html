@@ -304,7 +304,7 @@ const routeLayout={
  tree:{camp:{x:1115,y:615},pond:{x:850,y:350}},
  camp:{tree:{x:85,y:620},glade:{x:920,y:280},pond:{x:450,y:325}},
  pond:{tree:{x:85,y:625},camp:{x:1115,y:620},glade:{x:1090,y:440}},
- glade:{camp:{x:310,y:620},pond:{x:85,y:500},mill:{x:1115,y:625}},
+ glade:{camp:{x:310,y:620},pond:{x:85,y:380},mill:{x:1115,y:625}},
  mill:{glade:{x:430,y:350},loft:{x:735,y:380}},
  loft:{mill:{x:350,y:620},north:{x:1110,y:400}},
  north:{loft:{x:650,y:620},camp:{x:85,y:620}}
@@ -322,7 +322,7 @@ function trails(c,s){
  if(s.scene==='tree'){trail(c,[[0,660],[350,615],[800,620],end('camp'),[1200,625]],70);trail(c,[[710,625],[755,510],end('pond'),[900,300]],42);}
  if(s.scene==='camp'){trail(c,[[0,632],end('tree'),[520,625],[940,635],[1200,660]],72);trail(c,[[430,630],[420,480],end('pond'),[420,285]],40);trail(c,[[1030,635],[1040,500],[1000,360],end('glade'),[960,245]],40);}
  if(s.scene==='pond'){trail(c,[[0,640],end('tree'),[210,650],[300,675]],65);trail(c,[[955,675],[1010,645],end('camp'),[1200,660]],65);trail(c,[[1070,655],[1050,550],end('glade'),[1200,450]],42);}
- if(s.scene==='glade'){trail(c,[[240,675],end('camp'),[520,630],[900,640],end('mill'),[1200,660]],70);trail(c,[[520,640],[350,575],end('pond'),[0,480]],38);}
+ if(s.scene==='glade'){trail(c,[[240,675],end('camp'),[520,630],[900,640],end('mill'),[1200,660]],70);trail(c,[[520,640],[350,575],end('pond'),[0,365]],38);}
  if(s.scene==='mill'){trail(c,[[490,675],[495,540],[475,440],end('glade'),[380,305]],45);trail(c,[[495,650],[585,590],[700,485],end('loft')],65);}
  if(s.scene==='loft'){trail(c,[[320,675],end('mill'),[410,600],[950,620],[1130,530],end('north'),[1120,365]],40);}
  if(s.scene==='north'){trail(c,[[650,675],end('loft'),[730,540]],58);trail(c,[[0,675],end('camp'),[350,650],[650,650]],58);}
