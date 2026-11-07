@@ -299,7 +299,7 @@ function wheel(c,x,y,r,a,color='#876b57'){c.save();c.translate(x,y);c.rotate(a);
 function sails(c,a){c.save();c.translate(751,251);c.rotate(a);for(let i=0;i<4;i++){c.save();c.rotate(i*Math.PI/2);path(c,[[8,-12],[180,-40],[186,-12],[12,8]],'#bbaa86',ink,2);for(let j=30;j<170;j+=23)line(c,[[j,-16-j*.13],[j+3,5-j*.1]],'#817565',2);c.restore();}ellipse(c,0,0,17,17,'#d2be98');c.restore();}
 
 const routeLayout={
- tree:{camp:{x:1115,y:615,angle:0},pond:{x:280,y:475,angle:-135}},
+ tree:{camp:{x:1115,y:615,angle:0},pond:{x:370,y:500,angle:-135}},
  camp:{tree:{x:85,y:620,angle:180},glade:{x:820,y:350,angle:-80},pond:{x:1115,y:620,angle:0}},
  pond:{tree:{x:85,y:625,angle:180},camp:{x:430,y:370,angle:-135},glade:{x:1115,y:625,angle:0}},
  glade:{camp:{x:85,y:620,angle:180},pond:{x:355,y:510,angle:-145},mill:{x:1115,y:625,angle:0}},
@@ -314,7 +314,7 @@ function trail(c,points,width=40){
 }
 function trails(c,s){
  const r=routes(s),end=id=>[r[id].x,r[id].y];
- if(s.scene==='tree'){trail(c,[[0,660],[350,615],[800,620],end('camp'),[1200,625]],70);trail(c,[[350,630],[305,555],end('pond'),[185,435]],42);}
+ if(s.scene==='tree'){trail(c,[[0,660],[350,615],[800,620],end('camp'),[1200,625]],70);trail(c,[[430,630],[410,565],end('pond'),[320,450]],42);}
  if(s.scene==='camp'){trail(c,[[0,632],end('tree'),[520,625],[940,635],end('pond'),[1200,626]],72);trail(c,[[935,638],[855,555],[830,445],end('glade'),[825,310]],40);}
  if(s.scene==='pond'){trail(c,[[0,640],end('tree'),[210,650],[300,675]],65);trail(c,[[200,650],[225,490],[315,410],end('camp'),[460,345]],42);trail(c,[[955,675],[1010,645],end('glade'),[1200,620]],65);}
  if(s.scene==='glade'){trail(c,[[0,632],end('camp'),[520,630],[900,640],end('mill'),[1200,625]],70);trail(c,[[520,640],[430,575],end('pond'),[280,470]],38);}
