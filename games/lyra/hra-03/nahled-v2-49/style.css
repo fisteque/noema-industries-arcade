@@ -2417,7 +2417,7 @@ button:disabled {
   right: 4%;
   bottom: auto;
   left: auto;
-  width: min(860px, 68%);
+  width: min(820px, 64%);
   max-height: 370px;
   overflow: auto;
   padding: 16px 18px;

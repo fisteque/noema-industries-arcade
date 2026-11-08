@@ -61,14 +61,14 @@ assert.match(style, /\.cottage-tea-table/);
 assert.match(style, /\.compact-list-stage \.home-id-list \{[\s\S]*?grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
 assert.match(style, /\.compact-list-stage \.cooking-copy \.ingredient \{/);
 assert.match(style, /\.compact-list-stage \.home-id-row h4 \{ font-size: 1\.13rem; \}/);
-assert.match(style, /\.compact-list-stage \.cooking-copy\.cooking-list-panel \{[\s\S]*?width: min\(860px, 68%\);/);
+assert.match(style, /\.compact-list-stage \.cooking-copy\.cooking-list-panel \{[\s\S]*?width: min\(820px, 64%\);/);
 assert.match(style, /\.workstation-action \{[\s\S]*?bottom: 142px;/);
 assert.match(style, /\.indoor-stage\.result-workstation-stage \.cooking-result-copy \{[\s\S]*?bottom: 64px;[\s\S]*?left: 32%;/);
 assert.match(style, /\.scene-modal\.forest-soft-panel\.forest-book,[\s\S]*?\.scene-modal\.forest-soft-panel\.basket-overlay \{[\s\S]*?width: min\(620px,[\s\S]*?height: min\(500px,/);
 assert.match(style, /\.ending-summary \{[\s\S]*?grid-template-columns: minmax\(0, 1\.35fr\) minmax\(240px, \.65fr\);/);
 assert.match(style, /\.ending-room\.indoor-stage \.ending-copy \{[\s\S]*?overflow: hidden;/);
 assert.match(style, /\.result-art/);
-assert.match(html, /style\.css\?rev=2-49-1/);
-assert.match(html, /app\.js\?rev=2-49-1/);
+assert.match(html, /style\.css\?rev=2-49-2/);
+assert.match(html, /app\.js\?rev=2-49-2/);
 
 console.log("v2-49 readable lists, visible workstations, aligned overlays and southern sun passed");
