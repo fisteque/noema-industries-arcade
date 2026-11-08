@@ -1,0 +1,107 @@
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === "object" && module.exports) module.exports = api;
+  if (root) root.KloboukyContent = api;
+})(typeof window !== "undefined" ? window : globalThis, function () {
+  "use strict";
+
+  const SPECIES = {
+    medovka: {
+      id: "medovka", name: "Medovka hřebenitá", icon: "🍄", kind: "edible",
+      atlas: "JEDLÁ · Tupé hřebínky, medová vůně. V polévce zesládne, v lektvaru drží směr.",
+      use: "Zjemní sladší polévku. V lektvaru drží směr a s Modravcem tvoří stabilní pár.",
+      clues: ["zlatý klobouk", "tupé hřebínky místo lupenů", "vůně po medu a meruňce"]
+    },
+    hnedka: {
+      id: "hnedka", name: "Hnědka mechová", icon: "🍄", kind: "edible",
+      atlas: "JEDLÁ · Pod kloboukem má měkké póry a na třeni síťku. Spolehlivý základ polévky.",
+      use: "Spolehlivý základ polévky. S Modravcem tvoří stabilní lektvarový pár.",
+      clues: ["kaštanový klobouk", "měkké póry na spodku", "jemná síťka na třeni"]
+    },
+    ohnivka: {
+      id: "ohnivka", name: "Ohnivka zubatá", icon: "🍄", kind: "inedible",
+      atlas: "NEJEDLÁ · Ostré husté lupeny a pepřový pach. Zkazí polévku i lektvar.",
+      use: "Do polévky nepatří. S Modravcem se její chování mění jen při měsíci.",
+      clues: ["oranžový nálevkovitý klobouk", "ostré husté lupeny", "pepřový pach"]
+    },
+    belokruh: {
+      id: "belokruh", name: "Bělokruh zákeřný", icon: "🍄", kind: "poison",
+      atlas: "JEDOVATÝ · Bílý prsten a vakovitá pochva u země. Do košíku s jídlem nepatří.",
+      use: "Nejíst a nepřidávat do polévky. Bezpečné použití v lektvaru zatím neznáš.",
+      clues: ["bledý klobouk", "bílý prsten na třeni", "vakovitá pochva schovaná v jehličí"]
+    },
+    modravec: {
+      id: "modravec", name: "Modravec měsíční", icon: "🍄", kind: "potion",
+      atlas: "NEJÍ SE · Stříbrné výtrusy vedou lektvar. S Medovkou nebo Hnědkou tvoří stabilní pár.",
+      use: "Nejí se. Zkus ho v lektvaru s Medovkou nebo Hnědkou; některé vztahy ukáže až měsíc.",
+      clues: ["modrý klobouk světélkuje ve stínu", "dutý chladný třeň", "po otočení pouští stříbrné výtrusy"]
+    },
+    rosovka: {
+      id: "rosovka", name: "Rosovka perlová", icon: "🍄", kind: "edible",
+      atlas: "JEDLÁ · Narůžovělý klobouk drží kapky rosy a řídké lupeny voní po zeleném jablku. Polévku zjemní.",
+      use: "Zjemní polévku. Její spolehlivé lektvarové spojení zatím neznáš.",
+      clues: ["narůžovělý klobouk s perličkami rosy", "řídké krémové lupeny", "vůně po zeleném jablku"]
+    },
+    inkoustovka: {
+      id: "inkoustovka", name: "Inkoustovka fialová", icon: "🍄", kind: "inedible",
+      atlas: "NEJEDLÁ · Sametový fialový klobouk při poranění pouští tmavou šťávu. Polévku obarví a zhořkne; její místo v lektvaru zatím neznáš.",
+      use: "Polévku obarví a zhořkne. Její použití v lektvaru zatím zůstává neznámé.",
+      clues: ["sametový fialový klobouk", "tmavá šťáva na poraněném okraji", "kovová vůně"]
+    }
+  };
+
+  const SITES = [
+    { id: "breza", name: "Březový okraj", icon: "🌿", species: "medovka", intro: "Mezi kořeny břízy se pod listím schovává klobouk." },
+    { id: "mech", name: "Mechová pěšina", icon: "🌲", species: "hnedka", intro: "V mechu u pěšiny sedí houba téměř zarovnaná se zemí." },
+    { id: "parez", name: "Starý pařez", icon: "🪵", species: "ohnivka", intro: "U starého pařezu něco prorůstá mezi třískami a kapradím." },
+    { id: "rokle", name: "Bílá rokle", icon: "🕳️", species: "belokruh", intro: "Pod jehličím v mělké roklince se rýsuje klobouk." },
+    { id: "studenka", name: "Měsíční studánka", icon: "🌙", species: "modravec", intro: "Ve vlhkém stínu u studánky vyrůstá osamělá houba." }
+  ];
+
+  const IDENTIFICATION_OPTIONS = {
+    medovka: ["medovka", "rosovka", "ohnivka"],
+    hnedka: ["hnedka", "medovka", "inkoustovka"],
+    ohnivka: ["ohnivka", "rosovka", "belokruh"],
+    belokruh: ["belokruh", "inkoustovka", "modravec"],
+    modravec: ["modravec", "inkoustovka", "hnedka"],
+    rosovka: ["rosovka", "medovka", "belokruh"],
+    inkoustovka: ["inkoustovka", "modravec", "hnedka"]
+  };
+
+  const TIMINGS = {
+    dayStart: 8 * 60,
+    workStart: 16 * 60,
+    travelHome: 30,
+    carriedItemDelay: 30,
+    homeIdentification: 15,
+    homeLexicon: 30,
+    soup: 60,
+    soupEating: 30,
+    potCleanup: 30,
+    potScrub: 60,
+    potion: 60,
+    hungerTick: 60,
+    nightStart: 20 * 60
+  };
+
+  const COSTS = {
+    soupFocus: 0,
+    potionFocus: 2,
+    sleepHunger: 2,
+    normalSleepFocus: 3,
+    easySleepFocus: 5
+  };
+
+  const EQUIPMENT = {
+    baskets: {
+      wicker: { id: "wicker", name: "Proutěný košík", capacity: 5, returnThreshold: 3, accepts: ["mushroom"] }
+    }
+  };
+
+  return { SPECIES, SITES, IDENTIFICATION_OPTIONS, TIMINGS, COSTS, EQUIPMENT };
+});
+
+
+
+
+
