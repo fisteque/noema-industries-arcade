@@ -9,6 +9,7 @@ const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 
 assert.match(app, /lyra-klobouky-a-hlizy-v2-48-preview/);
 assert.match(app, /LEGACY_STORAGE = "lyra-klobouky-a-hlizy-v2-47-preview"/);
+assert.match(app, /Lýra · pracovní v2-48/);
 assert.match(style, /\.forest-hud \.forest-meters \{\s*top: 0;\s*left: 0;\s*right: auto;/);
 assert.match(style, /\.forest-shortcuts \{\s*top: 38px;/);
 assert.match(style, /@media \(max-width: 460px\)[\s\S]*?\.forest-hud #compass \{\s*right: 0;\s*left: auto;\s*transform: none;/);
@@ -59,7 +60,7 @@ assert.match(style, /\.compact-list-stage \.cooking-copy \.ingredient \{/);
 assert.match(style, /\.ending-summary \{[\s\S]*?grid-template-columns: minmax\(0, 1\.35fr\) minmax\(240px, \.65fr\);/);
 assert.match(style, /\.ending-room\.indoor-stage \.ending-copy \{[\s\S]*?overflow: hidden;/);
 assert.match(style, /\.result-art/);
-assert.match(html, /style\.css\?rev=2-48-1/);
-assert.match(html, /app\.js\?rev=2-48-1/);
+assert.match(html, /style\.css\?rev=2-48-2/);
+assert.match(html, /app\.js\?rev=2-48-2/);
 
 console.log("v2-48 compact lists, compact ending, number guessing and southern sun passed");

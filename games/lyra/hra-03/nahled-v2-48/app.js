@@ -265,7 +265,7 @@
     app.innerHTML = `
       <section class="title-screen">
         <div class="moon" aria-hidden="true"></div>
-        <p class="eyebrow">Lýra · pracovní v2-47</p>
+        <p class="eyebrow">Lýra · pracovní v2-48</p>
         <h1>Klobouky<br><span>a hlízy</span></h1>
         <p class="lede">V lese hledáš, určuješ nebo si nejistotu neseš domů. Po třech houbách můžeš odejít, košík ale pojme pět. Bramboru či šestou houbu uneseš pouze v ruce.</p>
         <div class="title-menu">
