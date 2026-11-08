@@ -324,7 +324,7 @@
       }
     });
     state.phase = state.basket.length ? "identifying" : "evening-order";
-    state.notes.unshift(`${clock(state.minutes)} · Odkládáš čaj a začínáš pracovat; známé druhy se vracejí z paměti.`);
+    state.notes.unshift(`${clock(state.minutes)} · Odkládáš čaj a začínáš pracovat; známé druhy se vracejí ze zápisníku.`);
     state.error = null;
     return state;
   }
@@ -363,7 +363,7 @@
     if (isDepleted(state)) return fail(state, "Bez jídla nebo soustředění můžeš neznámou houbu už jen nechat jako „nevím“.");
     const record = state.basketRecords?.[index];
     if (!record) return fail(state, "Tahle houba v košíku není.");
-    if (record.homeDecision === "memory") return fail(state, "Tuhle houbu už znáš z paměti minulých dnů.");
+    if (record.homeDecision === "memory") return fail(state, "Tuhle houbu už znáš ze zápisníku z minulých dnů.");
     if (record.consultedLexicon) return fail(state, "Lexikon už tenhle dotaz vyřešil.");
     const species = getSpecies(record.actual);
     const lookupGuess = record.forestGuess || record.homeGuess || null;
@@ -377,7 +377,7 @@
       ? state.knowledge.filter((entry) => entry.type === "exclusion" && entry.species === species.id).map((entry) => entry.id)
       : [];
     const availableAfterCorrection = state.knowledge.length - obsoleteNegativeIds.length;
-    if (!known && availableAfterCorrection >= MEMORY_LIMIT) return fail(state, "Paměť je plná. Otevři paměť V a jeden záznam vymaž.");
+    if (!known && availableAfterCorrection >= MEMORY_LIMIT) return fail(state, "Zápisník je plný. Otevři zápisník V a jeden záznam vymaž.");
     if (confirmed && obsoleteNegativeIds.length) {
       state.knowledge = state.knowledge.filter((entry) => !obsoleteNegativeIds.includes(entry.id));
     }
@@ -418,7 +418,7 @@
       const excluded = getSpecies(lookupGuess);
       record.speciesGuess = null;
       record.homeDecision = "disproved";
-      state.notes.unshift(`${clock(state.minutes)} · Lexikon za 15 minut a 1 soustředění vyvrací tip ${excluded.name}. Správný druh dál nevíš; do paměti ukládáš jen vyloučení.`);
+      state.notes.unshift(`${clock(state.minutes)} · Lexikon za 15 minut a 1 soustředění vyvrací tip ${excluded.name}. Správný druh dál nevíš; do zápisníku ukládáš jen vyloučení.`);
     }
     state.error = null;
     return state;
@@ -427,9 +427,9 @@
   function forgetKnowledge(input, knowledgeId) {
     const state = clone(input);
     const index = state.knowledge.findIndex((entry) => entry.id === knowledgeId);
-    if (index < 0) return fail(state, "Tenhle záznam už v paměti není.");
+    if (index < 0) return fail(state, "Tenhle záznam už v zápisníku není.");
     const [forgotten] = state.knowledge.splice(index, 1);
-    state.notes.unshift(`${clock(state.minutes)} · Z paměti pouštíš záznam „${forgotten.title}“.`);
+    state.notes.unshift(`${clock(state.minutes)} · Ze zápisníku mažeš záznam „${forgotten.title}“.`);
     state.error = null;
     return state;
   }
@@ -439,7 +439,7 @@
     if (state.phase !== "identifying") return fail(state, "Houby teď neurčuješ.");
     const record = state.basketRecords?.[index];
     if (!record) return fail(state, "Tahle houba v košíku není.");
-    if (record.homeDecision === "memory") return fail(state, "Tuhle houbu už znáš z paměti minulých dnů.");
+    if (record.homeDecision === "memory") return fail(state, "Tuhle houbu už znáš ze zápisníku z minulých dnů.");
     record.speciesGuess = null;
     record.homeDecision = "unknown";
     record.consultedLexicon = false;
@@ -761,7 +761,7 @@
     state.knowledge = clone(Array.isArray(previous.knowledge) ? previous.knowledge : []);
     state.notes = [hungryMorning
       ? `Den ${state.day} · Po hladovém večeru vyrážíš v 07:00 se 2 body sytosti a jen s ${state.focus} soustředěními.`
-      : `Den ${state.day} · Paměť zůstala; do lesa znovu vyrážíš v 07:00.`];
+      : `Den ${state.day} · Zápisník zůstal; do lesa znovu vyrážíš v 07:00.`];
     return state;
   }
 

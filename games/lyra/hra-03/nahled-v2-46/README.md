@@ -29,7 +29,7 @@ V2-17 dolaďuje čitelnost lesa a ovládání:
 - břízy mají užší kmeny i odpovídající menší kolizní poloměr;
 - brambory jsou vzácnější: v lese jsou dvě rostliny na okraji a jedna volná hlíza pod křovím.
 
-Lexikon stojí 2 soustředění, odhalí správný druh i text znalosti a uloží záznam do paměti o pěti místech. Jednou uloženou znalost lze při dalším setkání vybavit zdarma. Košík ukazuje hráčovo určení druhu, nikoli skrytou pravdu.
+Lexikon stojí 2 soustředění, odhalí správný druh i text znalosti a uloží záznam do zápisníku o pěti místech. Jednou zapsanou znalost lze při dalším setkání použít zdarma. Košík ukazuje hráčovo určení druhu, nikoli skrytou pravdu.
 
 Večerní pořadí polévky a lektvaru, hlad a schopnost vařit zůstávají napojené na původní pravidla. Polévka spotřebuje jen houby označené jako jedlé; houby ponechané stranou mohou při pořadí polévka → lektvar zůstat pro lektvar.
 
@@ -85,7 +85,7 @@ V2-21 odděluje původní nález, akci a stav hry a znovu zviditelňuje atmosfé
 - šipky: náhradní chůze a otáčení bez myši;
 - `E`: prozkoumat houbu nebo sebrat zaměřenou bramboru;
 - po třech houbách: `Q` otevře potvrzení odchodu, `E` v něm znamená ano a další `Q` ne;
-- `F`: košík, `X`: zápisník, `V`: paměť — stejné vrstvy fungují v lese, chaloupce i při vaření;
+- `F`: košík, `X`: deník cesty, `V`: zápisník — stejné vrstvy fungují v lese, chaloupce i při vaření;
 - `C`: sníst chléb;
 - `E`: potvrdit hlavní akci, `Q`: zavřít otevřené okno;
 - na dotykovém zařízení: šest tlačítek pod výhledem.
@@ -136,7 +136,7 @@ Tohle je pracovní prototyp na větvi `lyra/klobouky-a-hlizy-v2`. Veřejná v1 v
 
 - `index.html` — vstupní stránka;
 - `style.css` — rozhraní, responzivní ovládání a vzhled;
-- `engine.js` — pravidla sběru, poznávání, paměti a vaření;
+- `engine.js` — pravidla sběru, poznávání, zápisníku a vaření;
 - `lib/content-registry.js` — datový registr druhů, nalezišť, košíků a časů pro další rozšiřování;
 - `app.js` — první osoba, procedurální les, vykreslování hub, brambor a večerní obrazovky;
 - `tests.cjs` — automatické scénáře pravidel.
@@ -148,7 +148,7 @@ Hra nepoužívá externí knihovny ani obrázky; les, houby, brambory, listí i 
 - po otevření hry se vždy zobrazí úvodní obrazovka s oddělenou volbou **Pokračovat** a **Nová hra**;
 - nová hra nabízí normální obtížnost s 5 nebo lehkou obtížnost s 10 body soustředění každé ráno; zvolená obtížnost zůstává i v dalších dnech;
 - tip z lesa se po vložení houby do košíku uzamkne;
-- neznámou houbu lze u domácího stolu za 15 minut tipnout ze tří názvů. Neověřený tip je žlutý, zatímco druh potvrzený pamětí nebo lexikonem je zelený;
+- neznámou houbu lze u domácího stolu za 15 minut tipnout ze tří názvů. Neověřený tip je žlutý, zatímco druh potvrzený zápisníkem nebo lexikonem je zelený;
 - lexikon může tip za dalších 15 minut a 1 soustředění potvrdit nebo vyvrátit;
 - závěrečný titulek přisoudí záchranu dne bramboře pouze tehdy, když byla skutečně použita v polévce.
 
@@ -157,7 +157,7 @@ Hra nepoužívá externí knihovny ani obrázky; les, houby, brambory, listí i 
 - na úzkém displeji zůstávají současně vidět čas, sytost i soustředění; nízké hodnoty dostávají varovnou barvu;
 - kreslicí plocha se při změně velikosti průzoru přepočítá podle skutečných rozměrů, takže přepnutí vzdáleného náhledu mezi širokým a úzkým režimem obraz neroztáhne;
 - dotykové ovládání má zvláštní tlačítka **Sklonit se** a **Vyrovnat pohled**;
-- košík, paměť a zápisník mají vpravo nahoře čitelné **Q Zavřít**, nejen samotnou klávesovou značku;
+- košík, zápisník a deník cesty mají vpravo nahoře čitelné **Q Zavřít**, nejen samotnou klávesovou značku;
 - rozložení mobilního HUDu má menší ikony košíku a oddělené řádky, aby se údaje a akce na úzké obrazovce nepřekrývaly.
 
 ## V2-40 — kompaktní telefonní rozložení
@@ -185,7 +185,8 @@ Hra nepoužívá externí knihovny ani obrázky; les, houby, brambory, listí i 
 - první tip u nálezu i každý nový tip u houby v košíku nebo v ruce zabere 5 minut;
 - návrat ke stejné volbě čas nepřidává a označení houby jako „nevím“ je bez časové ceny;
 - po prozkoumání houby zůstává otázka se třemi druhy přímo v obraze nad potvrzením `E`;
-- okna nálezu, paměti a košíku jsou průsvitnější, menší a nechávají les čitelný i během rozhodování.
+- hráčská **Paměť** se jmenuje **Zápisník** (`V`); dosavadní seznam událostí na `X` je **Deník cesty**;
+- okna nálezu, zápisníku a košíku jsou průsvitnější, menší a nechávají les čitelný i během rozhodování.
 
 ## V2-45 — oblouk slunce, pomíjivé hlášky a původ určení
 

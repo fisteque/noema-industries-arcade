@@ -274,7 +274,7 @@
           <button class="secondary big" data-new-game>Nová hra · ${difficultyName.toLowerCase()}</button>
         </div>
         <div class="title-help">
-          <span><b>WASD</b> chůze</span><span><b>E</b> potvrdit</span><span><b>Q</b> zavřít</span><span><b>F</b> košík</span><span><b>X</b> zápisník</span><span><b>V</b> paměť</span><span><b>C</b> chléb</span>
+          <span><b>WASD</b> chůze</span><span><b>E</b> potvrdit</span><span><b>Q</b> zavřít</span><span><b>F</b> košík</span><span><b>X</b> deník cesty</span><span><b>V</b> zápisník</span><span><b>C</b> chléb</span>
         </div>
         <p class="small">Po každém otevření si vybereš pokračování, nebo novou hru. Na telefonu použij tlačítka pod výhledem.</p>
       </section>`;
@@ -320,11 +320,11 @@
           </div>
           <nav class="forest-shortcuts" aria-label="Lesní nabídky">
             <button data-forest-panel="basket" class="basket-shortcut"><kbd>F</kbd><span>Košík</span>${basketShortcutIcons()}</button>
-            <button data-forest-panel="memory"><kbd>V</kbd><span>Paměť ${state.knowledge.length}/${E.MEMORY_LIMIT}</span></button>
+            <button data-forest-panel="memory"><kbd>V</kbd><span>Zápisník ${state.knowledge.length}/${E.MEMORY_LIMIT}</span></button>
             ${state.bread ? `<button class="bread-shortcut" data-action="bread"><kbd>C</kbd><span>Sníst chleba</span></button>` : ""}
           </nav>
           <div class="forest-lower-shortcut">
-            <button data-forest-panel="notes"><kbd>X</kbd><span>Zápisník</span></button>
+            <button data-forest-panel="notes"><kbd>X</kbd><span>Deník cesty</span></button>
           </div>
           <div class="forest-actions">
             ${canGoHome ? `<button class="forest-action home" data-action="home"><kbd>Q</kbd> Jít domů · ${state.carriedItem ? "1 h" : "30 min"} →</button>` : ""}
@@ -392,11 +392,11 @@
         <span title="Soustředění">✦ ${state.focus}</span>
       </div>
       <nav class="phase-shortcuts">
-        <button data-forest-panel="memory"><kbd>V</kbd><span>Paměť ${state.knowledge.length}/${E.MEMORY_LIMIT}</span></button>
+        <button data-forest-panel="memory"><kbd>V</kbd><span>Zápisník ${state.knowledge.length}/${E.MEMORY_LIMIT}</span></button>
       </nav>
     </div>
     <div class="phase-lower-shortcut">
-      <button data-forest-panel="notes"><kbd>X</kbd><span>Zápisník</span></button>
+      <button data-forest-panel="notes"><kbd>X</kbd><span>Deník cesty</span></button>
     </div>`;
   }
 
@@ -450,7 +450,7 @@
       return `<div class="scene-modal-backdrop"><section class="scene-modal confirm-home" role="dialog" aria-modal="true"><p class="kicker">Návrat z lesa</p><h4>Chceš se opravdu vydat domů?</h4><p>Cesta potrvá ${state.carriedItem ? "hodinu, protože něco neseš v ruce" : "30 minut"}.</p><div class="scene-modal-actions"><button class="quiet" data-close-forest-panel><kbd>Q</kbd> Ne, hledat dál</button><button class="primary" data-confirm-home data-key-e><kbd>E</kbd> Ano, jít domů</button></div></section></div>`;
     }
     if (forestPanelView === "notes") {
-      return `<div class="scene-modal-backdrop"><section class="scene-modal forest-book" role="dialog" aria-modal="true"><button class="modal-close" data-close-forest-panel aria-label="Zavřít"><kbd>Q</kbd><span>Zavřít</span></button><p class="kicker">Zápisník · X</p><h4>Stopy dnešní cesty</h4><ol class="overlay-notes">${state.notes.map((note) => `<li>${esc(note)}</li>`).join("")}</ol></section></div>`;
+      return `<div class="scene-modal-backdrop"><section class="scene-modal forest-book" role="dialog" aria-modal="true"><button class="modal-close" data-close-forest-panel aria-label="Zavřít"><kbd>Q</kbd><span>Zavřít</span></button><p class="kicker">Deník cesty · X</p><h4>Stopy dnešní cesty</h4><ol class="overlay-notes">${state.notes.map((note) => `<li>${esc(note)}</li>`).join("")}</ol></section></div>`;
     }
     if (forestPanelView === "memory") {
       const entries = state.knowledge.map((entry) => {
@@ -458,9 +458,9 @@
         const icon = entry.species && E.getSpecies(entry.species)
           ? mushroomIcon(entry.species, "memory-icon")
           : "";
-        return `<li class="${negative ? "negative-memory" : "positive-memory"}">${icon}<div class="memory-entry-copy"><b>${esc(entry.title)}</b><span>${esc(entry.text)}</span><button class="forget-memory" data-forget-knowledge="${esc(entry.id)}">Vymazat z paměti</button></div></li>`;
+        return `<li class="${negative ? "negative-memory" : "positive-memory"}">${icon}<div class="memory-entry-copy"><b>${esc(entry.title)}</b><span>${esc(entry.text)}</span><button class="forget-memory" data-forget-knowledge="${esc(entry.id)}">Vymazat ze zápisníku</button></div></li>`;
       }).join("");
-      return `<div class="scene-modal-backdrop forest-soft-backdrop"><section class="scene-modal forest-book forest-soft-panel" role="dialog" aria-modal="true"><button class="modal-close" data-close-forest-panel aria-label="Zavřít"><kbd>Q</kbd><span>Zavřít</span></button><p class="kicker">Paměť · V · ${state.knowledge.length}/${E.MEMORY_LIMIT}</p><h4>Co si právě vybavuješ</h4><ul class="overlay-memory">${entries || '<li class="empty-memory">Zatím bez uložené znalosti.</li>'}</ul></section></div>`;
+      return `<div class="scene-modal-backdrop forest-soft-backdrop"><section class="scene-modal forest-book forest-soft-panel" role="dialog" aria-modal="true"><button class="modal-close" data-close-forest-panel aria-label="Zavřít"><kbd>Q</kbd><span>Zavřít</span></button><p class="kicker">Zápisník · V · ${state.knowledge.length}/${E.MEMORY_LIMIT}</p><h4>Co sis poznamenala</h4><ul class="overlay-memory">${entries || '<li class="empty-memory">Zatím bez zapsané znalosti.</li>'}</ul></section></div>`;
     }
     const items = state.basket.map((id, index) => basketItemRow(id, state.basketRecords?.[index], "basket", index)).join("");
     const hand = state.carriedItem ? (state.carriedItem.kind === "mushroom"
@@ -476,7 +476,7 @@
     const emergency = E.isDepleted(state);
     const heading = emergency ? "Dnes už jen určit houby a postavit hrnec" : waiting ? "Do práce zbývá chvíle na čaj" : "Dílna už čeká";
     const copy = emergency
-      ? `${state.forcedHome || "Došlo ti jídlo nebo soustředění."} Do 16:00 jen čekáš; potom známé houby poznáš z paměti, ostatní můžeš nechat jako „nevím“ a uvařit polévku. Lektvar teď nezvládneš.`
+      ? `${state.forcedHome || "Došlo ti jídlo nebo soustředění."} Do 16:00 jen čekáš; potom známé houby poznáš podle zápisníku, ostatní můžeš nechat jako „nevím“ a uvařit polévku. Lektvar teď nezvládneš.`
       : waiting
         ? "Práce začne v 16:00. Každá celá hodina v houpacím křesle vezme půl bodu sytosti a vrátí 1 soustředění."
         : `Přišla jsi až po 16:00, takže začneš hned v ${E.clock(start)}.`;
@@ -507,7 +507,7 @@
       const lexiconDisabled = state.focus < lexiconCost || E.isDepleted(state) || memoryFull;
       if (decision === "memory") {
         return `<article class="home-id-row known">${mushroomIcon(id, "home-row-icon")}<div class="home-id-options">
-          <p class="kicker">Houba ${index + 1} · potvrzeno z paměti</p>
+          <p class="kicker">Houba ${index + 1} · potvrzeno zápisníkem</p>
           <h4>${esc(species.name)}</h4>
           <p class="atlas-line">${esc(species.atlas)}</p>
         </div></article>`;
@@ -528,13 +528,13 @@
         return `<article class="home-id-row unknown">${mushroomIcon(id, "home-row-icon")}<div class="home-id-options">
           <p class="kicker">Houba ${index + 1} · tip vyvrácen lexikonem</p>
           <h4 class="unknown-label">Nevím</h4>
-          <p class="atlas-line">Lexikon zjistil jen to, že tahle houba není ${esc(excluded.name)}. Stejné vyloučení se uložilo do paměti.</p>
+          <p class="atlas-line">Lexikon zjistil jen to, že tahle houba není ${esc(excluded.name)}. Stejné vyloučení se zapsalo do zápisníku.</p>
         </div></article>`;
       }
       if (decision === "guess") {
         const source = record.forestGuess ? "tip z lesa · po sběru zamčený" : "tip od stolu · 15 minut";
         const lexiconLabel = memoryFull
-          ? "Paměť je plná"
+          ? "Zápisník je plný"
           : E.isDepleted(state)
             ? "Lexikon teď nezvládneš"
             : "Ověřit v lexikonu · 15 min · 1 soustředění";
@@ -547,7 +547,7 @@
       }
       const unknownSelected = decision === "unknown";
       const lexiconLabel = memoryFull
-        ? "Paměť je plná"
+        ? "Zápisník je plný"
         : E.isDepleted(state)
           ? "Lexikon teď nezvládneš"
           : `Lexikon · ${lexiconMinutes} min · ${lexiconCost} soustředění`;
@@ -558,7 +558,7 @@
       return `<article class="home-id-row unknown">${mushroomIcon(id, "home-row-icon")}<div class="home-id-options">
         <p class="kicker">Houba ${index + 1} · neznámá</p>
         <h4 class="unknown-label">${unknownSelected ? "Nevím" : "Tipni druh, otevři lexikon, nebo nech nevím"}</h4>
-        ${unknownSelected ? "" : `<div class="id-grid species-options">${guessOptions}</div><p class="atlas-line">Tip od stolu zabere 15 minut a zůstane žlutý, dokud ho nepotvrdí lexikon nebo paměť.</p>`}
+        ${unknownSelected ? "" : `<div class="id-grid species-options">${guessOptions}</div><p class="atlas-line">Tip od stolu zabere 15 minut a zůstane žlutý, dokud ho nepotvrdí lexikon nebo zápisník.</p>`}
         <div class="row-actions">
           <button class="secondary" data-home-lexicon="${index}"${lexiconDisabled ? " disabled" : ""}>${esc(lexiconLabel)}</button>
           <button class="id-choice unknown-choice${unknownSelected ? " selected" : ""}" data-home-unknown="${index}">Nevím</button>
@@ -568,7 +568,7 @@
     return `<main class="card main-card home-identification"><div class="workroom-stage">
       ${phaseHud()}
       <div class="kitchen-shelf"><i></i><i></i><i></i></div><div class="alchemy-table"><span>⚗</span><b>♨</b></div><div class="hanging-herbs">☘︎ ☘︎ ☘︎</div>
-      <div class="workroom-copy home-list-copy"><p class="kicker">Kuchyně a dílna · ${E.clock(state.minutes)}</p><h3>Určování na jednom stole</h3><p>Zelené houby jsou potvrzené pamětí nebo lexikonem. Žluté zůstávají jen tipem. U neznámé můžeš 15 minut hádat ze tří názvů, hledat v lexikonu, nebo přiznat „nevím“. Lesní tip už doma nezměníš.</p><div class="home-id-list">${rows}</div><button class="primary finish-home-id" data-finish-identification data-key-e${unresolved ? " disabled" : ""}><kbd>E</kbd> ${unresolved ? "Rozhodnout u všech hub" : "Dokončit určování"}</button></div>
+      <div class="workroom-copy home-list-copy"><p class="kicker">Kuchyně a dílna · ${E.clock(state.minutes)}</p><h3>Určování na jednom stole</h3><p>Zelené houby jsou potvrzené zápisníkem nebo lexikonem. Žluté zůstávají jen tipem. U neznámé můžeš 15 minut hádat ze tří názvů, hledat v lexikonu, nebo přiznat „nevím“. Lesní tip už doma nezměníš.</p><div class="home-id-list">${rows}</div><button class="primary finish-home-id" data-finish-identification data-key-e${unresolved ? " disabled" : ""}><kbd>E</kbd> ${unresolved ? "Rozhodnout u všech hub" : "Dokončit určování"}</button></div>
       ${utilityOverlay()}
     </div></main>`;
   }
@@ -602,9 +602,9 @@
   }
 
   function identificationStatus(record) {
-    if (record?.homeDecision === "memory") return { className: "confirmed-memory", label: "potvrzeno pamětí" };
+    if (record?.homeDecision === "memory") return { className: "confirmed-memory", label: "potvrzeno zápisníkem" };
     if (record?.homeDecision === "lexicon") return { className: "confirmed-lexicon", label: "potvrzeno lexikonem" };
-    if (record?.homeDecision === "guess") return { className: "unverified-tip", label: "neověřeno pamětí ani lexikonem" };
+    if (record?.homeDecision === "guess") return { className: "unverified-tip", label: "neověřeno zápisníkem ani lexikonem" };
     if (record?.homeDecision === "disproved") return { className: "unknown-species", label: "tip vyvrácen lexikonem · druh neznámý" };
     return { className: "unknown-species", label: "druh zůstal neurčený" };
   }
@@ -645,7 +645,7 @@
           <section class="cooking-copy">
             <p class="kicker">${potion ? "Alchymistická dílna · lektvar" : "Kuchyně · polévka"} · ${E.clock(state.minutes)} → +60 min</p>
             <h3>${potion ? "Dvě houby a přesný rytmus" : "Co opravdu vložíš do hrnce?"}</h3>
-            <p>${blockedPotion ? "Na lektvar potřebuješ aspoň 2 sytosti a nějaké soustředění. Dílna zůstane zavřená; můžeš jen přejít k polévce." : potion ? `Aktuální schopnost vařit: <b>${E.cookingAbility(state)}</b>. Lektvar potřebuje právě dvě houby; noc přidává únavu, ale otevírá jednu noční dvojici.` : `Žádné předchozí hádání jedlá/ne­jedlá. Vyber houby a brambory podle vzhledu, jména a paměti; následky ukáže až hotová polévka. Vaření skončí v ${E.clock(state.minutes + 60)}. Polévku můžeš také vynechat.`}</p>
+            <p>${blockedPotion ? "Na lektvar potřebuješ aspoň 2 sytosti a nějaké soustředění. Dílna zůstane zavřená; můžeš jen přejít k polévce." : potion ? `Aktuální schopnost vařit: <b>${E.cookingAbility(state)}</b>. Lektvar potřebuje právě dvě houby; noc přidává únavu, ale otevírá jednu noční dvojici.` : `Žádné předchozí hádání jedlá/ne­jedlá. Vyber houby a brambory podle vzhledu, jména a zápisníku; následky ukáže až hotová polévka. Vaření skončí v ${E.clock(state.minutes + 60)}. Polévku můžeš také vynechat.`}</p>
             <div class="ingredients">${items}${potatoes}${(!items && !potatoes) ? `<p class="empty">${potion ? "Košík je prázdný." : "Nemáš žádnou dostupnou surovinu do polévky."}</p>` : ""}</div>
             <div class="choice-row">
               <button class="primary" data-cook="${kind}" data-key-e${blockedPotion ? " disabled" : ""}><kbd>E</kbd> ${potion ? "Uvařit lektvar" : "Uvařit polévku"}</button>
@@ -688,8 +688,8 @@
     return `
       <aside class="card side-card">
         <section><p class="kicker">Košík</p><ul class="basket-list">${basket || `<li class="muted">zatím prázdný</li>`}${state.potatoes ? `<li>Brambory × ${state.potatoes}</li>` : ""}</ul></section>
-        <section><p class="kicker">Paměť · ${state.knowledge.length}/${E.MEMORY_LIMIT}</p><ul class="memory-list">${knowledge || `<li class="muted">zatím bez znalostí</li>`}</ul></section>
-        <section><p class="kicker">Zápisník</p><ol class="notes">${state.notes.slice(0, 7).map((note) => `<li>${esc(note)}</li>`).join("")}</ol></section>
+        <section><p class="kicker">Zápisník · ${state.knowledge.length}/${E.MEMORY_LIMIT}</p><ul class="memory-list">${knowledge || `<li class="muted">zatím bez znalostí</li>`}</ul></section>
+        <section><p class="kicker">Deník cesty</p><ol class="notes">${state.notes.slice(0, 7).map((note) => `<li>${esc(note)}</li>`).join("")}</ol></section>
       </aside>`;
   }
 
@@ -722,7 +722,7 @@
             <article class="result ${esc(soup.tone)}"><span>🥣</span><h3>${esc(soup.title)}</h3><p>${esc(soup.text)}</p></article>
             <article class="result ${esc(potion.tone)}"><span>🧪</span><h3>${esc(potion.title)}</h3><p>${esc(potion.text)}</p></article>
           </div>
-          ${identificationReview ? `<section class="ending-identification-review"><h2>Určení hub na konci dne</h2><p>Žlutý tip zůstává jen odhadem, dokud ho nepotvrdí paměť nebo lexikon.</p><ul>${identificationReview}</ul></section>` : ""}
+          ${identificationReview ? `<section class="ending-identification-review"><h2>Určení hub na konci dne</h2><p>Žlutý tip zůstává jen odhadem, dokud ho nepotvrdí zápisník nebo lexikon.</p><ul>${identificationReview}</ul></section>` : ""}
           <section class="score-card" aria-label="Bodování dne">
             <h2>Skóre dne <strong>${score.total}</strong></h2>
             <div class="score-row"><span>Polévka</span><b>${points(score.soupPoints)}</b></div>
@@ -731,9 +731,9 @@
             <div class="score-row"><span>Houpací křeslo · ${score.rockingHours} h</span><b>${points(score.chairPoints)}</b></div>
             <div class="score-row penalty"><span>Špatně určené houby · ${score.wrongGuesses}</span><b>${score.mistakePoints}</b></div>
           </section>
-          <p class="ending-note">Den končí v ${E.clock(state.minutes)}. Sytost je ${formatHunger(state.hunger)}/10 a soustředění ${state.focus}. Paměť obsahuje ${state.knowledge.length} záznamů.${state.hunger <= 0 ? ` Kvůli prázdnému žaludku začneš další ráno jen s ${state.difficulty === "easy" ? 5 : 3} soustředěními.` : ""}</p>
+          <p class="ending-note">Den končí v ${E.clock(state.minutes)}. Sytost je ${formatHunger(state.hunger)}/10 a soustředění ${state.focus}. Zápisník obsahuje ${state.knowledge.length} záznamů.${state.hunger <= 0 ? ` Kvůli prázdnému žaludku začneš další ráno jen s ${state.difficulty === "easy" ? 5 : 3} soustředěními.` : ""}</p>
           <div class="ending-actions">
-            <button class="primary big" data-next-day>Další den · zachovat paměť</button>
+            <button class="primary big" data-next-day>Další den · zachovat zápisník</button>
             <button class="quiet big" data-title-screen>Zpět na úvodní obrazovku</button>
           </div>
         </div>

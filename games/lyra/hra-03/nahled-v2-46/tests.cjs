@@ -218,7 +218,7 @@ function mushroomRecord(actual, forestGuess = null) {
     text: "Pokusný záznam"
   }));
   const blocked = E.consultHomeLexicon(state, 0);
-  assert.match(blocked.error, /Paměť je plná/);
+  assert.match(blocked.error, /Zápisník je plný/);
   state = E.forgetKnowledge(blocked, "test:2");
   assert.equal(state.knowledge.length, E.MEMORY_LIMIT - 1);
   state = E.consultHomeLexicon(state, 0);
