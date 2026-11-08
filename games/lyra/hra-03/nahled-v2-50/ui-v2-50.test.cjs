@@ -10,8 +10,10 @@ const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 assert.match(app, /STORAGE = "lyra-klobouky-a-hlizy-v2-50-preview"/);
 assert.match(app, /LEGACY_STORAGE = "lyra-klobouky-a-hlizy-v2-49-preview"/);
 assert.match(app, /Lýra · pracovní v2-50/);
-assert.match(html, /style\.css\?rev=2-50-1/);
-assert.match(html, /app\.js\?rev=2-50-1/);
+assert.match(html, /style\.css\?rev=2-50-2/);
+assert.match(html, /lib\/content-registry\.js\?rev=2-50-2/);
+assert.match(html, /engine\.js\?rev=2-50-2/);
+assert.match(html, /app\.js\?rev=2-50-2/);
 
 // Pohled se opravdu může sklopit téměř kolmo k zemi.
 assert.match(app, /const VERTICAL_LOOK = 1\.02/);
