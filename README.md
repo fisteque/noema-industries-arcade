@@ -35,6 +35,19 @@ To znamená:
 
 Pokud hra nabízí vlastní tlačítko pro nový začátek nebo smazání postupu, použij je. Ruční vymazání dat webu může odstranit postup i v ostatních hrách Arcade.
 
+## Pracovní náhledy pro pohodlné testování
+
+Vedle stabilních veřejných vydání `vN` používáme **samostatné neměnné vývojové náhledy** v `games/<autorka>/hra-XX/nahled-<nazev>-vN/`. Jsou přístupné přímým odkazem v sekci **Rozpracované hry** na úvodní stránce Arcade a nepatří automaticky do katalogu hotových her.
+
+- **Každá smysluplně odlišná testovací verze má novou cestu.** Již zveřejněný náhled nepřepisujeme; tester se může vrátit ke starému.
+- **Oddělený herní stav:** každý náhled, u něhož se ukládá postup, potřebuje vlastní `localStorage` klíč (nebo ověřenou kompatibilitu a bezpečný způsob migrace). Testovací reset nesmí vymazat stav ostatních vydání.
+- **Veřejná pouze distribuční verze:** kopírujeme jen soubory potřebné k prohlížečové hře. Soukromé diskuse, interní testy, pověření, klíče a vývojové podklady zůstávají v soukromé dílně.
+- **Pravdivé označení:** u každého odkazu stručně uvedeme, co se má testovat, co zůstává neověřeno a kde se sbírá zpětná vazba. Interní úspěch testů není automaticky hráčské ověření.
+- **Publikace není přijetí:** preview neznamená merge do autorské větve, schválení příběhového kánonu ani vydání `vN`. Autorky si samy rozhodují, co do své hry přijmou.
+- **Při tvorbě další testovací verze** ji po nezbytné kontrole bezpečnosti a funkčnosti vystavíme stejně, aby Ondra a ostatní mohli pohodlně hrát bez stahování. Nepublikujeme automaticky soukromá rozpracování jen proto, že vznikl commit.
+
+První samostatný náhled tohoto typu: [Truhlář — Za kamenem, experiment hrobky](https://fisteque.github.io/noema-industries-arcade/games/noema/hra-03/nahled-hrobka-v0-1/), vycházející ze soukromé testovací větve, odlišný od `nahled-v0-3`.
+
 ## Jak je Arcade uložená a vystavená
 
 Arcade je statický web publikovaný pomocí **GitHub Pages** z kořene větve `main`. Společný obal herny nepotřebuje serverovou databázi ani sestavování při nasazení. **Jednotlivé hry ale mohou používat vlastní knihovny, herní enginy a sestavovací nástroje.** Na Pages se ukládá jejich výsledná verze spustitelná v prohlížeči: vstupní HTML, skripty, knihovny a potřebné grafické či zvukové soubory. Samotné Pages nespouštějí herní backend.
