@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Truhlář — kontrola rozložení</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#0e1720;color:#f4e8c9;font:14px/1.4 system-ui,sans-serif}
+body{padding:12px}
+header{max-width:1100px;margin:0 auto 12px}
+h1{font-size:19px;margin:0 0 5px;font-weight:650}
+p{margin:0;color:#b8c9c9;font-size:12px}
+.controls{display:flex;flex-wrap:wrap;align-items:end;gap:10px;margin-top:10px}
+label{display:grid;gap:4px;font-size:11px;color:#c0d0ce}
+select,button,a{font:inherit}
+select{min-height:38px;border:1px solid #6a868b;border-radius:7px;background:#213740;color:#fff0d0;padding:6px 9px;font-size:13px}
+select:focus-visible,a:focus-visible{outline:3px solid #e5bb79;outline-offset:3px}
+a{color:#93d4c7;font-size:12px;align-self:center}
+output{font-size:12px;color:#e5bb79;align-self:center}
+#preview-area{width:100%;min-height:220px;overflow:auto;border:1px solid #334a54;border-radius:10px;background:#091219;padding:9px;text-align:center}
+#frame-space{position:relative;display:block;margin:0 auto;box-shadow:0 0 0 1px #7b938f,0 12px 25px #0007;background:#152630}
+iframe{position:absolute;top:0;left:0;border:0;display:block;transform-origin:top left;background:#101923}
+@media(max-width:420px){body{padding:8px}.controls{gap:7px}select{max-width:100%}h1{font-size:17px}}
+</style>
+</head>
+<body>
+<header>
+<h1>Truhlář · kontrola rozložení</h1>
+<p>Hra běží v samostatném rámu zvolených rozměrů. Zmenšení náhledu nemění rozměry uvnitř hry.</p>
+<div class="controls">
+<label>Rozměry obrazovky
+<select id="viewport">
+<option value="360x800">360 × 800 · na výšku</option>
+<option value="412x915">412 × 915 · na výšku</option>
+<option value="800x360">800 × 360 · na šířku</option>
+<option value="915x412">915 × 412 · na šířku</option>
+</select></label>
+<label>Velikost náhledu
+<select id="scale-mode">
+<option value="fit">Vejít na obrazovku</option>
+<option value="width">Přizpůsobit šířce</option>
+<option value="actual">Skutečná velikost · 100 %</option>
+</select></label>
+<output id="dimensions" aria-live="polite"></output>
+<a href="../index.html">Otevřít hru přímo ↗</a>
+</div>
+</header>
+<main id="preview-area" aria-label="Náhled hry ve zvolených rozměrech">
+<div id="frame-space">
+<iframe id="game" src="../index.html" title="Truhlář — hra v mobilním rozložení" width="360" height="800" allow="autoplay"></iframe>
+</div>
+</main>
+<script>
+"use strict";
+const viewport=document.getElementById("viewport");
+const scaleMode=document.getElementById("scale-mode");
+const area=document.getElementById("preview-area");
+const frameSpace=document.getElementById("frame-space");
+const game=document.getElementById("game");
+const dimensions=document.getElementById("dimensions");
+function resizePreview(){
+  const [width,height]=viewport.value.split("x").map(Number);
+  const availableWidth=Math.max(180,area.clientWidth-20);
+  const availableHeight=Math.max(180,window.innerHeight-area.getBoundingClientRect().top-32);
+  let scale=1;
+  if(scaleMode.value==="width")scale=Math.min(1,availableWidth/width);
+  if(scaleMode.value==="fit")scale=Math.min(1,availableWidth/width,availableHeight/height);
+  game.width=width;game.height=height;
+  game.style.width=width+"px";game.style.height=height+"px";
+  game.style.transform="scale("+scale+")";
+  frameSpace.style.width=(width*scale)+"px";
+  frameSpace.style.height=(height*scale)+"px";
+  area.style.height=scaleMode.value==="actual"?Math.max(220,availableHeight+20)+"px":"auto";
+  dimensions.textContent=width+" × "+height+" · náhled "+Math.round(scale*100)+" %";
+}
+viewport.addEventListener("change",resizePreview);
+scaleMode.addEventListener("change",resizePreview);
+window.addEventListener("resize",resizePreview);
+resizePreview();
+</script>
+</body>
+</html>
