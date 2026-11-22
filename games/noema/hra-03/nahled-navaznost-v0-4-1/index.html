@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101c26">
+<meta name="description" content="Truhlář: Věčné prkno — pracovní hratelná epizoda filozofické 2D adventury od Noemy.">
+<title>Truhlář: Věčné prkno — Jeskyně a hrobka</title>
+<style>
+:root{color-scheme:dark;--bg:#101923;--cream:#f4e8c9;--gold:#e5bb79;--teal:#81c9bc;--muted:#c2c6c6;--stroke:#678288;--danger:#eea9a4}*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#233c47 0%,transparent 62%),#0e1720;color:var(--cream);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+button,a{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--gold);outline-offset:3px}a{color:var(--teal)}
+.shell{max-width:1190px;margin:0 auto;padding:15px clamp(8px,2vw,22px) 36px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;padding:3px 5px 14px}
+.logo{font-size:11px;letter-spacing:.21em;color:var(--gold);font-weight:850}.logo strong{display:block;font:normal clamp(22px,3.5vw,36px)/1.05 Georgia,serif;letter-spacing:-.025em;color:#fff1d4;margin-top:5px}.topright{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.ghost{background:#162833;border:1px solid #61777c;border-radius:10px;color:#e9e3cf;padding:8px 12px}
+.theatre{position:relative;border:1px solid #5c7c7c;border-radius:17px;overflow:hidden;background:#182832;box-shadow:0 30px 65px #02080d99,0 0 0 7px #fff1d406}
+#scene{display:block;width:100%;aspect-ratio:16/9;max-height:680px}
+.scene-caption{position:absolute;top:18px;left:20px;z-index:2;background:#071720aa;border:1px solid #fff4cd42;border-radius:12px;padding:9px 12px;backdrop-filter:blur(7px);pointer-events:none}
+.scene-caption span{display:block;font-size:10px;letter-spacing:.18em;color:#e4d1a3}.scene-caption strong{display:block;font-size:13px;color:#f9e9ca;font-weight:650}
+.hotspot{cursor:pointer;transform-box:fill-box;transform-origin:center;transition:filter .2s}
+.hotspot:hover,.hotspot:focus{filter:drop-shadow(0 0 9px #ffde9e)}.hotspot .hit{fill:#fff;fill-opacity:.001}
+.hotspot .tag{fill:#13242bdc;stroke:#e9c78e;stroke-width:1.5}.hotspot .tag-text{fill:#fff4d8;font:650 16px system-ui,sans-serif;text-anchor:middle;pointer-events:none}
+.hotspot:hover .tag{fill:#43504c}
+#avatar{transition:none;pointer-events:none;filter:drop-shadow(0 7px 7px #07121a9e)}
+#aside{position:absolute;left:clamp(9px,3%,36px);bottom:17%;z-index:3;max-width:min(52%,460px);padding:9px 13px;border-radius:12px;border:1px solid #c3a773;background:#122630ec;box-shadow:0 8px 25px #0008;opacity:0;transform:translateY(6px);transition:opacity .16s,transform .16s;pointer-events:none}
+#aside.show{opacity:1;transform:none}
+#aside-who{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#e4c489;margin-bottom:3px}
+#aside-text{display:block;font:clamp(13px,1.7vw,20px)/1.3 Georgia,serif;color:#f7e9ce}
+@media(max-width:640px){#aside{bottom:25%;max-width:72%;padding:6px 9px}#aside-text{font-size:13px}}
+.subtitle{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font:italic 13px Georgia,serif;color:#f4e0b0;opacity:.72;pointer-events:none}
+.dialog{position:absolute;z-index:5;left:clamp(10px,3%,36px);right:clamp(10px,3%,36px);bottom:clamp(10px,3%,25px);background:linear-gradient(145deg,#101d27f5,#1f313cf8);border:1px solid #d1b77a;border-radius:14px;box-shadow:0 12px 45px #010b13ba;padding:18px 20px;min-height:142px;display:none}
+.dialog.open{display:block}.who{font-size:11px;letter-spacing:.15em;color:var(--gold);font-weight:850;text-transform:uppercase;margin-bottom:7px}
+.speech{font:clamp(17px,2.2vw,25px)/1.35 Georgia,serif;margin-bottom:14px;max-width:100ch}
+.d-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+.choice{background:#2e494b;border:1px solid #9bc5ad;border-radius:9px;color:#f9eacb;padding:10px 15px;min-height:42px;text-align:left}
+.choice:hover{background:#48645f}.choice.primary{background:#e6be7e;border-color:#e6be7e;color:#1b292c;font-weight:800}
+.title-screen{position:absolute;z-index:8;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(175deg,#071621cb,#06131de9);padding:20px}
+.title-screen[hidden]{display:none}.title-inner{max-width:690px;animation:rise .5s ease-out}
+.title-inner .eyebrow{font-size:11px;letter-spacing:.29em;color:#dfcc9c;font-weight:800}
+.title-inner h1{font:normal clamp(38px,7vw,89px)/1.02 Georgia,serif;letter-spacing:-.055em;margin:14px 0;color:#f5e1b8;text-shadow:0 4px 25px #02080c}
+.title-inner h1 span{display:block;font-size:.45em;letter-spacing:.1em;color:#b6d2c9;margin-top:9px}
+.title-inner p{max-width:620px;margin:15px auto 22px;color:#d2d6cd}
+.big{border:0;border-radius:10px;background:var(--gold);color:#14252a;padding:14px 24px;font-weight:850;min-height:48px}
+.big:hover{background:#f7d89d}.secondary{background:#203943;color:#e8d9b9;border:1px solid #729b98}
+@keyframes rise{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+.lowbar{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;padding:15px 3px 6px}
+.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#e5bd79;font-weight:850}
+.quest{font:normal 18px/1.35 Georgia,serif;margin:4px 0}.help{font-size:12px;color:#b7c5c1}
+.inventory{display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:end}.inv-item{border:1px solid #5d777b;background:#172b35;color:#f5e8cc;border-radius:8px;padding:7px 11px;font-size:12px}
+.mobile-controls{display:flex;gap:10px;align-items:center;justify-content:center;padding:12px 0 5px}
+.mobile-controls button{background:#253e44;border:1px solid #6d8d8d;color:#fff0d4;border-radius:11px;padding:12px 20px;min-width:65px;min-height:46px;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.footerline{font-size:11px;color:#9eafb0;margin:10px 5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#toast{position:absolute;bottom:12%;left:50%;transform:translateX(-50%);z-index:4;background:#19353de8;color:#fff2d5;border:1px solid #a5b6a0;padding:9px 17px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s;text-align:center}
+#toast.show{opacity:1}
+@media(max-width:640px){.shell{padding:8px 5px 20px}.theatre{border-radius:8px}.scene-caption{left:7px;top:7px;padding:5px 7px}.scene-caption span{font-size:7px}.scene-caption strong{font-size:10px}.dialog{left:5px;right:5px;bottom:5px;padding:10px;min-height:auto}.speech{font-size:15px;margin-bottom:8px}.who{font-size:9px}.choice{font-size:12px;padding:7px 9px;min-height:35px}.title-inner p{font-size:12px}.lowbar{grid-template-columns:1fr}.inventory{justify-content:start}.subtitle{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* The bite advances by time, never by three mandatory dialogue clicks. */
+@keyframes tomb-bite-approach{from{transform:translateX(-95px);opacity:.68}to{transform:none;opacity:1}}
+@keyframes tomb-bite-lunge{from{transform:translateX(-66px) rotate(-7deg)}to{transform:none}}
+@keyframes tomb-bite-retreat{from{transform:translateX(54px)}to{transform:none}}
+.bite-approach{animation:tomb-bite-approach 1s ease-out both}
+.bite-bite{animation:tomb-bite-lunge .68s cubic-bezier(.2,.9,.25,1) both}
+.bite-reaction{animation:tomb-bite-retreat .55s ease-out both}
+.bite-bubble{position:absolute;z-index:4;top:9%;left:29%;width:max-content;max-width:37%;padding:7px 11px;border:1px solid #ddc392;border-radius:13px;background:#162630f2;box-shadow:0 6px 14px #0007;pointer-events:none}
+.bite-bubble.is-jesus{left:54%;top:8%}
+.bite-bubble[hidden]{display:none}
+.bite-bubble strong{display:block;color:#e4bd80;font-size:10px;letter-spacing:.08em}
+.bite-bubble span{display:block;font:clamp(12px,1.7vw,19px)/1.25 Georgia,serif}
+@media(max-width:640px){.bite-bubble{top:4%;left:25%;max-width:46%;padding:5px 7px}.bite-bubble.is-jesus{left:52%;top:4%}.bite-bubble strong{font-size:8px}.bite-bubble span{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.bite-approach,.bite-bite,.bite-reaction{animation:none}}
+
+/* Dialogue stays above its speaker; decisions live outside the drawing. */
+html{min-width:280px}
+body{overflow-x:hidden}
+.shell{padding-top:10px}
+.top{gap:8px;padding-bottom:10px}
+.topright{gap:8px}
+.topright>span{font-size:10px;letter-spacing:.035em}
+.stage{position:relative;min-width:0;background:linear-gradient(#182832,#213640);isolation:isolate}
+#scene{height:auto;max-height:none;aspect-ratio:16/9}
+.scene-caption{z-index:2;top:10px;left:12px;padding:5px 9px}
+.scene-caption span{font-size:9px}
+.scene-caption strong{font-size:11px}
+.dialog{left:8px;right:auto;bottom:auto;top:65px;width:max-content;max-width:min(70%,480px);min-height:0;padding:10px 13px;border-radius:15px;background:#172b35f5;box-shadow:0 5px 18px #07121a66;transition:none;overflow:visible;--tail-x:50%}
+.dialog::after,#aside::after,.bite-bubble::after{content:"";position:absolute;left:var(--tail-x,50%);bottom:-9px;width:15px;height:15px;background:#172b35;transform:translateX(-50%) rotate(45deg);border-right:1px solid #d1b77a;border-bottom:1px solid #d1b77a;pointer-events:none}
+.dialog.narration{max-width:88%;border-color:#829794;background:#183039f5}
+.dialog.narration::after{display:none}
+.dialog .who{font-size:10px;margin-bottom:4px;letter-spacing:.09em}
+.dialog .speech{font:clamp(15px,1.7vw,21px)/1.35 Georgia,serif;margin:0;max-height:var(--speech-max,160px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:2px;overflow-wrap:anywhere}
+.dialog-controls{padding:10px 12px;background:#101f29;border-top:1px solid #50666a;max-height:36svh;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.dialog-controls[hidden]{display:none}
+.d-actions{justify-content:flex-end;gap:8px}
+.choice{min-height:44px;padding:9px 13px;font-size:14px;line-height:1.3;max-width:100%;overflow-wrap:anywhere}
+.choice:only-child{min-width:140px}
+#aside{left:8px;bottom:auto;top:65px;width:max-content;max-width:min(68%,430px);padding:8px 11px;border-radius:14px;background:#172b35f5;transform:none;transition:opacity .16s;--tail-x:50%;pointer-events:auto}
+#aside:not(.show){visibility:hidden;pointer-events:none}
+#aside-who{font-size:10px;letter-spacing:.08em;margin-bottom:4px}
+#aside-text{font:clamp(14px,1.65vw,20px)/1.3 Georgia,serif;max-height:var(--speech-max,130px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.bite-bubble,.bite-bubble.is-jesus{left:8px;top:65px;width:max-content;max-width:min(58%,360px);padding:8px 11px;background:#172b35f5;--tail-x:50%}
+.bite-bubble strong{font-size:10px}
+.bite-bubble span{font:clamp(14px,1.65vw,20px)/1.3 Georgia,serif;max-height:var(--speech-max,130px);overflow-y:auto}
+#toast{max-width:88%;width:max-content;bottom:6%;font-size:12px;padding:7px 12px}
+.subtitle{bottom:5px;font-size:11px}
+.title-screen{overflow-y:auto;overscroll-behavior:contain;padding:18px}
+.title-inner{width:100%;min-width:0}
+.title-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+#tomb-prototype{margin:0!important}
+.title-inner .title-note{font-size:11px;margin:13px auto 0}
+.mobile-controls button{padding:10px 17px;min-width:56px}
+.lowbar{padding:11px 3px 3px}
+.quest{font-size:17px}
+.footerline{line-height:1.4}
+@media(max-width:640px){
+ .shell{padding:8px 6px 14px}.top{padding:1px 2px 9px}.logo{font-size:8px;letter-spacing:.13em}.logo strong{font-size:25px}.topright{gap:6px;font-size:11px}.topright>span{flex-basis:100%;font-size:8px}.ghost{padding:6px 9px;min-height:36px}
+ .stage{padding-top:48px}.stage:has(.title-screen:not([hidden])){min-height:440px;padding-top:0;display:flex;align-items:end}
+ .stage:has(.title-screen:not([hidden])) #scene{width:100%}.scene-caption{top:6px;left:7px;padding:4px 7px}.scene-caption span{font-size:8px}.scene-caption strong{font-size:10px}
+ .dialog{max-width:78%;padding:8px 10px;border-radius:12px}.dialog .who{font-size:9px}.dialog .speech{font-size:15px;line-height:1.3}.dialog::after,#aside::after,.bite-bubble::after{width:12px;height:12px;bottom:-7px}
+ .dialog-controls{padding:8px;max-height:34svh}.d-actions{gap:7px;justify-content:stretch}.choice{flex:1 1 100%;min-height:42px;font-size:13px;padding:9px 11px}.choice:only-child{flex:0 1 auto;margin-left:auto;min-width:145px}
+ #aside,.bite-bubble,.bite-bubble.is-jesus{max-width:76%;padding:7px 9px}#aside-text,.bite-bubble span{font-size:14px}#aside-who,.bite-bubble strong{font-size:9px}
+ .lowbar{gap:7px;grid-template-columns:1fr}.quest{font-size:16px}.help{font-size:11px;line-height:1.4}.inventory{justify-content:start}.inv-item{padding:6px 9px;font-size:12px}.mobile-controls{gap:7px;padding:9px 0 3px}.mobile-controls button{font-size:13px;padding:11px 14px;min-height:44px}.footerline{font-size:10px;margin-top:8px;gap:6px}.title-inner h1{font-size:53px}.title-inner p{font-size:14px}.title-actions{flex-direction:column;max-width:270px;margin:auto}.title-actions button{min-height:44px}.title-inner .title-note{font-size:11px}
+}
+@media(orientation:landscape) and (max-height:600px){
+ .shell{max-width:none;padding:4px 8px 7px}.top{height:40px;padding:0 1px 5px;gap:6px;flex-wrap:nowrap}.logo{font-size:7px;letter-spacing:.1em}.logo strong{font-size:20px;margin-top:1px}.topright{flex-wrap:nowrap;gap:6px;font-size:10px}.topright>span{display:none}.topright .ghost{padding:5px 8px;min-height:31px}.topright a{white-space:nowrap}
+ main{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,32%);column-gap:10px;align-items:start}
+ .theatre{grid-column:1;grid-row:1 / 4;display:contents;box-shadow:none;border:0}
+ .stage{grid-column:1;grid-row:1 / 4;align-self:start;display:flex;align-items:end;height:calc(100svh - 49px);padding-top:0;border:1px solid #5c7c7c;border-radius:9px;overflow:hidden}
+ #scene{width:100%;height:100%;object-fit:contain;aspect-ratio:16/9}.stage:has(.title-screen:not([hidden])){height:calc(100svh - 49px);min-height:0;padding-top:0;grid-column:1 / -1}
+ .scene-caption{left:6px;top:6px;padding:3px 6px;max-width:95%}.scene-caption span{font-size:7px}.scene-caption strong{font-size:9px}
+ .dialog,.dialog.narration{max-width:80%;padding:7px 9px}.dialog .who{font-size:9px}.dialog .speech{font-size:14px;line-height:1.25}
+ #aside,.bite-bubble,.bite-bubble.is-jesus{max-width:78%;padding:6px 8px}#aside-text,.bite-bubble span{font-size:13px}#aside-who,.bite-bubble strong{font-size:8px}
+ .dialog-controls{grid-column:2;grid-row:1;max-height:calc(100svh - 108px);border:1px solid #50666a;border-radius:9px;padding:7px;align-self:start}.d-actions{display:flex;flex-direction:column;gap:6px}.choice,.choice:only-child{width:100%;min-width:0;min-height:39px;margin:0;font-size:12px;padding:7px 9px;flex:none}
+ .lowbar{grid-column:2;grid-row:1;display:flex;flex-direction:column;padding:4px 1px;gap:7px;max-height:calc(100svh - 112px);overflow-y:auto}.lowbar .eyebrow{font-size:8px}.quest{font-size:14px;margin:3px 0}.help{font-size:10px}.inventory{justify-content:start;gap:5px}.inv-item{font-size:11px;padding:5px 7px}
+ main:has(.dialog.open) .lowbar{visibility:hidden;pointer-events:none}main:has(.title-screen:not([hidden])) .lowbar,main:has(.title-screen:not([hidden])) .mobile-controls{visibility:hidden;pointer-events:none}
+ .mobile-controls{grid-column:2;grid-row:3;padding:5px 0 0;gap:5px;align-self:end;min-width:0}.mobile-controls button{min-width:39px;min-height:41px;padding:8px 9px;font-size:11px}.mobile-controls #interact{flex:1;padding:8px 4px}.footerline{display:none}.subtitle{display:none}
+ .title-screen{padding:14px}.title-inner{display:grid;grid-template-columns:1fr 1.1fr;gap:8px 18px;align-items:center;text-align:left}.title-inner .eyebrow{grid-column:1;grid-row:1;font-size:8px;letter-spacing:.1em}.title-inner h1{grid-column:1;grid-row:2 / 5;font-size:clamp(26px,5.5vw,48px);margin:0}.title-inner>p:not(.title-note){grid-column:2;grid-row:1 / 3;margin:0;font-size:12px}.title-actions{grid-column:2;grid-row:3;display:flex;flex-direction:column;gap:6px;max-width:none;margin:0}.title-actions button{font-size:11px;padding:9px 8px;min-height:36px}.title-inner .title-note{grid-column:2;grid-row:4;font-size:9px;margin:0;line-height:1.3}
+}
+
+/* Gameplay: physical props, the first bite and the sound of the closing tomb. */
+.inv-item.selected{border-color:#f8d38e;background:#605137;box-shadow:0 0 0 2px #d5b77655}
+.actor-switch{color:#fff0c4;border-color:#d2b67d;font-weight:700}
+@keyframes cave-rustle{0%,78%,100%{opacity:.38;transform:translateX(0)}82%,89%{opacity:.65;transform:translateX(6px)}}
+.cave-rustle{animation:cave-rustle 7s ease-in-out infinite}
+@keyframes cave-lunge{from{transform:translateX(-38px)}to{transform:none}}
+.cave-biter.contact{animation:cave-lunge .45s ease-out both}
+@keyframes tomb-closing{0%{transform:translateX(115px)}60%{transform:translateX(0)}68%,84%{transform:translateX(-5px)}76%,92%{transform:translateX(5px)}100%{transform:none}}
+.tomb-closing{animation:tomb-closing 1.3s ease-in both}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top">
+<div class="logo">NOEMA INDUSTRIES · PŘÍBĚHY FLATWORLDU<strong>Truhlář: Věčné prkno</strong></div>
+<div class="topright"><span>VÝVOJOVÝ NÁHLED · v0.4.1</span><button class="ghost" type="button" id="sound" aria-pressed="false">♪ Zvuk vypnut</button><button class="ghost" type="button" id="restart">↻ Od začátku</button><a href="../../../../index.html">← Arcade</a></div>
+</header>
+<main>
+<div class="theatre">
+<div class="stage" id="stage">
+<svg id="scene" viewBox="0 0 1000 562.5" role="img" aria-label="Dvojrozměrná herní scéna s interaktivními předměty"></svg>
+<div class="scene-caption"><span id="chapter">PROLOG · ROK 2026</span><strong id="place">Oddělení židlí</strong></div>
+<div id="toast" aria-live="polite"></div>
+<div id="aside" role="status" aria-live="polite"><strong id="aside-who"></strong><span id="aside-text"></span></div>
+<div id="bite-bubble" class="bite-bubble" role="status" aria-live="polite" hidden><strong id="bite-bubble-who"></strong><span id="bite-bubble-text"></span></div>
+<div class="subtitle" id="stagehint">Klikni na zvýrazněný předmět, nebo k němu dojdi a stiskni E</div>
+<div class="dialog" id="dialog" role="dialog" aria-label="Herní rozhovor" aria-live="polite" aria-describedby="speech" aria-controls="d-actions"><div class="who" id="who"></div><div class="speech" id="speech" tabindex="0"></div></div>
+<div class="title-screen" id="title"><div class="title-inner">
+<div class="eyebrow">FILOSOFICKO-UPÍRSKÁ ADVENTURA</div>
+<h1>TRUHLÁŘ<span>VĚČNÉ PRKNO</span></h1>
+<p>Dva upíři. Jedna krabice s nápisem ŽIDLE. Všechno ostatní je otevřené.</p>
+<div class="title-actions"><button class="big" id="start">Vstoupit do příběhu</button><button class="ghost" type="button" id="tomb-prototype">Za kamenem · hratelný pokus</button></div>
+<p class="title-note">Hratelný prolog, Athény a hrobka · české titulky · bez dabingu</p>
+</div></div>
+</div>
+<div class="dialog-controls" id="dialog-actions" hidden aria-label="Možnosti rozhovoru" aria-describedby="speech"><div class="d-actions" id="d-actions"></div></div>
+</div>
+<div class="lowbar"><div><div class="eyebrow">OKOLÍ</div><div class="quest" id="quest">Otevři krabici a zjisti, co v ní je.</div><div class="help">Kliknutím se postava sama přiblíží. Nebo A / D či šipky, E pro interakci. Dialog: Enter. Na mobilu jsou tlačítka níže.</div></div><div class="inventory" id="inventory" aria-label="Inventář"><span class="help">Inventář: prázdný</span></div></div>
+<div class="mobile-controls" aria-label="Ovládání pohybu"><button type="button" id="left" aria-label="Jít vlevo">◀</button><button type="button" id="interact" aria-label="Použít nejbližší předmět">PROZKOUMAT · E</button><button type="button" id="right" aria-label="Jít vpravo">▶</button></div>
+<div class="footerline"><span>Autorská pracovní ukázka · Noema · česká 2D adventura · všechny postavy a děj jsou fikce</span><span>Dabing a další kapitoly jsou zatím ve vývoji. Postup se ukládá v tomto prohlížeči.</span></div>
+</main></div>
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const svg=$("scene"),dlg=$("dialog"),title=$("title"),K="noema-truhlar-navaznost-0-4-1";
+const INTRO_TITLE={eyebrow:title.querySelector(".eyebrow").textContent,heading:title.querySelector("h1").innerHTML,description:title.querySelector("p").textContent,start:$("start").textContent};
+function freshCave(){return {night:false,phase:"quiet",puzzle:false,selected:null,lampSlot:null,boardSlot:null};}
+function freshTomb(){return {phase:"sleep",exitOpen:false,repaired:false,escaped:false,horizonSeen:false,braced:false,wedged:false,wedge:false,nightVision:false,together:false,positions:{plato:300,jesus:568}};}
+function freshState(){return {scene:"ikea",box:0,definition:false,board:false,lamp:false,shadow:false,finished:false,choices:{},discoveries:{},playerActor:null,vampire:false,cave:freshCave(),tomb:freshTomb()};}
+let state=freshState();
+let x=215,caveBeat="approach",goal=null,pressed=new Set(),queue=[],done=null,dialogOpen=false,audio=null,sound=false,last=0,toastTimer=null,asideTimer=null,asideRevision=0,biteBeat="approach",biteTimers=[],biteRevision=0;
+const SCENES={
+ikea:{actor:"jesus",chapter:"PROLOG · 2026",place:"Obchod s nábytkem — Flatworld",quest:"Na podlaze stojí krabice.",spots:[["box","Krabice",535,402]]},
+agora:{actor:"plato",chapter:"KAPITOLA I · 4. STOL. PŘ. N. L.",place:"Athénské tržiště",quest:"Athénské tržiště. Je tu o čem mluvit.",spots:[["shop","Tesařova dílna",785,347],["lamp","Olejová lampa",400,400],["cave","Jeskyně",120,365],["citizen","Občan",553,371]]},
+shop:{actor:"plato",chapter:"KAPITOLA I · ATHÉNY",place:"Tesařova dílna",quest:"V dílně není nic dokončené.",spots:[["carpenter","Tesař",500,380],["plan","Nedokončená židle",240,410],["back","Na tržiště",855,360]]},
+cave:{actor:"plato",chapter:"KAPITOLA I · ATHÉNY",place:"Jeskyně stínů",quest:"Pohybující se stíny zakrývají část stěny.",spots:[["shadow","Stěna stínů",730,286],["caveback","Zpět na tržiště",870,380],["figure","Šramot za pochodní",170,390],["light-0","Místo u pochodně",300,405],["light-1","Prostřední místo",450,405],["light-2","Místo u stěny",600,405],["cave-rest","Výklenek za kamenem",170,405]]},
+tomb:{actor:"plato",chapter:"KAPITOLA II · ZA KAMENEM",place:"Za kamenem — noc",quest:"Kdo zavřel vchod?",spots:[["tomb-inner","Vnitřní kámen",230,405],["tomb-threshold","Hlavní síň",505,405],["tomb-plato","Platón",300,405],["tomb-repair","Podstavec",570,405],["tomb-wedge","Dřevěný klín",405,430],["tomb-gate","Vstupní kámen",810,405],["tomb-exit","Cesta ven",940,405]]},
+tombOutside:{actor:"jesus",chapter:"KAPITOLA II · CESTA VEN",place:"Cesta od hrobky",quest:"Za jeskyní pokračuje cesta.",spots:[["tomb-horizon","Rozhlédnout se",750,405]]}
+};
+function currentActor(){return state.playerActor||SCENES[state.scene].actor;}
+function rememberPosition(){if(state.scene==="tomb"&&state.tomb.phase==="awake")state.tomb.positions[currentActor()]=x;}
+function save(){rememberPosition();try{localStorage.setItem(K,JSON.stringify(state));}catch(_e){}}
+function load(){
+ try{const stored=JSON.parse(localStorage.getItem(K));if(stored&&SCENES[stored.scene])state=Object.assign(freshState(),stored);}catch(_e){}
+ if(!state.choices||typeof state.choices!=="object"||Array.isArray(state.choices))state.choices={};
+ if(!state.discoveries||typeof state.discoveries!=="object"||Array.isArray(state.discoveries))state.discoveries={};
+ if(state.playerActor!=="plato"&&state.playerActor!=="jesus")state.playerActor=null;
+ state.cave=Object.assign(freshCave(),state.cave&&typeof state.cave==="object"?state.cave:{});
+ for(const key of ["lampSlot","boardSlot"])if(![0,1,2].includes(state.cave[key]))state.cave[key]=null;
+ if(!["lamp","board"].includes(state.cave.selected))state.cave.selected=null;
+ const savedTomb=state.tomb&&typeof state.tomb==="object"?state.tomb:{};
+ state.tomb=Object.assign(freshTomb(),savedTomb);
+ state.tomb.positions=Object.assign({plato:300,jesus:568},savedTomb.positions||{});
+ for(const actor of ["plato","jesus"])if(!Number.isFinite(state.tomb.positions[actor]))state.tomb.positions[actor]=actor==="plato"?300:568;
+ if(typeof state.tomb.horizonSeen!=="boolean")state.tomb.horizonSeen=false;
+ if(state.scene==="ikea"&&state.box>0)state.box=0;
+ // Resume at a stable action boundary; never finish an interrupted authored bite.
+ if(state.cave.phase==="turning")state.cave.phase=state.vampire?"turned":"ready";
+ if(state.tomb.phase==="cutscene")state.tomb.phase="explore";
+ if(state.tomb.phase==="awakening")state.tomb.phase="sleep";
+ if(state.scene==="tomb"||state.scene==="tombOutside")state.vampire=true;
+ if(state.finished&&state.scene==="cave"&&state.shadow){state.finished=false;state.cave.night=true;state.cave.phase=state.vampire?"turned":"ready";}
+ if(state.scene==="tomb")x=state.tomb.phase==="awake"?state.tomb.positions[currentActor()]:130;
+}
+
+function rememberFirstChoice(key,value){if(!Object.prototype.hasOwnProperty.call(state.choices,key)){state.choices[key]=value;save();}}
+function markDiscovery(key){if(!state.discoveries[key]){state.discoveries[key]=true;save();}}
+function reset(){cancelBite();biteBeat="approach";caveBeat="approach";state=freshState();x=215;goal=null;pressed.clear();hideAside();clearTimeout(toastTimer);$("toast").classList.remove("show");queue=[];done=null;dialogOpen=false;dlg.classList.remove("open");save();title.hidden=false;title.querySelector(".eyebrow").textContent=INTRO_TITLE.eyebrow;title.querySelector("h1").innerHTML=INTRO_TITLE.heading;title.querySelector("p").textContent=INTRO_TITLE.description;const start=$("start");start.textContent=INTRO_TITLE.start;start.onclick=()=>{title.hidden=true;opening();};render();}
+// Environmental speech never owns movement or forces the next line.
+function hideAside(){if(asideTimer!==null){clearTimeout(asideTimer);asideTimer=null;}asideRevision++;$("aside").classList.remove("show");}
+function showAside(who,text,durationMs=5000){hideAside();if(dialogOpen||!title.hidden)return false;$("aside-who").textContent=who;$("aside-text").textContent=text;$("aside").classList.add("show");updateSpeechLayout();const revision=asideRevision;asideTimer=setTimeout(()=>{if(revision===asideRevision)hideAside();},durationMs);return true;}
+// Positions use SVG coordinates. Gameplay can supply actorPosition for moving companions.
+function speakerAnchor(who){
+ const name=String(who||"").toLocaleLowerCase("cs");
+ let actor=name.includes("platón")?"plato":name.includes("ježíš")?"jesus":name.includes("tmy")&&state.scene==="cave"&&state.cave.phase==="turning"?"stranger":null;
+ if(actor&&typeof actorPosition==="function"){const p=actorPosition(actor);if(p)return {x:p.x,y:p.y-137};}
+ if(actor){
+  const active=state.playerActor||SCENES[state.scene].actor;
+  const px=actor===active?x:state.scene==="ikea"?362:state.scene==="tomb"?300:x;
+  return {x:px,y:296};
+ }
+ if(name.includes("tesař"))return {x:500,y:255};
+ if(name.includes("athéňan"))return {x:552,y:290};
+ if(name.includes("schrödinger"))return {x:725,y:295};
+ if(name.includes("tmy")||name.includes("tajem"))return {x:170,y:255};
+ return null;
+}
+function positionSpeechBubble(el,who,textEl){
+ const stage=$("stage");
+ if(!stage||typeof stage.getBoundingClientRect!=="function"||typeof el.getBoundingClientRect!=="function")return;
+ const stageBox=stage.getBoundingClientRect(),svgBox=svg.getBoundingClientRect();
+ if(stageBox.width<1||svgBox.width<1)return;
+ // SVG keeps its viewBox aspect ratio; account for letterboxing on short landscape screens.
+ const scale=Math.min(svgBox.width/1000,svgBox.height/562.5);
+ const left=svgBox.left-stageBox.left+(svgBox.width-1000*scale)/2;
+ const top=svgBox.top-stageBox.top+(svgBox.height-562.5*scale)/2;
+ const anchor=speakerAnchor(who);
+ if(el===dlg)el.classList.toggle("narration",!anchor);
+ const ax=anchor?left+anchor.x*scale:stageBox.width/2;
+ const ay=anchor?top+anchor.y*scale:top+255*scale;
+ const margin=8,captionBottom=$("place").getBoundingClientRect?.().bottom-stageBox.top||0;
+ const ceiling=Math.max(margin,Math.min(captionBottom+7,40));
+ const available=Math.max(48,ay-ceiling-16);
+ if(textEl?.style)textEl.style.maxHeight=Math.max(24,available-42)+"px";
+ el.style.maxHeight=available+"px";
+ el.style.top=ceiling+"px";
+ el.style.left=margin+"px";
+ const width=el.getBoundingClientRect().width,height=el.getBoundingClientRect().height;
+ const bubbleLeft=Math.max(margin,Math.min(stageBox.width-width-margin,ax-width/2));
+ const bubbleTop=Math.max(ceiling,ay-height-13);
+ el.style.left=bubbleLeft+"px";el.style.top=bubbleTop+"px";
+ el.style.setProperty("--tail-x",Math.max(14,Math.min(width-14,ax-bubbleLeft))+"px");
+}
+function updateSpeechLayout(){
+ const controls=$("dialog-actions");if(controls)controls.hidden=!dialogOpen;
+ if(dialogOpen)positionSpeechBubble(dlg,$("who").textContent,$("speech"));
+ if($("aside").classList.contains("show"))positionSpeechBubble($("aside"),$("aside-who").textContent,$("aside-text"));
+ if(!$("bite-bubble").hidden)positionSpeechBubble($("bite-bubble"),$("bite-bubble-who").textContent,$("bite-bubble-text"));
+}
+window.addEventListener("resize",updateSpeechLayout);
+function note(message){const t=$("toast");t.textContent=message;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2400);}
+function playSound(f=420,d=.09){if(!sound)return;try{if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();const o=audio.createOscillator(),g=audio.createGain();o.type="triangle";o.frequency.value=f;g.gain.setValueAtTime(.045,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+d);o.connect(g);g.connect(audio.destination);o.start();o.stop(audio.currentTime+d);}catch(_e){}}
+$("sound").onclick=()=>{sound=!sound;$("sound").textContent=sound?"♫ Zvuk zapnut":"♪ Zvuk vypnut";$("sound").setAttribute("aria-pressed",String(sound));if(sound)playSound(520);};
+$("restart").onclick=()=>{if(confirm("Začít příběh od začátku? Dosavadní postup v ukázce se smaže."))reset();};
+$("start").onclick=()=>{title.hidden=true; if(state.finished){finish();return;}if(state.scene==="ikea"&&state.box===0)opening();else {render();note("Pokračuješ v rozhraném příběhu.");}};
+$("tomb-prototype").onclick=()=>{if(confirm("Začít oddělený test hrobky? Rozehraná pozice tohoto prototypu se nahradí."))startTombPrototype();};
+function actionButton(text,fn,primary=false){const b=document.createElement("button");b.type="button";b.className="choice"+(primary?" primary":"");b.textContent=text;b.onclick=fn;return b;}
+function line(who,text,effect){return {who,text,effect};}
+function story(lines,after){hideAside();pressed.clear();goal=null;queue=lines.slice();done=after||null;dialogOpen=true;dlg.classList.add("open");nextLine();}
+function nextLine(){if(!queue.length){dlg.classList.remove("open");dialogOpen=false;updateSpeechLayout();const cb=done;done=null;render();if(cb)cb();return;}const l=queue.shift();if(typeof l.effect==="function")l.effect();else if(l.effect)effect(l.effect);$("who").textContent=l.who;$("speech").textContent=l.text;$("speech").scrollTop=0;const actions=$("d-actions");actions.replaceChildren(actionButton(queue.length?"Dál →":"Pokračovat →",nextLine,true));updateSpeechLayout();playSound(l.who==="Schrödinger"?230:375,.05);}
+function choose(who,text,choices){hideAside();pressed.clear();goal=null;queue=[];done=null;dialogOpen=true;dlg.classList.add("open");$("who").textContent=who;$("speech").textContent=text;$("speech").scrollTop=0;const actions=$("d-actions");actions.replaceChildren(...choices.map(c=>actionButton(c[0],c[1],!!c[2])));updateSpeechLayout();}
+function closeDialog(){dlg.classList.remove("open");dialogOpen=false;updateSpeechLayout();render();}
+function effect(k){if(k==="open")state.box=1;if(k==="steal")state.box=2;if(k==="boxgone")state.box=3;save();render();}
+function opening(){story([
+line("VYPRAVĚČ","Flatworld. Obchod s nábytkem. Rok 2026."),
+line("Ježíš","Tak. Tentokrát to dokončíme."),
+line("Platón","Nejdřív si musíme ověřit, co vlastně dokončujeme."),
+line("Ježíš","Píše se tu židle."),
+line("Platón","Aspoň krabice nepochybně existuje.")
+],()=>note("Otevři krabici. Klikni na označené místo."));}
+function boxScene(){if(state.box!==0){note("Krabici už Schrödinger odnesl.");return;}goal=null;story([
+line("Ježíš","Prkna. Šroubky. Imbus. Všechno máme.", "open"),
+line("Platón","Vidím kusy dřeva. Židli dosud nevidím."),
+line("Ježíš","Protože ji máme teprve sestavit!"),
+line("Schrödinger","To je moje.","steal"),
+line("Ježíš","On nám právě ukradl židli."),
+line("Platón","To není jisté. Podle tebe ještě neexistovala."),
+line("Ježíš","Tak nám ukradl materiál."),
+line("Platón","Na tom se shodneme."),
+line("Schrödinger","A tohle taky.","boxgone"),
+line("Ježíš","On se vrátil pro prázdnou krabici?!"),
+line("Platón","Zjevně nechce sedět."),
+line("Ježíš","Dva tisíce let, Platone. DVA TISÍCE LET."),
+line("Platón","Ve skutečnosti to začalo ještě dřív.")
+],()=>transition("agora",650,[
+line("VYPRAVĚČ","Athény, 4. století před naším letopočtem.")
+]));}
+function transition(id,startX,lines){hideAside();pressed.clear();state.scene=id;state.playerActor=null;goal=null;x=startX;save();render();playSound(300,.3);if(lines)story(lines);}
+// A scene may hand control to another actor without inheriting held input.
+function setPlayableActor(actor){
+ if(actor!=="plato"&&actor!=="jesus")return false;
+ rememberPosition();pressed.clear();goal=null;hideAside();state.playerActor=actor;
+ if(state.scene==="tomb"&&state.tomb.phase==="awake")x=state.tomb.positions[actor];
+ save();render();return true;
+}
+function switchActor(){if(state.scene!=="tomb"||state.tomb.phase!=="awake"||dialogOpen||!title.hidden)return false;setPlayableActor(currentActor()==="jesus"?"plato":"jesus");note("Ovládáš: "+(currentActor()==="plato"?"Platón":"Ježíš")+". Q přepíná postavy.");return true;}
+function actorPosition(actor){
+ if(state.scene==="cave"&&state.cave.phase==="turning")return {x:actor==="stranger"?(caveBeat==="approach"?375:caveBeat==="bite"?485:360):510,y:433};
+ if(state.scene==="tomb"&&["sleep","awakening"].includes(state.tomb.phase))return {x:state.tomb.phase==="sleep"?x:119,y:433};
+ if(state.scene==="tomb"&&state.tomb.phase==="cutscene")return {x:actor==="jesus"?568:(biteBeat==="approach"?392:biteBeat==="reaction"?404:458),y:427};
+ if(state.scene==="tomb"&&state.tomb.phase==="awake")return {x:currentActor()===actor?x:state.tomb.positions[actor],y:433};
+ if(state.scene==="ikea")return {x:actor==="jesus"?x:362,y:433};
+ return {x:currentActor()===actor?x:300,y:433};
+}
+function beginTomb(){
+ cancelBite();hideAside();state.scene="tomb";state.finished=false;state.vampire=true;state.playerActor="plato";state.tomb=freshTomb();state.tomb.phase="awakening";x=130;goal=null;pressed.clear();title.hidden=true;save();render();
+ playSound(68,.8);showBiteSpeech("ZE VSTUPU","Kámen zaduněl. Pak bylo ticho.","plato");
+ const revision=biteRevision;
+ biteTimers.push(setTimeout(()=>{if(revision!==biteRevision||state.scene!=="tomb"||state.tomb.phase!=="awakening")return;cancelBite();state.tomb.phase="sleep";save();render();showAside("Platón","Kdo si zase přestavuje jeskyni?");},2100));
+}
+// The shortcut starts its own run. The story reaches beginTomb without resetting choices.
+function startTombPrototype(){reset();beginTomb();}
+function biteIsPlaying(){return (state.scene==="tomb"&&["cutscene","awakening"].includes(state.tomb.phase))||(state.scene==="cave"&&state.cave.phase==="turning");}
+
+function hideBiteSpeech(){$("bite-bubble").hidden=true;}
+function showBiteSpeech(who,text,actor){const b=$("bite-bubble");b.className="bite-bubble is-"+actor;$("bite-bubble-who").textContent=who;$("bite-bubble-text").textContent=text;b.hidden=false;updateSpeechLayout();}
+function cancelBite(){biteRevision++;for(const id of biteTimers)clearTimeout(id);biteTimers=[];hideBiteSpeech();}
+function tombBite(){
+ if(state.scene!=="tomb"||state.tomb.phase!=="explore")return;
+ cancelBite();hideAside();biteBeat="approach";
+ state.tomb.phase="cutscene";pressed.clear();goal=null;save();render();
+ showBiteSpeech("Platón","Snídaně po tak dlouhém spánku...","plato");
+ const revision=biteRevision;
+ const later=(ms,callback)=>biteTimers.push(setTimeout(()=>{
+  if(revision!==biteRevision||!biteIsPlaying())return;
+  callback();
+ },ms));
+ later(1050,()=>{biteBeat="bite";render();hideBiteSpeech();playSound(205,.18);});
+ later(1770,()=>{biteBeat="reaction";render();showBiteSpeech("Platón","Ty jsi byl mrtvý.","plato");});
+ later(3000,()=>showBiteSpeech("Ježíš","Tak proč mě koušeš?","jesus"));
+ later(5100,()=>{
+  cancelBite();state.tomb.phase="awake";state.tomb.positions={plato:404,jesus:568};state.playerActor="jesus";x=568;setPlayableActor("jesus");
+  showAside("Platón","To se nemělo stát.");
+ });
+}
+function tombUse(id){
+ const t=state.tomb,actor=currentActor();
+ if(id==="tomb-inner"&&t.phase==="sleep"){t.phase="explore";t.nightVision=true;save();render();showAside("Platón","Tma. A přesto vidím.");return;}
+ if(id==="tomb-threshold"&&t.phase==="explore"){tombBite();return;}
+ if(t.phase!=="awake")return;
+ if(id==="tomb-plato"){story([line("Platón","Chtěl jsem se jen najíst."),line("Ježíš","Toho jsem si všiml.")],()=>{markDiscovery("bite_explained");if(actor==="jesus")rememberFirstChoice("tomb_first_action","explain");});return;}
+ if(id==="tomb-wedge"&&!t.wedge){t.wedge=true;save();render();showAside(actor==="plato"?"Platón":"Ježíš","Klín. Aspoň něco tu má jasný účel.");return;}
+ if(id==="tomb-repair"){
+  if(t.repaired){showAside(actor==="plato"?"Platón":"Ježíš","Podstavec se konečně neviklá.");return;}
+  if(actor==="plato"){
+   t.braced=true;x=530;t.positions.plato=x;save();render();
+   showAside("Platón","Kdyby tíha působila jinde... Dobře, držím to.",6500);return;
+  }
+  if(!t.braced&&!t.wedged){
+   if(t.wedge){t.wedged=true;t.wedge=false;save();render();showAside("Ježíš","Klín to podrží. Teď srovnat nohu.");}
+   else showAside("Ježíš","Deska tlačí na prasklou nohu. Nejdřív ji něčím podepřu.");
+   return;
+  }
+  t.repaired=true;t.together=t.braced;t.braced=false;rememberFirstChoice("tomb_first_action","repair");save();render();
+  showAside("Ježíš","Podstavec se konečně neviklá.");return;
+ }
+ if(id==="tomb-gate"){
+  if(!t.exitOpen){t.exitOpen=true;if(actor==="jesus")rememberFirstChoice("tomb_first_action","leave");save();render();showAside(actor==="plato"?"Platón":"Ježíš",t.repaired?"A teď se podíváme ven.":"Vchod je volný.");}return;
+ }
+ if(id==="tomb-exit"&&t.exitOpen){
+  if(actor!=="jesus"){setPlayableActor("jesus");showAside("Platón","A co ty?",4500);return;}
+  t.escaped=true;state.choices.left_without_plato=!t.together;save();transition("tombOutside",145);showAside("Ježíš",t.together?"Tudy. A tentokrát bez kousání.":"Kam teď?");
+ }
+}
+
+function definition(){choose("Tesař","Mám jen pár prken. Co z nich má být?",[
+["To, na čem se sedí.",()=>{rememberFirstChoice("chair_first_answer","sitting");story([line("Tesař","Tak si sedni na ten kámen. Ušetříme prkna.")],definition);}],
+["Něco, čemu by se nedalo vytknout, že to není židle.",()=>{rememberFirstChoice("chair_first_answer","idea");story([line("Tesař","A má ta idea rozměry? Něco, podle čeho řežu?")],definition);}],
+["Něco, co se pod člověkem neprohne.",()=>{rememberFirstChoice("chair_first_answer","practical");state.definition=true;state.board=true;save();playSound(610,.24);story([line("Tesař","Tohle prkno něco unese."),line("Platón","A když pod ním zůstane jen prkno?"),line("Tesař","Tak jsme ještě neskončili.")],()=>{closeDialog();note("Prkno je v inventáři.");});}],
+["Ještě o tom musím přemýšlet.",closeDialog]
+]);}
+function shadowPuzzle(){
+ if(state.shadow){if(state.cave.phase==="turned")beginTomb();else caveEncounter();return;}
+ if(!state.cave.night){choose("Platón","Stíny se hýbou. Já zatím stojím.",[
+  ["Pozorovat se zavřenýma očima.",()=>{closeDialog();state.cave.night=true;save();render();showAside("Platón","Pozoruhodné. Mezitím se setmělo.");}],
+  ["Vyrobit židli.",()=>{closeDialog();startLightPuzzle();}],
+  ["Ještě se rozhlédnout.",closeDialog]
+ ]);return;}
+ startLightPuzzle();
+}
+function startLightPuzzle(){
+ if(!state.board||!state.lamp){story([line("Platón","Holé ruce vrhají stín. Židli z něj neudělám.")]);return;}
+ state.cave.puzzle=true;save();render();note("Vyber předmět v inventáři a polož ho na jedno ze tří míst.");
+}
+function selectCaveItem(item){
+ if(state.scene!=="cave"||!state.cave.puzzle||state.shadow||dialogOpen||biteIsPlaying()||!title.hidden)return;
+ if(item!=="lamp"&&item!=="board")return;
+ state.cave.selected=item;save();render();note(item==="lamp"?"Kam postavíš lampu?":"Kam položíš prkno na dvě podpěry?");
+}
+const LIGHT_SLOTS=[300,450,600],WALL_X=760;
+function lightProjection(){
+ const c=state.cave;if(c.lampSlot===null||c.boardSlot===null)return {visible:false,scale:0,fits:false};
+ const lampX=LIGHT_SLOTS[c.lampSlot],boardX=LIGHT_SLOTS[c.boardSlot];
+ if(lampX>=boardX)return {visible:false,scale:0,fits:false};
+ const scale=(WALL_X-lampX)/(boardX-lampX);
+ return {visible:true,scale,fits:scale>=1.3&&scale<=2.2};
+}
+function placeCaveItem(slot){
+ const c=state.cave;if(!c.puzzle||state.shadow||![0,1,2].includes(slot))return;
+ const item=c.selected;if(!item){note("Nejdřív vyber lampu nebo prkno v inventáři.");return;}
+ const other=item==="lamp"?"boardSlot":"lampSlot";
+ if(c[other]===slot){note("Tady už stojí druhý předmět. Každý potřebuje své místo.");return;}
+ c[item+"Slot"]=slot;c.selected=null;save();render();
+ const p=lightProjection();
+ if(p.fits){state.shadow=true;c.phase="ready";save();render();playSound(750,.5);showAside("Platón",state.choices.chair_first_answer==="idea"?"Tesař chtěl rozměry ideje. Teď měřím stín.":state.choices.chair_first_answer==="sitting"?"Na tom kameni bych si aspoň sedl. Tohle je pořád stín.":"Stín se vešel. Židle sama by tam sotva prošla.",6500);}
+ else if(c.lampSlot!==null&&c.boardSlot!==null)showAside("Platón",p.visible?"Stín přerostl celou bránu.":"Světlo jde na druhou stranu.");
+}
+function caveEncounter(){
+ if(!state.shadow||state.vampire||biteIsPlaying())return;
+ cancelBite();hideAside();state.cave.phase="turning";caveBeat="approach";goal=null;pressed.clear();x=510;save();render();
+ showBiteSpeech("HLAS ZE TMY",state.discoveries.figure?"Vrátil ses. Na takovou židli budeš potřebovat víc času.":"Na takovou židli budeš potřebovat víc času.","plato");
+ const revision=biteRevision;
+ const later=(ms,fn)=>biteTimers.push(setTimeout(()=>{if(revision!==biteRevision||state.scene!=="cave"||state.cave.phase!=="turning")return;fn();},ms));
+ later(1700,()=>{caveBeat="bite";state.vampire=true;save();render();hideBiteSpeech();playSound(190,.2);});
+ later(2900,()=>{caveBeat="retreat";render();showBiteSpeech("Platón","To se při tesařině stává běžně?","plato");});
+ later(5100,()=>{cancelBite();state.cave.phase="turned";state.cave.puzzle=false;save();render();showAside("Platón","Světlo teď pálí do očí. Za tím kamenem bude klid.",7000);});
+}
+
+function finish(){hideAside();state.finished=true;save();render();title.hidden=false;title.querySelector(".eyebrow").textContent="KONEC HRATELNÉ UKÁZKY · KAPITOLA I";title.querySelector("h1").innerHTML="IDEA ŽIDLE<span>A ZROZENÍ OTÁZKY</span>";title.querySelector("p").textContent="Otevřel jsi stínovou bránu. Platón právě dostal nabídku, která promění další dvě tisíciletí. Schrödingerovo muzeum a osud krabice zatím počkají na celou hru.";const b=$("start");b.textContent="Začít znovu";b.onclick=()=>{reset();title.hidden=true;opening();};}
+function use(id){
+if(dialogOpen||!title.hidden||biteIsPlaying())return;playSound(470,.045);
+if(state.scene==="tomb"){tombUse(id);return;}
+if(state.scene==="tombOutside"){if(id==="tomb-horizon"&&!state.tomb.horizonSeen){state.tomb.horizonSeen=true;save();render();showAside("Ježíš","Tudy. Aspoň dokud někdo nepřivalí další kámen.");}return;}
+if(id==="box"){boxScene();return;}
+if(id==="shop"){transition("shop",810);return;}
+if(id==="back"){transition("agora",650);return;}
+if(id==="cave"){transition("cave",800);return;}
+if(id==="caveback"){transition("agora",170);return;}
+if(id==="lamp"){if(!state.lamp){state.lamp=true;save();story([line("Platón","Lampa. Jakmile se setmí, uvidím, co tady znamenají stíny.")],()=>note("Získáno: OLEJOVÁ LAMPA."));}else note("Lampu už mám.");return;}
+if(id==="citizen"){story([line("Athéňan","Tesař dnes prodává opěradlo zvlášť."),line("Platón","A židle bez něj?"),line("Athéňan","Levnější.")]);return;}
+if(id==="plan"){story([line("Platón","Dvě nohy. Jako já."),line("Tesař","Tak se taky přestaň houpat.")]);return;}
+if(id==="carpenter"){if(!state.definition)definition();else story([line("Tesař","To prkno jsem ti dal. Židli pořád nemáš.")]);return;}
+if(id==="shadow"){shadowPuzzle();return;}
+if(id.startsWith("light-")){placeCaveItem(Number(id.slice(6)));return;}
+if(id==="cave-rest"&&state.cave.phase==="turned"){beginTomb();return;}
+if(id==="figure"){if(state.cave.phase==="turned"){beginTomb();return;}if(state.shadow){caveEncounter();return;}markDiscovery("figure");story([line("Platón","Za pochodní se něco pohnulo. Je tu někdo?"),line("HLAS ZE TMY","Záleží, kdo se ptá.")]);return;}
+}
+function hotspot(id,label,cx,cy,art){return '<g class="hotspot" role="button" tabindex="0" data-act="'+id+'" aria-label="'+label+'">'+art+'<rect class="hit" x="'+(cx-65)+'" y="'+(cy-112)+'" width="130" height="145" rx="12"/><rect class="tag" x="'+(cx-75)+'" y="'+(cy+21)+'" width="150" height="29" rx="10"/><text class="tag-text" x="'+cx+'" y="'+(cy+41)+'">'+label+'</text></g>';}
+const palette='<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#132e48"/><stop offset="1" stop-color="#7f8b80"/></linearGradient><linearGradient id="golden" x2="0" y2="1"><stop stop-color="#e8cf9d"/><stop offset="1" stop-color="#8f866e"/></linearGradient><linearGradient id="stone" x2="0" y2="1"><stop stop-color="#667d77"/><stop offset="1" stop-color="#20333a"/></linearGradient><linearGradient id="cave" x2="0" y2="1"><stop stop-color="#101c2a"/><stop offset="1" stop-color="#394b50"/></linearGradient><radialGradient id="torch"><stop stop-color="#e6a95b" stop-opacity=".56"/><stop offset="1" stop-color="#e6a95b" stop-opacity="0"/></radialGradient><pattern id="tiles" patternUnits="userSpaceOnUse" width="74" height="38"><path d="M0 0H74M0 0V38M37 0V19M0 19H74" fill="none" stroke="#e1c6a0" stroke-opacity=".1"/></pattern></defs>';
+function person(px,py,type,scale=1){
+ const jesus=type==="jesus",plato=type==="plato",stranger=type==="stranger";
+ const ancient=jesus||plato;
+ const suit=jesus?"#e8dcc0":plato?"#6f91a1":stranger?"#18252c":type==="schro"?"#374d53":"#836146";
+ const face=jesus?"#c99876":stranger?"#b8aa97":"#d0ae87";
+ const hairColor=jesus?"#463026":plato?"#b9b6a2":"#383533";
+ const vampire=stranger||(ancient&&(state.scene==="ikea"||(plato&&state.vampire)||(jesus&&["tomb","tombOutside"].includes(state.scene)&&["awake"].includes(state.tomb.phase))));
+ const hair=jesus?'<path d="M-20 -81L-22 -57L-13 -57L-12 -92Q0 -106 13 -92L15 -57H24L21 -87Q21 -115 0 -116Q-23 -113 -20 -81Z" fill="'+hairColor+'"/>':plato?'<path d="M-19 -90Q-22 -111 -12 -110Q-7 -119 1 -113Q12 -119 18 -107Q25 -101 18 -87L12 -99Q1 -105 -12 -97Z" fill="'+hairColor+'"/>':'<path d="M-20 -84Q-24 -116 0 -116Q24 -109 20 -82L12 -98H-11Z" fill="#454039"/>';
+ const beard=ancient?'<path d="M-16 -84L-13 -62Q0 '+(plato?'-42':'-49')+' 14 -62L17 -85L10 -72L0 -68L-10 -74Z" fill="'+hairColor+'"/>':'';
+ const garment=ancient?'<path d="M-20 -71Q-4 -79 18 -70L28 -7H-27Z" fill="'+suit+'" stroke="#233940" stroke-width="2"/>'+(plato?'<path d="M-17 -70L19 -35L10 -8M-8 -74L-22 -11" stroke="#c0d0ce" stroke-width="6" fill="none"/>':'<path d="M-15 -70L13 -39L18 -8" stroke="#a56951" stroke-width="8" fill="none"/>'):'<path d="M-18 -75Q0 -84 18 -75L22 -26H-22Z" fill="'+suit+'" stroke="#101f26" stroke-width="2"/>';
+ const fangs=vampire?'<g data-fangs="'+type+'"><path d="M-7 -73L-4 -65L-1 -73M2 -73L5 -65L8 -73" fill="#fff8de"/></g>':'';
+ return '<g data-person="'+type+'" transform="translate('+px+' '+py+') scale('+scale+')"><ellipse cy="2" rx="24" ry="6" fill="#0a171a" opacity=".4"/><path d="M-10 -20L-15 0H-3L0 -20L6 0H19L11 -20" fill="#514337"/>'+garment+'<path d="M-17 -65L-28 -33M18 -65L27 -34" stroke="'+suit+'" stroke-width="11" stroke-linecap="round"/><ellipse cy="-90" rx="17" ry="22" fill="'+face+'"/>'+hair+beard+'<circle cx="-6" cy="-90" r="1.8" fill="'+(stranger?'#ffd39b':'#253039')+'"/><circle cx="7" cy="-90" r="1.8" fill="'+(stranger?'#ffd39b':'#253039')+'"/><path d="M-7 -73Q0 -69 8 -73" stroke="#6b4637" fill="none" stroke-width="2"/>'+fangs+'</g>';
+}
+
+function column(cx,height=205){return '<g><rect x="'+(cx-20)+'" y="'+(428-height)+'" width="40" height="'+height+'" fill="#e3c79b"/><path d="M'+(cx-12)+' '+(428-height)+'V428M'+(cx+1)+' '+(428-height)+'V428M'+(cx+12)+' '+(428-height)+'V428" stroke="#967e65" stroke-width="2"/><rect x="'+(cx-29)+'" y="'+(416-height)+'" width="58" height="15" rx="2" fill="#f2d9b4"/><rect x="'+(cx-26)+'" y="425" width="52" height="11" fill="#cab08a"/></g>';}
+function artIkea(){
+let chairs="";for(let i=0;i<6;i++){let p=65+i*165;chairs+='<g opacity="'+(i===4?".85":".45")+'" transform="translate('+p+' 275)"><rect x="0" y="40" width="70" height="16" rx="3" fill="#d8bf91"/><path d="M6 55V111M63 55V111M4 38V-22H17V41" fill="none" stroke="#b89b6b" stroke-width="9"/></g>';}
+const props=state.box===0?'<rect x="476" y="366" width="115" height="58" fill="#b79668" stroke="#6e5539" stroke-width="3"/><path d="M476 377H591" stroke="#e1c797" stroke-width="2"/><text x="530" y="401" fill="#263138" font-size="15" font-weight="900" text-anchor="middle">ŽIDLE</text>':state.box===1?'<path d="M470 423L460 378L519 357L536 422" fill="#a38458" stroke="#d7ba88"/><path d="M510 423L532 375L548 376L550 423M555 422L578 371L593 375L580 424" stroke="#ad905e" stroke-width="14"/><circle cx="593" cy="420" r="2" fill="#f2ead2"/>':state.box===2?'<rect x="488" y="377" width="104" height="44" fill="#b99866" stroke="#e2c390"/><text x="540" y="400" fill="#25313c" text-anchor="middle">PRÁZDNÁ</text>':'<path d="M485 425h101" stroke="#1f2c34" stroke-width="3"/>';
+const sch=state.box===1||state.box===2?person(725,427,"schro",.98):"";
+return '<rect width="1000" height="562.5" fill="#172935"/><rect width="1000" height="150" fill="#243b48"/><path d="M0 145H1000" stroke="#acc1b6" stroke-width="9"/><path d="M0 168H1000" stroke="#d0c9ad" stroke-width="3"/><rect y="405" width="1000" height="157" fill="#344c52"/><rect y="405" width="1000" height="157" fill="url(#tiles)"/><path d="M0 340H1000" stroke="#899d93" stroke-width="8"/>'+chairs+'<rect x="18" y="190" width="230" height="59" rx="7" fill="#eddfba" transform="rotate(-1 18 190)"/><text x="135" y="225" text-anchor="middle" font-size="24" font-weight="900" fill="#273d49">ODDĚLENÍ ŽIDLÍ</text><circle cx="847" cy="113" r="52" fill="#ead0a0" opacity=".15"/>'+props+person(362,433,"plato",1.22)+sch+(state.box===0?hotspot("box","Otevřít krabici",535,402,""):"")+'<text x="905" y="225" font-size="28" fill="#e9d1a6" text-anchor="middle" opacity=".55">2026</text>';
+}
+function artAgora(){
+let far="";for(let i=0;i<7;i++){const n=i*160-30;far+='<path d="M'+n+' 334V220l57-40 58 40v114Z" fill="'+(i%2?"#8b8f78":"#999a83")+'" stroke="#6c786f" stroke-width="2"/><rect x="'+(n+35)+'" y="252" width="35" height="50" fill="#586c70"/>';}
+const isNight=!!state.cave?.night;
+const sky=isNight?'<rect width="1000" height="562" fill="#101b31"/><circle cx="760" cy="116" r="48" fill="#d4e4dc"/><circle cx="782" cy="101" r="45" fill="#101b31"/><g fill="#cfddd9"><circle cx="105" cy="65" r="2"/><circle cx="330" cy="104" r="1.7"/><circle cx="590" cy="53" r="2"/><circle cx="900" cy="90" r="1.5"/></g>':'<rect width="1000" height="562" fill="url(#sky)"/><circle cx="760" cy="116" r="70" fill="#ead49f" opacity=".82"/>';
+return sky+far+'<rect y="386" width="1000" height="176" fill="#948e75"/><path d="M0 423H1000" stroke="#dcc39b" stroke-width="5"/><rect y="420" width="1000" height="143" fill="url(#tiles)"/>'+column(280,265)+column(670,270)+'<path d="M0 388l125-23 99 21v45H0" fill="#566b69"/><path d="M40 392Q96 300 170 390" fill="#1b2e36"/><path d="M690 361V280H895V390H690Z" fill="#c6b091" stroke="#786b5a" stroke-width="4"/><rect x="735" y="310" width="95" height="82" rx="46" fill="#26333d"/><path d="M700 286H885" stroke="#e1d3ab" stroke-width="10"/>'+(state.lamp?"":'<g data-world-item="lamp"><path d="M369 386Q375 405 405 405Q426 403 429 383L445 372L419 377H374Z" fill="#c09650" stroke="#765535" stroke-width="3"/><path d="M374 381C350 361 349 402 378 396" fill="none" stroke="#bd9456" stroke-width="6"/><ellipse cx="402" cy="382" rx="20" ry="5" fill="#715333"/><path d="M436 375L439 365" stroke="#e5c78b" stroke-width="3"/><path d="M440 364Q429 354 440 343Q448 357 440 364" fill="#f4c567"/></g>')+''+(isNight?'<rect y="180" width="1000" height="382" fill="#041025" opacity=".45" pointer-events="none"/>':'')+person(552,410,"carpenter",.95)+hotspot("shop","Dílna →",785,347,"")+hotspot("cave","← Jeskyně",120,365,"")+hotspot("citizen","Promluvit",553,370,"")+(state.lamp?"":hotspot("lamp","Vzít lampu",400,400,""))+'<text x="505" y="185" text-anchor="middle" font-family="Georgia" font-size="35" fill="#f8e6c5" opacity=".8">ATHÉNY</text>';
+}
+function artShop(){
+return '<rect width="1000" height="562" fill="#28363a"/><rect y="390" width="1000" height="172" fill="#544c41"/><path d="M0 392H1000" stroke="#b99c73" stroke-width="8"/><rect x="0" y="48" width="1000" height="27" fill="#665546"/><rect x="72" y="95" width="225" height="180" fill="#b49b70" opacity=".3"/><path d="M72 125H297M72 190H297M72 265H297" stroke="#d0b185" stroke-width="8"/><rect x="260" y="355" width="310" height="20" rx="3" fill="#b79769"/><path d="M280 375V431M550 375V431" stroke="#826546" stroke-width="17"/><path d="M195 413V344H207V397H276V413M202 395V447M272 397V447" stroke="#c7a77a" fill="none" stroke-width="9"/><path d="M650 325h135l-10 20H655Z" fill="#c3a77b"/><path d="M691 325V405M746 325V405" stroke="#8b7556" stroke-width="15"/><path d="M790 170V397H925V170Z" fill="#9a8367"/><path d="M820 215H890V399H820Z" fill="#243d45"/>'+person(500,395,"carpenter",1.16)+hotspot("carpenter","Mluvit s tesařem",500,380,"")+hotspot("plan","Prohlédnout",240,410,"")+hotspot("back","Na tržiště →",855,360,"")+'<text x="475" y="155" text-anchor="middle" font-family="Georgia" font-size="29" fill="#e8d5b2">DÍLNA · TA Z PRAVÉHO DŘEVA</text>';
+}
+function artCave(){
+ const c=state.cave,p=lightProjection(),turning=c.phase==="turning";
+ let art='<rect width="1000" height="562" fill="'+(c.night?'#0c1925':'#263842')+'"/><path d="M0 0L170 107L287 20L420 95L620 0L763 94L1000 0V562H0Z" fill="#243841" opacity=".88"/><path d="M0 560L120 440L310 472L440 429L665 460L910 417L1000 552" fill="#53605b" opacity=".55"/><path d="M650 120H840L855 390H633Z" fill="#7c8377" opacity=".66" stroke="#a7ac92" stroke-width="8"/><circle cx="146" cy="333" r="132" fill="url(#torch)"/><path d="M148 371V336" stroke="#b78d61" stroke-width="9"/><path d="M147 340Q114 307 146 281Q172 306 147 340" fill="#e8bb6d"/><rect x="820" y="335" width="128" height="105" rx="55" fill="#1e333b"/>';
+ // Before the encounter there is only a moving shadow behind the torch, not a visible person.
+ if(!state.vampire&&!turning)art+='<path data-cave-rustle="true" d="M97 360Q112 339 108 313Q134 341 123 378" fill="#08151f" opacity=".6" class="cave-rustle"/>';
+ if(c.puzzle&&!state.shadow){
+  art+='<path d="M698 316V271H708V310H791V322M705 318V370M784 318V370" fill="none" stroke="#e4cfa3" stroke-width="3" stroke-dasharray="7 6" opacity=".5"/>';
+  for(let i=0;i<3;i++){
+   const sx=LIGHT_SLOTS[i];
+   art+='<ellipse cx="'+sx+'" cy="421" rx="36" ry="7" fill="#d9c69e" opacity=".24"/>';
+   if(c.lampSlot===i)art+='<g data-placed="lamp"><circle cx="'+sx+'" cy="354" r="80" fill="url(#torch)"/><path d="M'+(sx-20)+' 409Q'+sx+' 428 '+(sx+23)+' 404L'+(sx+13)+' 391H'+(sx-17)+'Z" fill="#c89e63"/><path d="M'+(sx+18)+' 393Q'+(sx+9)+' 377 '+(sx+21)+' 365Q'+(sx+31)+' 381 '+(sx+18)+' 393" fill="#ffd28d"/></g>';
+   if(c.boardSlot===i)art+='<g data-placed="board"><path d="M'+(sx-28)+' 415V369M'+(sx+28)+' 415V369M'+(sx-36)+' 368H'+(sx+38)+'M'+(sx-33)+' 366V331" fill="none" stroke="#c4a779" stroke-width="9"/></g>';
+   art+=hotspot('light-'+i,String(i+1)+' · '+(c.selected==='lamp'?'Položit lampu':c.selected==='board'?'Položit prkno':'Místo'),sx,405,'');
+  }
+  if(p.visible){const scale=Math.min(p.scale,3.5),width=48*scale;art+='<g data-projection="'+p.scale.toFixed(2)+'"><path d="M'+(744-width/2)+' 322V'+(322-38*scale)+'H'+(754-width/2)+'V315H'+(744+width/2)+'V326M'+(750-width/2)+' 320V380M'+(738+width/2)+' 320V380" fill="none" stroke="#101e25" stroke-width="9" opacity=".85"/></g>';}
+ }
+ if(state.shadow)art+='<path d="M698 316V271H708V310H791V322M705 318V370M784 318V370" fill="none" stroke="#14232a" stroke-width="12"/><path d="M651 392V118H839V392" fill="none" stroke="#edd79f" stroke-width="4" opacity=".7"/>';
+ if(turning){
+  art+='<g data-cave-bite="'+caveBeat+'">'+person(510,433,'plato',1.15)+'<g class="cave-biter '+(caveBeat==='bite'?'contact':'')+'">'+person(caveBeat==='approach'?375:caveBeat==='bite'?485:360,433,'stranger',1.13)+'</g>'+(caveBeat==='bite'?'<g data-cave-contact="true"><path d="M502 331L506 341L511 331M512 332L516 341L521 332" fill="#fff7dc"/><path d="M497 330l-9 -6M499 342l-11 3M521 341l8 7" stroke="#dba47d" stroke-width="3"/></g>':'')+'</g>';
+ }
+ if(!turning){
+  if(c.phase==='turned')art+=hotspot('cave-rest','Usnout za kamenem',170,405,'');
+  else if(!c.puzzle||state.shadow)art+=hotspot('figure',state.shadow?'Hlas za bránou':'Šramot',170,390,'');
+  art+=hotspot('shadow',state.shadow?'Za stínovou bránu':c.puzzle?'Stěna stínů':'Prozkoumat stěnu',730,286,'');
+  if(!state.vampire)art+=hotspot('caveback','Na tržiště →',870,380,'');
+ }
+ return art+'<text x="502" y="84" text-anchor="middle" font-family="Georgia" font-size="26" fill="#f0d4a8" opacity=".67">'+(c.night?'JESKYNĚ · NOC':'JESKYNĚ STÍNŮ')+'</text>';
+}
+
+function artTomb(){
+ const t=state.tomb,dark=["sleep","awakening"].includes(t.phase);
+ const base='<rect width="1000" height="562" fill="'+(dark?'#02070b':t.nightVision?'#102b2a':'#15242e')+'"/><path d="M0 180L180 50L360 150L610 45L840 150L1000 70V562H0Z" fill="'+(dark?'#081115':t.nightVision?'#344f46':'#3f4d4b')+'"/><rect y="422" width="1000" height="140" fill="'+(dark?'#10171a':'#58564d')+'"/>';
+ const inner=dark?'<path d="M105 415Q135 255 245 245Q325 280 350 415Z" fill="#27332f" stroke="#5e6759" stroke-width="7"/>':'<path d="M65 420L125 344L285 375L299 420Z" fill="#85948c" stroke="#c8bda0" stroke-width="7"/>';
+ const gate=t.exitOpen?'<path d="M755 418L870 260L994 421Z" fill="#192c35"/>':'<g class="'+(t.phase==='awakening'?'tomb-closing':'')+'"><path d="M744 420Q745 260 842 225Q950 285 953 420Z" fill="'+(dark?'#25312f':'#89928b')+'" stroke="'+(dark?'#48534b':'#bcb69e')+'" stroke-width="8"/></g>';
+ if(dark)return base+inner+gate+(t.phase==='awakening'?'<g data-plato-eyes="true"><ellipse cx="110" cy="354" rx="5" ry="3" fill="#e1ecc3"/><ellipse cx="128" cy="354" rx="5" ry="3" fill="#e1ecc3"/></g>':'')+(t.phase==='sleep'?hotspot('tomb-inner','Odvalit svůj kámen',230,405,''):'')+'<text x="200" y="190" text-anchor="middle" fill="#8d9884" font-size="19">VNITŘNÍ KÁMEN</text><text x="810" y="190" text-anchor="middle" fill="#65756b" font-size="19">VSTUPNÍ KÁMEN</text>';
+ const props=t.repaired
+ ? '<g data-tomb-stand="repaired"><path d="M549 420V348M617 420V348" stroke="#b49a73" fill="none" stroke-width="12"/><path d="M541 346H626" stroke="#d7c49a" stroke-width="13"/><rect x="547" y="306" width="74" height="33" rx="4" fill="#84908b" stroke="#c4c0a8" stroke-width="4"/></g>'
+ : '<g data-tomb-stand="damaged"><path d="M549 420L565 353M620 420L607 365" stroke="#896a52" fill="none" stroke-width="11"/><path d="M545 354L625 370" stroke="#b49a73" stroke-width="12"/><path d="M549 314L621 328L615 359L543 344Z" fill="#84908b" stroke="#c4c0a8" stroke-width="4"/><path d="M563 395L598 399" stroke="#443e39" stroke-width="5"/><path d="M567 390L576 399L565 405" stroke="#e0b28e" fill="none" stroke-width="3"/></g>';
+ const support=t.braced?'<path data-support="plato" d="M530 367L551 342" stroke="#d0ae87" stroke-width="7"/>':t.wedged&&!t.repaired?'<path data-support="wedge" d="M544 420L566 384V420Z" fill="#cfae76"/>':'';
+ const wedge=t.phase==='awake'&&!t.wedge&&!t.wedged&&!t.repaired?'<path d="M387 425L421 412V425Z" fill="#bd9966"/>':'';
+ const spots=t.phase==='explore'?hotspot('tomb-threshold','Do hlavní síně',505,405,''):
+ t.phase==='awake'?hotspot('tomb-plato',currentActor()==='jesus'?'Promluvit s Platónem':'Promluvit s Ježíšem',t.positions[currentActor()==='jesus'?'plato':'jesus'],405,'')+hotspot('tomb-repair',t.repaired?'Podstavec stojí':currentActor()==='plato'?'Podepřít desku':t.braced||t.wedged?'Srovnat podstavec':'Prohlédnout podstavec',570,405,'')+(!t.wedge&&!t.wedged&&!t.repaired?hotspot('tomb-wedge','Vzít klín',405,430,''):'')+hotspot('tomb-gate',t.exitOpen?'Vchod je otevřen':'Odvalit vstupní kámen',810,405,'')+(t.exitOpen?hotspot('tomb-exit','Odejít',940,405,''):''):'';
+ const actor=currentActor(),other=t.phase==='awake'?person(t.positions[actor==='jesus'?'plato':'jesus'],433,actor==='jesus'?'plato':'jesus',1.15):'';
+ const asleep='<g transform="rotate(-66 585 415)">'+person(585,415,'jesus',1.02)+'</g>';
+ const bier='<rect x="442" y="404" width="213" height="18" rx="5" fill="#78817d" stroke="#aeb0a2" stroke-width="5"/><path d="M459 423V452M641 423V452" stroke="#606e6b" stroke-width="11"/>';
+ const biteScene=t.phase==='cutscene'?'<g data-bite-beat="'+biteBeat+'">'+bier+(biteBeat==='reaction'?person(568,426,'jesus',1.02):asleep)+'<g class="bite-'+biteBeat+'"'+(biteBeat==='bite'?' transform="rotate(18 458 427)"':'')+'>'+person(biteBeat==='approach'?392:biteBeat==='reaction'?404:458,427,'plato',1.05)+'</g>'+(biteBeat==='bite'?'<g data-bite-contact="true"><path d="M491 361l-8 -15 12 4 6 -15 5 17 14 -8 -6 17 15 5 -18 6 -2 15 -12 -11 -14 8 4 -17Z" fill="#f4e5b0" stroke="#cfb773" stroke-width="2"/><path d="M498 360l4 10 4 -10" stroke="#fff" stroke-width="3" fill="none"/></g>':'')+'</g>':t.phase==='explore'?bier+asleep:'';
+ return base+inner+gate+props+biteScene+other+support+wedge+spots+'<text x="200" y="185" fill="#e9d5b0" font-size="23">VNITŘNÍ KÁMEN</text><text x="760" y="184" fill="#e9d5b0" font-size="23">VSTUPNÍ KÁMEN</text>';
+}
+
+function artTombOutside(){return '<rect width="1000" height="562" fill="url(#sky)"/><circle cx="750" cy="145" r="80" fill="#efd8a8"/><path d="M0 410L210 360L410 400L680 325L1000 422V562H0Z" fill="#788b79"/><rect y="425" width="1000" height="137" fill="#a99a82"/>'+(state.tomb.together?person(300,433,'plato',1.15):'')+(state.tomb.horizonSeen?"":hotspot("tomb-horizon","Rozhlédnout se",750,405,""));}
+function avatarMarkup(){if(state.scene==="tomb"&&state.tomb.phase==="sleep")return '<g id="avatar"><g data-plato-eyes="true"><ellipse cx="-9" cy="-79" rx="5" ry="3" fill="#e1ecc3"/><ellipse cx="9" cy="-79" rx="5" ry="3" fill="#e1ecc3"/></g></g>';if((state.scene==="tomb"&&["awakening","cutscene"].includes(state.tomb.phase))||(state.scene==="cave"&&state.cave.phase==="turning"))return "";return '<g id="avatar">'+person(0,0,currentActor(),1.15)+'</g>';}
+
+function render(){
+const z=SCENES[state.scene];$("chapter").textContent=z.chapter;$("place").textContent=z.place;
+let q=z.quest;
+if(state.scene==="agora")q=!state.board?"Tesařova dílna je otevřená.":!state.lamp?"Na tržišti je ještě co prohlédnout.":"Jeskyně čeká za tržištěm.";
+if(state.scene==="tomb")q=state.tomb.phase==="awakening"?"Po dlouhém spánku. Někdo právě zavřel hrobku.":state.tomb.phase==="sleep"?"Ve tmě svítí jen Platónovy oči.":state.tomb.phase==="explore"?"Za vnitřním kamenem je hlavní síň.":state.tomb.phase==="awake"?(state.tomb.exitOpen?"Otevřeným vchodem táhne.":state.tomb.repaired?"Podstavec stojí. Vchod je ještě zavřený.":"Prasklá noha podstavce nese těžkou desku."):"Platón jedná...";
+if(state.scene==="tombOutside"&&state.tomb.horizonSeen)q="Konec hratelného pokusu. Další cesta ještě není napsaná.";
+if(state.scene==="ikea"&&state.box===3)q="Příběh pokračuje v Athénách...";
+if(state.scene==="shop"&&state.board)q="Tesař se vrátil ke své práci.";
+if(state.scene==="cave")q=state.cave.phase==="turned"?"Za vnitřním kamenem je tma a klid.":state.cave.phase==="turning"?"Ze stínu někdo vystoupil.":state.shadow?"Stínová brána je otevřená.":state.cave.puzzle?"Vyber předmět v inventáři. Položením se mění jeho skutečný stín.":state.cave.night?"Pochodeň zůstala jediným světlem.":"Za pochodní se občas pohne stín.";
+$("quest").textContent=q;
+const inventory=[];
+for(const [item,label] of [["board","🪵 Prkno"],["lamp","🪔 Lampa"]])if(state[item]){
+ const usable=state.scene==="cave"&&state.cave.puzzle&&!state.shadow;
+ const b=document.createElement(usable?"button":"span");b.className="inv-item"+(state.cave.selected===item?" selected":"");b.textContent=label+(usable&&state.cave[item+"Slot"]!==null?" · "+(state.cave[item+"Slot"]+1):"");
+ if(usable){b.type="button";b.setAttribute("aria-pressed",String(state.cave.selected===item));b.onclick=()=>selectCaveItem(item);}inventory.push(b);
+}
+if(state.tomb.wedge){const b=document.createElement("span");b.className="inv-item";b.textContent="◢ Dřevěný klín";inventory.push(b);}
+if(state.scene==="tomb"&&state.tomb.phase==="awake"){
+ const b=document.createElement("button");b.type="button";b.id="switch-actor";b.className="inv-item actor-switch";b.textContent="Q · "+(currentActor()==="jesus"?"Přepnout na Platóna":"Přepnout na Ježíše");b.onclick=switchActor;inventory.push(b);
+}
+$("inventory").replaceChildren(...(inventory.length?inventory:[Object.assign(document.createElement("span"),{className:"help",textContent:"Inventář: prázdný"})]));
+svg.innerHTML=palette+(state.scene==="ikea"?artIkea():state.scene==="agora"?artAgora():state.scene==="shop"?artShop():state.scene==="cave"?artCave():state.scene==="tomb"?artTomb():artTombOutside())+avatarMarkup();
+updateAvatar();
+}
+function updateAvatar(){
+ const a=$("avatar");if(a)a.setAttribute("transform","translate("+x+" 433)");
+ if(state.scene==="tomb"&&state.tomb.phase==="awake"){
+  state.tomb.positions[currentActor()]=x;
+  if(currentActor()==="plato"&&state.tomb.braced&&Math.abs(x-530)>65){state.tomb.braced=false;save();render();return;}
+ }
+ if(typeof updateSpeechLayout==="function")updateSpeechLayout();
+}
+
+function sceneSpots(){const spots=SCENES[state.scene].spots;if(state.scene!=="tomb"||state.tomb.phase!=="awake")return spots;return spots.map(s=>s[0]==="tomb-plato"?[s[0],s[1],state.tomb.positions[currentActor()==="jesus"?"plato":"jesus"],s[3]]:s);}
+function moveTo(id){if(biteIsPlaying()||dialogOpen||!title.hidden)return;const spot=sceneSpots().find(s=>s[0]===id);if(!spot)return;goal={x:spot[2],id};}
+svg.addEventListener("click",e=>{const target=e.target.closest("[data-act]");if(target&&!dialogOpen&&title.hidden)moveTo(target.dataset.act);});
+svg.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.dataset.act){e.preventDefault();moveTo(e.target.dataset.act);}});
+function nearest(){const shown=new Set(Array.from(svg.querySelectorAll(".hotspot[data-act]"),el=>el.getAttribute("data-act")));let a=null,b=140;for(const s of sceneSpots()){if(!shown.has(s[0]))continue;const d=Math.abs(x-s[2]);if(d<b){a=s;b=d;}}return a;}
+function interact(){if(dialogOpen){const choices=$("d-actions").children;if(choices.length===1)choices[0].onclick();return;}if(!title.hidden||biteIsPlaying())return;const s=nearest();if(s){goal=null;use(s[0]);}else note("Přibliž se k označenému předmětu, nebo na něj klikni.");}
+$("interact").onclick=interact;
+function directional(id,key){const b=$(id);b.addEventListener("touchstart",e=>e.preventDefault(),{passive:false});b.addEventListener("contextmenu",e=>e.preventDefault());b.addEventListener("pointerdown",e=>{e.preventDefault();if(biteIsPlaying()||dialogOpen||!title.hidden)return;pressed.add(key);b.setPointerCapture(e.pointerId);});["pointerup","pointercancel","lostpointercapture"].forEach(evt=>b.addEventListener(evt,()=>{pressed.delete(key);if(state.scene==="tomb")save();}));}
+directional("left","arrowleft");directional("right","arrowright");
+document.addEventListener("keydown",e=>{const editing=e.target?.isContentEditable||["INPUT","TEXTAREA","SELECT"].includes(e.target?.tagName);if(["ArrowLeft","ArrowRight","a","d","A","D","e","E","q","Q"].includes(e.key)&&title.hidden&&!biteIsPlaying()&&!editing){e.preventDefault();if(e.key.toLowerCase()==="q"){if(!e.repeat)switchActor();}else if(e.key.toLowerCase()==="e"){if(!e.repeat)interact();}else if(!dialogOpen&&!e.repeat)pressed.add(e.key.toLowerCase());}});
+document.addEventListener("keyup",e=>{pressed.delete(e.key.toLowerCase());if(state.scene==="tomb")save();});
+window.addEventListener("blur",()=>{pressed.clear();save();});
+window.addEventListener("pagehide",save);
+function frame(t){const dt=Math.min((t-last)/1000||0,.05);last=t;if(!dialogOpen&&title.hidden&&!biteIsPlaying()){let dir=(pressed.has("arrowright")||pressed.has("d")?1:0)-(pressed.has("arrowleft")||pressed.has("a")?1:0);
+if(dir){goal=null;x=Math.max(32,Math.min(955,x+dir*230*dt));updateAvatar();}
+else if(goal){const delta=goal.x-x;const step=210*dt;if(Math.abs(delta)<=Math.max(35,step)){x=goal.x;const target=goal.id;goal=null;updateAvatar();use(target);}else{x+=Math.sign(delta)*step;updateAvatar();}}
+}requestAnimationFrame(frame);}requestAnimationFrame(frame);
+window.addEventListener("keydown",e=>{if(dialogOpen&&e.key==="Enter"&&e.target.tagName!=="BUTTON"&&!e.repeat){e.preventDefault();const choices=$("d-actions").children;if(choices.length===1)choices[0].onclick();}});
+load();render();if(state.finished){title.querySelector(".eyebrow").textContent="KONEC HRATELNÉ UKÁZKY";title.querySelector("h1").innerHTML="IDEA ŽIDLE<span>STÍNOVÁ BRÁNA</span>";title.querySelector("p").textContent="Tuto ukázku už máš dohranou. Můžeš si znovu projít Athény nebo ji začít od začátku.";$("start").textContent="Zahrát znovu";$("start").onclick=()=>{reset();title.hidden=true;opening();};}else if(state.scene!=="ikea"){$("start").textContent="Pokračovat v příběhu";}
+</script>
+</body>
+</html>
