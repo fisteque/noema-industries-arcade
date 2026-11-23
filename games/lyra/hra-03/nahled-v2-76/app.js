@@ -345,7 +345,7 @@
   function header() {
     return `
       <header class="game-header">
-        <p class="eyebrow">Klobouky a hlízy · v2-75 · ${state.difficulty === "easy" ? "lehká" : "normální"} · den ${state.day || 1}</p>
+        <p class="eyebrow">Klobouky a hlízy · v2-76 · ${state.difficulty === "easy" ? "lehká" : "normální"} · den ${state.day || 1}</p>
       </header>`;
   }
 
@@ -2518,6 +2518,7 @@
 
   render();
 })();
+
 
 
 
